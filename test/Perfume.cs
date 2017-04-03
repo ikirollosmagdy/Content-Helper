@@ -83,7 +83,7 @@ namespace test
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Gender].HeaderText = "Gender"));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Size].HeaderText = "Size"));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Type].HeaderText = "Fregrance type"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[ExtraData].HeaderText = "Extra Data"));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[ExtraData].HeaderText = "Description"));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[FregFamily].HeaderText = "Fregrance Family"));
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
