@@ -15,7 +15,7 @@ using System.Windows.Forms;
 
 
 
-namespace test
+namespace helper
 {
     public partial class Form1 : Form
     {
@@ -92,6 +92,7 @@ namespace test
             Adapter adapter = new Adapter();
             Thread newThread = new Thread(adapter.SwitchBulk);
             newThread.Start(DropCat.SelectedIndex);
+          //  btnSave.PerformClick();
         }
 
 
@@ -103,7 +104,7 @@ namespace test
             BulkSheet = BulkGrid;
             txtStats = txtStatus;
             PBar = ProgressBAR;
-
+           
 
 
 
@@ -130,8 +131,8 @@ namespace test
         }
         public void pasteCell(string copied)
         {
+            string[] Lines = Regex.Split(copied.TrimEnd("\r\n".ToCharArray()), "\r\n");
            
-            string[] Lines = copied.Split('\n');
             int StartingRow = OrganaizedGrid.CurrentCell.RowIndex;
             int StartingColumn = OrganaizedGrid.CurrentCell.ColumnIndex;
             List<changedCell> terms = new List<changedCell>();
@@ -321,6 +322,13 @@ namespace test
             
         }
 
+        private void OrganaizedGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            //  TextBox TB = (TextBox)e.Control;
+            // TB.Multiline = true;
+           // ((DataGridViewTextBoxEditingControl)e.Control).AcceptsReturn = true;
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             Thread thread = new Thread(() => exportToExcel());
@@ -397,7 +405,7 @@ namespace test
         public int row;
         public int column;
         public string data;
-        public DataGridViewCellStyle style;
+//        public DataGridViewCellStyle style;
     }
 }
 

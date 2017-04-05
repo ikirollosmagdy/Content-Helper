@@ -1,4 +1,4 @@
-﻿namespace test
+﻿namespace helper
 {
     partial class Form1
     {
@@ -75,7 +75,7 @@
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.BulkGrid = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -187,10 +187,11 @@
             // 
             this.DropCat.Items.AddRange(new object[] {
             "Perfume",
+            "Refrigerators & Freezers",
             "MakeUp"});
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.DropCat.Name = "DropCat";
-            this.DropCat.Size = new System.Drawing.Size(121, 25);
+            this.DropCat.Size = new System.Drawing.Size(200, 25);
             // 
             // toolStripButton2
             // 
@@ -285,7 +286,7 @@
             this.OrganaizedGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.OrganaizedGrid.BackgroundColor = System.Drawing.SystemColors.Menu;
+            this.OrganaizedGrid.BackgroundColor = System.Drawing.SystemColors.Window;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrganaizedGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.A,
@@ -314,6 +315,8 @@
             this.X,
             this.Y,
             this.Z});
+            this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.OrganaizedGrid.Location = new System.Drawing.Point(8, 31);
             this.OrganaizedGrid.Name = "OrganaizedGrid";
             this.OrganaizedGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -325,6 +328,7 @@
             this.OrganaizedGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellValueChanged);
             this.OrganaizedGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_ColumnHeaderMouseClick);
             this.OrganaizedGrid.CurrentCellChanged += new System.EventHandler(this.OrganaizedGrid_CurrentCellChanged);
+            this.OrganaizedGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.OrganaizedGrid_EditingControlShowing);
             this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
             this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
             // 
@@ -332,6 +336,7 @@
             // 
             this.A.HeaderText = "A";
             this.A.Name = "A";
+            this.A.Width = 39;
             // 
             // B
             // 
@@ -473,22 +478,22 @@
             // toolStrip3
             // 
             this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton4});
+            this.btnSave});
             this.toolStrip3.Location = new System.Drawing.Point(3, 3);
             this.toolStrip3.Name = "toolStrip3";
             this.toolStrip3.Size = new System.Drawing.Size(1005, 25);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
-            // toolStripButton4
+            // btnSave
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(35, 22);
-            this.toolStripButton4.Text = "Save";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(35, 22);
+            this.btnSave.Text = "Save";
+            this.btnSave.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // BulkGrid
             // 
@@ -606,7 +611,7 @@
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStrip toolStrip3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripComboBox DropCat;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
@@ -617,6 +622,7 @@
         private System.Windows.Forms.ToolStripStatusLabel txtStatus;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripProgressBar ProgressBAR;
+        private System.Windows.Forms.ToolStripMenuItem btnQC;
         private System.Windows.Forms.DataGridViewTextBoxColumn A;
         private System.Windows.Forms.DataGridViewTextBoxColumn B;
         private System.Windows.Forms.DataGridViewTextBoxColumn C;
@@ -643,7 +649,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
-        private System.Windows.Forms.ToolStripMenuItem btnQC;
     }
 }
 

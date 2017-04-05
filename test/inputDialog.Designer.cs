@@ -1,4 +1,4 @@
-﻿namespace test
+﻿namespace helper
 {
     partial class inputDialog
     {

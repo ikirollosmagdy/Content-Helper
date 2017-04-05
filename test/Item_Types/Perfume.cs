@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace test
+namespace helper
 {
     class Perfume
 
@@ -68,6 +68,8 @@ namespace test
                
 
             }
+
+           
         }
 
 
@@ -87,7 +89,7 @@ namespace test
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[FregFamily].HeaderText = "Fregrance Family"));
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
-                for (col = 0; col < Form1.Sheet.RowCount; col++)
+                for (col = 0; col < Form1.Sheet.ColumnCount; col++)
                 {
                     try
                     {
@@ -99,6 +101,7 @@ namespace test
                         if (matchSize.Success)
                         {
                             Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value;
+                           
                         }
                     }
                     catch (Exception) { }
