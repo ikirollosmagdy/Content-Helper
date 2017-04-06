@@ -34,19 +34,28 @@ namespace helper
                 {
                     try
                     {
-                        Form1.OrganizedSheet[0,row].Value = Convert.ToString(row + 2);
+                        Form1.OrganizedSheet[0, row].Value = Convert.ToString(row + 2);
                     }
                     catch { }
                     try
                     {
                         Regex regexSize = new Regex(@"([Rr]efr?\w+)|(\w+eezer)");
-                        Match matchSize = regexSize.Match(Form1.Sheet[col,row].Value.ToString());
-
-
-
-                        if (matchSize.Success)
+                        Match matchSize = regexSize.Match(Form1.Sheet[col, row].Value.ToString());
+                          if (matchSize.Success)
                         {
-                            Form1.OrganizedSheet[Type,row].Value = matchSize.Value;
+                            Form1.OrganizedSheet[Type, row].Value = matchSize.Value;
+
+                        }
+                    }
+                    catch { }
+                    try
+                    {
+                        Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
+                        Match matchModel = regexModel.Match(Form1.Sheet[col, row].Value.ToString());
+                        
+                        if (matchModel.Success)
+                        {
+                            Form1.OrganizedSheet[Model, row].Value = matchModel.Value;
 
                         }
                     }
@@ -138,7 +147,7 @@ namespace helper
             string des = "";
             try
             {
-               
+
                 string[] lines = Form1.OrganizedSheet[Des, row].Value.ToString().Split('\n');
                 foreach (string line in lines)
                 {
@@ -153,14 +162,40 @@ namespace helper
         }
         public void setDimensions(int row)
         {
-            try
+            if (Form1.OrganizedSheet[Dims, row].Value.ToString().Contains("x"))
             {
-                string[] dim = Form1.OrganizedSheet[Dims, row].Value.ToString().Split('x');
-                Form1.BulkSheet[4, row].Value = dim[0];
-                Form1.BulkSheet[5, row].Value = dim[1];
-                Form1.BulkSheet[6, row].Value = dim[2];
+                try
+                {
+                    string[] dim = Form1.OrganizedSheet[Dims, row].Value.ToString().Split('x');
+                    Form1.BulkSheet[4, row].Value = dim[0];
+                    Form1.BulkSheet[5, row].Value = dim[1];
+                    Form1.BulkSheet[6, row].Value = dim[2];
+                }
+                catch { }
+
             }
-            catch { }
+            else if (Form1.OrganizedSheet[Dims, row].Value.ToString().Contains("*"))
+            {
+                try
+                {
+                    string[] dim = Form1.OrganizedSheet[Dims, row].Value.ToString().Split('*');
+                    Form1.BulkSheet[4, row].Value = dim[0];
+                    Form1.BulkSheet[5, row].Value = dim[1];
+                    Form1.BulkSheet[6, row].Value = dim[2];
+                }
+                catch { }
+            }
+            else if (Form1.OrganizedSheet[Dims, row].Value.ToString().Contains("-"))
+            {
+                try
+                {
+                    string[] dim = Form1.OrganizedSheet[Dims, row].Value.ToString().Split('-');
+                    Form1.BulkSheet[4, row].Value = dim[0];
+                    Form1.BulkSheet[5, row].Value = dim[1];
+                    Form1.BulkSheet[6, row].Value = dim[2];
+                }
+                catch { }
+            }
 
         }
 
