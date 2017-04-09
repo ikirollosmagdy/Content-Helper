@@ -332,7 +332,12 @@ namespace helper
 
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
+            Database DB = new Database();
             //MessageBox.Show(EnglishTxtBox.Lines.Count().ToString());
+            for(int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
+            {
+                DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
+            }
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
