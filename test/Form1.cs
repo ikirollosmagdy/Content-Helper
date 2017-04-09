@@ -15,6 +15,7 @@ using System.Windows.Forms;
 
 
 
+
 namespace helper
 {
     public partial class Form1 : Form
@@ -329,12 +330,19 @@ namespace helper
            // ((DataGridViewTextBoxEditingControl)e.Control).AcceptsReturn = true;
         }
 
+        private void toolStripButton4_Click_1(object sender, EventArgs e)
+        {
+            //MessageBox.Show(EnglishTxtBox.Lines.Count().ToString());
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
+                 
+            /*
             Thread thread = new Thread(() => exportToExcel());
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
-            // exportToExcel();
+            */
 
         }
         public void exportToExcel()
