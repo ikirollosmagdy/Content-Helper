@@ -340,6 +340,26 @@ namespace helper
             }
         }
 
+        private void toolStripMenuItem2_Click_2(object sender, EventArgs e)
+        {
+            MessageBox.Show(OrganizedSheet.Rows[2].Cells[7].Value.ToString());
+        }
+
+        private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void OrganaizedGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+         
+        }
+
+        private void OrganaizedGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue;
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
                  

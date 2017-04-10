@@ -153,6 +153,9 @@ namespace helper
 
                         throw;
                     }
+                   
+                     addAttrib(row);
+                    
                 }
             }
             
@@ -281,7 +284,20 @@ namespace helper
               return textInfo.ToTitleCase(arabicMatch);
           }
 
-    
+    public static void addAttrib(int rows)
+        {
+            string[] datasource = { "Floral & Fruity", "Fresh & Zesty","Oriental & Spicy", "Oriental Fruity","Woody & Musky","Woody & Spicy" };
+            DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
+                      
+            combo.DataSource = datasource.ToList();
+            Form1.OrganizedSheet[7, rows] = combo;
+       
+
+
+
+
+
+        }
 
 
       }
