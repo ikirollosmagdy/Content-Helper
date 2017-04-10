@@ -110,33 +110,36 @@ namespace helper
 
                         if (matchSize.Success)
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value;
                            
+                            Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value.Replace(" ", "").ToLower();
                         }
                     }
                     catch (Exception) { }
                     try
                     {
+                     
                         Regex regexGender = new Regex(@"(([Ww]o)?[Mm][ae]n)|([Uu]ni(sex)?)|([Bb]oys?)|([Gg]irls?)");
                         MatchCollection matchGender = regexGender.Matches(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchGender.Count > 1)
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = matchGender[0].Value + ", " + matchGender[1].Value;
+                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement( matchGender[0].Value) + ", " + getReplacement( matchGender[1].Value);
                         }
                         else
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = matchGender[0].Value;
+                            //  Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = textInfo.ToTitleCase(matchGender[0].Value);
+                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement(matchGender[0].Value);
                         }
 
                     }
                     catch (Exception) { }
                     try
                     {
+                       
                         Regex regType = new Regex(@"((?=[Ee]au)( ?\w+ ?\w+ ?\w{5,8}))|((?=[Pp]erf)(\w{6} ?\w+ ?\w{3,6}))|(([A-Z]\w+ ?\w+ ?)(?=[Pp]arf)\w{6})|([Oo]ud ?)|([Ee][Dd][TtPpCc] ?)");
                         Match matchType = regType.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchType.Success)
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Type].Value = matchType.Value;
+                            Form1.OrganizedSheet.Rows[row].Cells[Type].Value = getReplacement(matchType.Value);
 
                         }
                     }
@@ -254,15 +257,18 @@ namespace helper
 
 
 
-        /*  public static string getArabic(String Text)
+          public static string getReplacement(String Text)
           {
-              string arabicMatch = Text;
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            string arabicMatch = Text;
               if (Text != null)
               {
-                  try
+                Text = Text.ToLower().Trim();
+                try
                   {
                       foreach (string line in System.IO.File.ReadAllLines("lookup.dat"))
                       {
+                       
                           if (line.Contains(Text))
                               arabicMatch = line.Split('	')[1];
                       }
@@ -272,10 +278,10 @@ namespace helper
                       arabicMatch="";
                   }
               }
-              return arabicMatch;
+              return textInfo.ToTitleCase(arabicMatch);
           }
 
-    */
+    
 
 
       }

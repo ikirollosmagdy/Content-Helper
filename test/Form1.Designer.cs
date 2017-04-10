@@ -81,13 +81,13 @@
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.EnglishTxtBox = new System.Windows.Forms.TextBox();
+            this.ArabicTxtBox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.EnglishTxtBox = new System.Windows.Forms.TextBox();
-            this.ArabicTxtBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
@@ -569,6 +569,24 @@
             this.splitContainer1.SplitterDistance = 336;
             this.splitContainer1.TabIndex = 0;
             // 
+            // EnglishTxtBox
+            // 
+            this.EnglishTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
+            this.EnglishTxtBox.Multiline = true;
+            this.EnglishTxtBox.Name = "EnglishTxtBox";
+            this.EnglishTxtBox.Size = new System.Drawing.Size(336, 372);
+            this.EnglishTxtBox.TabIndex = 0;
+            // 
+            // ArabicTxtBox
+            // 
+            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
+            this.ArabicTxtBox.Multiline = true;
+            this.ArabicTxtBox.Name = "ArabicTxtBox";
+            this.ArabicTxtBox.Size = new System.Drawing.Size(669, 372);
+            this.ArabicTxtBox.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -619,24 +637,6 @@
             this.toolStripContainer1.TabIndex = 2;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
-            // 
-            // EnglishTxtBox
-            // 
-            this.EnglishTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.EnglishTxtBox.Multiline = true;
-            this.EnglishTxtBox.Name = "EnglishTxtBox";
-            this.EnglishTxtBox.Size = new System.Drawing.Size(336, 372);
-            this.EnglishTxtBox.TabIndex = 0;
-            // 
-            // ArabicTxtBox
-            // 
-            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.ArabicTxtBox.Multiline = true;
-            this.ArabicTxtBox.Name = "ArabicTxtBox";
-            this.ArabicTxtBox.Size = new System.Drawing.Size(669, 372);
-            this.ArabicTxtBox.TabIndex = 0;
             // 
             // Form1
             // 
