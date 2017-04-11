@@ -35,6 +35,7 @@ namespace helper
         }
         public void clearSheets()
         {
+        
             int row, col;
             for (char c = 'a'; c <= 'z'; c++)
             {
@@ -47,6 +48,7 @@ namespace helper
                 for (col = 0; col < Form1.OrganizedSheet.ColumnCount; col++)
                 {
                     Form1.OrganizedSheet.Invoke(new Action(()=>   Form1.OrganizedSheet[col, row].Value = ""));
+                 
                 }
             }
             for (row = 0; row < Form1.BulkSheet.RowCount; row++)
@@ -74,6 +76,15 @@ namespace helper
 
                 default:
                     MessageBox.Show("Please choose category first");
+                    break;
+            }
+        }
+        public void switchDrop(int type, DataGridViewEditingControlShowingEventArgs e)
+        {
+            switch (type)
+            {
+                case 0:
+                    Perfume.dropdown(e);
                     break;
             }
         }
