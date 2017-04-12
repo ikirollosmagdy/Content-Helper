@@ -74,14 +74,21 @@ namespace helper
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            PBar.Visible = true;
-            OrganizedSheet.Rows.Clear();
-            OrganizedSheet.RowCount = Sheet.RowCount;
-            txtStatus.Text = "Working Please wait...";
-            Adapter adapter = new Adapter();
-            Thread newThread = new Thread(adapter.SwitchCategory);
-            newThread.Start(DropCat.SelectedIndex);
-
+            try
+            {
+                PBar.Visible = true;
+                OrganizedSheet.Rows.Clear();
+                OrganizedSheet.RowCount = Sheet.RowCount;
+                txtStatus.Text = "Working Please wait...";
+                Adapter adapter = new Adapter();
+                Thread newThread = new Thread(adapter.SwitchCategory);
+                newThread.Start(DropCat.SelectedIndex);
+            }
+            catch
+            {
+                MessageBox.Show("No file loaded");
+                PBar.Visible = false;
+            }
 
         }
 
@@ -336,8 +343,8 @@ namespace helper
         {
             
 
-            Adapter adapter = new Adapter();
-             adapter.switchDrop(DropCat.SelectedIndex, e);
+          //  Adapter adapter = new Adapter();
+          //   adapter.switchDrop(DropCat.SelectedIndex, e);
         }
 
       
@@ -412,6 +419,16 @@ namespace helper
         private void OrganaizedGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Please choose one from list");
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

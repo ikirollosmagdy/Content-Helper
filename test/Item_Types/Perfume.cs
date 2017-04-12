@@ -139,11 +139,23 @@ namespace helper
                         Match matchType = regType.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchType.Success)
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Type].Value = getReplacement(matchType.Value);
+                            
+                            addTypeAttrib(row, Type, getReplacement(matchType.Value));
+
 
                         }
+
+
+
+
+
                     }
-                    catch (Exception) { }
+                    catch (Exception)
+                    {
+
+
+
+                    }
                     try
                     {
                         Form1.OrganizedSheet.Rows[row].Cells[0].Value = Convert.ToString(row + 2);
@@ -155,7 +167,11 @@ namespace helper
                     }
 
                     addAttrib(row);
+                    if (Form1.OrganizedSheet[Type, row] == null || Form1.OrganizedSheet[Type, row].Value == null || Form1.OrganizedSheet[Type, row].Value.ToString() == "")
+                    {
+                        addTypeAttrib(row, Type, null);
 
+                    }
                 }
             }
 
@@ -274,6 +290,7 @@ namespace helper
 
                         if (line.Contains(Text))
                             arabicMatch = line.Split('	')[1];
+                        
                     }
                 }
                 catch (Exception)
@@ -286,37 +303,74 @@ namespace helper
 
         public static void addAttrib(int rows)
         {
-            
+                       
             string[] datasource = { "Floral & Fruity", "Fresh & Zesty", "Oriental & Spicy", "Oriental Fruity", "Woody & Musky", "Woody & Spicy" };
             DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
             combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-          
+            combo.FlatStyle = FlatStyle.Popup;
             combo.DataSource = datasource.ToList();
             Form1.OrganizedSheet[7, rows] = combo;
-            
+           
 
+        }
+        public static void addTypeAttrib(int row,int col,string data)
+        {
+            List<string> list = new List<string>();
+          
+            DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
+            combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            combo.FlatStyle = FlatStyle.Popup;
+            addItems(list);
+            int ID = list.FindIndex(xBas => xBas.Equals(data, StringComparison.OrdinalIgnoreCase));
+            if (ID != -1) {
+                combo.DataSource = list;
+                Form1.OrganizedSheet[col, row] = combo;
+                Form1.OrganizedSheet[col, row].Value = list[ID];
+            }
+            else {
+
+
+
+                if (data == null)
+                {
+                    combo.DataSource = list;
+                    Form1.OrganizedSheet[col, row] = combo;
+                }
+                else
+                {
+                    list.Add(data);
+                    combo.DataSource = list;
+                    Form1.OrganizedSheet[col, row] = combo;
+
+                    Form1.OrganizedSheet[col, row].Value = data;
+                }
+            }
         }
 
         public static void dropdown(DataGridViewEditingControlShowingEventArgs e)
         {
-            if (Form1.OrganizedSheet.CurrentCell.OwningColumn.HeaderText.Equals("Fregrance Type"))
+            if (Form1.OrganizedSheet.CurrentCell.OwningColumn.HeaderText != "Fregrance Type")
             {
+                return;
+            }
+            else { 
                 TextBox autoText = e.Control as TextBox;
                 if (autoText != null)
                 {
                     autoText.AutoCompleteMode = AutoCompleteMode.Suggest;
                     autoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
-                    addItems(DataCollection);
+                  //  addItems(DataCollection);
                     autoText.AutoCompleteCustomSource = DataCollection;
-                   
-
-
 
                 }
+               
+
+
+                
             }
         }
-              public static void addItems(AutoCompleteStringCollection col)
+              public static void addItems(List<string> col)
         {
             col.Add("Eau de Cologne");
             col.Add("Eau de Parfum");

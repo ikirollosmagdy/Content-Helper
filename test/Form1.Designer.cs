@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GridView1 = new System.Windows.Forms.DataGridView();
@@ -47,26 +48,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Undo = new System.Windows.Forms.ToolStripMenuItem();
             this.btnQC = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.BulkGrid = new System.Windows.Forms.DataGridView();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.EnglishTxtBox = new System.Windows.Forms.TextBox();
-            this.ArabicTxtBox = new System.Windows.Forms.TextBox();
-            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.B = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.C = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +76,24 @@
             this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.BulkGrid = new System.Windows.Forms.DataGridView();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.EnglishTxtBox = new System.Windows.Forms.TextBox();
+            this.ArabicTxtBox = new System.Windows.Forms.TextBox();
+            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
@@ -240,7 +241,8 @@
             // 
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton3,
-            this.toolStripDropDownButton1});
+            this.toolStripDropDownButton1,
+            this.toolStripButton5});
             this.toolStrip2.Location = new System.Drawing.Point(3, 3);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(1005, 25);
@@ -263,8 +265,7 @@
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.Undo,
-            this.btnQC,
-            this.toolStripMenuItem2});
+            this.btnQC});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
@@ -278,7 +279,7 @@
             this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItem1.Text = "Replace";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -287,7 +288,7 @@
             this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
             this.Undo.Name = "Undo";
             this.Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.Undo.Size = new System.Drawing.Size(180, 22);
+            this.Undo.Size = new System.Drawing.Size(170, 22);
             this.Undo.Text = "Undo";
             this.Undo.Click += new System.EventHandler(this.Undo_Click);
             // 
@@ -297,16 +298,19 @@
             this.btnQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnQC.Name = "btnQC";
             this.btnQC.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.btnQC.Size = new System.Drawing.Size(180, 22);
+            this.btnQC.Size = new System.Drawing.Size(170, 22);
             this.btnQC.Text = "QC Check";
             this.btnQC.Click += new System.EventHandler(this.btnQC_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripButton5
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click_2);
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(87, 22);
+            this.toolStripButton5.Text = "Test Functions";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // OrganaizedGrid
             // 
@@ -315,6 +319,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.OrganaizedGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.OrganaizedGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrganaizedGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.A,
@@ -343,6 +349,14 @@
             this.X,
             this.Y,
             this.Z});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SandyBrown;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.OrganaizedGrid.Location = new System.Drawing.Point(8, 31);
@@ -361,9 +375,141 @@
             this.OrganaizedGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellValueChanged);
             this.OrganaizedGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_ColumnHeaderMouseClick);
             this.OrganaizedGrid.CurrentCellChanged += new System.EventHandler(this.OrganaizedGrid_CurrentCellChanged);
+            this.OrganaizedGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OrganaizedGrid_DataError);
             this.OrganaizedGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.OrganaizedGrid_EditingControlShowing);
             this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
             this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
+            // 
+            // A
+            // 
+            this.A.HeaderText = "A";
+            this.A.Name = "A";
+            this.A.Width = 39;
+            // 
+            // B
+            // 
+            this.B.HeaderText = "B";
+            this.B.Name = "B";
+            // 
+            // C
+            // 
+            this.C.HeaderText = "C";
+            this.C.Name = "C";
+            // 
+            // D
+            // 
+            this.D.HeaderText = "D";
+            this.D.Name = "D";
+            // 
+            // E
+            // 
+            this.E.HeaderText = "E";
+            this.E.Name = "E";
+            // 
+            // F
+            // 
+            this.F.HeaderText = "F";
+            this.F.Name = "F";
+            // 
+            // G
+            // 
+            this.G.HeaderText = "G";
+            this.G.Name = "G";
+            // 
+            // H
+            // 
+            this.H.HeaderText = "H";
+            this.H.Name = "H";
+            // 
+            // I
+            // 
+            this.I.HeaderText = "I";
+            this.I.Name = "I";
+            // 
+            // J
+            // 
+            this.J.HeaderText = "J";
+            this.J.Name = "J";
+            // 
+            // K
+            // 
+            this.K.HeaderText = "K";
+            this.K.Name = "K";
+            // 
+            // L
+            // 
+            this.L.HeaderText = "L";
+            this.L.Name = "L";
+            // 
+            // M
+            // 
+            this.M.HeaderText = "M";
+            this.M.Name = "M";
+            // 
+            // N
+            // 
+            this.N.HeaderText = "N";
+            this.N.Name = "N";
+            // 
+            // O
+            // 
+            this.O.HeaderText = "O";
+            this.O.Name = "O";
+            // 
+            // P
+            // 
+            this.P.HeaderText = "P";
+            this.P.Name = "P";
+            // 
+            // Q
+            // 
+            this.Q.HeaderText = "Q";
+            this.Q.Name = "Q";
+            // 
+            // R
+            // 
+            this.R.HeaderText = "R";
+            this.R.Name = "R";
+            // 
+            // S
+            // 
+            this.S.HeaderText = "S";
+            this.S.Name = "S";
+            // 
+            // T
+            // 
+            this.T.HeaderText = "T";
+            this.T.Name = "T";
+            // 
+            // U
+            // 
+            this.U.HeaderText = "U";
+            this.U.Name = "U";
+            // 
+            // V
+            // 
+            this.V.HeaderText = "V";
+            this.V.Name = "V";
+            // 
+            // W
+            // 
+            this.W.HeaderText = "W";
+            this.W.Name = "W";
+            // 
+            // X
+            // 
+            this.X.HeaderText = "X";
+            this.X.Name = "X";
+            // 
+            // Y
+            // 
+            this.Y.HeaderText = "Y";
+            this.Y.Name = "Y";
+            // 
+            // Z
+            // 
+            this.Z.HeaderText = "Z";
+            this.Z.Name = "Z";
             // 
             // tabPage3
             // 
@@ -548,137 +694,6 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // A
-            // 
-            this.A.HeaderText = "A";
-            this.A.Name = "A";
-            this.A.Width = 39;
-            // 
-            // B
-            // 
-            this.B.HeaderText = "B";
-            this.B.Name = "B";
-            // 
-            // C
-            // 
-            this.C.HeaderText = "C";
-            this.C.Name = "C";
-            // 
-            // D
-            // 
-            this.D.HeaderText = "D";
-            this.D.Name = "D";
-            // 
-            // E
-            // 
-            this.E.HeaderText = "E";
-            this.E.Name = "E";
-            // 
-            // F
-            // 
-            this.F.HeaderText = "F";
-            this.F.Name = "F";
-            // 
-            // G
-            // 
-            this.G.HeaderText = "G";
-            this.G.Name = "G";
-            // 
-            // H
-            // 
-            this.H.HeaderText = "H";
-            this.H.Name = "H";
-            // 
-            // I
-            // 
-            this.I.HeaderText = "I";
-            this.I.Name = "I";
-            // 
-            // J
-            // 
-            this.J.HeaderText = "J";
-            this.J.Name = "J";
-            // 
-            // K
-            // 
-            this.K.HeaderText = "K";
-            this.K.Name = "K";
-            // 
-            // L
-            // 
-            this.L.HeaderText = "L";
-            this.L.Name = "L";
-            // 
-            // M
-            // 
-            this.M.HeaderText = "M";
-            this.M.Name = "M";
-            // 
-            // N
-            // 
-            this.N.HeaderText = "N";
-            this.N.Name = "N";
-            // 
-            // O
-            // 
-            this.O.HeaderText = "O";
-            this.O.Name = "O";
-            // 
-            // P
-            // 
-            this.P.HeaderText = "P";
-            this.P.Name = "P";
-            // 
-            // Q
-            // 
-            this.Q.HeaderText = "Q";
-            this.Q.Name = "Q";
-            // 
-            // R
-            // 
-            this.R.HeaderText = "R";
-            this.R.Name = "R";
-            // 
-            // S
-            // 
-            this.S.HeaderText = "S";
-            this.S.Name = "S";
-            // 
-            // T
-            // 
-            this.T.HeaderText = "T";
-            this.T.Name = "T";
-            // 
-            // U
-            // 
-            this.U.HeaderText = "U";
-            this.U.Name = "U";
-            // 
-            // V
-            // 
-            this.V.HeaderText = "V";
-            this.V.Name = "V";
-            // 
-            // W
-            // 
-            this.W.HeaderText = "W";
-            this.W.Name = "W";
-            // 
-            // X
-            // 
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            // 
-            // Y
-            // 
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            // 
-            // Z
-            // 
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -762,10 +777,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.TextBox EnglishTxtBox;
         private System.Windows.Forms.TextBox ArabicTxtBox;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ContextMenuStrip menu;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.DataGridViewTextBoxColumn A;
         private System.Windows.Forms.DataGridViewTextBoxColumn B;
         private System.Windows.Forms.DataGridViewTextBoxColumn C;
