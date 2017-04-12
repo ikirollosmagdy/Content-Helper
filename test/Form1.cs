@@ -384,8 +384,11 @@ namespace helper
 
         private void OrganaizedGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-              OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue;
-            
+            try
+            {
+                OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue;
+            }
+            catch { }
         }
 
         private void OrganaizedGrid_CellClick(object sender, DataGridViewCellEventArgs e)

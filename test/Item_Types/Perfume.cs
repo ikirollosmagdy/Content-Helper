@@ -87,7 +87,7 @@ namespace helper
         {
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
             int row, col;
-
+           
             //   Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount;
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[0].HeaderText = "Row Number"));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Brand].HeaderText = "Brand"));
@@ -103,7 +103,7 @@ namespace helper
                 {
                     try
                     {
-                        Regex regexSize = new Regex(@"(\d{2,3} ?[Mm][lL])");
+                        Regex regexSize = new Regex(@"(\d{2,3} ?[Mm][lL]?)");
                         Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
 
 
@@ -112,6 +112,7 @@ namespace helper
                         {
 
                             Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value.Replace(" ", "").ToLower();
+                          
                         }
                     }
                     catch (Exception) { }
@@ -123,13 +124,15 @@ namespace helper
                         if (matchGender.Count > 1)
                         {
                             Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement(matchGender[0].Value) + ", " + getReplacement(matchGender[1].Value);
+                           
                         }
                         else
                         {
                             //  Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = textInfo.ToTitleCase(matchGender[0].Value);
                             Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement(matchGender[0].Value);
+                          
                         }
-
+                        
                     }
                     catch (Exception) { }
                     try
@@ -142,7 +145,7 @@ namespace helper
                             
                             addTypeAttrib(row, Type, getReplacement(matchType.Value));
 
-
+                           
                         }
 
 
@@ -158,13 +161,18 @@ namespace helper
                     }
                     try
                     {
+                        
                         Form1.OrganizedSheet.Rows[row].Cells[0].Value = Convert.ToString(row + 2);
+                    
                     }
                     catch (Exception)
                     {
 
-                        throw;
+                       
                     }
+
+                   
+
 
                     addAttrib(row);
                     if (Form1.OrganizedSheet[Type, row] == null || Form1.OrganizedSheet[Type, row].Value == null || Form1.OrganizedSheet[Type, row].Value.ToString() == "")
