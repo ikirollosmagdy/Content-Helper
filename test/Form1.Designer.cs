@@ -94,6 +94,8 @@
             this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
@@ -649,7 +651,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.txtStatus,
-            this.ProgressBAR});
+            this.ProgressBAR,
+            this.toolStripStatusLabel2,
+            this.txtTranslatedCellCount});
             this.statusStrip1.Location = new System.Drawing.Point(0, 425);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1019, 22);
@@ -694,6 +698,21 @@
             this.toolStripContainer1.TabIndex = 2;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(750, 17);
+            this.toolStripStatusLabel2.Spring = true;
+            this.toolStripStatusLabel2.Text = "Untranslated Cells:";
+            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtTranslatedCellCount
+            // 
+            this.txtTranslatedCellCount.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
+            this.txtTranslatedCellCount.Name = "txtTranslatedCellCount";
+            this.txtTranslatedCellCount.Size = new System.Drawing.Size(13, 17);
+            this.txtTranslatedCellCount.Text = "0";
             // 
             // Form1
             // 
@@ -808,6 +827,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn X;
         private System.Windows.Forms.DataGridViewTextBoxColumn Y;
         private System.Windows.Forms.DataGridViewTextBoxColumn Z;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel txtTranslatedCellCount;
     }
 }
 

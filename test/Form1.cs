@@ -1,5 +1,4 @@
 ﻿using Excel;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,7 +26,7 @@ namespace helper
         }
         DataSet result;
         public static DataGridView Sheet, OrganizedSheet, BulkSheet;
-        public static ToolStripLabel txtStats;
+        public static ToolStripLabel txtStats,txtUntranslated;
         public static ToolStripProgressBar PBar;
         Stack<changedCell> UndoAction = new Stack<changedCell>();
         Stack<changedCell[]> Undocopy = new Stack<changedCell[]>();
@@ -96,11 +95,16 @@ namespace helper
 
         private void toolStripButton3_Click_1(object sender, EventArgs e)
         {
-            // Creating the bulk for perfume 
-            Adapter adapter = new Adapter();
-            Thread newThread = new Thread(adapter.SwitchBulk);
-            newThread.Start(DropCat.SelectedIndex);
-            //  btnSave.PerformClick();
+            try
+            {
+                Adapter adapter = new Adapter();
+                Thread newThread = new Thread(adapter.SwitchBulk);
+                newThread.Start(DropCat.SelectedIndex);
+                //  btnSave.PerformClick();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 
@@ -112,7 +116,7 @@ namespace helper
             BulkSheet = BulkGrid;
             txtStats = txtStatus;
             PBar = ProgressBAR;
-
+            txtUntranslated = txtTranslatedCellCount;
 
 
 
@@ -138,12 +142,19 @@ namespace helper
             }
             else if (e.Control && e.KeyCode == Keys.D)
             {
-                int row = OrganizedSheet.CurrentCell.RowIndex-1, col = OrganizedSheet.CurrentCell.ColumnIndex ;
+                int row = OrganizedSheet.CurrentCell.RowIndex - 1, col = OrganizedSheet.CurrentCell.ColumnIndex;
                 try
                 {
                     OrganizedSheet.CurrentCell.Value = OrganizedSheet[col, row].Value;
                 }
                 catch { }
+            }
+            else if (e.KeyCode == Keys.Delete)
+            {
+                for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
+                {
+                    OrganizedSheet.SelectedCells[x].Value = string.Empty;
+                }
             }
         }
         public void pasteCell(string copied)
@@ -283,14 +294,18 @@ namespace helper
 
         private void OrganaizedGrid_CellLeave_1(object sender, DataGridViewCellEventArgs e)
         {
-
+            try
+            {
+                OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue;
+            }
+            catch { }
         }
 
         private void OrganaizedGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
 
 
-            
+
 
 
             changedCell cell = new changedCell();
@@ -322,7 +337,7 @@ namespace helper
                 {
                     if (OrganizedSheet.Rows[i].Cells[j].Value == null || OrganizedSheet.Rows[i].Cells[j].Value.ToString() == "" || OrganizedSheet.Rows[i].Cells[j] == null)
                     {
-                        OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Red;
+                        OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
                     }
                 }
 
@@ -341,13 +356,13 @@ namespace helper
 
         private void OrganaizedGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            
 
-          //  Adapter adapter = new Adapter();
-          //   adapter.switchDrop(DropCat.SelectedIndex, e);
+
+            //  Adapter adapter = new Adapter();
+            //   adapter.switchDrop(DropCat.SelectedIndex, e);
         }
 
-      
+
 
 
 
@@ -369,7 +384,7 @@ namespace helper
 
         private void toolStripMenuItem2_Click_2(object sender, EventArgs e)
         {
-           
+
         }
 
         private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -395,38 +410,47 @@ namespace helper
         {
             try
             {
-                if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() ==typeof(DataGridViewComboBoxCell)) { 
-                OrganizedSheet.BeginEdit(true);
-                ComboBox comb = (ComboBox)OrganizedSheet.EditingControl;
-                comb.DroppedDown = true;
-            }
+                if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
+                {
+                    OrganizedSheet.BeginEdit(true);
+                    ComboBox comb = (ComboBox)OrganizedSheet.EditingControl;
+                    comb.DroppedDown = true;
+                }
             }
             catch { }
         }
 
         private void menu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-          //  OrganizedSheet.SelectedCells[0].Value = e.ClickedItem.Text;
+            //  OrganizedSheet.SelectedCells[0].Value = e.ClickedItem.Text;
         }
 
         private void OrganaizedGrid_CellContextMenuStripChanged(object sender, DataGridViewCellEventArgs e)
         {
-         
+
         }
 
         private void OrganaizedGrid_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
         {
-            
+
+
         }
 
         private void OrganaizedGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-           
+            try
+            {
+                MessageBox.Show(OrganizedSheet[3, 1].Value.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -437,11 +461,12 @@ namespace helper
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 
-            /*
+            PBar.Visible = true;
+            txtStatus.Text = "Saving...";
             Thread thread = new Thread(() => exportToExcel());
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
-            */
+
 
         }
         public void exportToExcel()
@@ -486,7 +511,8 @@ namespace helper
                 if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     workbook.SaveAs(saveDialog.FileName);
-                    MessageBox.Show("Export Successful");
+                    txtStats.GetCurrentParent().Invoke(new Action(() => Form1.txtStats.Text = "File has been saved!!!"));
+                    PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Visible = false));
                 }
             }
             catch (System.Exception ex)
@@ -500,6 +526,7 @@ namespace helper
                 excel.Quit();
                 workbook = null;
                 excel = null;
+                
             }
 
         }

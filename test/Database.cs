@@ -63,17 +63,7 @@ namespace helper
             
             // Now the SQLiteCommand object can give us a DataReader-Object:
             sqlite_datareader = sqlite_cmd.ExecuteReader();
-
-            // The SQLiteDataReader allows us to run through the result lines:
-           /* 
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
-            {
-                               
-                    arabic = sqlite_datareader["Arabic"].ToString();
-                   
-                }
             
-            */
             
             sqlite_conn.Close();
 

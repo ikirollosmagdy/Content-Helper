@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -9,20 +10,20 @@ using System.Windows.Forms;
 
 namespace helper
 {
-   public class Perfume
+    public class Perfume
 
     {
 
 
 
         public static int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
-            ExtraData = 6, FregFamily = 7;
+            ExtraData = 6, FregFamily = 7,UnTranslatedCount=0;
         static bool isFirst = true;
 
         public static void createBulk()
         {
-
-
+            UnTranslatedCount = 0;
+            Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
 
             if (isFirst)
             {
@@ -75,10 +76,10 @@ namespace helper
                 setGender(i);
                 setFragFamiley(i);
                 setPerfumeName(i);
-
+                Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
 
             }
-
+           
 
         }
 
@@ -87,7 +88,7 @@ namespace helper
         {
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
             int row, col;
-           
+
             //   Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount;
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[0].HeaderText = "Row Number"));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Brand].HeaderText = "Brand"));
@@ -112,7 +113,7 @@ namespace helper
                         {
 
                             Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value.Replace(" ", "").ToLower();
-                          
+
                         }
                     }
                     catch (Exception) { }
@@ -124,15 +125,15 @@ namespace helper
                         if (matchGender.Count > 1)
                         {
                             Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement(matchGender[0].Value) + ", " + getReplacement(matchGender[1].Value);
-                           
+
                         }
                         else
                         {
                             //  Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = textInfo.ToTitleCase(matchGender[0].Value);
                             Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = getReplacement(matchGender[0].Value);
-                          
+
                         }
-                        
+
                     }
                     catch (Exception) { }
                     try
@@ -142,10 +143,10 @@ namespace helper
                         Match matchType = regType.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchType.Success)
                         {
-                            
+
                             addTypeAttrib(row, Type, getReplacement(matchType.Value));
 
-                           
+
                         }
 
 
@@ -161,25 +162,26 @@ namespace helper
                     }
                     try
                     {
-                        
+
                         Form1.OrganizedSheet.Rows[row].Cells[0].Value = Convert.ToString(row + 2);
-                    
+
                     }
                     catch (Exception)
                     {
 
-                       
+
                     }
-
-                   
-
-
                     addAttrib(row);
+
+
+
+
                     if (Form1.OrganizedSheet[Type, row] == null || Form1.OrganizedSheet[Type, row].Value == null || Form1.OrganizedSheet[Type, row].Value.ToString() == "")
                     {
                         addTypeAttrib(row, Type, null);
 
                     }
+
                 }
             }
 
@@ -196,13 +198,23 @@ namespace helper
             Database db = new Database();
 
             string title = Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value + " By " + Form1.OrganizedSheet.Rows[row].Cells[Brand].Value
-              + " For " + Form1.OrganizedSheet.Rows[row].Cells[Gender].Value + " - " + Form1.OrganizedSheet.Rows[row].Cells[Type].Value
+              + " For " + Form1.OrganizedSheet.Rows[row].Cells[Gender].Value + " - " + Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue
                + ", " + Form1.OrganizedSheet.Rows[row].Cells[Size].Value;
-            Form1.BulkSheet.Rows[row].Cells[0].Value = textInfo.ToTitleCase(title);
+                 Form1.BulkSheet.Rows[row].Cells[0].Value = textInfo.ToTitleCase(title);
+
             Form1.BulkSheet[8, row].Value = "عطر " + db.getRecord(Form1.OrganizedSheet[PerfumeName, row].Value.ToString()) + " ل"
                 + db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()) + " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) +
-                " - " + db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "، " + db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
+                " - " + db.getRecord(Form1.OrganizedSheet[Type, row].EditedFormattedValue.ToString()) + "، " + db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
 
+            if(CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            {
+                Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[8, row].Style.BackColor = Color.White;
+            }
         }
 
         public static void setDescription(int row)
@@ -212,7 +224,7 @@ namespace helper
                 + "</p> <p><strong>Product Features:</strong></p> <ul> <li>Brand: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Brand].Value + "</li> <li>Target Group: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Gender].Value + "</li> <li>Fragrance Type: "
-                + Form1.OrganizedSheet.Rows[row].Cells[Type].Value + "</li> <li>Perfume Name: "
+                + Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue + "</li> <li>Perfume Name: "
                 + Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value + "</li> <li>Size: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Size].Value + "</li> </ul>";
             Form1.BulkSheet.Rows[row].Cells[2].Value = Des;
@@ -220,7 +232,7 @@ namespace helper
                 + "</p> <p><strong>خصائص المنتج:</strong></p> <ul> <li>العلامة التجارية: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Brand].Value.ToString()) + "</li> <li>النوع: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Gender].Value.ToString()) + "</li> <li>النوع العطر: "
-                + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Type].Value.ToString()) + "</li> <li>اسم العطر: "
+                + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue.ToString()) + "</li> <li>اسم العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString()) + "</li> <li>الحجم: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString()) + "</li> </ul>";
 
@@ -231,6 +243,15 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[1].Value = Form1.OrganizedSheet.Rows[row].Cells[Brand].Value;
             Form1.BulkSheet.Rows[row].Cells[9].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Brand].Value.ToString());
+            if (CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            {
+                Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[9, row].Style.BackColor = Color.White;
+            }
         }
         public static void setType(int row)
         {
@@ -242,8 +263,15 @@ namespace helper
 
                 Form1.BulkSheet.Rows[row].Cells[11].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[3].Value.ToString());
 
-
-
+                if (CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
+                {
+                    Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;
+                    UnTranslatedCount++;
+                }
+                else
+                {
+                    Form1.BulkSheet[11, row].Style.BackColor = Color.White;
+                }
 
             }
         }
@@ -254,6 +282,15 @@ namespace helper
             {
                 Database db = new Database();
                 Form1.BulkSheet.Rows[row].Cells[12].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[4].Value.ToString());
+                if (CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
+                {
+                    Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
+                    UnTranslatedCount++;
+                }
+                else
+                {
+                    Form1.BulkSheet[12, row].Style.BackColor = Color.White;
+                }
             }
 
         }
@@ -265,6 +302,15 @@ namespace helper
             {
                 Database db = new Database();
                 Form1.BulkSheet.Rows[row].Cells[13].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[5].Value.ToString());
+                if (CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
+                {
+                    Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
+                    UnTranslatedCount++;
+                }
+                else
+                {
+                    Form1.BulkSheet[13, row].Style.BackColor = Color.White;
+                }
             }
 
         }
@@ -272,14 +318,32 @@ namespace helper
         public static void setFragFamiley(int row)
         {
             Database db = new Database();
-            Form1.BulkSheet.Rows[row].Cells[6].Value = Form1.OrganizedSheet.Rows[row].Cells[FregFamily].Value;
-            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[FregFamily].Value.ToString());
+            Form1.BulkSheet.Rows[row].Cells[6].Value = Form1.OrganizedSheet.Rows[row].Cells[FregFamily].EditedFormattedValue;
+            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[FregFamily].EditedFormattedValue.ToString());
+            if (CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
+            {
+                Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[14, row].Style.BackColor = Color.White;
+            }
         }
         public static void setPerfumeName(int row)
         {
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[7].Value = Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value;
             Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString());
+            if (CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
+            {
+                Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[15, row].Style.BackColor = Color.White;
+            }
         }
 
 
@@ -298,7 +362,7 @@ namespace helper
 
                         if (line.Contains(Text))
                             arabicMatch = line.Split('	')[1];
-                        
+
                     }
                 }
                 catch (Exception)
@@ -311,31 +375,33 @@ namespace helper
 
         public static void addAttrib(int rows)
         {
-                       
+
             string[] datasource = { "Floral & Fruity", "Fresh & Zesty", "Oriental & Spicy", "Oriental Fruity", "Woody & Musky", "Woody & Spicy" };
             DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
             combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             combo.FlatStyle = FlatStyle.Popup;
             combo.DataSource = datasource.ToList();
             Form1.OrganizedSheet[7, rows] = combo;
-           
+
 
         }
-        public static void addTypeAttrib(int row,int col,string data)
+        public static void addTypeAttrib(int row, int col, string data)
         {
             List<string> list = new List<string>();
-          
+
             DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
             combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             combo.FlatStyle = FlatStyle.Popup;
             addItems(list);
             int ID = list.FindIndex(xBas => xBas.Equals(data, StringComparison.OrdinalIgnoreCase));
-            if (ID != -1) {
+            if (ID != -1)
+            {
                 combo.DataSource = list;
                 Form1.OrganizedSheet[col, row] = combo;
                 Form1.OrganizedSheet[col, row].Value = list[ID];
             }
-            else {
+            else
+            {
 
 
 
@@ -361,24 +427,24 @@ namespace helper
             {
                 return;
             }
-            else { 
+            else
+            {
                 TextBox autoText = e.Control as TextBox;
                 if (autoText != null)
                 {
                     autoText.AutoCompleteMode = AutoCompleteMode.Suggest;
                     autoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
                     AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
-                  //  addItems(DataCollection);
+                    //  addItems(DataCollection);
                     autoText.AutoCompleteCustomSource = DataCollection;
 
                 }
-               
 
 
-                
+
             }
         }
-              public static void addItems(List<string> col)
+        public static void addItems(List<string> col)
         {
             col.Add("Eau de Cologne");
             col.Add("Eau de Parfum");
@@ -390,8 +456,25 @@ namespace helper
             col.Add("Perfume Mist");
             col.Add("Perfume Oil");
         }
+
+      public static bool CheckEnglish(string text)
+        {
+            bool IsEnglish = false;
+            Regex regex = new Regex("[a-zA-Z]");
+            Match match = regex.Match(text);
+            if (match.Success)
+            {
+                IsEnglish = true;
+            }
+            else
+            {
+                IsEnglish = false;
+            }
+
+            return IsEnglish;
+        }
     }
 
-    
+
 
 }
