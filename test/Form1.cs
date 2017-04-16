@@ -28,8 +28,7 @@ namespace helper
         public static DataGridView Sheet, OrganizedSheet, BulkSheet;
         public static ToolStripLabel txtStats,txtUntranslated;
         public static ToolStripProgressBar PBar;
-        Stack<changedCell> UndoAction = new Stack<changedCell>();
-        Stack<changedCell[]> Undocopy = new Stack<changedCell[]>();
+         Stack<Object[][]> undoStack = new Stack<Object[][]>();
         public bool copiedData = false;
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -64,6 +63,12 @@ namespace helper
             {
                 GridView1.DataSource = result.Tables[ComboBox1.SelectedIndex];
                 GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+                foreach (DataGridViewColumn column in Sheet.Columns)
+                {
+                    column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
             }
             catch (Exception)
             {
@@ -118,10 +123,12 @@ namespace helper
             PBar = ProgressBAR;
             txtUntranslated = txtTranslatedCellCount;
 
+            foreach (DataGridViewColumn column in OrganizedSheet.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
-
-
-
+            
 
         }
 
@@ -159,11 +166,13 @@ namespace helper
         }
         public void pasteCell(string copied)
         {
+            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+
             string[] Lines = Regex.Split(copied.TrimEnd("\r\n".ToCharArray()), "\r\n");
 
             int StartingRow = OrganaizedGrid.CurrentCell.RowIndex;
             int StartingColumn = OrganaizedGrid.CurrentCell.ColumnIndex;
-            List<changedCell> terms = new List<changedCell>();
+            
             foreach (var line in Lines)
             {
                 if (StartingRow <= (OrganaizedGrid.Rows.Count - 1))
@@ -172,18 +181,7 @@ namespace helper
                     int ColumnIndex = StartingColumn;
                     for (int i = 0; i < cells.Length && ColumnIndex <= (OrganaizedGrid.Columns.Count - 1); i++)
                     {
-                        changedCell copiedCell = new changedCell();
-                        copiedCell.column = ColumnIndex;
-                        copiedCell.row = StartingRow;
-                        if (OrganaizedGrid[ColumnIndex, StartingRow].Value != null)
-                        {
-                            copiedCell.data = OrganaizedGrid[ColumnIndex, StartingRow].Value.ToString();
-                        }
-                        else
-                        {
-                            copiedCell.data = "";
-                        }
-                        terms.Add(copiedCell);
+                       
                         OrganaizedGrid[ColumnIndex++, StartingRow].Value = cells[i];
 
                     }
@@ -192,9 +190,9 @@ namespace helper
                     StartingRow++;
                 }
             }
-            changedCell[] arr = terms.ToArray();
-            Undocopy.Push(arr);
-            copiedData = true;
+         
+          
+           
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -210,34 +208,20 @@ namespace helper
 
         private void Undo_Click(object sender, EventArgs e)
         {
-
-            if (copiedData)
+            if (undoStack.Count == 0)
+                return;
+            object[][] rows = undoStack.Pop();
+            while (rows.Equals(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).ToArray()))
             {
-                if (Undocopy.Count == 0)
-                {
-                    return;
-                }
-                changedCell[] arrce = new changedCell[120];
-                arrce = Undocopy.Pop();
-                foreach (changedCell ce in arrce)
-                {
-                    OrganizedSheet.Rows[ce.row].Cells[ce.column].Value = ce.data;
-                }
-                copiedData = false;
+                rows = undoStack.Pop();
             }
-            else
+
+            OrganizedSheet.Rows.Clear();
+            for (int x = 0; x <= rows.GetUpperBound(0); x++)
             {
-
-                if (UndoAction.Count == 0)
-                {
-                    return;
-                }
-
-                changedCell cell = new changedCell();
-                cell = UndoAction.Pop();
-                OrganizedSheet.Rows[cell.row].Cells[cell.column].Value = cell.data;
-
+                OrganizedSheet.Rows.Add(rows[x]);
             }
+
 
         }
 
@@ -248,7 +232,6 @@ namespace helper
 
         private void GridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-
         }
 
         private void OrganaizedGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -305,21 +288,7 @@ namespace helper
         {
 
 
-
-
-
-            changedCell cell = new changedCell();
-            cell.row = e.RowIndex;
-            cell.column = e.ColumnIndex;
-            if (OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null)
-            {
-                cell.data = "";
-            }
-            else
-            {
-                cell.data = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-            }
-            UndoAction.Push(cell);
+            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
 
 
         }
@@ -362,16 +331,7 @@ namespace helper
             //   adapter.switchDrop(DropCat.SelectedIndex, e);
         }
 
-
-
-
-
-
-
-
-
-
-
+        
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
             Database DB = new Database();
@@ -443,19 +403,48 @@ namespace helper
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
+           
+          
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void doneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sheet.SelectedCells[0].OwningRow.DefaultCellStyle.BackColor = Color.LightGreen;
+        }
+
+        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Sheet.SelectedCells[0].OwningRow.DefaultCellStyle.BackColor = Color.HotPink;
+        }
+
+        private void doneToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OrganizedSheet.SelectedCells[0].OwningRow.DefaultCellStyle.BackColor = Color.LightGreen;
+        }
+
+        private void cancelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OrganizedSheet.SelectedCells[0].OwningRow.DefaultCellStyle.BackColor = Color.HotPink;
+        }
+
+        private void removeRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
             try
             {
-                MessageBox.Show(OrganizedSheet[3, 1].Value.ToString());
+                OrganizedSheet.Rows.RemoveAt(OrganizedSheet.SelectedCells[0].RowIndex);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch { }
         }
 
         private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show("Please choose one from list");
+           
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
@@ -496,6 +485,7 @@ namespace helper
                         if (BulkSheet.Rows[i].Cells[j].Value != null)
                         {
                             worksheet.Cells[i + 2, j + 1] = BulkSheet.Rows[i].Cells[j].Value.ToString();
+                            
                         }
                         else
                         {
@@ -533,14 +523,7 @@ namespace helper
 
 
     }
-    class changedCell
-    {
-
-        public int row;
-        public int column;
-        public string data;
-        //        public DataGridViewCellStyle style;
-    }
+   
 }
 
 

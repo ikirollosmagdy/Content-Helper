@@ -34,6 +34,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GridView1 = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.ComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -50,32 +53,10 @@
             this.btnQC = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
-            this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.B = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.C = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.D = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.E = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.F = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.G = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.H = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.I = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.J = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.K = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.L = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.M = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.N = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.O = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.P = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Q = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.R = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.S = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.T = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.U = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.V = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.W = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.X = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Y = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Z = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OrganizedMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.doneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -86,23 +67,22 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.EnglishTxtBox = new System.Windows.Forms.TextBox();
             this.ArabicTxtBox = new System.Windows.Forms.TextBox();
-            this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).BeginInit();
+            this.OrganizedMenu.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulkGrid)).BeginInit();
@@ -112,7 +92,6 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.menu.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -151,8 +130,8 @@
             this.GridView1.AllowUserToOrderColumns = true;
             this.GridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.GridView1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.GridView1.Location = new System.Drawing.Point(3, 28);
             this.GridView1.Name = "GridView1";
@@ -161,6 +140,28 @@
             this.GridView1.TabIndex = 1;
             this.GridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellEndEdit);
             this.GridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_ColumnHeaderMouseClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doneToolStripMenuItem,
+            this.cancelToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(111, 48);
+            // 
+            // doneToolStripMenuItem
+            // 
+            this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
+            this.doneToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.doneToolStripMenuItem.Text = "Done";
+            this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
+            // 
+            // cancelToolStripMenuItem
+            // 
+            this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.cancelToolStripMenuItem.Text = "Cancel";
+            this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -325,33 +326,7 @@
             this.OrganaizedGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OrganaizedGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.A,
-            this.B,
-            this.C,
-            this.D,
-            this.E,
-            this.F,
-            this.G,
-            this.H,
-            this.I,
-            this.J,
-            this.K,
-            this.L,
-            this.M,
-            this.N,
-            this.O,
-            this.P,
-            this.Q,
-            this.R,
-            this.S,
-            this.T,
-            this.U,
-            this.V,
-            this.W,
-            this.X,
-            this.Y,
-            this.Z});
+            this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -383,136 +358,35 @@
             this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
             this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
             // 
-            // A
+            // OrganizedMenu
             // 
-            this.A.HeaderText = "A";
-            this.A.Name = "A";
-            this.A.Width = 39;
+            this.OrganizedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doneToolStripMenuItem1,
+            this.cancelToolStripMenuItem1,
+            this.removeRowToolStripMenuItem});
+            this.OrganizedMenu.Name = "OrganizedMenu";
+            this.OrganizedMenu.Size = new System.Drawing.Size(144, 70);
             // 
-            // B
+            // doneToolStripMenuItem1
             // 
-            this.B.HeaderText = "B";
-            this.B.Name = "B";
+            this.doneToolStripMenuItem1.Name = "doneToolStripMenuItem1";
+            this.doneToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.doneToolStripMenuItem1.Text = "Done";
+            this.doneToolStripMenuItem1.Click += new System.EventHandler(this.doneToolStripMenuItem1_Click);
             // 
-            // C
+            // cancelToolStripMenuItem1
             // 
-            this.C.HeaderText = "C";
-            this.C.Name = "C";
+            this.cancelToolStripMenuItem1.Name = "cancelToolStripMenuItem1";
+            this.cancelToolStripMenuItem1.Size = new System.Drawing.Size(143, 22);
+            this.cancelToolStripMenuItem1.Text = "Cancel";
+            this.cancelToolStripMenuItem1.Click += new System.EventHandler(this.cancelToolStripMenuItem1_Click);
             // 
-            // D
+            // removeRowToolStripMenuItem
             // 
-            this.D.HeaderText = "D";
-            this.D.Name = "D";
-            // 
-            // E
-            // 
-            this.E.HeaderText = "E";
-            this.E.Name = "E";
-            // 
-            // F
-            // 
-            this.F.HeaderText = "F";
-            this.F.Name = "F";
-            // 
-            // G
-            // 
-            this.G.HeaderText = "G";
-            this.G.Name = "G";
-            // 
-            // H
-            // 
-            this.H.HeaderText = "H";
-            this.H.Name = "H";
-            // 
-            // I
-            // 
-            this.I.HeaderText = "I";
-            this.I.Name = "I";
-            // 
-            // J
-            // 
-            this.J.HeaderText = "J";
-            this.J.Name = "J";
-            // 
-            // K
-            // 
-            this.K.HeaderText = "K";
-            this.K.Name = "K";
-            // 
-            // L
-            // 
-            this.L.HeaderText = "L";
-            this.L.Name = "L";
-            // 
-            // M
-            // 
-            this.M.HeaderText = "M";
-            this.M.Name = "M";
-            // 
-            // N
-            // 
-            this.N.HeaderText = "N";
-            this.N.Name = "N";
-            // 
-            // O
-            // 
-            this.O.HeaderText = "O";
-            this.O.Name = "O";
-            // 
-            // P
-            // 
-            this.P.HeaderText = "P";
-            this.P.Name = "P";
-            // 
-            // Q
-            // 
-            this.Q.HeaderText = "Q";
-            this.Q.Name = "Q";
-            // 
-            // R
-            // 
-            this.R.HeaderText = "R";
-            this.R.Name = "R";
-            // 
-            // S
-            // 
-            this.S.HeaderText = "S";
-            this.S.Name = "S";
-            // 
-            // T
-            // 
-            this.T.HeaderText = "T";
-            this.T.Name = "T";
-            // 
-            // U
-            // 
-            this.U.HeaderText = "U";
-            this.U.Name = "U";
-            // 
-            // V
-            // 
-            this.V.HeaderText = "V";
-            this.V.Name = "V";
-            // 
-            // W
-            // 
-            this.W.HeaderText = "W";
-            this.W.Name = "W";
-            // 
-            // X
-            // 
-            this.X.HeaderText = "X";
-            this.X.Name = "X";
-            // 
-            // Y
-            // 
-            this.Y.HeaderText = "Y";
-            this.Y.Name = "Y";
-            // 
-            // Z
-            // 
-            this.Z.HeaderText = "Z";
-            this.Z.Name = "Z";
+            this.removeRowToolStripMenuItem.Name = "removeRowToolStripMenuItem";
+            this.removeRowToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.removeRowToolStripMenuItem.Text = "Remove Row";
+            this.removeRowToolStripMenuItem.Click += new System.EventHandler(this.removeRowToolStripMenuItem_Click);
             // 
             // tabPage3
             // 
@@ -625,27 +499,6 @@
             this.ArabicTxtBox.Size = new System.Drawing.Size(669, 372);
             this.ArabicTxtBox.TabIndex = 0;
             // 
-            // menu
-            // 
-            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem3,
-            this.toolStripMenuItem4});
-            this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(110, 48);
-            this.menu.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menu_ItemClicked);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(109, 22);
-            this.toolStripMenuItem3.Text = "Basem";
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(109, 22);
-            this.toolStripMenuItem4.Text = "Kiro";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -682,6 +535,21 @@
             this.ProgressBAR.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.ProgressBAR.Visible = false;
             // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(897, 17);
+            this.toolStripStatusLabel2.Spring = true;
+            this.toolStripStatusLabel2.Text = "Untranslated Cells:";
+            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtTranslatedCellCount
+            // 
+            this.txtTranslatedCellCount.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
+            this.txtTranslatedCellCount.Name = "txtTranslatedCellCount";
+            this.txtTranslatedCellCount.Size = new System.Drawing.Size(13, 17);
+            this.txtTranslatedCellCount.Text = "0";
+            // 
             // toolStripContainer1
             // 
             // 
@@ -699,21 +567,6 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(750, 17);
-            this.toolStripStatusLabel2.Spring = true;
-            this.toolStripStatusLabel2.Text = "Untranslated Cells:";
-            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtTranslatedCellCount
-            // 
-            this.txtTranslatedCellCount.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
-            this.txtTranslatedCellCount.Name = "txtTranslatedCellCount";
-            this.txtTranslatedCellCount.Size = new System.Drawing.Size(13, 17);
-            this.txtTranslatedCellCount.Text = "0";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -723,12 +576,15 @@
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Content Helper";
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -736,6 +592,7 @@
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).EndInit();
+            this.OrganizedMenu.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
@@ -751,7 +608,6 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.menu.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
@@ -797,38 +653,16 @@
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.TextBox EnglishTxtBox;
         private System.Windows.Forms.TextBox ArabicTxtBox;
-        private System.Windows.Forms.ContextMenuStrip menu;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn A;
-        private System.Windows.Forms.DataGridViewTextBoxColumn B;
-        private System.Windows.Forms.DataGridViewTextBoxColumn C;
-        private System.Windows.Forms.DataGridViewTextBoxColumn D;
-        private System.Windows.Forms.DataGridViewTextBoxColumn E;
-        private System.Windows.Forms.DataGridViewTextBoxColumn F;
-        private System.Windows.Forms.DataGridViewTextBoxColumn G;
-        private System.Windows.Forms.DataGridViewTextBoxColumn H;
-        private System.Windows.Forms.DataGridViewTextBoxColumn I;
-        private System.Windows.Forms.DataGridViewTextBoxColumn J;
-        private System.Windows.Forms.DataGridViewTextBoxColumn K;
-        private System.Windows.Forms.DataGridViewTextBoxColumn L;
-        private System.Windows.Forms.DataGridViewTextBoxColumn M;
-        private System.Windows.Forms.DataGridViewTextBoxColumn N;
-        private System.Windows.Forms.DataGridViewTextBoxColumn O;
-        private System.Windows.Forms.DataGridViewTextBoxColumn P;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Q;
-        private System.Windows.Forms.DataGridViewTextBoxColumn R;
-        private System.Windows.Forms.DataGridViewTextBoxColumn S;
-        private System.Windows.Forms.DataGridViewTextBoxColumn T;
-        private System.Windows.Forms.DataGridViewTextBoxColumn U;
-        private System.Windows.Forms.DataGridViewTextBoxColumn V;
-        private System.Windows.Forms.DataGridViewTextBoxColumn W;
-        private System.Windows.Forms.DataGridViewTextBoxColumn X;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Y;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Z;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel txtTranslatedCellCount;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip OrganizedMenu;
+        private System.Windows.Forms.ToolStripMenuItem doneToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem removeRowToolStripMenuItem;
     }
 }
 

@@ -17,8 +17,36 @@ namespace helper
 
 
         public static int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
-            ExtraData = 6, FregFamily = 7,UnTranslatedCount=0;
+            ExtraData = 7, FregFamily = 6,UnTranslatedCount=0,Link=8,Price=9,Quantity=10;
         static bool isFirst = true;
+
+        public static void setupTable()
+        {
+            DataGridViewComboBoxColumn com = new DataGridViewComboBoxColumn();
+            com.HeaderText = "Fregrance Type";
+            com.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            com.FlatStyle = FlatStyle.Popup;
+            com.Items.AddRange("Eau de Cologne", "Eau de Parfum", "Eau de Splash", "Eau de Toilette", "Esprit de Parfum", "Extrait De Parfum"
+                , "Oud", "Perfume Mist", "Perfume Oil");
+            DataGridViewComboBoxColumn Freg = new DataGridViewComboBoxColumn();
+            Freg.HeaderText = "Fregrance Familey";
+            Freg.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            Freg.FlatStyle = FlatStyle.Popup;
+            Freg.Items.AddRange("Floral & Fruity", "Fresh & Zesty", "Oriental & Spicy", "Oriental Fruity", "Woody & Musky", "Woody & Spicy");
+
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("NO", "No.")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Brand", "Brand")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("PerfumeName", "Perfume Name")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(com)));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Size", "Size")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Gender", "Gender")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(Freg)));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("De", "Description")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Link")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount));
+        }
 
         public static void createBulk()
         {
@@ -28,7 +56,7 @@ namespace helper
             if (isFirst)
             {
                 //  Form1.BulkSheet.Columns.Add("Title", "Title");
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[0].HeaderText = "Title"));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Title", "Title")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Des", "Description")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Type", "Fregrance Type")));
@@ -44,6 +72,9 @@ namespace helper
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("GenderAr", "Target Group AR")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("FmileyAr", "Fragrance Family(AR)")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("FragNameAr", "Perfume Name(AR) ")));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Qunt", "Quntity")));
                 isFirst = false;
             }
             else
@@ -64,20 +95,35 @@ namespace helper
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[13].HeaderText = "Target Group AR"));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[14].HeaderText = "Fragrance Family(AR)"));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[15].HeaderText = "Perfume Name(AR)"));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[16].HeaderText = "Link"));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[17].HeaderText = "Price"));
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[18].HeaderText = "Quantity"));
+
+                
             }
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
 
             for (int i = 0; i < Form1.OrganizedSheet.RowCount; i++)
             {
-                setTitle(i);
-                setBrand(i);
-                setDescription(i);
-                setType(i);
-                setSize(i);
-                setGender(i);
-                setFragFamiley(i);
-                setPerfumeName(i);
-                Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
-
+                try
+                {
+                    setTitle(i);
+                    setBrand(i);
+                    setDescription(i);
+                    setType(i);
+                    setSize(i);
+                    setGender(i);
+                    setFragFamiley(i);
+                    setPerfumeName(i);
+                    setLink(i);
+                    setPrice(i);
+                    setQuantity(i);
+                    Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Error: "+ex.Message);
+                }
             }
            
 
@@ -86,18 +132,9 @@ namespace helper
 
         public static void getGender()
         {
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
+            setupTable();
             int row, col;
-
-            //   Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount;
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[0].HeaderText = "Row Number"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Brand].HeaderText = "Brand"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[PerfumeName].HeaderText = "Perfume Name"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Gender].HeaderText = "Gender"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Size].HeaderText = "Size"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Type].HeaderText = "Fregrance Type"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[ExtraData].HeaderText = "Description"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[FregFamily].HeaderText = "Fregrance Family"));
+            
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
                 for (col = 0; col < Form1.Sheet.ColumnCount; col++)
@@ -163,15 +200,11 @@ namespace helper
                     try
                     {
 
-                        Form1.OrganizedSheet.Rows[row].Cells[0].Value = Convert.ToString(row + 2);
+                        Form1.OrganizedSheet.Rows[row].Cells[0].Value = Convert.ToString(row + 1);
 
                     }
-                    catch (Exception)
-                    {
-
-
-                    }
-                    addAttrib(row);
+                    catch (Exception) { }
+                    
 
 
 
@@ -346,6 +379,18 @@ namespace helper
             }
         }
 
+        public static void setLink(int row)
+        {
+            Form1.BulkSheet[16, row].Value = Form1.OrganizedSheet[Link, row].Value;
+        }
+        public static void setPrice(int row)
+        {
+            Form1.BulkSheet[17, row].Value = Form1.OrganizedSheet[Price, row].Value;
+        }
+        public static void setQuantity(int row)
+        {
+            Form1.BulkSheet[18, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
+        }
 
 
         public static string getReplacement(String Text)
@@ -373,77 +418,24 @@ namespace helper
             return textInfo.ToTitleCase(arabicMatch);
         }
 
-        public static void addAttrib(int rows)
-        {
-
-            string[] datasource = { "Floral & Fruity", "Fresh & Zesty", "Oriental & Spicy", "Oriental Fruity", "Woody & Musky", "Woody & Spicy" };
-            DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
-            combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            combo.FlatStyle = FlatStyle.Popup;
-            combo.DataSource = datasource.ToList();
-            Form1.OrganizedSheet[7, rows] = combo;
-
-
-        }
+        
+        
         public static void addTypeAttrib(int row, int col, string data)
         {
             List<string> list = new List<string>();
 
-            DataGridViewComboBoxCell combo = new DataGridViewComboBoxCell();
-            combo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            combo.FlatStyle = FlatStyle.Popup;
+           
             addItems(list);
             int ID = list.FindIndex(xBas => xBas.Equals(data, StringComparison.OrdinalIgnoreCase));
             if (ID != -1)
             {
-                combo.DataSource = list;
-                Form1.OrganizedSheet[col, row] = combo;
+               
                 Form1.OrganizedSheet[col, row].Value = list[ID];
             }
-            else
-            {
-
-
-
-                if (data == null)
-                {
-                    combo.DataSource = list;
-                    Form1.OrganizedSheet[col, row] = combo;
-                }
-                else
-                {
-                    list.Add(data);
-                    combo.DataSource = list;
-                    Form1.OrganizedSheet[col, row] = combo;
-
-                    Form1.OrganizedSheet[col, row].Value = data;
-                }
-            }
+           
         }
 
-        public static void dropdown(DataGridViewEditingControlShowingEventArgs e)
-        {
-            if (Form1.OrganizedSheet.CurrentCell.OwningColumn.HeaderText != "Fregrance Type")
-            {
-                return;
-            }
-            else
-            {
-                TextBox autoText = e.Control as TextBox;
-                if (autoText != null)
-                {
-                    autoText.AutoCompleteMode = AutoCompleteMode.Suggest;
-                    autoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
-                    AutoCompleteStringCollection DataCollection = new AutoCompleteStringCollection();
-                    //  addItems(DataCollection);
-                    autoText.AutoCompleteCustomSource = DataCollection;
-
-                }
-
-
-
-            }
-        }
+      
         public static void addItems(List<string> col)
         {
             col.Add("Eau de Cologne");

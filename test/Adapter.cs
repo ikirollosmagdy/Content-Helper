@@ -35,29 +35,19 @@ namespace helper
         }
         public void clearSheets()
         {
-        
-            int row, col;
-            for (char c = 'a'; c <= 'z'; c++)
-            {
-                Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[c.ToString()].HeaderText = c.ToString()));
-            }
+            
+                int row, col;
 
-
-            for (row = 0; row < Form1.OrganizedSheet.RowCount; row++)
-            {
-                for (col = 0; col < Form1.OrganizedSheet.ColumnCount; col++)
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
+                for (row = 0; row < Form1.BulkSheet.RowCount; row++)
                 {
-                    Form1.OrganizedSheet.Invoke(new Action(()=>   Form1.OrganizedSheet[col, row].Value = ""));
-                 
+                    for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)
+                    {
+                        Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet[col, row].Value = ""));
+                    }
                 }
-            }
-            for (row = 0; row < Form1.BulkSheet.RowCount; row++)
-            {
-                for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)
-                {
-                    Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet[col, row].Value = ""));
-                }
-            }
+               
+           
         }
 
         public void SwitchBulk(object index)
@@ -79,16 +69,7 @@ namespace helper
                     break;
             }
         }
-        public void switchDrop(int type, DataGridViewEditingControlShowingEventArgs e)
-        {
-            switch (type)
-            {
-                case 0:
-                    Perfume.dropdown(e);
-                    break;
-                
-            }
-        }
+       
 
 
     }
