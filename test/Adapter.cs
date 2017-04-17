@@ -38,7 +38,7 @@ namespace helper
             
                 int row, col;
 
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
+            
                 for (row = 0; row < Form1.BulkSheet.RowCount; row++)
                 {
                     for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)

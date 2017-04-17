@@ -21,7 +21,10 @@ namespace helper
         static bool isFirst = true;
 
         public static void setupTable()
+
         {
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
+
             DataGridViewComboBoxColumn com = new DataGridViewComboBoxColumn();
             com.HeaderText = "Fregrance Type";
             com.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
@@ -51,10 +54,9 @@ namespace helper
         public static void createBulk()
         {
             UnTranslatedCount = 0;
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
             Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
 
-            if (isFirst)
-            {
                 //  Form1.BulkSheet.Columns.Add("Title", "Title");
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Title", "Title")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
@@ -75,32 +77,7 @@ namespace helper
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Qunt", "Quntity")));
-                isFirst = false;
-            }
-            else
-            {
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[0].HeaderText = "Title"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[1].HeaderText = "Brand"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[2].HeaderText = "Description"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[3].HeaderText = "Fregrance Type"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[4].HeaderText = "Size"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[5].HeaderText = "Target Group"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[6].HeaderText = "Fragrance Family"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[7].HeaderText = "Perfume Name"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[8].HeaderText = "Title AR"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[9].HeaderText = "Brand Ar"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[10].HeaderText = "Description(AR)"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[11].HeaderText = "Fregrance Type AR"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[12].HeaderText = "Size AR"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[13].HeaderText = "Target Group AR"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[14].HeaderText = "Fragrance Family(AR)"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[15].HeaderText = "Perfume Name(AR)"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[16].HeaderText = "Link"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[17].HeaderText = "Price"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[18].HeaderText = "Quantity"));
-
-                
-            }
+               
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
 
             for (int i = 0; i < Form1.OrganizedSheet.RowCount; i++)
