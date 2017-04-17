@@ -16,11 +16,11 @@ namespace helper
 
 
 
-        public static int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
+        public  int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
             ExtraData = 7, FregFamily = 6,UnTranslatedCount=0,Link=8,Price=9,Quantity=10;
-        static bool isFirst = true;
+       
 
-        public static void setupTable()
+        public  void setupTable()
 
         {
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
@@ -51,7 +51,7 @@ namespace helper
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount));
         }
 
-        public static void createBulk()
+        public  void createBulk()
         {
             UnTranslatedCount = 0;
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
@@ -107,7 +107,7 @@ namespace helper
         }
 
 
-        public static void getGender()
+        public  void getGender()
         {
             setupTable();
             int row, col;
@@ -200,7 +200,7 @@ namespace helper
 
 
 
-        public static void setTitle(int row)
+        public  void setTitle(int row)
         {
 
 
@@ -227,7 +227,7 @@ namespace helper
             }
         }
 
-        public static void setDescription(int row)
+        public  void setDescription(int row)
         {
             Database db = new Database();
             string Des = "<p>" + Form1.OrganizedSheet.Rows[row].Cells[ExtraData].Value
@@ -248,7 +248,7 @@ namespace helper
 
 
         }
-        public static void setBrand(int row)
+        public  void setBrand(int row)
         {
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[1].Value = Form1.OrganizedSheet.Rows[row].Cells[Brand].Value;
@@ -263,7 +263,7 @@ namespace helper
                 Form1.BulkSheet[9, row].Style.BackColor = Color.White;
             }
         }
-        public static void setType(int row)
+        public  void setType(int row)
         {
             Form1.BulkSheet.Rows[row].Cells[3].Value = Form1.OrganizedSheet.Rows[row].Cells[Type].Value;
 
@@ -285,7 +285,7 @@ namespace helper
 
             }
         }
-        public static void setSize(int row)
+        public  void setSize(int row)
         {
             Form1.BulkSheet.Rows[row].Cells[4].Value = Form1.OrganizedSheet.Rows[row].Cells[Size].Value;
             if (Form1.OrganizedSheet.Rows[row].Cells[Size].Value != null)
@@ -304,7 +304,7 @@ namespace helper
             }
 
         }
-        public static void setGender(int row)
+        public  void setGender(int row)
         {
             Form1.BulkSheet.Rows[row].Cells[5].Value = Form1.OrganizedSheet.Rows[row].Cells[Gender].Value;
 
@@ -325,7 +325,7 @@ namespace helper
 
         }
 
-        public static void setFragFamiley(int row)
+        public  void setFragFamiley(int row)
         {
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[6].Value = Form1.OrganizedSheet.Rows[row].Cells[FregFamily].EditedFormattedValue;
@@ -340,7 +340,7 @@ namespace helper
                 Form1.BulkSheet[14, row].Style.BackColor = Color.White;
             }
         }
-        public static void setPerfumeName(int row)
+        public  void setPerfumeName(int row)
         {
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[7].Value = Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value;
@@ -356,21 +356,21 @@ namespace helper
             }
         }
 
-        public static void setLink(int row)
+        public  void setLink(int row)
         {
             Form1.BulkSheet[16, row].Value = Form1.OrganizedSheet[Link, row].Value;
         }
-        public static void setPrice(int row)
+        public  void setPrice(int row)
         {
             Form1.BulkSheet[17, row].Value = Form1.OrganizedSheet[Price, row].Value;
         }
-        public static void setQuantity(int row)
+        public  void setQuantity(int row)
         {
             Form1.BulkSheet[18, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
         }
 
 
-        public static string getReplacement(String Text)
+        public  string getReplacement(String Text)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             string arabicMatch = Text;
@@ -397,7 +397,7 @@ namespace helper
 
         
         
-        public static void addTypeAttrib(int row, int col, string data)
+        public  void addTypeAttrib(int row, int col, string data)
         {
             List<string> list = new List<string>();
 
@@ -413,7 +413,7 @@ namespace helper
         }
 
       
-        public static void addItems(List<string> col)
+        public  void addItems(List<string> col)
         {
             col.Add("Eau de Cologne");
             col.Add("Eau de Parfum");
@@ -426,7 +426,7 @@ namespace helper
             col.Add("Perfume Oil");
         }
 
-      public static bool CheckEnglish(string text)
+      public  bool CheckEnglish(string text)
         {
             bool IsEnglish = false;
             Regex regex = new Regex("[a-zA-Z]");

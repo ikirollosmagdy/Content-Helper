@@ -442,6 +442,13 @@ namespace helper
             catch { }
         }
 
+        private void insertColumnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.HeaderText = "Comments";
+            Sheet.Columns.Insert(Sheet.SelectedCells[0].ColumnIndex , column);
+        }
+
         private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
            

@@ -17,7 +17,8 @@ namespace helper
             {
 
                 case 0:
-                    Perfume.getGender();
+                    Perfume perfume = new Perfume();
+                    perfume.getGender();
                                       
                     break;
                 case 1:
@@ -57,7 +58,8 @@ namespace helper
             {
 
                 case 0:
-                    Perfume.createBulk();
+                    Perfume per = new Perfume();
+                    per.createBulk();
                     break;
                 case 1:
                     Refrigerator Ref = new Refrigerator();
