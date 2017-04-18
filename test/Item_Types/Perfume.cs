@@ -84,7 +84,7 @@ namespace helper
                
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
 
-            for (int i = 0; i < Form1.OrganizedSheet.RowCount; i++)
+            for (int i = 0; i < Form1.OrganizedSheet.RowCount-1; i++)
             {
                 try
                 {

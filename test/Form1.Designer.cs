@@ -46,15 +46,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.DropCat = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Undo = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnQC = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
             this.OrganizedMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.doneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,14 +68,21 @@
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Undo = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnQC = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.CleartoolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.CleartoolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).BeginInit();
             this.OrganizedMenu.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.toolStrip3.SuspendLayout();
@@ -98,13 +96,17 @@
             this.statusStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.StatusBar;
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -118,7 +120,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.GridView1);
+            this.tabPage1.Controls.Add(this.splitContainer2);
             this.tabPage1.Controls.Add(this.toolStrip1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -131,7 +133,7 @@
             // GridView1
             // 
             this.GridView1.AllowUserToOrderColumns = true;
-            this.GridView1.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.GridView1.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -144,22 +146,25 @@
             this.GridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView1.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.GridView1.Location = new System.Drawing.Point(3, 28);
+            this.GridView1.Location = new System.Drawing.Point(0, 0);
             this.GridView1.Name = "GridView1";
             this.GridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridView1.Size = new System.Drawing.Size(1005, 368);
+            this.GridView1.Size = new System.Drawing.Size(395, 368);
             this.GridView1.TabIndex = 1;
+            this.GridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellContentClick);
             this.GridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellEndEdit);
             this.GridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_ColumnHeaderMouseClick);
+            this.GridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_RowHeaderMouseClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.doneToolStripMenuItem,
             this.cancelToolStripMenuItem,
+            this.CleartoolStrip,
             this.insertColumnToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 92);
             // 
             // doneToolStripMenuItem
             // 
@@ -192,7 +197,10 @@
             this.toolStripLabel1,
             this.DropCat,
             this.toolStripButton2,
-            this.btnSaveSheet});
+            this.btnSaveSheet,
+            this.toolStripButton3,
+            this.toolStripDropDownButton1,
+            this.toolStripButton5});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1005, 25);
@@ -249,144 +257,15 @@
             this.toolStripButton2.Text = "Analayze";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.toolStrip2);
-            this.tabPage2.Controls.Add(this.OrganaizedGrid);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1011, 399);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Organized";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton3,
-            this.toolStripDropDownButton1,
-            this.toolStripButton5});
-            this.toolStrip2.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1005, 25);
-            this.toolStrip2.TabIndex = 1;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(71, 22);
-            this.toolStripButton3.Text = "Create Bulk";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click_1);
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.Undo,
-            this.btnQC});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(40, 22);
-            this.toolStripDropDownButton1.Text = "Edit";
-            this.toolStripDropDownButton1.Click += new System.EventHandler(this.toolStripDropDownButton1_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
-            this.toolStripMenuItem1.Text = "Replace";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // Undo
-            // 
-            this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
-            this.Undo.Name = "Undo";
-            this.Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.Undo.Size = new System.Drawing.Size(170, 22);
-            this.Undo.Text = "Undo";
-            this.Undo.Click += new System.EventHandler(this.Undo_Click);
-            // 
-            // btnQC
-            // 
-            this.btnQC.Image = ((System.Drawing.Image)(resources.GetObject("btnQC.Image")));
-            this.btnQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnQC.Name = "btnQC";
-            this.btnQC.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.btnQC.Size = new System.Drawing.Size(170, 22);
-            this.btnQC.Text = "QC Check";
-            this.btnQC.Click += new System.EventHandler(this.btnQC_Click);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(87, 22);
-            this.toolStripButton5.Text = "Test Functions";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // OrganaizedGrid
-            // 
-            this.OrganaizedGrid.AllowUserToOrderColumns = true;
-            this.OrganaizedGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.OrganaizedGrid.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.OrganaizedGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SandyBrown;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
-            this.OrganaizedGrid.Location = new System.Drawing.Point(8, 31);
-            this.OrganaizedGrid.Name = "OrganaizedGrid";
-            this.OrganaizedGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.OrganaizedGrid.Size = new System.Drawing.Size(1000, 362);
-            this.OrganaizedGrid.TabIndex = 0;
-            this.OrganaizedGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.OrganaizedGrid_CellBeginEdit);
-            this.OrganaizedGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellClick);
-            this.OrganaizedGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellContentClick);
-            this.OrganaizedGrid.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.OrganaizedGrid_CellContextMenuStripNeeded);
-            this.OrganaizedGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellDoubleClick);
-            this.OrganaizedGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellEndEdit);
-            this.OrganaizedGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.OrganaizedGrid_CellFormatting);
-            this.OrganaizedGrid.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellLeave_1);
-            this.OrganaizedGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellValueChanged);
-            this.OrganaizedGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_ColumnHeaderMouseClick);
-            this.OrganaizedGrid.CurrentCellChanged += new System.EventHandler(this.OrganaizedGrid_CurrentCellChanged);
-            this.OrganaizedGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OrganaizedGrid_DataError);
-            this.OrganaizedGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.OrganaizedGrid_EditingControlShowing);
-            this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
-            this.OrganaizedGrid.SelectionChanged += new System.EventHandler(this.OrganaizedGrid_SelectionChanged);
-            this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
-            // 
             // OrganizedMenu
             // 
             this.OrganizedMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.doneToolStripMenuItem1,
             this.cancelToolStripMenuItem1,
+            this.CleartoolStripMenuItem2,
             this.removeRowToolStripMenuItem});
             this.OrganizedMenu.Name = "OrganizedMenu";
-            this.OrganizedMenu.Size = new System.Drawing.Size(144, 70);
+            this.OrganizedMenu.Size = new System.Drawing.Size(144, 92);
             // 
             // doneToolStripMenuItem1
             // 
@@ -598,6 +477,134 @@
             this.btnSaveSheet.Text = "Save Sheet";
             this.btnSaveSheet.Click += new System.EventHandler(this.btnSaveSheet_Click);
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 28);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.GridView1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.OrganaizedGrid);
+            this.splitContainer2.Size = new System.Drawing.Size(1005, 368);
+            this.splitContainer2.SplitterDistance = 395;
+            this.splitContainer2.TabIndex = 2;
+            // 
+            // OrganaizedGrid
+            // 
+            this.OrganaizedGrid.AllowUserToOrderColumns = true;
+            this.OrganaizedGrid.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.OrganaizedGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SandyBrown;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.OrganaizedGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
+            this.OrganaizedGrid.Location = new System.Drawing.Point(0, 0);
+            this.OrganaizedGrid.Name = "OrganaizedGrid";
+            this.OrganaizedGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.OrganaizedGrid.Size = new System.Drawing.Size(606, 368);
+            this.OrganaizedGrid.TabIndex = 1;
+            this.OrganaizedGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.OrganaizedGrid_CellBeginEdit);
+            this.OrganaizedGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellClick);
+            this.OrganaizedGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellContentClick);
+            this.OrganaizedGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellEndEdit);
+            this.OrganaizedGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellValueChanged);
+            this.OrganaizedGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_ColumnHeaderMouseClick);
+            this.OrganaizedGrid.CurrentCellChanged += new System.EventHandler(this.OrganaizedGrid_CurrentCellChanged_1);
+            this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
+            this.OrganaizedGrid.SelectionChanged += new System.EventHandler(this.OrganaizedGrid_SelectionChanged_1);
+            this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(71, 22);
+            this.toolStripButton3.Text = "Create Bulk";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click_1);
+            // 
+            // toolStripDropDownButton1
+            // 
+            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.Undo,
+            this.btnQC});
+            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Margin = new System.Windows.Forms.Padding(10, 1, 0, 2);
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(40, 22);
+            this.toolStripDropDownButton1.Text = "Edit";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem1.Image")));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripMenuItem1.Text = "Replace";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // Undo
+            // 
+            this.Undo.Image = ((System.Drawing.Image)(resources.GetObject("Undo.Image")));
+            this.Undo.Name = "Undo";
+            this.Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.Undo.Size = new System.Drawing.Size(170, 22);
+            this.Undo.Text = "Undo";
+            this.Undo.Click += new System.EventHandler(this.Undo_Click);
+            // 
+            // btnQC
+            // 
+            this.btnQC.Image = ((System.Drawing.Image)(resources.GetObject("btnQC.Image")));
+            this.btnQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnQC.Name = "btnQC";
+            this.btnQC.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.btnQC.Size = new System.Drawing.Size(170, 22);
+            this.btnQC.Text = "QC Check";
+            this.btnQC.Click += new System.EventHandler(this.btnQC_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(85, 22);
+            this.toolStripButton5.Text = "test Functions";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
+            // 
+            // CleartoolStripMenuItem2
+            // 
+            this.CleartoolStripMenuItem2.Name = "CleartoolStripMenuItem2";
+            this.CleartoolStripMenuItem2.Size = new System.Drawing.Size(143, 22);
+            this.CleartoolStripMenuItem2.Text = "Clear Color";
+            this.CleartoolStripMenuItem2.Click += new System.EventHandler(this.CleartoolStripMenuItem2_Click);
+            // 
+            // CleartoolStrip
+            // 
+            this.CleartoolStrip.Name = "CleartoolStrip";
+            this.CleartoolStrip.Size = new System.Drawing.Size(211, 22);
+            this.CleartoolStrip.Text = "Clear Color";
+            this.CleartoolStrip.Click += new System.EventHandler(this.CleartoolStrip_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,6 +617,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Content Helper";
             this.Activated += new System.EventHandler(this.Form1_Activated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -618,11 +626,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).EndInit();
             this.OrganizedMenu.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -644,6 +647,11 @@
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -654,37 +662,28 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripComboBox ComboBox1;
         private System.Windows.Forms.DataGridView GridView1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.DataGridView OrganaizedGrid;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView BulkGrid;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton btnSave;
         private System.Windows.Forms.ToolStripComboBox DropCat;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem Undo;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel txtStatus;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripProgressBar ProgressBAR;
-        private System.Windows.Forms.ToolStripMenuItem btnQC;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.TextBox EnglishTxtBox;
         private System.Windows.Forms.TextBox ArabicTxtBox;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel txtTranslatedCellCount;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
@@ -696,6 +695,16 @@
         private System.Windows.Forms.ToolStripMenuItem removeRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem insertColumnToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton btnSaveSheet;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridView OrganaizedGrid;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem Undo;
+        private System.Windows.Forms.ToolStripMenuItem btnQC;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripMenuItem CleartoolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem CleartoolStrip;
     }
 }
 
