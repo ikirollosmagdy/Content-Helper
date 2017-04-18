@@ -1,4 +1,5 @@
 ﻿using Excel;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +44,7 @@ namespace helper
                     result = reader.AsDataSet();
 
                     ComboBox1.Items.Clear();
-                    foreach (DataTable dt in result.Tables)
+                    foreach (System.Data.DataTable dt in result.Tables)
                         ComboBox1.Items.Add(dt.TableName);
                     reader.Close();
 
@@ -403,8 +404,12 @@ namespace helper
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-           
-          
+            PBar.Visible = true;
+            txtStatus.Text = "Saving...";
+            Thread thread = new Thread(() => exportToExcel(Sheet));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -438,6 +443,7 @@ namespace helper
             try
             {
                 OrganizedSheet.Rows.RemoveAt(OrganizedSheet.SelectedCells[0].RowIndex);
+               
             }
             catch { }
         }
@@ -447,6 +453,20 @@ namespace helper
             DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
             column.HeaderText = "Comments";
             Sheet.Columns.Insert(Sheet.SelectedCells[0].ColumnIndex , column);
+        }
+
+        private void btnSaveSheet_Click(object sender, EventArgs e)
+        {
+            PBar.Visible = true;
+            txtStatus.Text = "Saving...";
+            Thread thread = new Thread(() => exportToExcel(Sheet));
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
+        private void OrganaizedGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            
         }
 
         private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -459,14 +479,18 @@ namespace helper
 
             PBar.Visible = true;
             txtStatus.Text = "Saving...";
-            Thread thread = new Thread(() => exportToExcel());
+            Thread thread = new Thread(() => exportToExcel(BulkSheet));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
 
         }
-        public void exportToExcel()
+        public void exportToExcel(DataGridView Grid)
         {
+            //Getting the location and file name of the excel to save from user. 
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            saveDialog.FilterIndex = 1;
             // Creating a Excel object. 
             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
             Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(Type.Missing);
@@ -481,18 +505,20 @@ namespace helper
 
 
                 //Loop through each row and read value from each column. 
-                for (int i = 0; i < BulkSheet.Columns.Count; i++)
+                for (int i = 0; i < Grid.Columns.Count; i++)
                 {
-                    worksheet.Cells[1, i + 1] = BulkSheet.Columns[i].HeaderText;
+                    worksheet.Cells[1, i + 1] = Grid.Columns[i].HeaderText;
                 }
-                for (int i = 0; i < BulkSheet.Rows.Count; i++)
+                for (int i = 0; i < Grid.Rows.Count; i++)
                 {
-                    for (int j = 0; j < BulkSheet.Columns.Count; j++)
+                    for (int j = 0; j < Grid.Columns.Count; j++)
 
-                        if (BulkSheet.Rows[i].Cells[j].Value != null)
+                        if (Grid.Rows[i].Cells[j].Value != null)
                         {
-                            worksheet.Cells[i + 2, j + 1] = BulkSheet.Rows[i].Cells[j].Value.ToString();
-                            
+                            Range range = (Range)worksheet.Cells[i + 2, j +1];
+                            worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
+                            range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid.Rows[i].DefaultCellStyle.BackColor);
+
                         }
                         else
                         {
@@ -500,16 +526,13 @@ namespace helper
                         }
                 }
 
-                //Getting the location and file name of the excel to save from user. 
-                SaveFileDialog saveDialog = new SaveFileDialog();
-                saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
-                saveDialog.FilterIndex = 1;
+               
 
                 if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     workbook.SaveAs(saveDialog.FileName);
-                    txtStats.GetCurrentParent().Invoke(new Action(() => Form1.txtStats.Text = "File has been saved!!!"));
-                    PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Visible = false));
+                    txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
+                    PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
                 }
             }
             catch (System.Exception ex)

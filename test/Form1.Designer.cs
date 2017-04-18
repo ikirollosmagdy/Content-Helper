@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -37,6 +38,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.doneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cancelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.insertColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.ComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -74,7 +76,7 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.insertColumnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridView1)).BeginInit();
@@ -132,6 +134,14 @@
             this.GridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.contextMenuStrip1;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView1.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.GridView1.Location = new System.Drawing.Point(3, 28);
@@ -149,21 +159,28 @@
             this.cancelToolStripMenuItem,
             this.insertColumnToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 92);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(212, 70);
             // 
             // doneToolStripMenuItem
             // 
             this.doneToolStripMenuItem.Name = "doneToolStripMenuItem";
-            this.doneToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.doneToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.doneToolStripMenuItem.Text = "Done";
             this.doneToolStripMenuItem.Click += new System.EventHandler(this.doneToolStripMenuItem_Click);
             // 
             // cancelToolStripMenuItem
             // 
             this.cancelToolStripMenuItem.Name = "cancelToolStripMenuItem";
-            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cancelToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
             this.cancelToolStripMenuItem.Text = "Cancel";
             this.cancelToolStripMenuItem.Click += new System.EventHandler(this.cancelToolStripMenuItem_Click);
+            // 
+            // insertColumnToolStripMenuItem
+            // 
+            this.insertColumnToolStripMenuItem.Name = "insertColumnToolStripMenuItem";
+            this.insertColumnToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.insertColumnToolStripMenuItem.Text = "Insert Comments Column";
+            this.insertColumnToolStripMenuItem.Click += new System.EventHandler(this.insertColumnToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -174,7 +191,8 @@
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.DropCat,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.btnSaveSheet});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1005, 25);
@@ -358,6 +376,7 @@
             this.OrganaizedGrid.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.OrganaizedGrid_DataError);
             this.OrganaizedGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.OrganaizedGrid_EditingControlShowing);
             this.OrganaizedGrid.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_RowHeaderMouseClick);
+            this.OrganaizedGrid.SelectionChanged += new System.EventHandler(this.OrganaizedGrid_SelectionChanged);
             this.OrganaizedGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrganaizedGrid_KeyDown);
             // 
             // OrganizedMenu
@@ -569,12 +588,15 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // insertColumnToolStripMenuItem
+            // btnSaveSheet
             // 
-            this.insertColumnToolStripMenuItem.Name = "insertColumnToolStripMenuItem";
-            this.insertColumnToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.insertColumnToolStripMenuItem.Text = "Insert Comments Column";
-            this.insertColumnToolStripMenuItem.Click += new System.EventHandler(this.insertColumnToolStripMenuItem_Click);
+            this.btnSaveSheet.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSaveSheet.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveSheet.Image")));
+            this.btnSaveSheet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveSheet.Name = "btnSaveSheet";
+            this.btnSaveSheet.Size = new System.Drawing.Size(83, 22);
+            this.btnSaveSheet.Text = "Save Sheet";
+            this.btnSaveSheet.Click += new System.EventHandler(this.btnSaveSheet_Click);
             // 
             // Form1
             // 
@@ -673,6 +695,7 @@
         private System.Windows.Forms.ToolStripMenuItem cancelToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem removeRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem insertColumnToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton btnSaveSheet;
     }
 }
 

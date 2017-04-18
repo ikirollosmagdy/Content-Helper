@@ -13,21 +13,38 @@ namespace helper
 
 
     {
-        int Brand = 1, Model = 2, Type = 3, Capacity = 4, Color = 5, Des = 6, Dims = 7, Material = 8;
-        bool isFirst = true;
+        int Brand = 1, Model = 2, Type = 3, Capacity = 4, Color = 5, Des = 6, Dims = 7, Material = 8
+            ,Link=9,Price=10,Quantity=11;
+       
+
+        private void setupTable()
+        {
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("No", "Row Number")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Brand", "Brand")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Model", "Model")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Type", "Type")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Capacity", "Capacity")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Color", "Color")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Des", "Desciption")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Dims", "Dimensions(Depth x Height x Width")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Material", "Material")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Link")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Quantity", "Quantity")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount));
+            foreach(DataGridViewColumn co in Form1.OrganizedSheet.Columns)
+            {
+                co.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+        }
+
         public void Organize()
         {
+            setupTable();
             int row, col;
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[0].HeaderText = "Row Number"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Brand].HeaderText = "Brand"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Model].HeaderText = "Model Number"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Type].HeaderText = "Type"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Capacity].HeaderText = "Capacity"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Color].HeaderText = "Color"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Des].HeaderText = "Description"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Dims].HeaderText = "Dimensions(Depth x Height x Width"));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns[Material].HeaderText = "Material"));
+            
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
                 for (col = 0; col < Form1.Sheet.ColumnCount; col++)
@@ -66,10 +83,9 @@ namespace helper
 
         public void creatBulk()
         {
-            if (isFirst)
-            {
 
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[0].HeaderText = "Title"));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Title", "Title")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Des", "Description")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Color", "Color")));
@@ -79,33 +95,25 @@ namespace helper
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Material", "Material")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("model", "Model Number")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Capacity", "Capacity")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
 
-                isFirst = false;
-            }
-            else
-            {
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[0].HeaderText = "Title"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[1].HeaderText = "Brand"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[2].HeaderText = "Description"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[3].HeaderText = "Color"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[4].HeaderText = "Depth"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[5].HeaderText = "Height"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[6].HeaderText = "Width"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[7].HeaderText = "Material"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[8].HeaderText = "Model Number"));
-                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns[9].HeaderText = "Capacity"));
-            }
             for (int i = 0; i < Form1.OrganizedSheet.RowCount; i++)
             {
-                setTitle(i);
-                setBrand(i);
-                setDescription(i);
-                setColor(i);
-                setDimensions(i);
-                SetMaterial(i);
-                setModel(i);
-                setCapacity(i);
-
+                try
+                {
+                    setTitle(i);
+                    setBrand(i);
+                    setDescription(i);
+                    setColor(i);
+                    setDimensions(i);
+                    SetMaterial(i);
+                    setModel(i);
+                    setCapacity(i);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
 
             }
@@ -113,36 +121,36 @@ namespace helper
 
 
 
-        public void setTitle(int row)
+         void setTitle(int row)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             string title = Form1.OrganizedSheet[Brand, row].Value + " " + Form1.OrganizedSheet[Model, row].Value + " " + Form1.OrganizedSheet[Type, row].Value + " - "
                 + Form1.OrganizedSheet[Capacity, row].Value + ", " + Form1.OrganizedSheet[Color, row].Value;
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
         }
-        public void setBrand(int row)
+         void setBrand(int row)
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
         }
-        public void setColor(int row)
+         void setColor(int row)
         {
             Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Color, row].Value;
         }
-        public void setModel(int row)
+         void setModel(int row)
         {
             Form1.BulkSheet[8, row].Value = Form1.OrganizedSheet[Model, row].Value;
         }
 
-        public void setCapacity(int row)
+         void setCapacity(int row)
         {
             Form1.BulkSheet[9, row].Value = Form1.OrganizedSheet[Capacity, row].Value;
         }
 
-        public void SetMaterial(int row)
+         void SetMaterial(int row)
         {
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Material, row].Value;
         }
-        public void setDescription(int row)
+         void setDescription(int row)
         {
             string des = "";
             try
@@ -160,7 +168,7 @@ namespace helper
 
             Form1.BulkSheet[2, row].Value = des;
         }
-        public void setDimensions(int row)
+         void setDimensions(int row)
         {
             if (Form1.OrganizedSheet[Dims, row].Value.ToString().Contains("x"))
             {

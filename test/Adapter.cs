@@ -60,6 +60,7 @@ namespace helper
                 case 0:
                     Perfume per = new Perfume();
                     per.createBulk();
+                    
                     break;
                 case 1:
                     Refrigerator Ref = new Refrigerator();
