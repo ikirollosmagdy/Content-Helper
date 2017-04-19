@@ -57,9 +57,10 @@ namespace helper
 
         public  void createBulk()
         {
-            UnTranslatedCount = 0;
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
-            Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
+           
+                UnTranslatedCount = 0;
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
+                Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
 
                 //  Form1.BulkSheet.Columns.Add("Title", "Title");
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Title", "Title")));
@@ -81,33 +82,34 @@ namespace helper
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
                 Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Qunt", "Quntity")));
-               
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
-
-            for (int i = 0; i < Form1.OrganizedSheet.RowCount-1; i++)
-            {
-                try
-                {
-                    setTitle(i);
-                    setBrand(i);
-                    setDescription(i);
-                    setType(i);
-                    setSize(i);
-                    setGender(i);
-                    setFragFamiley(i);
-                    setPerfumeName(i);
-                    setLink(i);
-                    setPrice(i);
-                    setQuantity(i);
-                    Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
-                }
-                catch(Exception ex)
-                {
-                    Console.WriteLine("Error: "+ex.Message);
-                }
-            }
            
+                Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
+            
 
+            for (int i = 0; i < Form1.OrganizedSheet.RowCount - 1; i++)
+                {
+                    try
+                    {
+                        setTitle(i);
+                        setBrand(i);
+                        setDescription(i);
+                        setType(i);
+                        setSize(i);
+                        setGender(i);
+                        setFragFamiley(i);
+                        setPerfumeName(i);
+                        setLink(i);
+                        setPrice(i);
+                        setQuantity(i);
+                        Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+
+           
         }
 
 
@@ -243,13 +245,21 @@ namespace helper
                 + Form1.OrganizedSheet.Rows[row].Cells[Size].Value + "</li> </ul>";
             Form1.BulkSheet.Rows[row].Cells[2].Value = Des;
             Form1.BulkSheet.Rows[row].Cells[10].Value = "<p>" + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[ExtraData].Value.ToString())
-                + "</p> <p><strong>خصائص المنتج:</strong></p> <ul> <li>العلامة التجارية: "
+                + "</p> <p><b>خصائص المنتج:</b></p> <ul> <li>العلامة التجارية: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Brand].Value.ToString()) + "</li> <li>النوع: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Gender].Value.ToString()) + "</li> <li>النوع العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue.ToString()) + "</li> <li>اسم العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString()) + "</li> <li>الحجم: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString()) + "</li> </ul>";
-
+            if (CheckEnglish(Form1.BulkSheet.Rows[row].Cells[10].Value.ToString()))
+            {
+                Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[10, row].Style.BackColor = Color.White;
+            }
 
         }
           void setBrand(int row)
@@ -433,7 +443,7 @@ namespace helper
         bool CheckEnglish(string text)
         {
             bool IsEnglish = false;
-            Regex regex = new Regex("[a-zA-Z]");
+            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
             Match match = regex.Match(text);
             if (match.Success)
             {
@@ -443,11 +453,12 @@ namespace helper
             {
                 IsEnglish = false;
             }
-
+            
             return IsEnglish;
         }
+        
     }
 
-
+    
 
 }

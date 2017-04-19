@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace helper
 {
-    class Adapter
+    public class Adapter
     {
         public void SwitchCategory(object index)
         {
@@ -19,10 +19,10 @@ namespace helper
                 case 0:
                     Perfume perfume = new Perfume();
                     perfume.getGender();
-                                      
+
                     break;
                 case 1:
-                    Refrigerator Ref= new Refrigerator();
+                    Refrigerator Ref = new Refrigerator();
                     Ref.Organize();
                     break;
 
@@ -32,35 +32,38 @@ namespace helper
             }
             Form1.txtStats.GetCurrentParent().Invoke(new Action(() => Form1.txtStats.Text = "Finished"));
             Form1.PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Visible = false));
-            
+
         }
         public void clearSheets()
         {
-            
-                int row, col;
 
-            
-                for (row = 0; row < Form1.BulkSheet.RowCount; row++)
+            int row, col;
+
+
+            for (row = 0; row < Form1.BulkSheet.RowCount; row++)
+            {
+                for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)
                 {
-                    for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)
-                    {
-                        Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet[col, row].Value = ""));
-                    }
+                    Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet[col, row].Value = ""));
                 }
-               
-           
+            }
+
+
         }
 
         public void SwitchBulk(object index)
         {
-          
+
             switch (Convert.ToInt32(index))
             {
 
                 case 0:
-                    Perfume per = new Perfume();
-                    per.createBulk();
+                   
+                        Perfume per = new Perfume();
+
+                        per.createBulk();
                     
+
                     break;
                 case 1:
                     Refrigerator Ref = new Refrigerator();
@@ -71,9 +74,12 @@ namespace helper
                     MessageBox.Show("Please choose category first");
                     break;
             }
+
         }
-       
+
 
 
     }
+
+
 }

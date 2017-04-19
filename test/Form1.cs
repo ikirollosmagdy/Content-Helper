@@ -27,12 +27,12 @@ namespace helper
         }
         DataSet result;
         public static DataGridView Sheet, OrganizedSheet, BulkSheet;
-        public static ToolStripLabel txtStats,txtUntranslated;
+        public static ToolStripLabel txtStats, txtUntranslated;
         public static ToolStripProgressBar PBar;
-         Stack<Object[][]> undoStack = new Stack<Object[][]>();
+        Stack<Object[][]> undoStack = new Stack<Object[][]>();
         public bool copiedData = false;
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void btnLoadFile_Click(object sender, EventArgs e)
         {
             {
                 OpenFileDialog OD = new OpenFileDialog();
@@ -53,10 +53,7 @@ namespace helper
             }
         }
 
-        private void ComboBox1_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -68,10 +65,12 @@ namespace helper
 
                 DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
                 columnID.HeaderText = "No";
-                Sheet.Columns.Insert(0, columnID);
-                foreach(DataGridViewRow row in Sheet.Rows)
+                if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText)){
+                    Sheet.Columns.Insert(0, columnID);
+                }
+                foreach (DataGridViewRow row in Sheet.Rows)
                 {
-                    Sheet[0, row.Index].Value = (row.Index+1).ToString();
+                    Sheet[0, row.Index].Value = (row.Index + 1).ToString();
                 }
 
                 foreach (DataGridViewColumn column in Sheet.Columns)
@@ -86,7 +85,7 @@ namespace helper
 
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void btnAnalayze_Click(object sender, EventArgs e)
         {
             try
             {
@@ -108,17 +107,27 @@ namespace helper
 
 
 
-        private void toolStripButton3_Click_1(object sender, EventArgs e)
+        private void btnCreateBulk_Click(object sender, EventArgs e)
         {
-            try
+            if (OrganizedSheet.RowCount >0)
             {
-                Adapter adapter = new Adapter();
-                Thread newThread = new Thread(adapter.SwitchBulk);
-                newThread.Start(DropCat.SelectedIndex);
-                //  btnSave.PerformClick();
-            }catch(Exception ex)
+
+                try
+                {
+                    Adapter adapter = new Adapter();
+                    Thread newThread = new Thread(adapter.SwitchBulk);
+                    newThread.Start(DropCat.SelectedIndex);
+                    tabControl1.SelectedIndex = 1;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show("Please, Analayze first...!", "Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }
 
@@ -138,49 +147,13 @@ namespace helper
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            
+
 
         }
 
         private void OrganaizedGrid_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.C)
-            {
-                DataObject d = OrganaizedGrid.GetClipboardContent();
-                Clipboard.SetDataObject(d);
-                e.Handled = true;
-            }
-            else if (e.Control && e.KeyCode == Keys.V)
-            {
-                string CopiedContent = Clipboard.GetText();
-                pasteCell(CopiedContent);
-
-
-            }
-            else if (e.Control && e.KeyCode == Keys.D)
-            {
-                undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
-                try {
-                    for (int x = 1; x < OrganizedSheet.SelectedCells.Count; x++)
-                    {
-                        OrganizedSheet.SelectedCells[x].Value = OrganizedSheet.SelectedCells[OrganizedSheet.SelectedCells.Count-1].Value;
-                    }
-
-                } catch { }
-                int row = OrganizedSheet.CurrentCell.RowIndex - 1, col = OrganizedSheet.CurrentCell.ColumnIndex;
-                try
-                {
-                    OrganizedSheet.CurrentCell.Value = OrganizedSheet[col, row].Value;
-                }
-                catch { }
-            }
-            else if (e.KeyCode == Keys.Delete)
-            {
-                for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
-                {
-                    OrganizedSheet.SelectedCells[x].Value = string.Empty;
-                }
-            }
+            KeyDownFunction(OrganizedSheet, e);
         }
         public void pasteCell(string copied)
         {
@@ -190,7 +163,7 @@ namespace helper
 
             int StartingRow = OrganaizedGrid.CurrentCell.RowIndex;
             int StartingColumn = OrganaizedGrid.CurrentCell.ColumnIndex;
-            
+
             foreach (var line in Lines)
             {
                 if (StartingRow <= (OrganaizedGrid.Rows.Count - 1))
@@ -199,7 +172,7 @@ namespace helper
                     int ColumnIndex = StartingColumn;
                     for (int i = 0; i < cells.Length && ColumnIndex <= (OrganaizedGrid.Columns.Count - 1); i++)
                     {
-                       
+
                         OrganaizedGrid[ColumnIndex++, StartingRow].Value = cells[i];
 
                     }
@@ -208,12 +181,12 @@ namespace helper
                     StartingRow++;
                 }
             }
-         
-          
-           
+
+
+
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ReplaceOrgMenu_Click(object sender, EventArgs e)
         {
 
 
@@ -250,68 +223,23 @@ namespace helper
 
         private void GridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                //  Sheet.ClearSelection();
-                foreach (DataGridViewRow c in Sheet.Rows)
-                {
-
-                    c.Cells[e.ColumnIndex].Selected = true;
-                }
-            }
-            else
-            {
-                 Sheet.ClearSelection();
-                foreach (DataGridViewRow c in Sheet.Rows)
-                {
-
-                    c.Cells[e.ColumnIndex].Selected = true;
-                }
-            }
+            Sheet.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+            Sheet.Columns[e.ColumnIndex].Selected = true;
         }
 
         private void OrganaizedGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                //   OrganizedSheet.ClearSelection();
-                foreach (DataGridViewRow c in OrganizedSheet.Rows)
-                {
 
-                    c.Cells[e.ColumnIndex].Selected = true;
-                }
-            }
-            else
-            {
-                 OrganizedSheet.ClearSelection();
-                foreach (DataGridViewRow c in OrganizedSheet.Rows)
-                {
+            OrganizedSheet.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+            OrganizedSheet.Columns[e.ColumnIndex].Selected = true;
 
-                    c.Cells[e.ColumnIndex].Selected = true;
-                }
-            }
+
         }
 
         private void OrganaizedGrid_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                //   OrganizedSheet.ClearSelection();
-                for (int x = 0; x < OrganizedSheet.ColumnCount; x++)
-                {
-
-                    OrganizedSheet.Rows[e.RowIndex].Cells[x].Selected = true;
-                }
-            }
-            else
-            {
-                 OrganizedSheet.ClearSelection();
-                for (int x = 0; x < OrganizedSheet.ColumnCount; x++)
-                {
-
-                    OrganizedSheet.Rows[e.RowIndex].Cells[x].Selected = true;
-                }
-            }
+            OrganizedSheet.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+            OrganizedSheet.Rows[e.RowIndex].Selected = true;
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
@@ -319,24 +247,10 @@ namespace helper
 
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
 
 
-
-        }
-
-        private void toolStripDropDownButton1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void OrganaizedGrid_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void OrganaizedGrid_CellLeave_1(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -374,25 +288,11 @@ namespace helper
             }
         }
 
-        private void OrganaizedGrid_CurrentCellChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripMenuItem2_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OrganaizedGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
 
 
-            //  Adapter adapter = new Adapter();
-            //   adapter.switchDrop(DropCat.SelectedIndex, e);
-        }
 
-        
+
+
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
             Database DB = new Database();
@@ -403,20 +303,14 @@ namespace helper
             }
         }
 
-        private void toolStripMenuItem2_Click_2(object sender, EventArgs e)
-        {
 
-        }
 
         private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void OrganaizedGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
 
-        }
 
         private void OrganaizedGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -441,66 +335,69 @@ namespace helper
             catch { }
         }
 
-        private void menu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            
-        }
 
-        private void OrganaizedGrid_CellContextMenuStripChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void OrganaizedGrid_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-        {
-
-
-        }
-
-        private void OrganaizedGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-        }
-
-        private void doneToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int selectedRow = Sheet.SelectedCells[0].OwningRow.Index;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
-        }
-
-        private void cancelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            int selectedRow = Sheet.SelectedCells[0].OwningRow.Index;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
 
         }
 
-        private void doneToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void doneToolMenuSheet_Click(object sender, EventArgs e)
         {
-            int selectedRow = OrganizedSheet.SelectedCells[0].OwningRow.Index;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor= Color.LightGreen;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
-
-            
+            try
+            {
+                for (int x = 0; x < Sheet.SelectedCells.Count; x++)
+                {
+                    int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+            catch { }
         }
 
-        private void cancelToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void cancelToolSheetMenu_Click(object sender, EventArgs e)
         {
-            int selectedRow = OrganizedSheet.SelectedCells[0].OwningRow.Index;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+            try
+            {
+                for (int x = 0; x < Sheet.SelectedCells.Count; x++)
+                {
+                    int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                }
+            }
+            catch { }
+        }
+
+        private void doneToolOrgMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
+                {
+                    int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+            }
+            catch { }
+
+
+        }
+
+        private void cancelToolOrgMenu_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
+                {
+                    int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                }
+            }
+            catch { }
         }
 
         private void removeRowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -509,7 +406,7 @@ namespace helper
             try
             {
                 OrganizedSheet.Rows.RemoveAt(OrganizedSheet.SelectedCells[0].RowIndex);
-               
+
             }
             catch { }
         }
@@ -518,26 +415,23 @@ namespace helper
         {
             DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
             column.HeaderText = "Comments";
-            Sheet.Columns.Insert(Sheet.SelectedCells[0].ColumnIndex , column);
+            Sheet.Columns.Insert(Sheet.SelectedCells[0].ColumnIndex, column);
         }
 
         private void btnSaveSheet_Click(object sender, EventArgs e)
         {
             PBar.Visible = true;
             txtStatus.Text = "Saving...";
-            Thread thread = new Thread(() => exportToExcel(Sheet,OrganizedSheet,"Organized"));
+            Thread thread = new Thread(() => exportToExcel(Sheet, OrganizedSheet, "Organized"));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
 
-        private void OrganaizedGrid_SelectionChanged(object sender, EventArgs e)
-        {
-            
-        }
+
 
         private void OrganaizedGrid_SelectionChanged_1(object sender, EventArgs e)
         {
-            
+
         }
 
         private void OrganaizedGrid_CurrentCellChanged_1(object sender, EventArgs e)
@@ -545,11 +439,11 @@ namespace helper
 
             try
             {
-                
+
                 Sheet.CurrentCell = Sheet[0, OrganizedSheet.CurrentCell.RowIndex];
             }
             catch { }
-           
+
         }
 
         private void GridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -569,7 +463,7 @@ namespace helper
                     txtStatus.Text = "Saving...";
                     exportToExcel(Sheet, OrganizedSheet, "Organized");
                     e.Cancel = false;
-                  
+
                 }
                 catch { }
             }
@@ -585,104 +479,72 @@ namespace helper
 
         private void toolStripButton5_Click_1(object sender, EventArgs e)
         {
-            /*
-            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook workbook = app.Workbooks.Open(@"D:\test3.xlsx");
-            Microsoft.Office.Interop.Excel.Worksheet worksheet = workbook.Sheets[1];
-            Microsoft.Office.Interop.Excel.Worksheet worksheet2 = workbook.Sheets[2];
-
-            Sheet.ColumnCount = worksheet.UsedRange.Columns.Count;
-            Sheet.RowCount = worksheet.UsedRange.Rows.Count;
-
-            
-            for (int x = 0; x < Sheet.ColumnCount-1; x++)
+            for (int x = Sheet.SelectedCells.Count - 1; x >= 0; x--)
             {
-
-                for (int i = 0; i < Sheet.RowCount-1; i++)
+                if (Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex + 1].Selected)
                 {
-                    Range range = (Range)worksheet.Cells[i + 2, x + 1];
-                    Sheet[x, i].Value = worksheet.Cells[i+2,x+1].Value;
-                    Sheet[x, i].Style.BackColor = System.Drawing.ColorTranslator.FromOle((int) range.Interior.Color) ;
+                    Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex + 1].Value
+                        = Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex].Value;
                 }
             }
 
-            OrganizedSheet.ColumnCount = worksheet2.UsedRange.Columns.Count;
-            OrganizedSheet.RowCount = worksheet2.UsedRange.Rows.Count;
 
 
-            for (int x = 0; x < OrganizedSheet.ColumnCount - 1; x++)
+        }
+
+        private void CleartoolOrgMenu_Click(object sender, EventArgs e)
+        {
+            try
             {
-
-                for (int i = 0; i < OrganizedSheet.RowCount - 1; i++)
+                for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
                 {
-                    Range range = (Range)worksheet2.Cells[i + 2, x + 1];
-                    OrganizedSheet[x, i].Value = worksheet2.Cells[i + 2, x + 1].Value;
-                    OrganizedSheet[x, i].Style.BackColor = System.Drawing.ColorTranslator.FromOle((int)range.Interior.Color);
+                    int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
                 }
             }
-
-            workbook.Close(false, Type.Missing, Type.Missing);
-            app.Quit();
-            workbook = null;
-            app = null;
-
-    */
-
+            catch { }
         }
 
-        private void CleartoolStripMenuItem2_Click(object sender, EventArgs e)
+        private void CleartoolSheetMenu_Click(object sender, EventArgs e)
         {
-            int selectedRow = OrganizedSheet.SelectedCells[0].OwningRow.Index;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
-        }
-
-        private void CleartoolStrip_Click(object sender, EventArgs e)
-        {
-            int selectedRow = Sheet.SelectedCells[0].OwningRow.Index;
-            Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
-            OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+            try
+            {
+                for (int x = 0; x < Sheet.SelectedCells.Count; x++)
+                {
+                    int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+            catch { }
         }
 
         private void GridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Control.ModifierKeys == Keys.Control)
-            {
-                //   Sheet.ClearSelection();
-                for (int x = 0; x < Sheet.ColumnCount; x++)
-                {
-
-                    Sheet.Rows[e.RowIndex].Cells[x].Selected = true;
-                }
-            }
-            else
-            {
-                  Sheet.ClearSelection();
-                for (int x = 0; x < Sheet.ColumnCount; x++)
-                {
-
-                    Sheet.Rows[e.RowIndex].Cells[x].Selected = true;
-                }
-            }
+            Sheet.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
+            Sheet.Rows[e.RowIndex].Selected = true;
         }
 
-        private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        private void GridView1_KeyDown(object sender, KeyEventArgs e)
         {
-           
+            KeyDownFunction(Sheet, e);
         }
+
+
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 
             PBar.Visible = true;
             txtStatus.Text = "Saving...";
-            Thread thread = new Thread(() => exportToExcel(BulkSheet,null,"Bulk"));
+            Thread thread = new Thread(() => exportToExcel(BulkSheet, null, "Bulk"));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
 
 
         }
-        public void exportToExcel(DataGridView Grid,DataGridView Grid2,string SheetName)
+        public void exportToExcel(DataGridView Grid, DataGridView Grid2, string SheetName)
         {
             //Getting the location and file name of the excel to save from user. 
             SaveFileDialog saveDialog = new SaveFileDialog();
@@ -729,52 +591,52 @@ namespace helper
                             worksheet.Cells[i + 2, j + 1] = "";
                         }
                 }
-                    if (Grid2 != null)
+                if (Grid2 != null)
+                {
+
+                    worksheet = workbook.Sheets[2];
+
+                    worksheet.Name = "Imported";
+
+                    //Loop through each row and read value from each column. 
+                    for (int x = 0; x < Grid2.Columns.Count; x++)
                     {
-                      
-                        worksheet = workbook.Sheets[2];
+                        worksheet.Cells[1, x + 1] = Grid2.Columns[x].HeaderText;
+                    }
+                    for (int x = 0; x < Grid2.Rows.Count; x++)
+                    {
+                        for (int y = 0; y < Grid2.Columns.Count; y++)
 
-                        worksheet.Name = "Imported";
-
-                        //Loop through each row and read value from each column. 
-                        for (int x = 0; x < Grid2.Columns.Count; x++)
-                        {
-                            worksheet.Cells[1, x + 1] = Grid2.Columns[x].HeaderText;
-                        }
-                        for (int x = 0; x < Grid2.Rows.Count; x++)
-                        {
-                            for (int y = 0; y < Grid2.Columns.Count; y++)
-
-                                if (Grid2.Rows[x].Cells[y].Value != null)
+                            if (Grid2.Rows[x].Cells[y].Value != null)
+                            {
+                                Range range = (Range)worksheet.Cells[x + 2, y + 1];
+                                worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
+                                if (Grid2.Rows[x].DefaultCellStyle.BackColor == Color.Empty)
                                 {
-                                    Range range = (Range)worksheet.Cells[x + 2, y + 1];
-                                    worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
-                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == Color.Empty)
-                                    {
-                                        range.Interior.ColorIndex = 0;
-                                    }
-                                    else
-                                    {
-                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
-                                    }
+                                    range.Interior.ColorIndex = 0;
                                 }
                                 else
                                 {
-                                    worksheet.Cells[x + 2, y + 1] = "";
+                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
                                 }
-                        }
+                            }
+                            else
+                            {
+                                worksheet.Cells[x + 2, y + 1] = "";
+                            }
+                    }
 
-                   
+
 
                 }
 
-                    if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    {
-                        workbook.SaveAs(saveDialog.FileName);
-                        txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
-                        PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
-                    }
-                
+                if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    workbook.SaveAs(saveDialog.FileName);
+                    txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
+                    PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
+                }
+
             }
 
             catch (System.Exception ex)
@@ -793,9 +655,64 @@ namespace helper
 
         }
 
+        private void KeyDownFunction(DataGridView Grid, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+            {
+                DataObject d = Grid.GetClipboardContent();
+                Clipboard.SetDataObject(d);
+                e.Handled = true;
+            }
+            else if (e.Control && e.KeyCode == Keys.V)
+            {
+                string CopiedContent = Clipboard.GetText();
+                pasteCell(CopiedContent);
 
+
+            }
+            else if (e.Control && e.KeyCode == Keys.D)
+            {
+                undoStack.Push(Grid.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+                try
+                {
+                    for (int x = Grid.SelectedCells.Count - 1; x >= 0; x--)
+                    {
+                        if (Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[x].RowIndex + 1].Selected)
+                        {
+                            Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[x].RowIndex + 1].Value
+                                = Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[x].RowIndex].Value;
+                        }
+                    }
+
+                }
+                catch { }
+
+
+                try
+                {
+
+                    for (int x = Grid.SelectedCells.Count - 1; x >= 0; x--)
+                    {
+                        if (Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[x].RowIndex].Selected)
+                        {
+                            Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[x].RowIndex].Value
+                                = Grid[Grid.SelectedCells[x].ColumnIndex, Grid.SelectedCells[0].RowIndex - 1].Value;
+                        }
+                    }
+
+                }
+                catch { }
+            }
+            else if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
+            {
+                for (int x = 0; x < Grid.SelectedCells.Count; x++)
+                {
+                    Grid.SelectedCells[x].Value = string.Empty;
+                }
+            }
+        }
     }
-   
+
 }
 
 
