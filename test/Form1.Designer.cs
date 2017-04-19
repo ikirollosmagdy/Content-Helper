@@ -80,6 +80,8 @@
             this.replaceOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.qcCheckOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.BulkMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ExportBulkMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -103,6 +105,7 @@
             this.statusStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
+            this.BulkMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -182,7 +185,7 @@
             this.colorsToolStripMenuItem1,
             this.insertColumnSheetMenu});
             this.SheetMenu.Name = "contextMenuStrip1";
-            this.SheetMenu.Size = new System.Drawing.Size(212, 70);
+            this.SheetMenu.Size = new System.Drawing.Size(212, 48);
             // 
             // insertColumnSheetMenu
             // 
@@ -320,8 +323,8 @@
             this.btnSaveSheet.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveSheet.Image")));
             this.btnSaveSheet.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSaveSheet.Name = "btnSaveSheet";
-            this.btnSaveSheet.Size = new System.Drawing.Size(83, 22);
-            this.btnSaveSheet.Text = "Save Sheet";
+            this.btnSaveSheet.Size = new System.Drawing.Size(92, 22);
+            this.btnSaveSheet.Text = "Export Sheet";
             this.btnSaveSheet.Click += new System.EventHandler(this.btnSaveSheet_Click);
             // 
             // btnCreateBulk
@@ -338,6 +341,7 @@
             // toolStripButton5
             // 
             this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Enabled = false;
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
@@ -373,8 +377,8 @@
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 22);
-            this.btnSave.Text = "Save";
+            this.btnSave.Size = new System.Drawing.Size(102, 22);
+            this.btnSave.Text = "Export Bulk Sheet";
             this.btnSave.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // BulkGrid
@@ -383,6 +387,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BulkGrid.ContextMenuStrip = this.BulkMenu;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -618,6 +623,21 @@
             this.UndoOrgMenu.Text = "Undo";
             this.UndoOrgMenu.Click += new System.EventHandler(this.Undo_Click);
             // 
+            // BulkMenu
+            // 
+            this.BulkMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportBulkMenu});
+            this.BulkMenu.Name = "BulkMenu";
+            this.BulkMenu.Size = new System.Drawing.Size(174, 26);
+            // 
+            // ExportBulkMenu
+            // 
+            this.ExportBulkMenu.Name = "ExportBulkMenu";
+            this.ExportBulkMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.ExportBulkMenu.Size = new System.Drawing.Size(173, 22);
+            this.ExportBulkMenu.Text = "Export Bulk";
+            this.ExportBulkMenu.Click += new System.EventHandler(this.btnSaveSheet_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -665,6 +685,7 @@
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
+            this.BulkMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -719,6 +740,8 @@
         private System.Windows.Forms.ToolStripMenuItem replaceOrgMenu;
         private System.Windows.Forms.ToolStripMenuItem qcCheckOrgMenu;
         private System.Windows.Forms.ToolStripMenuItem UndoOrgMenu;
+        private System.Windows.Forms.ContextMenuStrip BulkMenu;
+        private System.Windows.Forms.ToolStripMenuItem ExportBulkMenu;
     }
 }
 

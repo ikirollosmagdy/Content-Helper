@@ -88,7 +88,9 @@ namespace helper
 
             for (int i = 0; i < Form1.OrganizedSheet.RowCount - 1; i++)
                 {
-                    try
+                try
+                {
+                    if (Form1.OrganizedSheet.Rows[i].DefaultCellStyle.BackColor != Color.HotPink)
                     {
                         setTitle(i);
                         setBrand(i);
@@ -103,10 +105,11 @@ namespace helper
                         setQuantity(i);
                         Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error: " + ex.Message);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error: " + ex.Message);
+                }
                 }
 
            
