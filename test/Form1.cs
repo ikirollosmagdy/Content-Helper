@@ -30,6 +30,8 @@ namespace helper
         public static ToolStripLabel txtStats, txtUntranslated;
         public static ToolStripProgressBar PBar;
         Stack<Object[][]> undoStack = new Stack<Object[][]>();
+        Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
+       
         public bool copiedData = false;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -158,6 +160,8 @@ namespace helper
         public void pasteCell(string copied)
         {
             undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+            undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
+
 
             string[] Lines = Regex.Split(copied.TrimEnd("\r\n".ToCharArray()), "\r\n");
 
@@ -202,15 +206,26 @@ namespace helper
             if (undoStack.Count == 0)
                 return;
             object[][] rows = undoStack.Pop();
+            DataGridViewCellStyle[] colors = undoColor.Pop();
             while (rows.Equals(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).ToArray()))
             {
                 rows = undoStack.Pop();
+                colors = undoColor.Pop();
             }
+
+
 
             OrganizedSheet.Rows.Clear();
             for (int x = 0; x <= rows.GetUpperBound(0); x++)
             {
-                OrganizedSheet.Rows.Add(rows[x]);
+              
+               OrganizedSheet.Rows.Add(rows[x]);
+                OrganaizedGrid.Rows[x].DefaultCellStyle = colors[x];
+
+
+
+
+
             }
 
 
@@ -264,8 +279,8 @@ namespace helper
 
 
             undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
-
-
+            undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
+           
         }
 
         private void OrganaizedGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -403,6 +418,7 @@ namespace helper
         private void removeRowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+            undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
             try
             {
                 OrganizedSheet.Rows.RemoveAt(OrganizedSheet.SelectedCells[0].RowIndex);
@@ -499,8 +515,8 @@ namespace helper
                 for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
                 }
             }
             catch { }
@@ -513,8 +529,8 @@ namespace helper
                 for (int x = 0; x < Sheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.White;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
                 }
             }
             catch { }
@@ -530,8 +546,6 @@ namespace helper
         {
             KeyDownFunction(Sheet, e);
         }
-
-
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
@@ -673,6 +687,7 @@ namespace helper
             else if (e.Control && e.KeyCode == Keys.D)
             {
                 undoStack.Push(Grid.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+                undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
                 try
                 {
                     for (int x = Grid.SelectedCells.Count - 1; x >= 0; x--)

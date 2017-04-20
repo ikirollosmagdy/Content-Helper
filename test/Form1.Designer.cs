@@ -38,10 +38,21 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.GridView1 = new System.Windows.Forms.DataGridView();
             this.SheetMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colorsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.doneSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.ClearSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.insertColumnSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
             this.OrganizedMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doneToolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelToolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.CleartoolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.removeRowTOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.replaceOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.qcCheckOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.UndoOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnLoadFile = new System.Windows.Forms.ToolStripButton();
             this.ComboBox1 = new System.Windows.Forms.ToolStripComboBox();
@@ -56,6 +67,8 @@
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.BulkGrid = new System.Windows.Forms.DataGridView();
+            this.BulkMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ExportBulkMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
@@ -69,19 +82,6 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.doneToolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelToolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.CleartoolOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.colorsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.doneSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.ClearSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.cancelSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.replaceOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.qcCheckOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.UndoOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.BulkMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ExportBulkMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -96,6 +96,7 @@
             this.tabPage3.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulkGrid)).BeginInit();
+            this.BulkMenu.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -105,7 +106,6 @@
             this.statusStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.BulkMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -187,6 +187,37 @@
             this.SheetMenu.Name = "contextMenuStrip1";
             this.SheetMenu.Size = new System.Drawing.Size(212, 48);
             // 
+            // colorsToolStripMenuItem1
+            // 
+            this.colorsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doneSheetMenu,
+            this.cancelSheetMenu,
+            this.ClearSheetMenu});
+            this.colorsToolStripMenuItem1.Name = "colorsToolStripMenuItem1";
+            this.colorsToolStripMenuItem1.Size = new System.Drawing.Size(211, 22);
+            this.colorsToolStripMenuItem1.Text = "Format by Color";
+            // 
+            // doneSheetMenu
+            // 
+            this.doneSheetMenu.Name = "doneSheetMenu";
+            this.doneSheetMenu.Size = new System.Drawing.Size(133, 22);
+            this.doneSheetMenu.Text = "Done";
+            this.doneSheetMenu.Click += new System.EventHandler(this.doneToolMenuSheet_Click);
+            // 
+            // cancelSheetMenu
+            // 
+            this.cancelSheetMenu.Name = "cancelSheetMenu";
+            this.cancelSheetMenu.Size = new System.Drawing.Size(133, 22);
+            this.cancelSheetMenu.Text = "Cancel";
+            this.cancelSheetMenu.Click += new System.EventHandler(this.cancelToolSheetMenu_Click);
+            // 
+            // ClearSheetMenu
+            // 
+            this.ClearSheetMenu.Name = "ClearSheetMenu";
+            this.ClearSheetMenu.Size = new System.Drawing.Size(133, 22);
+            this.ClearSheetMenu.Text = "Clear Color";
+            this.ClearSheetMenu.Click += new System.EventHandler(this.CleartoolSheetMenu_Click);
+            // 
             // insertColumnSheetMenu
             // 
             this.insertColumnSheetMenu.Name = "insertColumnSheetMenu";
@@ -241,12 +272,67 @@
             this.OrganizedMenu.Name = "OrganizedMenu";
             this.OrganizedMenu.Size = new System.Drawing.Size(171, 114);
             // 
+            // colorsToolStripMenuItem
+            // 
+            this.colorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doneToolOrgMenu,
+            this.cancelToolOrgMenu,
+            this.CleartoolOrgMenu});
+            this.colorsToolStripMenuItem.Name = "colorsToolStripMenuItem";
+            this.colorsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.colorsToolStripMenuItem.Text = "Format by Color";
+            // 
+            // doneToolOrgMenu
+            // 
+            this.doneToolOrgMenu.Name = "doneToolOrgMenu";
+            this.doneToolOrgMenu.Size = new System.Drawing.Size(133, 22);
+            this.doneToolOrgMenu.Text = "Done";
+            this.doneToolOrgMenu.Click += new System.EventHandler(this.doneToolOrgMenu_Click);
+            // 
+            // cancelToolOrgMenu
+            // 
+            this.cancelToolOrgMenu.Name = "cancelToolOrgMenu";
+            this.cancelToolOrgMenu.Size = new System.Drawing.Size(133, 22);
+            this.cancelToolOrgMenu.Text = "Cancel";
+            this.cancelToolOrgMenu.Click += new System.EventHandler(this.cancelToolOrgMenu_Click);
+            // 
+            // CleartoolOrgMenu
+            // 
+            this.CleartoolOrgMenu.Name = "CleartoolOrgMenu";
+            this.CleartoolOrgMenu.Size = new System.Drawing.Size(133, 22);
+            this.CleartoolOrgMenu.Text = "Clear Color";
+            this.CleartoolOrgMenu.Click += new System.EventHandler(this.CleartoolOrgMenu_Click);
+            // 
             // removeRowTOrgMenu
             // 
             this.removeRowTOrgMenu.Name = "removeRowTOrgMenu";
             this.removeRowTOrgMenu.Size = new System.Drawing.Size(170, 22);
             this.removeRowTOrgMenu.Text = "Remove Row";
             this.removeRowTOrgMenu.Click += new System.EventHandler(this.removeRowToolStripMenuItem_Click);
+            // 
+            // replaceOrgMenu
+            // 
+            this.replaceOrgMenu.Name = "replaceOrgMenu";
+            this.replaceOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.replaceOrgMenu.Size = new System.Drawing.Size(170, 22);
+            this.replaceOrgMenu.Text = "Replace";
+            this.replaceOrgMenu.Click += new System.EventHandler(this.ReplaceOrgMenu_Click);
+            // 
+            // qcCheckOrgMenu
+            // 
+            this.qcCheckOrgMenu.Name = "qcCheckOrgMenu";
+            this.qcCheckOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.qcCheckOrgMenu.Size = new System.Drawing.Size(170, 22);
+            this.qcCheckOrgMenu.Text = "QC Check";
+            this.qcCheckOrgMenu.Click += new System.EventHandler(this.btnQC_Click);
+            // 
+            // UndoOrgMenu
+            // 
+            this.UndoOrgMenu.Name = "UndoOrgMenu";
+            this.UndoOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.UndoOrgMenu.Size = new System.Drawing.Size(170, 22);
+            this.UndoOrgMenu.Text = "Undo";
+            this.UndoOrgMenu.Click += new System.EventHandler(this.Undo_Click);
             // 
             // toolStrip1
             // 
@@ -401,6 +487,21 @@
             this.BulkGrid.Size = new System.Drawing.Size(1005, 368);
             this.BulkGrid.TabIndex = 0;
             // 
+            // BulkMenu
+            // 
+            this.BulkMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportBulkMenu});
+            this.BulkMenu.Name = "BulkMenu";
+            this.BulkMenu.Size = new System.Drawing.Size(174, 26);
+            // 
+            // ExportBulkMenu
+            // 
+            this.ExportBulkMenu.Name = "ExportBulkMenu";
+            this.ExportBulkMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.ExportBulkMenu.Size = new System.Drawing.Size(173, 22);
+            this.ExportBulkMenu.Text = "Export Bulk";
+            this.ExportBulkMenu.Click += new System.EventHandler(this.btnSaveSheet_Click);
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.toolStrip4);
@@ -537,107 +638,6 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // colorsToolStripMenuItem
-            // 
-            this.colorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.doneToolOrgMenu,
-            this.cancelToolOrgMenu,
-            this.CleartoolOrgMenu});
-            this.colorsToolStripMenuItem.Name = "colorsToolStripMenuItem";
-            this.colorsToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.colorsToolStripMenuItem.Text = "Format by Color";
-            // 
-            // doneToolOrgMenu
-            // 
-            this.doneToolOrgMenu.Name = "doneToolOrgMenu";
-            this.doneToolOrgMenu.Size = new System.Drawing.Size(152, 22);
-            this.doneToolOrgMenu.Text = "Done";
-            this.doneToolOrgMenu.Click += new System.EventHandler(this.doneToolOrgMenu_Click);
-            // 
-            // cancelToolOrgMenu
-            // 
-            this.cancelToolOrgMenu.Name = "cancelToolOrgMenu";
-            this.cancelToolOrgMenu.Size = new System.Drawing.Size(152, 22);
-            this.cancelToolOrgMenu.Text = "Cancel";
-            this.cancelToolOrgMenu.Click += new System.EventHandler(this.cancelToolOrgMenu_Click);
-            // 
-            // CleartoolOrgMenu
-            // 
-            this.CleartoolOrgMenu.Name = "CleartoolOrgMenu";
-            this.CleartoolOrgMenu.Size = new System.Drawing.Size(152, 22);
-            this.CleartoolOrgMenu.Text = "Clear Color";
-            this.CleartoolOrgMenu.Click += new System.EventHandler(this.CleartoolOrgMenu_Click);
-            // 
-            // colorsToolStripMenuItem1
-            // 
-            this.colorsToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.doneSheetMenu,
-            this.cancelSheetMenu,
-            this.ClearSheetMenu});
-            this.colorsToolStripMenuItem1.Name = "colorsToolStripMenuItem1";
-            this.colorsToolStripMenuItem1.Size = new System.Drawing.Size(211, 22);
-            this.colorsToolStripMenuItem1.Text = "Format by Color";
-            // 
-            // doneSheetMenu
-            // 
-            this.doneSheetMenu.Name = "doneSheetMenu";
-            this.doneSheetMenu.Size = new System.Drawing.Size(152, 22);
-            this.doneSheetMenu.Text = "Done";
-            this.doneSheetMenu.Click += new System.EventHandler(this.doneToolMenuSheet_Click);
-            // 
-            // ClearSheetMenu
-            // 
-            this.ClearSheetMenu.Name = "ClearSheetMenu";
-            this.ClearSheetMenu.Size = new System.Drawing.Size(152, 22);
-            this.ClearSheetMenu.Text = "Clear Color";
-            this.ClearSheetMenu.Click += new System.EventHandler(this.CleartoolSheetMenu_Click);
-            // 
-            // cancelSheetMenu
-            // 
-            this.cancelSheetMenu.Name = "cancelSheetMenu";
-            this.cancelSheetMenu.Size = new System.Drawing.Size(152, 22);
-            this.cancelSheetMenu.Text = "Cancel";
-            this.cancelSheetMenu.Click += new System.EventHandler(this.cancelToolSheetMenu_Click);
-            // 
-            // replaceOrgMenu
-            // 
-            this.replaceOrgMenu.Name = "replaceOrgMenu";
-            this.replaceOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.replaceOrgMenu.Size = new System.Drawing.Size(170, 22);
-            this.replaceOrgMenu.Text = "Replace";
-            this.replaceOrgMenu.Click += new System.EventHandler(this.ReplaceOrgMenu_Click);
-            // 
-            // qcCheckOrgMenu
-            // 
-            this.qcCheckOrgMenu.Name = "qcCheckOrgMenu";
-            this.qcCheckOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.qcCheckOrgMenu.Size = new System.Drawing.Size(170, 22);
-            this.qcCheckOrgMenu.Text = "QC Check";
-            this.qcCheckOrgMenu.Click += new System.EventHandler(this.btnQC_Click);
-            // 
-            // UndoOrgMenu
-            // 
-            this.UndoOrgMenu.Name = "UndoOrgMenu";
-            this.UndoOrgMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.UndoOrgMenu.Size = new System.Drawing.Size(170, 22);
-            this.UndoOrgMenu.Text = "Undo";
-            this.UndoOrgMenu.Click += new System.EventHandler(this.Undo_Click);
-            // 
-            // BulkMenu
-            // 
-            this.BulkMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExportBulkMenu});
-            this.BulkMenu.Name = "BulkMenu";
-            this.BulkMenu.Size = new System.Drawing.Size(174, 26);
-            // 
-            // ExportBulkMenu
-            // 
-            this.ExportBulkMenu.Name = "ExportBulkMenu";
-            this.ExportBulkMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.ExportBulkMenu.Size = new System.Drawing.Size(173, 22);
-            this.ExportBulkMenu.Text = "Export Bulk";
-            this.ExportBulkMenu.Click += new System.EventHandler(this.btnSaveSheet_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,6 +670,7 @@
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulkGrid)).EndInit();
+            this.BulkMenu.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
@@ -685,7 +686,6 @@
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.BulkMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
