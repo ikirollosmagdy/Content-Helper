@@ -36,7 +36,7 @@ namespace helper
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-            {
+           try {
                 OpenFileDialog OD = new OpenFileDialog();
                 if (OD.ShowDialog() == DialogResult.OK)
                 {
@@ -52,6 +52,10 @@ namespace helper
 
                 }
 
+            }
+            catch
+            {
+                MessageBox.Show("Please close file first...!!");
             }
         }
 
@@ -722,7 +726,7 @@ namespace helper
             {
                 for (int x = 0; x < Grid.SelectedCells.Count; x++)
                 {
-                    Grid.SelectedCells[x].Value = string.Empty;
+                    Grid.SelectedCells[x].Value=DBNull.Value;
                 }
             }
         }

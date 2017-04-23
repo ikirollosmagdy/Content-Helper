@@ -82,6 +82,7 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -517,7 +518,8 @@
             // toolStrip4
             // 
             this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton4});
+            this.toolStripButton4,
+            this.btnRebulk});
             this.toolStrip4.Location = new System.Drawing.Point(3, 3);
             this.toolStrip4.Name = "toolStrip4";
             this.toolStrip4.Size = new System.Drawing.Size(1005, 25);
@@ -638,6 +640,16 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
+            // btnRebulk
+            // 
+            this.btnRebulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRebulk.Image = ((System.Drawing.Image)(resources.GetObject("btnRebulk.Image")));
+            this.btnRebulk.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRebulk.Name = "btnRebulk";
+            this.btnRebulk.Size = new System.Drawing.Size(47, 22);
+            this.btnRebulk.Text = "ReBulk";
+            this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -742,6 +754,7 @@
         private System.Windows.Forms.ToolStripMenuItem UndoOrgMenu;
         private System.Windows.Forms.ContextMenuStrip BulkMenu;
         private System.Windows.Forms.ToolStripMenuItem ExportBulkMenu;
+        private System.Windows.Forms.ToolStripButton btnRebulk;
     }
 }
 
