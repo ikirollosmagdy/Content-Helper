@@ -84,11 +84,13 @@ namespace helper
                     try
                     {
                         Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
-                        Match matchModel = regexModel.Match(Form1.Sheet[col, row].Value.ToString());
+                        MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
+                    
 
-                        if (matchModel.Success)
+                        if (matchModel.Count>0)
                         {
-                            Form1.OrganizedSheet[Model, row].Value = matchModel.Value;
+                            Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
+                            break;
 
                         }
                     }
@@ -146,6 +148,9 @@ namespace helper
                         setCapacity(i);
                         setStyle(i);
                         setShipping(i);
+                        setLink(i);
+                        setPrice(i);
+                        setQuantity(i);
                         Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
                     }
                 }
@@ -340,8 +345,20 @@ namespace helper
         private void setShipping(int row)
         {
             Form1.BulkSheet[11, row].Value = Form1.OrganizedSheet[Shipping, row].Value;
+            Form1.BulkSheet[22, row].Value = Form1.OrganizedSheet[Shipping, row].Value;
         }
-
+        private void setLink(int row)
+        {
+            Form1.BulkSheet[23, row].Value = Form1.OrganizedSheet[Link, row].Value;
+        }
+        private void setPrice(int row)
+        {
+            Form1.BulkSheet[24, row].Value = Form1.OrganizedSheet[Price, row].Value;
+        }
+        private void setQuantity(int row)
+        {
+            Form1.BulkSheet[25, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
+        }
 
         string getReplacement(String Text)
         {
