@@ -12,7 +12,7 @@ namespace helper
     {
         public void SwitchCategory(object index)
         {
-            clearSheets();
+           
             switch (Convert.ToInt32(index))
             {
 
@@ -25,6 +25,10 @@ namespace helper
                     Refrigerator Ref = new Refrigerator();
                     Ref.Organize();
                     break;
+                case 2:
+                    Makeup makeup = new Makeup();
+                    makeup.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -34,22 +38,7 @@ namespace helper
             Form1.PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Visible = false));
 
         }
-        public void clearSheets()
-        {
-
-            int row, col;
-
-
-            for (row = 0; row < Form1.BulkSheet.RowCount; row++)
-            {
-                for (col = 0; col < Form1.BulkSheet.ColumnCount; col++)
-                {
-                    Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet[col, row].Value = ""));
-                }
-            }
-
-
-        }
+     
 
         public void SwitchBulk(object index)
         {
@@ -68,6 +57,10 @@ namespace helper
                 case 1:
                     Refrigerator Ref = new Refrigerator();
                     Ref.creatBulk();
+                    break;
+                case 2:
+                    Makeup makeup = new Makeup();
+                    makeup.createBulk();
                     break;
 
                 default:

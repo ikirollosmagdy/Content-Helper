@@ -130,6 +130,7 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Quantity", "Quantity")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("EAn", "Suggested EAN")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
 
             for (int i = 0; i < Form1.OrganizedSheet.RowCount - 1; i++)
@@ -185,6 +186,7 @@ namespace helper
             {
                 Form1.BulkSheet[12, row].Style.BackColor = Color.Empty;
             }
+            Form1.BulkSheet[26, row].Value = db.getEAN(Form1.BulkSheet[0, row].Value.ToString());
 
         }
         void setBrand(int row)

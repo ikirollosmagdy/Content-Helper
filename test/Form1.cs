@@ -314,14 +314,21 @@ namespace helper
 
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
+            Thread thread = new Thread(saveToDataBase);
+                        thread.Start();
+            MessageBox.Show("Saved");
+            
+            
+        }
+        private void saveToDataBase()
+        {
             Database DB = new Database();
-            //MessageBox.Show(EnglishTxtBox.Lines.Count().ToString());
+
             for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
             {
                 DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
             }
         }
-
 
 
         private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)

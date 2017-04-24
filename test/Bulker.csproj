@@ -95,6 +95,8 @@
     <Compile Include="inputDialog.Designer.cs">
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item_Types\Makeup.cs" />
+    <Compile Include="Item_Types\Mobile.cs" />
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
