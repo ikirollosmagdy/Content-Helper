@@ -35,7 +35,7 @@ namespace helper
                     break;
             }
             Form1.txtStats.GetCurrentParent().Invoke(new Action(() => Form1.txtStats.Text = "Finished"));
-            Form1.PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Visible = false));
+            Form1.PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Style = ProgressBarStyle.Continuous));
 
         }
      

@@ -62,7 +62,6 @@
             this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
             this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
             this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -72,6 +71,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.EnglishTxtBox = new System.Windows.Forms.TextBox();
             this.ArabicTxtBox = new System.Windows.Forms.TextBox();
@@ -79,10 +79,10 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
+            this.txtCellContent = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -121,7 +121,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(30, 3);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1019, 425);
+            this.tabControl1.Size = new System.Drawing.Size(1071, 450);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -131,7 +131,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1011, 399);
+            this.tabPage1.Size = new System.Drawing.Size(1063, 424);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Imported";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -149,14 +149,14 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.OrganaizedGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(1005, 368);
-            this.splitContainer2.SplitterDistance = 395;
+            this.splitContainer2.Size = new System.Drawing.Size(1057, 393);
+            this.splitContainer2.SplitterDistance = 415;
             this.splitContainer2.TabIndex = 2;
             // 
             // GridView1
             // 
             this.GridView1.AllowUserToOrderColumns = true;
-            this.GridView1.BackgroundColor = System.Drawing.SystemColors.InactiveCaption;
+            this.GridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.SheetMenu;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -168,14 +168,15 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.GridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GridView1.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.GridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.GridView1.Location = new System.Drawing.Point(0, 0);
             this.GridView1.Name = "GridView1";
             this.GridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.GridView1.Size = new System.Drawing.Size(395, 368);
+            this.GridView1.Size = new System.Drawing.Size(415, 393);
             this.GridView1.TabIndex = 1;
             this.GridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellContentClick);
             this.GridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellEndEdit);
+            this.GridView1.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_CellMouseMove);
             this.GridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_ColumnHeaderMouseClick);
             this.GridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_RowHeaderMouseClick);
             this.GridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridView1_KeyDown);
@@ -248,13 +249,15 @@
             this.OrganaizedGrid.Location = new System.Drawing.Point(0, 0);
             this.OrganaizedGrid.Name = "OrganaizedGrid";
             this.OrganaizedGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.OrganaizedGrid.Size = new System.Drawing.Size(606, 368);
+            this.OrganaizedGrid.Size = new System.Drawing.Size(638, 393);
             this.OrganaizedGrid.TabIndex = 1;
             this.OrganaizedGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.OrganaizedGrid_CellBeginEdit);
             this.OrganaizedGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellClick);
             this.OrganaizedGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellContentClick);
             this.OrganaizedGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellEndEdit);
             this.OrganaizedGrid.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellLeave);
+            this.OrganaizedGrid.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_CellMouseMove);
+            this.OrganaizedGrid.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.OrganaizedGrid_CellToolTipTextNeeded);
             this.OrganaizedGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellValueChanged);
             this.OrganaizedGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_ColumnHeaderMouseClick);
             this.OrganaizedGrid.CurrentCellChanged += new System.EventHandler(this.OrganaizedGrid_CurrentCellChanged_1);
@@ -346,11 +349,10 @@
             this.DropCat,
             this.btnAnalayze,
             this.btnSaveSheet,
-            this.btnCreateBulk,
-            this.toolStripButton5});
+            this.btnCreateBulk});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1005, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1057, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -425,17 +427,6 @@
             this.btnCreateBulk.Text = "Create Bulk";
             this.btnCreateBulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
             // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Enabled = false;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(85, 22);
-            this.toolStripButton5.Text = "test Functions";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click_1);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.toolStrip3);
@@ -443,7 +434,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1011, 399);
+            this.tabPage3.Size = new System.Drawing.Size(1063, 424);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Bulk Sheet";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -454,7 +445,7 @@
             this.btnSave});
             this.toolStrip3.Location = new System.Drawing.Point(3, 3);
             this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1005, 25);
+            this.toolStrip3.Size = new System.Drawing.Size(1057, 25);
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
@@ -473,6 +464,7 @@
             this.BulkGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.BulkGrid.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BulkGrid.ContextMenuStrip = this.BulkMenu;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -485,8 +477,9 @@
             this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.BulkGrid.Location = new System.Drawing.Point(3, 31);
             this.BulkGrid.Name = "BulkGrid";
-            this.BulkGrid.Size = new System.Drawing.Size(1005, 368);
+            this.BulkGrid.Size = new System.Drawing.Size(1057, 393);
             this.BulkGrid.TabIndex = 0;
+            this.BulkGrid.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BulkGrid_CellMouseMove);
             // 
             // BulkMenu
             // 
@@ -510,7 +503,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1011, 399);
+            this.tabPage4.Size = new System.Drawing.Size(1063, 424);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Translation";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -522,7 +515,7 @@
             this.btnRebulk});
             this.toolStrip4.Location = new System.Drawing.Point(3, 3);
             this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1005, 25);
+            this.toolStrip4.Size = new System.Drawing.Size(1057, 25);
             this.toolStrip4.TabIndex = 1;
             this.toolStrip4.Text = "toolStrip4";
             // 
@@ -534,6 +527,16 @@
             this.toolStripButton4.Size = new System.Drawing.Size(51, 22);
             this.toolStripButton4.Text = "Save";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click_1);
+            // 
+            // btnRebulk
+            // 
+            this.btnRebulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRebulk.Image = ((System.Drawing.Image)(resources.GetObject("btnRebulk.Image")));
+            this.btnRebulk.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRebulk.Name = "btnRebulk";
+            this.btnRebulk.Size = new System.Drawing.Size(47, 22);
+            this.btnRebulk.Text = "ReBulk";
+            this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
             // 
             // splitContainer1
             // 
@@ -550,8 +553,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ArabicTxtBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1009, 372);
-            this.splitContainer1.SplitterDistance = 336;
+            this.splitContainer1.Size = new System.Drawing.Size(1061, 397);
+            this.splitContainer1.SplitterDistance = 353;
             this.splitContainer1.TabIndex = 0;
             // 
             // EnglishTxtBox
@@ -560,7 +563,7 @@
             this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
             this.EnglishTxtBox.Multiline = true;
             this.EnglishTxtBox.Name = "EnglishTxtBox";
-            this.EnglishTxtBox.Size = new System.Drawing.Size(336, 372);
+            this.EnglishTxtBox.Size = new System.Drawing.Size(353, 397);
             this.EnglishTxtBox.TabIndex = 0;
             // 
             // ArabicTxtBox
@@ -569,7 +572,7 @@
             this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
             this.ArabicTxtBox.Multiline = true;
             this.ArabicTxtBox.Name = "ArabicTxtBox";
-            this.ArabicTxtBox.Size = new System.Drawing.Size(669, 372);
+            this.ArabicTxtBox.Size = new System.Drawing.Size(704, 397);
             this.ArabicTxtBox.TabIndex = 0;
             // 
             // statusStrip1
@@ -578,11 +581,12 @@
             this.toolStripStatusLabel1,
             this.txtStatus,
             this.ProgressBAR,
+            this.txtCellContent,
             this.toolStripStatusLabel2,
             this.txtTranslatedCellCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 425);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 450);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1019, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1071, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
@@ -605,14 +609,19 @@
             this.ProgressBAR.Margin = new System.Windows.Forms.Padding(15, 3, 1, 3);
             this.ProgressBAR.Name = "ProgressBAR";
             this.ProgressBAR.Size = new System.Drawing.Size(100, 16);
-            this.ProgressBAR.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.ProgressBAR.Visible = false;
+            // 
+            // txtCellContent
+            // 
+            this.txtCellContent.Margin = new System.Windows.Forms.Padding(25, 3, 25, 2);
+            this.txtCellContent.Name = "txtCellContent";
+            this.txtCellContent.Size = new System.Drawing.Size(678, 17);
+            this.txtCellContent.Spring = true;
+            this.txtCellContent.Text = "Content";
             // 
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(897, 17);
-            this.toolStripStatusLabel2.Spring = true;
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(105, 17);
             this.toolStripStatusLabel2.Text = "Untranslated Cells:";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -629,38 +638,28 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tabControl1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1019, 425);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1071, 450);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(1019, 425);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1071, 450);
             this.toolStripContainer1.TabIndex = 2;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
-            // 
-            // btnRebulk
-            // 
-            this.btnRebulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnRebulk.Image = ((System.Drawing.Image)(resources.GetObject("btnRebulk.Image")));
-            this.btnRebulk.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRebulk.Name = "btnRebulk";
-            this.btnRebulk.Size = new System.Drawing.Size(47, 22);
-            this.btnRebulk.Text = "ReBulk";
-            this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1019, 447);
+            this.ClientSize = new System.Drawing.Size(1071, 472);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Content Helper";
+            this.Text = "Katana";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -740,7 +739,6 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.DataGridView OrganaizedGrid;
         private System.Windows.Forms.ToolStripButton btnCreateBulk;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripMenuItem colorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doneToolOrgMenu;
         private System.Windows.Forms.ToolStripMenuItem cancelToolOrgMenu;
@@ -755,6 +753,7 @@
         private System.Windows.Forms.ContextMenuStrip BulkMenu;
         private System.Windows.Forms.ToolStripMenuItem ExportBulkMenu;
         private System.Windows.Forms.ToolStripButton btnRebulk;
+        private System.Windows.Forms.ToolStripStatusLabel txtCellContent;
     }
 }
 

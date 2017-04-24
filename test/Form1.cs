@@ -95,7 +95,8 @@ namespace helper
         {
             try
             {
-                PBar.Visible = true;
+                PBar.Style = ProgressBarStyle.Marquee;
+               // PBar.Visible = true;
                 OrganizedSheet.Rows.Clear();
                 OrganizedSheet.RowCount = Sheet.RowCount;
                 txtStatus.Text = "Working Please wait...";
@@ -106,7 +107,8 @@ namespace helper
             catch
             {
                 MessageBox.Show("No file loaded");
-                PBar.Visible = false;
+                // PBar.Visible = false;
+                PBar.Style = ProgressBarStyle.Continuous;
             }
 
         }
@@ -506,15 +508,8 @@ namespace helper
 
         private void toolStripButton5_Click_1(object sender, EventArgs e)
         {
-            for (int x = Sheet.SelectedCells.Count - 1; x >= 0; x--)
-            {
-                if (Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex + 1].Selected)
-                {
-                    Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex + 1].Value
-                        = Sheet[Sheet.SelectedCells[x].ColumnIndex, Sheet.SelectedCells[x].RowIndex].Value;
-                }
-            }
 
+            
 
 
         }
@@ -556,6 +551,50 @@ namespace helper
         private void GridView1_KeyDown(object sender, KeyEventArgs e)
         {
             KeyDownFunction(Sheet, e);
+        }
+
+        private void OrganaizedGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                txtCellContent.Text = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
+                
+            }
+            catch {
+                txtCellContent.Text = string.Empty;
+            }
+        }
+
+        private void GridView1_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                txtCellContent.Text = Sheet[e.ColumnIndex, e.RowIndex].Value.ToString();
+
+              
+
+            }
+            catch
+            {
+                txtCellContent.Text = string.Empty;
+            }
+        }
+
+        private void BulkGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+                txtCellContent.Text = BulkSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
+            }
+            catch
+            {
+                txtCellContent.Text = string.Empty;
+            }
+        }
+
+        private void OrganaizedGrid_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
+        {
+            
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)
