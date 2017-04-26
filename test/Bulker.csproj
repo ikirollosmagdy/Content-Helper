@@ -102,6 +102,7 @@
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Item_Types\Cables.cs" />
+    <Compile Include="Item_Types\HeadSet.cs" />
     <Compile Include="Item_Types\Makeup.cs" />
     <Compile Include="Item_Types\Mobile Accessories.cs" />
     <Compile Include="Item_Types\Charger.cs" />

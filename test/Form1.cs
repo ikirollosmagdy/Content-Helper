@@ -614,6 +614,11 @@ namespace helper
            
         }
 
+        private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            MessageBox.Show(e.ClickedItem.MergeIndex.ToString());
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 

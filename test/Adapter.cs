@@ -46,6 +46,10 @@ namespace helper
                     Charger charger = new Charger();
                     charger.Organize();
                     break;
+                case 7:
+                    HeadSet headSet = new HeadSet();
+                    headSet.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -95,6 +99,12 @@ namespace helper
                     Charger charger = new Charger();
                     charger.createBulk();
                     break;
+
+                case 7:
+                    HeadSet headSet = new HeadSet();
+                    headSet.createBulk();
+                    break;
+
                 default:
                     MessageBox.Show("Please choose category first");
                     break;

@@ -21,7 +21,7 @@ namespace helper
             typeColumn.HeaderText = "Type";
             typeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             typeColumn.FlatStyle = FlatStyle.Popup;
-            typeColumn.Items.AddRange("Battery Chargers", "Car Chargers", "Case Battery Chargers", "Charger Kit", "Dock Chargers", "Power Converter & Inverter", "Solar Powered Chargers", "Wall Charger", "Wireless Chargers");
+            typeColumn.Items.AddRange("Battery Charger", "Car Charger", "Case Battery Charger", "Dock Charger", "Solar Powered Charger", "Wall Charger", "Wireless Charger");
 
             DataGridViewComboBoxColumn Device = new DataGridViewComboBoxColumn();
             Device.HeaderText = "Compatible with";
@@ -226,7 +226,14 @@ namespace helper
         }
         private void setCompatibleWith(int row)
         {
-            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Device, row].Value;
+            if (Form1.OrganizedSheet[Type, row].Value.ToString() != "Multi")
+            {
+                Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value + "s";
+            }
+            else
+            {
+                Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
+            }
             Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString());
             if (CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
