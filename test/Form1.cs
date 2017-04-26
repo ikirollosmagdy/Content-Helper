@@ -357,7 +357,7 @@ namespace helper
                 {
                     ImageForm img = new ImageForm();
                     img.Url = OrganizedSheet[e.ColumnIndex,e.RowIndex].Value.ToString();
-                    img.ShowDialog();
+                    img.Show();
                 }
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
                 {

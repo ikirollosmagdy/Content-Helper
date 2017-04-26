@@ -14,10 +14,7 @@ namespace helper
 
         private void ImageForm_Activated(object sender, EventArgs e)
         {
-            progressBar1.Show();
-         
-            
-            pictureBox1.LoadAsync(Url);
+           
            
         }
 
@@ -33,19 +30,26 @@ namespace helper
 
 
             progressBar1.Hide();
-            lblHeight.Text = height.ToString();
-            lblWidth.Text = width.ToString();
+            lblSize.Text = width.ToString() + "*" + height.ToString();
+        
             if (height<400 || width < 400)
             {
-                pictureBox2.Image = Properties.Resources.Bad;
-                lblSouq.Text="We suggest to change this image";
+             //   pictureBox2.Image = Properties.Resources.Bad;
+                lblComment.Text="We suggest to change this image";
             }
             else
             {
-                pictureBox2.Image = Properties.Resources.Good;
-                lblSouq.Text = "Good to be in SOUQ.com";
+              //  pictureBox2.Image = Properties.Resources.Good;
+                lblComment.Text = "Good to be in SOUQ.com";
             }
 
+        }
+
+        private void ImageForm_Shown(object sender, EventArgs e)
+        {
+            progressBar1.Show();
+            
+            pictureBox1.LoadAsync(Url);
         }
     }
 }

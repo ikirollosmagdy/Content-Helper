@@ -10,15 +10,15 @@ using System.Windows.Forms;
 
 namespace helper
 {
-  public  class Cables
+    public class Cables
     {
         Database db = new Database();
-        int Brand = 1, Model = 2, Type = 3,  Colors = 4, Length = 5,Device=6,
+        int Brand = 1, Model = 2, Type = 3, Colors = 4, Length = 5, Device = 6,
             Link = 7, Price = 8, Quantity = 9, UnTranslatedCount = 0;
 
         private void setupTable()
         {
-            DataGridViewComboBoxColumn typeColumn  = new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn typeColumn = new DataGridViewComboBoxColumn();
             typeColumn.HeaderText = "Type";
             typeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             typeColumn.FlatStyle = FlatStyle.Popup;
@@ -79,23 +79,26 @@ namespace helper
                     catch { }
                     try
                     {
-                        Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
-                        MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
-
-
-                        if (matchModel.Count > 0)
+                        for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
                         {
-                            Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
-                        
+                            Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
+                            MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
 
+
+                            if (matchModel.Count > 0)
+                            {
+                                Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
+                                break;
+                            }
                         }
                     }
                     catch { }
-                   
+
                 }
             }
         }
-        public void createBulk() {
+        public void createBulk()
+        {
             UnTranslatedCount = 0;
             Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Clear()));
@@ -124,16 +127,16 @@ namespace helper
                 {
                     if (Form1.OrganizedSheet.Rows[i].DefaultCellStyle.BackColor != System.Drawing.Color.HotPink)
                     {
-                             setTitle(i);
-                              setBrand(i);
+                        setTitle(i);
+                        setBrand(i);
                         setDescription(i);
 
-                          setType(i);
-                         setCompatibleWith(i);
-                   
-                         setLink(i);
-                         setPrice(i);
-                         setQuantity(i);
+                        setType(i);
+                        setCompatibleWith(i);
+
+                        setLink(i);
+                        setPrice(i);
+                        setQuantity(i);
                         Form1.txtUntranslated.GetCurrentParent().Invoke(new Action(() => Form1.txtUntranslated.Text = UnTranslatedCount.ToString()));
                     }
                 }
@@ -152,7 +155,7 @@ namespace helper
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower() != "other")
             {
                 title = Form1.OrganizedSheet[Brand, row].Value + " " + Form1.OrganizedSheet[Model, row].Value + " ";
-                ArTitle = " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value+" ";
+                ArTitle = " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value + " ";
             }
             title = title + Form1.OrganizedSheet[Type, row].Value + ", " + Form1.OrganizedSheet[Length, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
             ArTitle = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + ArTitle + " ،" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) + " ،" +
@@ -164,7 +167,7 @@ namespace helper
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
-           
+
         }
         private void setBrand(int row)
         {
@@ -181,8 +184,8 @@ namespace helper
             Form1.BulkSheet[2, row].Value = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value + "</li> <li>Color :" +
                 Form1.OrganizedSheet[Colors, row].Value + "</li> <li>Length :" + Form1.OrganizedSheet[Length, row].Value +
                 "</li> <li>Compatible with :" + Form1.OrganizedSheet[Device, row].Value + "</li> </ul>";
-            Form1.BulkSheet[7,row].Value= "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +
-               db.getRecord( Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
+            Form1.BulkSheet[7, row].Value = "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +
+               db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
                 "</li> <li>متوافق مع :" + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li> </ul>";
             if (CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
@@ -193,7 +196,7 @@ namespace helper
         }
         private void setType(int row)
         {
-            if(Form1.OrganizedSheet[Type,row].Value.ToString()=="Cable"|| Form1.OrganizedSheet[Type, row].Value.ToString()== "Adapter")
+            if (Form1.OrganizedSheet[Type, row].Value.ToString() == "Cable" || Form1.OrganizedSheet[Type, row].Value.ToString() == "Adapter")
             {
                 Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Type, row].Value + "s";
             }

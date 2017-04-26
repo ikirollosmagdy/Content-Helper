@@ -83,15 +83,18 @@ namespace helper
                     catch { }
                     try
                     {
-                        Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
-                        MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
-                    
-
-                        if (matchModel.Count>0)
+                        for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
                         {
-                            Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
-                            break;
+                            Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
+                            MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
 
+
+                            if (matchModel.Count > 0)
+                            {
+                                Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
+                                break;
+
+                            }
                         }
                     }
                     catch { }

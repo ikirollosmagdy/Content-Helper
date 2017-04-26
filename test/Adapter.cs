@@ -38,7 +38,10 @@ namespace helper
                     Cables cable = new Cables();
                     cable.Organize();
                     break;
-
+                case 5:
+                    PowerBank pBank = new PowerBank();
+                    pBank.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -79,6 +82,10 @@ namespace helper
                 case 4:
                     Cables cable = new Cables();
                     cable.createBulk();
+                    break;
+                case 5:
+                    PowerBank pBank = new PowerBank();
+                    pBank.createBulk();
                     break;
 
                 default:
