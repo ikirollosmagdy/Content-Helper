@@ -15,6 +15,10 @@ namespace helper
         {
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;
+            if (english.Contains("'"))
+            {
+                english = english.Replace("'", "''");
+            }
             //Database_UAE
             if (IsEgypt)
             {
@@ -45,6 +49,10 @@ namespace helper
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;
             SQLiteDataReader sqlite_datareader;
+            if (english.Contains("'"))
+            {
+                english= english.Replace("'","''");
+            }
 
             if (IsEgypt)
             {
@@ -81,7 +89,10 @@ namespace helper
             
             
             sqlite_conn.Close();
-
+            if (arabic.Contains("''"))
+            {
+                arabic = arabic.Replace("''", "'");
+            }
 
 
             return arabic;
