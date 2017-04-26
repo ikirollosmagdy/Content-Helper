@@ -29,6 +29,16 @@ namespace helper
                     Makeup makeup = new Makeup();
                     makeup.Organize();
                     break;
+                    case 3:
+                    Mobile_Accessories acc = new Mobile_Accessories();
+                    acc.Organize();
+                    break;
+
+                case 4:
+                    Cables cable = new Cables();
+                    cable.Organize();
+                    break;
+
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -61,6 +71,14 @@ namespace helper
                 case 2:
                     Makeup makeup = new Makeup();
                     makeup.createBulk();
+                    break;
+                case 3:
+                    Mobile_Accessories acc = new Mobile_Accessories();
+                    acc.createBulk();
+                    break;
+                case 4:
+                    Cables cable = new Cables();
+                    cable.createBulk();
                     break;
 
                 default:

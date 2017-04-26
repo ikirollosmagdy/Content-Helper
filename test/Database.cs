@@ -9,13 +9,21 @@ namespace helper
 {
    public class Database
     {
-    
+        static bool IsEgypt = Properties.Settings.Default.IsEgypt;
+
         public void AddRecord(string english,string arabic)
         {
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;
-           
-            sqlite_conn = new SQLiteConnection("Data Source=Database.db;Version=3;New=False;Compress=True;");
+            //Database_UAE
+            if (IsEgypt)
+            {
+                sqlite_conn = new SQLiteConnection("Data Source=Database_Egypt.db;Version=3;New=False;Compress=True;");
+            }
+            else
+            {
+                sqlite_conn = new SQLiteConnection("Data Source=Database_UAE.db;Version=3;New=False;Compress=True;");
+            }
                        
                 sqlite_conn.Open();
           
@@ -38,7 +46,14 @@ namespace helper
             SQLiteCommand sqlite_cmd;
             SQLiteDataReader sqlite_datareader;
 
-            sqlite_conn = new SQLiteConnection("Data Source=Database.db;Version=3;New=False;Compress=True;");
+            if (IsEgypt)
+            {
+                sqlite_conn = new SQLiteConnection("Data Source=Database_Egypt.db;Version=3;New=False;Compress=True;");
+            }
+            else
+            {
+                sqlite_conn = new SQLiteConnection("Data Source=Database_UAE.db;Version=3;New=False;Compress=True;");
+            }
 
             sqlite_conn.Open();
 

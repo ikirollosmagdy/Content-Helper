@@ -73,6 +73,7 @@
             this.btnChooseLang.TabIndex = 5;
             this.btnChooseLang.Text = "Select";
             this.btnChooseLang.UseVisualStyleBackColor = true;
+            this.btnChooseLang.Click += new System.EventHandler(this.btnChooseLang_Click);
             // 
             // Splash_Screen
             // 
@@ -83,8 +84,12 @@
             this.Controls.Add(this.RadUAE);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RadEgypt);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "Splash_Screen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Choose Country";
+            this.Activated += new System.EventHandler(this.Splash_Screen_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 

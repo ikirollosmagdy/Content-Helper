@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -89,13 +89,21 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImageForm.Designer.cs">
+      <DependentUpon>ImageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="inputDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="inputDialog.Designer.cs">
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item_Types\Cables.cs" />
     <Compile Include="Item_Types\Makeup.cs" />
+    <Compile Include="Item_Types\Mobile Accessories.cs" />
     <Compile Include="Item_Types\Mobile.cs" />
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Program.cs" />
@@ -109,6 +117,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImageForm.resx">
+      <DependentUpon>ImageForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="inputDialog.resx">
       <DependentUpon>inputDialog.cs</DependentUpon>
@@ -126,6 +137,7 @@
     <EmbeddedResource Include="Splash_Screen.resx">
       <DependentUpon>Splash_Screen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -139,6 +151,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="66b2c3a35623ce83bf101e599f8e51dd.ico" />
+    <None Include="Resources\Good.png" />
+    <None Include="Resources\Bad.png" />
+    <None Include="Resources\good-and-bad-1_04.png" />
+    <None Include="Resources\good-and-bad-1_031.png" />
+    <None Include="Resources\good-and-bad-1_03.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

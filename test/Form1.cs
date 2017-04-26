@@ -155,7 +155,7 @@ namespace helper
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-
+            
 
         }
 
@@ -353,6 +353,12 @@ namespace helper
         {
             try
             {
+                if (OrganizedSheet[e.ColumnIndex,e.RowIndex].Value.ToString().Contains("http"))
+                {
+                    ImageForm img = new ImageForm();
+                    img.Url = OrganizedSheet[e.ColumnIndex,e.RowIndex].Value.ToString();
+                    img.ShowDialog();
+                }
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
                 {
                     OrganizedSheet.BeginEdit(true);
@@ -367,7 +373,7 @@ namespace helper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void doneToolMenuSheet_Click(object sender, EventArgs e)
@@ -595,6 +601,17 @@ namespace helper
         private void OrganaizedGrid_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
             
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            Splash_Screen sp = new Splash_Screen();
+            sp.ShowDialog();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+           
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

@@ -22,5 +22,29 @@ namespace helper.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsFirstUse {
+            get {
+                return ((bool)(this["IsFirstUse"]));
+            }
+            set {
+                this["IsFirstUse"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsEgypt {
+            get {
+                return ((bool)(this["IsEgypt"]));
+            }
+            set {
+                this["IsEgypt"] = value;
+            }
+        }
     }
 }

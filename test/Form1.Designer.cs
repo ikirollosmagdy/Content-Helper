@@ -62,6 +62,7 @@
             this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
             this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
             this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -349,7 +350,8 @@
             this.DropCat,
             this.btnAnalayze,
             this.btnSaveSheet,
-            this.btnCreateBulk});
+            this.btnCreateBulk,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1057, 25);
@@ -390,7 +392,9 @@
             this.DropCat.Items.AddRange(new object[] {
             "Perfume",
             "Refrigerators & Freezers",
-            "MakeUp"});
+            "MakeUp",
+            "Mobile Accessories",
+            "Cables"});
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.DropCat.Name = "DropCat";
             this.DropCat.Size = new System.Drawing.Size(200, 25);
@@ -426,6 +430,16 @@
             this.btnCreateBulk.Size = new System.Drawing.Size(71, 22);
             this.btnCreateBulk.Text = "Create Bulk";
             this.btnCreateBulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(82, 22);
+            this.toolStripButton1.Text = "Test Function";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // tabPage3
             // 
@@ -663,6 +677,7 @@
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -754,6 +769,7 @@
         private System.Windows.Forms.ToolStripMenuItem ExportBulkMenu;
         private System.Windows.Forms.ToolStripButton btnRebulk;
         private System.Windows.Forms.ToolStripStatusLabel txtCellContent;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 

@@ -89,6 +89,8 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Quan", "Quantity")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("EAN", "Suggested EAN")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.RowCount = Form1.OrganizedSheet.RowCount));
+
             for (int i = 0; i < Form1.OrganizedSheet.RowCount - 1; i++)
             {
                 try
@@ -185,7 +187,16 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[type, row].Value;
             Form1.BulkSheet[7, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString());
-           
+            if (CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            {
+                Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+            else
+            {
+                Form1.BulkSheet[7, row].Style.BackColor = Color.Empty;
+            }
+
         }
         private void setLink(int row)
         {
