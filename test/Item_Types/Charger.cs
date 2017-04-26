@@ -10,25 +10,24 @@ using System.Windows.Forms;
 
 namespace helper
 {
-    public class Cables
+    public class Charger
     {
         Database db = new Database();
-        int Brand = 1, Model = 2, Type = 3, Colors = 4, Length = 5, Device = 6,
+        int Brand = 1, Model = 2, Type = 3, Colors = 4, Device = 5, Extra = 6,
             Link = 7, Price = 8, Quantity = 9, UnTranslatedCount = 0;
-
         private void setupTable()
         {
             DataGridViewComboBoxColumn typeColumn = new DataGridViewComboBoxColumn();
             typeColumn.HeaderText = "Type";
             typeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             typeColumn.FlatStyle = FlatStyle.Popup;
-            typeColumn.Items.AddRange("Adapter", "Audio Cable", "Audio Splitter", "Cable", "Power cord", "VGA Splitter");
+            typeColumn.Items.AddRange("Battery Chargers", "Car Chargers", "Case Battery Chargers", "Charger Kit", "Dock Chargers", "Power Converter & Inverter", "Solar Powered Chargers", "Wall Charger", "Wireless Chargers");
 
             DataGridViewComboBoxColumn Device = new DataGridViewComboBoxColumn();
             Device.HeaderText = "Compatible with";
             Device.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             Device.FlatStyle = FlatStyle.Popup;
-            Device.Items.AddRange("Camcorders", "Computers - PCs", "Digital Cameras", "Game Consoles", "Laptops & Notebooks", "Mobile Phones", "MP3 Players & MP4 Players", "Multi", "Printers", "Projectors", "Routers", "Smart Watches", "Speakers", "TV's");
+            Device.Items.AddRange("Camcorder", "Camera", "Car", "Flashlight", "Game Console", "Laptop", "Mobile Phone", "MP3 Players & MP4 Player", "Multi", "Musical Instrument", "Smart Watche", "Tablet", "Toy");
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("NO", "No.")));
@@ -36,8 +35,8 @@ namespace helper
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Model", "Model")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(typeColumn)));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Color", "Color")));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Length", "Length")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(Device)));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("extra", "Description")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Link")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity")));
@@ -46,8 +45,8 @@ namespace helper
             {
                 co.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
+
         public void Organize()
         {
             setupTable();
@@ -62,21 +61,7 @@ namespace helper
                         Form1.OrganizedSheet[0, row].Value = Convert.ToString(row + 1);
                     }
                     catch { }
-                    try
-                    {
-                        Regex regexSize = new Regex(@"(\d{1,2} ?[Mm])|(\d{2,3} ?[Cc][Mm])");
-                        Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
 
-
-
-                        if (matchSize.Success)
-                        {
-
-                            Form1.OrganizedSheet.Rows[row].Cells[Length].Value = matchSize.Value.Replace(" ", "").ToLower();
-
-                        }
-                    }
-                    catch { }
                     try
                     {
                         for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
@@ -90,6 +75,20 @@ namespace helper
                                 Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
                                 break;
                             }
+                        }
+                    }
+                    catch { }
+                    try
+                    {
+                        Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ultiColor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
+                        MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
+
+
+                        if (matchColor.Count > 0)
+                        {
+                            Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value;
+
+
                         }
                     }
                     catch { }
@@ -146,7 +145,9 @@ namespace helper
                 }
             }
 
+
         }
+
 
         private void setTitle(int row)
         {
@@ -157,8 +158,8 @@ namespace helper
                 title = Form1.OrganizedSheet[Brand, row].Value + " " + Form1.OrganizedSheet[Model, row].Value + " ";
                 ArTitle = " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value + " ";
             }
-            title = title + Form1.OrganizedSheet[Type, row].Value + ", " + Form1.OrganizedSheet[Length, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
-            ArTitle = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + ArTitle + " ،" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) + " ،" +
+            title = title + Form1.OrganizedSheet[Type, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
+            ArTitle = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + ArTitle + " ،" + " ،" +
                 db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[5, row].Value = ArTitle;
@@ -167,7 +168,6 @@ namespace helper
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
-
         }
         private void setBrand(int row)
         {
@@ -178,25 +178,38 @@ namespace helper
                 Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
+
         }
         private void setDescription(int row)
         {
-            Form1.BulkSheet[2, row].Value = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value + "</li> <li>Color :" +
-                Form1.OrganizedSheet[Colors, row].Value + "</li> <li>Length :" + Form1.OrganizedSheet[Length, row].Value +
-                "</li> <li>Compatible with :" + Form1.OrganizedSheet[Device, row].Value + "</li> </ul>";
-            Form1.BulkSheet[7, row].Value = "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +
-               db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
-                "</li> <li>متوافق مع :" + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li> </ul>";
-            if (CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            string des = "", ArDes = "";
+            try
+            {
+
+                string[] lines = Form1.OrganizedSheet[Extra, row].Value.ToString().Split('\n');
+                foreach (string line in lines)
+                {
+                    des = des + "<p>" + line + "</p>";
+                    ArDes = ArDes + "<p>" + db.getRecord(line) + "</p>";
+                }
+            }
+            catch { }
+            des = des + "<li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
+"</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li>";
+            ArDes = ArDes + "<li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +
+                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع : " + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li>";
+
+            Form1.BulkSheet[2, row].Value = des;
+            Form1.BulkSheet[7, row].Value = ArDes;
+            if (CheckEnglish(ArDes))
             {
                 Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
-
         }
         private void setType(int row)
         {
-            if (Form1.OrganizedSheet[Type, row].Value.ToString() == "Cable" || Form1.OrganizedSheet[Type, row].Value.ToString() == "Adapter")
+            if (Form1.OrganizedSheet[Type, row].Value.ToString() != "Multi")
             {
                 Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Type, row].Value + "s";
             }

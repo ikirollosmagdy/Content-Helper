@@ -78,7 +78,7 @@ namespace helper
                         {
                             Form1.OrganizedSheet[Type, row].Value = getReplacement(matchSize.Value);
 
-                        }
+                         }
                     }
                     catch { }
                     try
@@ -86,7 +86,7 @@ namespace helper
                         for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
                         {
                             Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
-                            MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
+                            MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
 
 
                             if (matchModel.Count > 0)

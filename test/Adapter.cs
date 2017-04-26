@@ -42,6 +42,10 @@ namespace helper
                     PowerBank pBank = new PowerBank();
                     pBank.Organize();
                     break;
+                case 6:
+                    Charger charger = new Charger();
+                    charger.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -87,7 +91,10 @@ namespace helper
                     PowerBank pBank = new PowerBank();
                     pBank.createBulk();
                     break;
-
+                case 6:
+                    Charger charger = new Charger();
+                    charger.createBulk();
+                    break;
                 default:
                     MessageBox.Show("Please choose category first");
                     break;
