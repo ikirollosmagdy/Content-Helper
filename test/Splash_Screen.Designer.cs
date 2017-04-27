@@ -58,11 +58,11 @@
             // RadUAE
             // 
             this.RadUAE.AutoSize = true;
-            this.RadUAE.Location = new System.Drawing.Point(127, 51);
+            this.RadUAE.Location = new System.Drawing.Point(101, 51);
             this.RadUAE.Name = "RadUAE";
-            this.RadUAE.Size = new System.Drawing.Size(47, 17);
+            this.RadUAE.Size = new System.Drawing.Size(73, 17);
             this.RadUAE.TabIndex = 4;
-            this.RadUAE.Text = "UAE";
+            this.RadUAE.Text = "UAE/KSA";
             this.RadUAE.UseVisualStyleBackColor = true;
             // 
             // btnChooseLang

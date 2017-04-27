@@ -301,8 +301,8 @@ namespace helper
         }
         private void setNoise(int row)
         {
-            Form1.BulkSheet[9, row].Value = Form1.OrganizedSheet[Type, row].Value;
-            Form1.BulkSheet[19, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString());
+            Form1.BulkSheet[9, row].Value = Form1.OrganizedSheet[Noise, row].Value;
+            Form1.BulkSheet[19, row].Value = db.getRecord(Form1.OrganizedSheet[Noise, row].Value.ToString());
             if (CheckEnglish(Form1.BulkSheet[19, row].Value.ToString()))
             {
                 Form1.BulkSheet[19, row].Style.BackColor = Color.Yellow;

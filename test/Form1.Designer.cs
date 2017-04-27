@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabImported = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.GridView1 = new System.Windows.Forms.DataGridView();
             this.SheetMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -54,25 +54,17 @@
             this.qcCheckOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.btnLoadFile = new System.Windows.Forms.ToolStripButton();
             this.ComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.DropCat = new System.Windows.Forms.ToolStripComboBox();
-            this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
-            this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
-            this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabBulk = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.BulkGrid = new System.Windows.Forms.DataGridView();
             this.BulkMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExportBulkMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabTranslation = new System.Windows.Forms.TabPage();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.EnglishTxtBox = new System.Windows.Forms.TextBox();
             this.ArabicTxtBox = new System.Windows.Forms.TextBox();
@@ -84,8 +76,19 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.btnLoadFile = new System.Windows.Forms.ToolStripButton();
+            this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
+            this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
+            this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.btnChooseCountry = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTranslation = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabImported.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
@@ -95,11 +98,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.OrganaizedGrid)).BeginInit();
             this.OrganizedMenu.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabBulk.SuspendLayout();
             this.toolStrip3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulkGrid)).BeginInit();
             this.BulkMenu.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabTranslation.SuspendLayout();
             this.toolStrip4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -113,9 +116,9 @@
             // tabControl1
             // 
             this.tabControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.StatusBar;
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabImported);
+            this.tabControl1.Controls.Add(this.tabBulk);
+            this.tabControl1.Controls.Add(this.tabTranslation);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Multiline = true;
@@ -125,17 +128,17 @@
             this.tabControl1.Size = new System.Drawing.Size(1071, 450);
             this.tabControl1.TabIndex = 0;
             // 
-            // tabPage1
+            // tabImported
             // 
-            this.tabPage1.Controls.Add(this.splitContainer2);
-            this.tabPage1.Controls.Add(this.toolStrip1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1063, 424);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Imported";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabImported.Controls.Add(this.splitContainer2);
+            this.tabImported.Controls.Add(this.toolStrip1);
+            this.tabImported.Location = new System.Drawing.Point(4, 22);
+            this.tabImported.Name = "tabImported";
+            this.tabImported.Padding = new System.Windows.Forms.Padding(3);
+            this.tabImported.Size = new System.Drawing.Size(1063, 424);
+            this.tabImported.TabIndex = 0;
+            this.tabImported.Text = "Imported";
+            this.tabImported.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
             // 
@@ -160,14 +163,14 @@
             this.GridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.SheetMenu;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.GridView1.Location = new System.Drawing.Point(0, 0);
@@ -236,14 +239,14 @@
             this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.SandyBrown;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SandyBrown;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle1;
             this.OrganaizedGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -358,16 +361,6 @@
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // btnLoadFile
-            // 
-            this.btnLoadFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLoadFile.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadFile.Image")));
-            this.btnLoadFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(55, 22);
-            this.btnLoadFile.Text = "LoadFile";
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
-            // 
             // ComboBox1
             // 
             this.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -403,6 +396,210 @@
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.DropCat.Name = "DropCat";
             this.DropCat.Size = new System.Drawing.Size(200, 25);
+            // 
+            // tabBulk
+            // 
+            this.tabBulk.Controls.Add(this.toolStrip3);
+            this.tabBulk.Controls.Add(this.BulkGrid);
+            this.tabBulk.Location = new System.Drawing.Point(4, 22);
+            this.tabBulk.Name = "tabBulk";
+            this.tabBulk.Padding = new System.Windows.Forms.Padding(3);
+            this.tabBulk.Size = new System.Drawing.Size(1063, 424);
+            this.tabBulk.TabIndex = 2;
+            this.tabBulk.Text = "Bulk Sheet";
+            this.tabBulk.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnSave});
+            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.Size = new System.Drawing.Size(1057, 25);
+            this.toolStrip3.TabIndex = 1;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // BulkGrid
+            // 
+            this.BulkGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BulkGrid.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BulkGrid.ContextMenuStrip = this.BulkMenu;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            this.BulkGrid.Location = new System.Drawing.Point(3, 31);
+            this.BulkGrid.Name = "BulkGrid";
+            this.BulkGrid.Size = new System.Drawing.Size(1057, 393);
+            this.BulkGrid.TabIndex = 0;
+            this.BulkGrid.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BulkGrid_CellMouseMove);
+            // 
+            // BulkMenu
+            // 
+            this.BulkMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ExportBulkMenu});
+            this.BulkMenu.Name = "BulkMenu";
+            this.BulkMenu.Size = new System.Drawing.Size(174, 26);
+            // 
+            // ExportBulkMenu
+            // 
+            this.ExportBulkMenu.Name = "ExportBulkMenu";
+            this.ExportBulkMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.ExportBulkMenu.Size = new System.Drawing.Size(173, 22);
+            this.ExportBulkMenu.Text = "Export Bulk";
+            this.ExportBulkMenu.Click += new System.EventHandler(this.btnSaveSheet_Click);
+            // 
+            // tabTranslation
+            // 
+            this.tabTranslation.Controls.Add(this.toolStrip4);
+            this.tabTranslation.Controls.Add(this.splitContainer1);
+            this.tabTranslation.Location = new System.Drawing.Point(4, 22);
+            this.tabTranslation.Name = "tabTranslation";
+            this.tabTranslation.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTranslation.Size = new System.Drawing.Size(1063, 424);
+            this.tabTranslation.TabIndex = 3;
+            this.tabTranslation.Text = "Translation";
+            this.tabTranslation.UseVisualStyleBackColor = true;
+            // 
+            // toolStrip4
+            // 
+            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton4,
+            this.btnRebulk});
+            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
+            this.toolStrip4.Name = "toolStrip4";
+            this.toolStrip4.Size = new System.Drawing.Size(1057, 25);
+            this.toolStrip4.TabIndex = 1;
+            this.toolStrip4.Text = "toolStrip4";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(3, 31);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.EnglishTxtBox);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.ArabicTxtBox);
+            this.splitContainer1.Size = new System.Drawing.Size(1061, 397);
+            this.splitContainer1.SplitterDistance = 353;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // EnglishTxtBox
+            // 
+            this.EnglishTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
+            this.EnglishTxtBox.Multiline = true;
+            this.EnglishTxtBox.Name = "EnglishTxtBox";
+            this.EnglishTxtBox.Size = new System.Drawing.Size(353, 397);
+            this.EnglishTxtBox.TabIndex = 0;
+            // 
+            // ArabicTxtBox
+            // 
+            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
+            this.ArabicTxtBox.Multiline = true;
+            this.ArabicTxtBox.Name = "ArabicTxtBox";
+            this.ArabicTxtBox.Size = new System.Drawing.Size(704, 397);
+            this.ArabicTxtBox.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSplitButton1,
+            this.toolStripStatusLabel1,
+            this.txtStatus,
+            this.ProgressBAR,
+            this.txtCellContent,
+            this.toolStripStatusLabel2,
+            this.txtTranslatedCellCount});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 450);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1071, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 17);
+            this.toolStripStatusLabel1.Text = "Status: ";
+            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.Size = new System.Drawing.Size(39, 17);
+            this.txtStatus.Text = "Ready";
+            // 
+            // ProgressBAR
+            // 
+            this.ProgressBAR.Margin = new System.Windows.Forms.Padding(15, 3, 1, 3);
+            this.ProgressBAR.Name = "ProgressBAR";
+            this.ProgressBAR.Size = new System.Drawing.Size(100, 16);
+            // 
+            // txtCellContent
+            // 
+            this.txtCellContent.Margin = new System.Windows.Forms.Padding(25, 3, 25, 2);
+            this.txtCellContent.Name = "txtCellContent";
+            this.txtCellContent.Size = new System.Drawing.Size(646, 17);
+            this.txtCellContent.Spring = true;
+            this.txtCellContent.Text = "Content";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(105, 17);
+            this.toolStripStatusLabel2.Text = "Untranslated Cells:";
+            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // txtTranslatedCellCount
+            // 
+            this.txtTranslatedCellCount.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
+            this.txtTranslatedCellCount.Name = "txtTranslatedCellCount";
+            this.txtTranslatedCellCount.Size = new System.Drawing.Size(13, 17);
+            this.txtTranslatedCellCount.Text = "0";
+            // 
+            // toolStripContainer1
+            // 
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.tabControl1);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1071, 450);
+            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
+            this.toolStripContainer1.Size = new System.Drawing.Size(1071, 450);
+            this.toolStripContainer1.TabIndex = 2;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            this.toolStripContainer1.TopToolStripPanelVisible = false;
+            // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLoadFile.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadFile.Image")));
+            this.btnLoadFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(55, 22);
+            this.btnLoadFile.Text = "LoadFile";
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // btnAnalayze
             // 
@@ -446,28 +643,6 @@
             this.toolStripButton1.Text = "Test Function";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.toolStrip3);
-            this.tabPage3.Controls.Add(this.BulkGrid);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1063, 424);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Bulk Sheet";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip3
-            // 
-            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnSave});
-            this.toolStrip3.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip3.Name = "toolStrip3";
-            this.toolStrip3.Size = new System.Drawing.Size(1057, 25);
-            this.toolStrip3.TabIndex = 1;
-            this.toolStrip3.Text = "toolStrip3";
-            // 
             // btnSave
             // 
             this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -477,66 +652,6 @@
             this.btnSave.Size = new System.Drawing.Size(102, 22);
             this.btnSave.Text = "Export Bulk Sheet";
             this.btnSave.Click += new System.EventHandler(this.toolStripButton4_Click);
-            // 
-            // BulkGrid
-            // 
-            this.BulkGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BulkGrid.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BulkGrid.ContextMenuStrip = this.BulkMenu;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle1;
-            this.BulkGrid.Location = new System.Drawing.Point(3, 31);
-            this.BulkGrid.Name = "BulkGrid";
-            this.BulkGrid.Size = new System.Drawing.Size(1057, 393);
-            this.BulkGrid.TabIndex = 0;
-            this.BulkGrid.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BulkGrid_CellMouseMove);
-            // 
-            // BulkMenu
-            // 
-            this.BulkMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ExportBulkMenu});
-            this.BulkMenu.Name = "BulkMenu";
-            this.BulkMenu.Size = new System.Drawing.Size(174, 26);
-            // 
-            // ExportBulkMenu
-            // 
-            this.ExportBulkMenu.Name = "ExportBulkMenu";
-            this.ExportBulkMenu.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.ExportBulkMenu.Size = new System.Drawing.Size(173, 22);
-            this.ExportBulkMenu.Text = "Export Bulk";
-            this.ExportBulkMenu.Click += new System.EventHandler(this.btnSaveSheet_Click);
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.toolStrip4);
-            this.tabPage4.Controls.Add(this.splitContainer1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1063, 424);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Translation";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // toolStrip4
-            // 
-            this.toolStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton4,
-            this.btnRebulk});
-            this.toolStrip4.Location = new System.Drawing.Point(3, 3);
-            this.toolStrip4.Name = "toolStrip4";
-            this.toolStrip4.Size = new System.Drawing.Size(1057, 25);
-            this.toolStrip4.TabIndex = 1;
-            this.toolStrip4.Text = "toolStrip4";
             // 
             // toolStripButton4
             // 
@@ -557,116 +672,32 @@
             this.btnRebulk.Text = "ReBulk";
             this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
             // 
-            // splitContainer1
+            // toolStripSplitButton1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(3, 31);
-            this.splitContainer1.Name = "splitContainer1";
+            this.toolStripSplitButton1.AutoSize = false;
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnChooseCountry,
+            this.btnTranslation});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 20);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
-            // splitContainer1.Panel1
+            // btnChooseCountry
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.EnglishTxtBox);
+            this.btnChooseCountry.Name = "btnChooseCountry";
+            this.btnChooseCountry.Size = new System.Drawing.Size(171, 22);
+            this.btnChooseCountry.Text = "Choose Country";
+            this.btnChooseCountry.Click += new System.EventHandler(this.btnChooseCountry_Click);
             // 
-            // splitContainer1.Panel2
+            // btnTranslation
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.ArabicTxtBox);
-            this.splitContainer1.Size = new System.Drawing.Size(1061, 397);
-            this.splitContainer1.SplitterDistance = 353;
-            this.splitContainer1.TabIndex = 0;
-            // 
-            // EnglishTxtBox
-            // 
-            this.EnglishTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.EnglishTxtBox.Multiline = true;
-            this.EnglishTxtBox.Name = "EnglishTxtBox";
-            this.EnglishTxtBox.Size = new System.Drawing.Size(353, 397);
-            this.EnglishTxtBox.TabIndex = 0;
-            // 
-            // ArabicTxtBox
-            // 
-            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.ArabicTxtBox.Multiline = true;
-            this.ArabicTxtBox.Name = "ArabicTxtBox";
-            this.ArabicTxtBox.Size = new System.Drawing.Size(704, 397);
-            this.ArabicTxtBox.TabIndex = 0;
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.txtStatus,
-            this.ProgressBAR,
-            this.txtCellContent,
-            this.toolStripStatusLabel2,
-            this.txtTranslatedCellCount});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 450);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1071, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(45, 17);
-            this.toolStripStatusLabel1.Text = "Status: ";
-            this.toolStripStatusLabel1.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(39, 17);
-            this.txtStatus.Text = "Ready";
-            // 
-            // ProgressBAR
-            // 
-            this.ProgressBAR.Margin = new System.Windows.Forms.Padding(15, 3, 1, 3);
-            this.ProgressBAR.Name = "ProgressBAR";
-            this.ProgressBAR.Size = new System.Drawing.Size(100, 16);
-            // 
-            // txtCellContent
-            // 
-            this.txtCellContent.Margin = new System.Windows.Forms.Padding(25, 3, 25, 2);
-            this.txtCellContent.Name = "txtCellContent";
-            this.txtCellContent.Size = new System.Drawing.Size(678, 17);
-            this.txtCellContent.Spring = true;
-            this.txtCellContent.Text = "Content";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(105, 17);
-            this.toolStripStatusLabel2.Text = "Untranslated Cells:";
-            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // txtTranslatedCellCount
-            // 
-            this.txtTranslatedCellCount.Margin = new System.Windows.Forms.Padding(0, 3, 10, 2);
-            this.txtTranslatedCellCount.Name = "txtTranslatedCellCount";
-            this.txtTranslatedCellCount.Size = new System.Drawing.Size(13, 17);
-            this.txtTranslatedCellCount.Text = "0";
-            // 
-            // toolStripContainer1
-            // 
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.tabControl1);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1071, 450);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.LeftToolStripPanelVisible = false;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(1071, 450);
-            this.toolStripContainer1.TabIndex = 2;
-            this.toolStripContainer1.Text = "toolStripContainer1";
-            this.toolStripContainer1.TopToolStripPanelVisible = false;
+            this.btnTranslation.Name = "btnTranslation";
+            this.btnTranslation.Size = new System.Drawing.Size(160, 22);
+            this.btnTranslation.Text = "Translator Login";
+            this.btnTranslation.Click += new System.EventHandler(this.btnTranslation_Click);
             // 
             // Form1
             // 
@@ -675,17 +706,20 @@
             this.ClientSize = new System.Drawing.Size(1071, 472);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.statusStrip1);
+            this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Katana";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Form1_HelpButtonClicked);
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabImported.ResumeLayout(false);
+            this.tabImported.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
@@ -696,14 +730,14 @@
             this.OrganizedMenu.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tabBulk.ResumeLayout(false);
+            this.tabBulk.PerformLayout();
             this.toolStrip3.ResumeLayout(false);
             this.toolStrip3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BulkGrid)).EndInit();
             this.BulkMenu.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
+            this.tabTranslation.ResumeLayout(false);
+            this.tabTranslation.PerformLayout();
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -725,14 +759,14 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabImported;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton btnLoadFile;
         private System.Windows.Forms.ToolStripComboBox ComboBox1;
         private System.Windows.Forms.DataGridView GridView1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAnalayze;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabBulk;
         private System.Windows.Forms.DataGridView BulkGrid;
         private System.Windows.Forms.ToolStrip toolStrip3;
         private System.Windows.Forms.ToolStripButton btnSave;
@@ -743,7 +777,7 @@
         private System.Windows.Forms.ToolStripStatusLabel txtStatus;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripProgressBar ProgressBAR;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabTranslation;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
@@ -775,6 +809,9 @@
         private System.Windows.Forms.ToolStripButton btnRebulk;
         private System.Windows.Forms.ToolStripStatusLabel txtCellContent;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripMenuItem btnChooseCountry;
+        private System.Windows.Forms.ToolStripMenuItem btnTranslation;
     }
 }
 

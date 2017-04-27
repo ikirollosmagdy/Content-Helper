@@ -20,6 +20,7 @@ namespace helper
         private void btnChooseLang_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.IsEgypt = RadEgypt.Checked;
+            Properties.Settings.Default.IsFirstUse = false;
             Properties.Settings.Default.Save();
             Close();
         }

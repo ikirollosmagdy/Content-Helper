@@ -24,11 +24,14 @@ namespace helper
         public Form1()
         {
             InitializeComponent();
+            
         }
         DataSet result;
         public static DataGridView Sheet, OrganizedSheet, BulkSheet;
         public static ToolStripLabel txtStats, txtUntranslated;
         public static ToolStripProgressBar PBar;
+        public static TabControl tabs;
+        public static TabPage translationTab;
         Stack<Object[][]> undoStack = new Stack<Object[][]>();
         Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
        
@@ -122,6 +125,8 @@ namespace helper
 
                 try
                 {
+                    txtStats.Text = "Processing";
+                    PBar.Style = ProgressBarStyle.Marquee;
                     Adapter adapter = new Adapter();
                     Thread newThread = new Thread(adapter.SwitchBulk);
                     newThread.Start(DropCat.SelectedIndex);
@@ -149,6 +154,8 @@ namespace helper
             txtStats = txtStatus;
             PBar = ProgressBAR;
             txtUntranslated = txtTranslatedCellCount;
+            tabs = tabControl1;
+            translationTab = tabTranslation;
 
             foreach (DataGridViewColumn column in OrganizedSheet.Columns)
             {
@@ -605,8 +612,13 @@ namespace helper
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            Splash_Screen sp = new Splash_Screen();
-            sp.ShowDialog();
+            if (Properties.Settings.Default.IsFirstUse)
+            {
+                Splash_Screen sp = new Splash_Screen();
+                sp.ShowDialog();
+            }
+            tabControl1.TabPages.Remove(tabTranslation);
+         
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -617,6 +629,23 @@ namespace helper
         private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             MessageBox.Show(e.ClickedItem.MergeIndex.ToString());
+        }
+
+        private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+          
+        }
+
+        private void btnChooseCountry_Click(object sender, EventArgs e)
+        {
+            Splash_Screen sp = new Splash_Screen();
+            sp.ShowDialog();
+        }
+
+        private void btnTranslation_Click(object sender, EventArgs e)
+        {
+            TranslationUsers user = new TranslationUsers();
+            user.ShowDialog();
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

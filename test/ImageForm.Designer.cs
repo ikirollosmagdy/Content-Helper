@@ -88,7 +88,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(485, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(521, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.Text = "Comment:";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -106,6 +106,8 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(430, 300);
             this.Name = "ImageForm";
             this.ShowIcon = false;

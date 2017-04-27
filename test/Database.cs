@@ -17,7 +17,7 @@ namespace helper
             SQLiteCommand sqlite_cmd;
             if (english.Contains("'"))
             {
-                english = english.Replace("'", "''");
+                english = english.Trim().Replace("'", "''");
             }
             //Database_UAE
             if (IsEgypt)
@@ -51,7 +51,7 @@ namespace helper
             SQLiteDataReader sqlite_datareader;
             if (english.Contains("'"))
             {
-                english= english.Replace("'","''");
+                english= english.Trim().Replace("'","''");
             }
 
             if (IsEgypt)
@@ -75,7 +75,7 @@ namespace helper
             sqlite_cmd.CommandText = "SELECT Arabic FROM Translation WHERE English LIKE '"+english+"'";
             if (Convert.ToString(sqlite_cmd.ExecuteScalar()) == string.Empty)
             {
-                arabic = english;
+                arabic = english.Trim();
             }
             else
             {
@@ -91,7 +91,7 @@ namespace helper
             sqlite_conn.Close();
             if (arabic.Contains("''"))
             {
-                arabic = arabic.Replace("''", "'");
+                arabic = arabic.Trim().Replace("''", "'");
             }
 
 
@@ -141,6 +141,45 @@ namespace helper
 
             return EAN;
 
+        }
+
+        public string getUserPassword(string UserName)
+        {
+           
+            string password = "";
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            SQLiteDataReader sqlite_datareader;
+
+            sqlite_conn = new SQLiteConnection("Data Source=EAN.db;Version=3;New=False;Compress=True;");
+
+            sqlite_conn.Open();
+
+
+            sqlite_cmd = sqlite_conn.CreateCommand();
+
+
+            sqlite_cmd.CommandText = "SELECT Password FROM Users WHERE UserName = '" + UserName + "'";
+            // Looking for Ean by Values
+
+            sqlite_datareader = sqlite_cmd.ExecuteReader();
+
+            // The SQLiteDataReader allows us to run through the result lines:
+            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            {
+                password=sqlite_datareader["Password"].ToString();
+
+            }
+
+           
+
+
+
+            sqlite_conn.Close();
+
+
+
+            return password;
         }
     }
 }

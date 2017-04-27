@@ -117,6 +117,12 @@
     <Compile Include="Splash_Screen.Designer.cs">
       <DependentUpon>Splash_Screen.cs</DependentUpon>
     </Compile>
+    <Compile Include="TranslationUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TranslationUsers.Designer.cs">
+      <DependentUpon>TranslationUsers.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="Splash_Screen.resx">
       <DependentUpon>Splash_Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TranslationUsers.resx">
+      <DependentUpon>TranslationUsers.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
