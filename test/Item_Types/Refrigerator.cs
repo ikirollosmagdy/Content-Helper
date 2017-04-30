@@ -209,8 +209,9 @@ namespace helper
         }
         void setColor(int row)
         {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             Database db = new Database();
-            Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Colors, row].Value;
+            Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase( Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
             if (CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {

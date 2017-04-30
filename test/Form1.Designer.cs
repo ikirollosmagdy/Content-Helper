@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabImported = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -54,21 +54,31 @@
             this.qcCheckOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.UndoOrgMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnLoadFile = new System.Windows.Forms.ToolStripButton();
             this.ComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.DropCat = new System.Windows.Forms.ToolStripComboBox();
+            this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
+            this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
+            this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
             this.tabBulk = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.btnSave = new System.Windows.Forms.ToolStripButton();
             this.BulkGrid = new System.Windows.Forms.DataGridView();
             this.BulkMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ExportBulkMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.tabTranslation = new System.Windows.Forms.TabPage();
             this.toolStrip4 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.EnglishTxtBox = new System.Windows.Forms.TextBox();
             this.ArabicTxtBox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.btnChooseCountry = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnTranslation = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.ProgressBAR = new System.Windows.Forms.ToolStripProgressBar();
@@ -76,17 +86,7 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.btnLoadFile = new System.Windows.Forms.ToolStripButton();
-            this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
-            this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
-            this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.btnSave = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.btnRebulk = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.btnChooseCountry = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnTranslation = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDevelop = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabImported.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -163,14 +163,14 @@
             this.GridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.SheetMenu;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.GridView1.Location = new System.Drawing.Point(0, 0);
@@ -239,14 +239,14 @@
             this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.SandyBrown;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SandyBrown;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.OrganaizedGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -353,13 +353,22 @@
             this.DropCat,
             this.btnAnalayze,
             this.btnSaveSheet,
-            this.btnCreateBulk,
-            this.toolStripButton1});
+            this.btnCreateBulk});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1057, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnLoadFile
+            // 
+            this.btnLoadFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnLoadFile.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadFile.Image")));
+            this.btnLoadFile.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLoadFile.Name = "btnLoadFile";
+            this.btnLoadFile.Size = new System.Drawing.Size(55, 22);
+            this.btnLoadFile.Text = "LoadFile";
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
             // 
             // ComboBox1
             // 
@@ -397,6 +406,38 @@
             this.DropCat.Name = "DropCat";
             this.DropCat.Size = new System.Drawing.Size(200, 25);
             // 
+            // btnAnalayze
+            // 
+            this.btnAnalayze.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAnalayze.Image = ((System.Drawing.Image)(resources.GetObject("btnAnalayze.Image")));
+            this.btnAnalayze.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAnalayze.Margin = new System.Windows.Forms.Padding(25, 1, 0, 2);
+            this.btnAnalayze.Name = "btnAnalayze";
+            this.btnAnalayze.Size = new System.Drawing.Size(58, 22);
+            this.btnAnalayze.Text = "Analayze";
+            this.btnAnalayze.Click += new System.EventHandler(this.btnAnalayze_Click);
+            // 
+            // btnSaveSheet
+            // 
+            this.btnSaveSheet.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnSaveSheet.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveSheet.Image")));
+            this.btnSaveSheet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSaveSheet.Name = "btnSaveSheet";
+            this.btnSaveSheet.Size = new System.Drawing.Size(92, 22);
+            this.btnSaveSheet.Text = "Export Sheet";
+            this.btnSaveSheet.Click += new System.EventHandler(this.btnSaveSheet_Click);
+            // 
+            // btnCreateBulk
+            // 
+            this.btnCreateBulk.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnCreateBulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnCreateBulk.Image = ((System.Drawing.Image)(resources.GetObject("btnCreateBulk.Image")));
+            this.btnCreateBulk.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCreateBulk.Name = "btnCreateBulk";
+            this.btnCreateBulk.Size = new System.Drawing.Size(71, 22);
+            this.btnCreateBulk.Text = "Create Bulk";
+            this.btnCreateBulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
+            // 
             // tabBulk
             // 
             this.tabBulk.Controls.Add(this.toolStrip3);
@@ -419,6 +460,16 @@
             this.toolStrip3.TabIndex = 1;
             this.toolStrip3.Text = "toolStrip3";
             // 
+            // btnSave
+            // 
+            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(102, 22);
+            this.btnSave.Text = "Export Bulk Sheet";
+            this.btnSave.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
             // BulkGrid
             // 
             this.BulkGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -427,14 +478,14 @@
             this.BulkGrid.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BulkGrid.ContextMenuStrip = this.BulkMenu;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.BulkGrid.Location = new System.Drawing.Point(3, 31);
             this.BulkGrid.Name = "BulkGrid";
             this.BulkGrid.Size = new System.Drawing.Size(1057, 393);
@@ -478,6 +529,25 @@
             this.toolStrip4.Size = new System.Drawing.Size(1057, 25);
             this.toolStrip4.TabIndex = 1;
             this.toolStrip4.Text = "toolStrip4";
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(51, 22);
+            this.toolStripButton4.Text = "Save";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click_1);
+            // 
+            // btnRebulk
+            // 
+            this.btnRebulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnRebulk.Image = ((System.Drawing.Image)(resources.GetObject("btnRebulk.Image")));
+            this.btnRebulk.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRebulk.Name = "btnRebulk";
+            this.btnRebulk.Size = new System.Drawing.Size(47, 22);
+            this.btnRebulk.Text = "ReBulk";
+            this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
             // 
             // splitContainer1
             // 
@@ -533,6 +603,34 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.AutoSize = false;
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnChooseCountry,
+            this.btnTranslation,
+            this.btnDevelop});
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 20);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
+            // btnChooseCountry
+            // 
+            this.btnChooseCountry.Name = "btnChooseCountry";
+            this.btnChooseCountry.Size = new System.Drawing.Size(160, 22);
+            this.btnChooseCountry.Text = "Choose Country";
+            this.btnChooseCountry.Click += new System.EventHandler(this.btnChooseCountry_Click);
+            // 
+            // btnTranslation
+            // 
+            this.btnTranslation.Name = "btnTranslation";
+            this.btnTranslation.Size = new System.Drawing.Size(160, 22);
+            this.btnTranslation.Text = "Translator Login";
+            this.btnTranslation.Click += new System.EventHandler(this.btnTranslation_Click);
+            // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
@@ -556,7 +654,7 @@
             // 
             this.txtCellContent.Margin = new System.Windows.Forms.Padding(25, 3, 25, 2);
             this.txtCellContent.Name = "txtCellContent";
-            this.txtCellContent.Size = new System.Drawing.Size(646, 17);
+            this.txtCellContent.Size = new System.Drawing.Size(615, 17);
             this.txtCellContent.Spring = true;
             this.txtCellContent.Text = "Content";
             // 
@@ -591,113 +689,11 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // btnLoadFile
+            // btnDevelop
             // 
-            this.btnLoadFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLoadFile.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadFile.Image")));
-            this.btnLoadFile.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(55, 22);
-            this.btnLoadFile.Text = "LoadFile";
-            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
-            // 
-            // btnAnalayze
-            // 
-            this.btnAnalayze.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnAnalayze.Image = ((System.Drawing.Image)(resources.GetObject("btnAnalayze.Image")));
-            this.btnAnalayze.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAnalayze.Margin = new System.Windows.Forms.Padding(25, 1, 0, 2);
-            this.btnAnalayze.Name = "btnAnalayze";
-            this.btnAnalayze.Size = new System.Drawing.Size(58, 22);
-            this.btnAnalayze.Text = "Analayze";
-            this.btnAnalayze.Click += new System.EventHandler(this.btnAnalayze_Click);
-            // 
-            // btnSaveSheet
-            // 
-            this.btnSaveSheet.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnSaveSheet.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveSheet.Image")));
-            this.btnSaveSheet.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSaveSheet.Name = "btnSaveSheet";
-            this.btnSaveSheet.Size = new System.Drawing.Size(92, 22);
-            this.btnSaveSheet.Text = "Export Sheet";
-            this.btnSaveSheet.Click += new System.EventHandler(this.btnSaveSheet_Click);
-            // 
-            // btnCreateBulk
-            // 
-            this.btnCreateBulk.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.btnCreateBulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnCreateBulk.Image = ((System.Drawing.Image)(resources.GetObject("btnCreateBulk.Image")));
-            this.btnCreateBulk.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCreateBulk.Name = "btnCreateBulk";
-            this.btnCreateBulk.Size = new System.Drawing.Size(71, 22);
-            this.btnCreateBulk.Text = "Create Bulk";
-            this.btnCreateBulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(82, 22);
-            this.toolStripButton1.Text = "Test Function";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(102, 22);
-            this.btnSave.Text = "Export Bulk Sheet";
-            this.btnSave.Click += new System.EventHandler(this.toolStripButton4_Click);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(51, 22);
-            this.toolStripButton4.Text = "Save";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click_1);
-            // 
-            // btnRebulk
-            // 
-            this.btnRebulk.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnRebulk.Image = ((System.Drawing.Image)(resources.GetObject("btnRebulk.Image")));
-            this.btnRebulk.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnRebulk.Name = "btnRebulk";
-            this.btnRebulk.Size = new System.Drawing.Size(47, 22);
-            this.btnRebulk.Text = "ReBulk";
-            this.btnRebulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.AutoSize = false;
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnChooseCountry,
-            this.btnTranslation});
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(32, 20);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
-            // 
-            // btnChooseCountry
-            // 
-            this.btnChooseCountry.Name = "btnChooseCountry";
-            this.btnChooseCountry.Size = new System.Drawing.Size(171, 22);
-            this.btnChooseCountry.Text = "Choose Country";
-            this.btnChooseCountry.Click += new System.EventHandler(this.btnChooseCountry_Click);
-            // 
-            // btnTranslation
-            // 
-            this.btnTranslation.Name = "btnTranslation";
-            this.btnTranslation.Size = new System.Drawing.Size(160, 22);
-            this.btnTranslation.Text = "Translator Login";
-            this.btnTranslation.Click += new System.EventHandler(this.btnTranslation_Click);
+            this.btnDevelop.Name = "btnDevelop";
+            this.btnDevelop.Size = new System.Drawing.Size(160, 22);
+            this.btnDevelop.Text = "Developer Zone";
             // 
             // Form1
             // 
@@ -808,10 +804,10 @@
         private System.Windows.Forms.ToolStripMenuItem ExportBulkMenu;
         private System.Windows.Forms.ToolStripButton btnRebulk;
         private System.Windows.Forms.ToolStripStatusLabel txtCellContent;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem btnChooseCountry;
         private System.Windows.Forms.ToolStripMenuItem btnTranslation;
+        private System.Windows.Forms.ToolStripMenuItem btnDevelop;
     }
 }
 

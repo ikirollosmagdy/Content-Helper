@@ -7,14 +7,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
-
+using System.Xml.Linq;
 
 namespace helper
 {
@@ -618,6 +617,15 @@ namespace helper
                 sp.ShowDialog();
             }
             tabControl1.TabPages.Remove(tabTranslation);
+            XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
+            var elements = document.Element("AppName");
+            Version onlineVersion = new Version(elements.Element("version").Value);
+            Version LocalVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            if (LocalVersion.CompareTo(onlineVersion) < 0)
+            {
+                Updater updater = new Updater("http://souqforms.atwebpages.com/");
+                updater.ShowDialog();
+            }
          
         }
 
