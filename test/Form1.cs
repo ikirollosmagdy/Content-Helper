@@ -14,6 +14,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Microsoft.VisualBasic;
 
 namespace helper
 {
@@ -40,6 +41,8 @@ namespace helper
         {
            try {
                 OpenFileDialog OD = new OpenFileDialog();
+                OD.Filter = "Excel files (*.xlsx)|*.xlsx";
+                OD.FilterIndex = 0;
                 if (OD.ShowDialog() == DialogResult.OK)
                 {
                     FileStream fs = File.Open(OD.FileName, FileMode.Open, FileAccess.Read);
@@ -57,6 +60,7 @@ namespace helper
             }
             catch
             {
+                
                 MessageBox.Show("Please close file first...!!");
             }
         }
@@ -103,8 +107,9 @@ namespace helper
                 OrganizedSheet.RowCount = Sheet.RowCount;
                 txtStatus.Text = "Working Please wait...";
                 Adapter adapter = new Adapter();
-                Thread newThread = new Thread(adapter.SwitchCategory);
-                newThread.Start(DropCat.SelectedIndex);
+               
+                 Thread newThread = new Thread(adapter.SwitchCategory);
+                 newThread.Start(DropCat.SelectedItem);
             }
             catch
             {
@@ -128,7 +133,7 @@ namespace helper
                     PBar.Style = ProgressBarStyle.Marquee;
                     Adapter adapter = new Adapter();
                     Thread newThread = new Thread(adapter.SwitchBulk);
-                    newThread.Start(DropCat.SelectedIndex);
+                    newThread.Start(DropCat.SelectedItem);
                     tabControl1.SelectedIndex = 1;
 
                 }
@@ -654,6 +659,21 @@ namespace helper
         {
             TranslationUsers user = new TranslationUsers();
             user.ShowDialog();
+        }
+
+        private void btnDevelop_Click(object sender, EventArgs e)
+        {
+            
+          if (  Interaction.InputBox("Enter your password", "Developer Section") == "admin") {
+
+
+                DeveloperForm DForm = new DeveloperForm();
+                DForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Wrong Password", "Developer password", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void toolStripButton4_Click(object sender, EventArgs e)

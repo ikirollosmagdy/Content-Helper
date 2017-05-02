@@ -181,5 +181,33 @@ namespace helper
 
             return password;
         }
+
+        public void AddTranslationMember(string Username, string Password)
+        {
+            SQLiteConnection sqlite_conn;
+            SQLiteCommand sqlite_cmd;
+            if (Username.Contains("'"))
+            {
+                Username = Username.Trim().Replace("'", "''");
+            }
+         
+            sqlite_conn = new SQLiteConnection("Data Source=EAN.db;Version=3;New=False;Compress=True;");
+
+            sqlite_conn.Open();
+
+           
+
+
+            sqlite_cmd = sqlite_conn.CreateCommand();
+            sqlite_cmd.CommandText = "CREATE TABLE IF NOT EXISTS `Users` (`ID`	INTEGER PRIMARY KEY AUTOINCREMENT,`UserName`	TEXT,`Password`	TEXT); ";
+
+            // Now lets execute the SQL ;D
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.CommandText = "INSERT INTO Users (UserName, Password) VALUES ('" + Username + "','" + Password + "');";
+
+
+            sqlite_cmd.ExecuteNonQuery();
+            sqlite_conn.Close();
+        }
     }
 }

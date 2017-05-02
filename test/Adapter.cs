@@ -13,40 +13,40 @@ namespace helper
         public void SwitchCategory(object index)
         {
            
-            switch (Convert.ToInt32(index))
+            switch (Convert.ToString(index))
             {
 
-                case 0:
+                case "Perfumes & Fragrances perfumes (478)":
                     Perfume perfume = new Perfume();
                     perfume.getGender();
 
                     break;
-                case 1:
+                case "Refrigerators & Freezers refrigerators (531)":
                     Refrigerator Ref = new Refrigerator();
                     Ref.Organize();
                     break;
-                case 2:
+                case "Makeup (295)":
                     Makeup makeup = new Makeup();
                     makeup.Organize();
                     break;
-                    case 3:
+                    case "Mobile Phone Accessories (26)":
                     Mobile_Accessories acc = new Mobile_Accessories();
                     acc.Organize();
                     break;
 
-                case 4:
+                case "Cable (29)":
                     Cables cable = new Cables();
                     cable.Organize();
                     break;
-                case 5:
+                case "Power Banks power (562)":
                     PowerBank pBank = new PowerBank();
                     pBank.Organize();
                     break;
-                case 6:
+                case "Chargers laptop (351)":
                     Charger charger = new Charger();
                     charger.Organize();
                     break;
-                case 7:
+                case "Headphones & Headsets (373)":
                     HeadSet headSet = new HeadSet();
                     headSet.Organize();
                     break;
@@ -64,10 +64,10 @@ namespace helper
         public void SwitchBulk(object index)
         {
 
-            switch (Convert.ToInt32(index))
+            switch (Convert.ToString(index))
             {
 
-                case 0:
+                case "Perfumes & Fragrances perfumes (478)":
                    
                         Perfume per = new Perfume();
 
@@ -75,32 +75,32 @@ namespace helper
                     
 
                     break;
-                case 1:
+                case "Refrigerators & Freezers refrigerators (531)":
                     Refrigerator Ref = new Refrigerator();
                     Ref.creatBulk();
                     break;
-                case 2:
+                case "Makeup (295)":
                     Makeup makeup = new Makeup();
                     makeup.createBulk();
                     break;
-                case 3:
+                case "Mobile Phone Accessories (26)":
                     Mobile_Accessories acc = new Mobile_Accessories();
                     acc.createBulk();
                     break;
-                case 4:
+                case "Cable (29)":
                     Cables cable = new Cables();
                     cable.createBulk();
                     break;
-                case 5:
+                case "Power Banks power (562)":
                     PowerBank pBank = new PowerBank();
                     pBank.createBulk();
                     break;
-                case 6:
+                case "Chargers laptop (351)":
                     Charger charger = new Charger();
                     charger.createBulk();
                     break;
 
-                case 7:
+                case "Headphones & Headsets (373)":
                     HeadSet headSet = new HeadSet();
                     headSet.createBulk();
                     break;
