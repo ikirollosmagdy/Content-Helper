@@ -96,6 +96,7 @@
             this.Text = "Updater";
             this.Activated += new System.EventHandler(this.Updater_Activated);
             this.Load += new System.EventHandler(this.Updater_Load);
+            this.Shown += new System.EventHandler(this.Updater_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
