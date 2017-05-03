@@ -43,6 +43,7 @@ namespace helper
 
             sqlite_cmd.ExecuteNonQuery();
            sqlite_conn.Close();
+          Form1.  LogWrite(string.Format("Translated \"{0}\" to \"{1}\"", english,arabic));
         }
         public string getRecord(string english)
         {

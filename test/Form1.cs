@@ -37,6 +37,13 @@ namespace helper
         Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
         public static System.Windows.Forms.TextBox Englishtxt;
         public bool copiedData = false,IsEdited=false;
+        Stopwatch STImported, STBulk, STTranslation;
+       static string path;
+        public static int LogActionsPerType;
+        List<string> LogSavedFile = new List<string>();
+        List<string> LogItemTypes = new List<string>();
+        List<int> LogActionList = new List<int>();
+        int LogTranslatedLines,LogListedItems=0, LogActionsTotal=0;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
@@ -90,7 +97,8 @@ namespace helper
                 {
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-
+                
+                LogWrite("Sheet imported \""+ComboBox1.SelectedItem.ToString()+"\"");
             }
             catch (Exception)
             {
@@ -102,6 +110,7 @@ namespace helper
         {
             try
             {
+                LogWrite("Start Analayzing category \""+DropCat.SelectedItem.ToString()+"\"");
                 ManualResetEvent syncEvent = new ManualResetEvent(false);
                 IsEdited = true;
                 PBar.Style = ProgressBarStyle.Marquee;
@@ -115,6 +124,8 @@ namespace helper
                  newThread.Start(DropCat.SelectedItem);
                 syncEvent.WaitOne();
                 PBar.Style = ProgressBarStyle.Continuous;
+            
+
             }
             catch
             {
@@ -129,6 +140,7 @@ namespace helper
 
         private void btnCreateBulk_Click(object sender, EventArgs e)
         {
+            LogWrite(string.Format("Start creating bulk for category {0}", DropCat.SelectedItem.ToString()));
             if (OrganizedSheet.RowCount >0)
             {
 
@@ -191,6 +203,7 @@ namespace helper
         public void pasteCell(string copied)
         {
             undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+         
             undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
 
 
@@ -307,7 +320,16 @@ namespace helper
 
         private void OrganaizedGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            string value = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
+            LogWrite(string.Format("Cell [{0},{1}] value changed to \"{2}\"", e.ColumnIndex,e.RowIndex,value));
+            try
+            {
+                LogActionsPerType++;
+               
 
+
+            }
+            catch { }
         }
 
         private void btnQC_Click(object sender, EventArgs e)
@@ -335,15 +357,19 @@ namespace helper
             Thread thread = new Thread(saveToDataBase);
                         thread.Start();
             MessageBox.Show("Saved");
+            
+            LogTranslatedLines = EnglishTxtBox.Lines.Count();
             EnglishTxtBox.Text = string.Empty;
             ArabicTxtBox.Text = string.Empty;
+            
             
             
         }
         private void saveToDataBase()
         {
             Database DB = new Database();
-
+            EnglishTxtBox.Invoke(new System.Action(()=> EnglishTxtBox.Text = EnglishTxtBox.Text.Trim()));
+            ArabicTxtBox.Invoke(new System.Action(() => ArabicTxtBox.Text = ArabicTxtBox.Text.Trim()));
             for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
             {
                 DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
@@ -656,11 +682,42 @@ namespace helper
             _start = DateTime.Now;
             t.Start();
             t.Tick += T_Tick;
-
-
-
+            STImported = new Stopwatch();
+            STBulk = new Stopwatch();
+            STTranslation = new Stopwatch();
+            if (!Directory.Exists(System.Windows.Forms.Application.StartupPath + "\\log"))
+            {
+                Directory.CreateDirectory(System.Windows.Forms.Application.StartupPath + "\\log");
+            }
+            string dt = DateTime.Now.ToString("dd-MM-yy_HHmm");
+               path = System.Windows.Forms.Application.StartupPath+ "\\log\\Log_" + dt + ".txt";
+            LogWrite("Initilaizing");
+            STImported.Start();
         }
-        DateTime _start;
+
+        public static void LogWrite(string value)
+        {
+            try
+            {
+                string nowtime = DateTime.Now.ToString("dd-MM-yy HH:mm:ss");
+              
+                TimeSpan duration = DateTime.Now - _start;
+                string du= string.Format("{0:hh\\:mm\\:ss}", duration);
+                using (StreamWriter sw = File.AppendText(path))
+                {
+                    sw.WriteLine(value +" ("+du+")  " +"  at: " + nowtime);
+                    sw.Close();
+                    
+                }
+
+
+            }
+            catch { }
+        }
+
+
+
+      static  DateTime _start;
         private void T_Tick(object sender, EventArgs e)
         {
             TimeSpan duration = DateTime.Now - _start;
@@ -709,6 +766,56 @@ namespace helper
             }
         }
 
+        private void OrganaizedGrid_RowsDefaultCellStyleChanged(object sender, EventArgs e)
+        {
+           
+         
+        }
+
+        private void OrganaizedGrid_RowDefaultCellStyleChanged(object sender, DataGridViewRowEventArgs e)
+        {
+            
+        }
+
+        private void OrganaizedGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            LogWrite(string.Format("Row #{0} has been deleted", e.RowIndex));
+        }
+
+        private void OrganaizedGrid_RowsDefaultCellStyleChanged_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Report();
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            int selectedPageIndex = tabControl1.SelectedIndex;
+            switch (selectedPageIndex)
+            {
+                case 0:
+                    STImported.Start();
+                    STBulk.Stop();
+                    STTranslation.Stop();
+                    break;
+                case 1:
+                    STImported.Stop();
+                    STBulk.Start();
+                    STTranslation.Stop();
+                    break;
+                case 2:
+                    STImported.Stop();
+                    STBulk.Stop();
+                    STTranslation.Start();
+                    break;
+            }
+            
+        }
+
         private void EnglishTxtBox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Control && e.KeyCode == Keys.A)
@@ -743,6 +850,14 @@ namespace helper
         }
         public void exportToExcel(DataGridView Grid, DataGridView Grid2, string SheetName)
         {
+            for (int g = 0; g < BulkSheet.RowCount; g++)
+            {
+                if (BulkSheet[0, g] != null || BulkSheet[0, g].Value != null || BulkSheet[0, g].Value.ToString() != string.Empty)
+                {
+                    LogListedItems++;
+                }
+
+            }
             //Getting the location and file name of the excel to save from user. 
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
@@ -850,7 +965,54 @@ namespace helper
                     excel = null;
 
                 }
+                LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName) );
+               
+                try
+                {
+                    LogSavedFile.Add(saveDialog.FileName);
+                    LogActionList.Add(LogActionsPerType);
+                DropCat.GetCurrentParent().Invoke(new System.Action(()=>    LogItemTypes.Add(DropCat.SelectedItem.ToString())));
+                    LogActionsTotal += LogActionsPerType;
 
+                }
+                catch {
+                  
+                }
+            }
+        }
+
+
+        private void Report()
+        {
+            try
+            {
+                TimeSpan duration = DateTime.Now - _start;
+                string du = string.Format("{0:mm\\:ss}", duration);
+                LogWrite("\r\n\r\n+====================================================================================+");
+                LogWrite(string.Format("|Total item listed: {0} items(s)                                     |", LogListedItems));
+                LogWrite(string.Format("|Total lines translated: {0} line(s)                                 |", LogTranslatedLines));
+                LogWrite(string.Format("|Start time : {0}                                      |", _start));
+                LogWrite(string.Format("|Total time elapsed: {0} Min(s):Sec(s)                                      |", du));
+                LogWrite(string.Format("|Active sheet elapsed time                                          |"));
+                LogWrite(string.Format("|   -Tab Imported: {0}:{1}                                           |", STImported.Elapsed.Minutes, STImported.Elapsed.Seconds));
+                LogWrite(string.Format("|   -Tab Bulk: {0}:{1}                                               |", STBulk.Elapsed.Minutes, STBulk.Elapsed.Seconds));
+                LogWrite(string.Format("|   -Tab Translation: {0}:{1}                                        |", STTranslation.Elapsed.Minutes, STTranslation.Elapsed.Seconds));
+                LogWrite(string.Format("|Total actions by Agent : {0} Action(s)                              |", LogActionsTotal));
+                LogWrite(string.Format("|Saved file names                                                   |"));
+                for (int x = 0; x < LogSavedFile.Count; x++)
+                {
+                    LogWrite(string.Format("|   -Name:{0}                                    |", LogSavedFile[x]));
+                }
+                LogWrite(string.Format("|Item type names                                                    |"));
+                for (int y = 0; y < LogItemTypes.Count; y++)
+                {
+                    LogWrite(string.Format("|   -Item type name:{0} with actions {1}                         |", LogItemTypes[y],LogActionList[y]));
+                }
+                LogWrite("+====================================================================================+");
+            }
+            catch
+            {
+                LogWrite("Application closed by force");
             }
         }
 
