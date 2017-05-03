@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("An application for helping content agent to create tonz of items in less time")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Souq.com")]
-[assembly: AssemblyProduct("Katana")]
+[assembly: AssemblyProduct("An application for helping content agent to create tonz of items in less time")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

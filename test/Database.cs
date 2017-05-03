@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Finisar.SQLite;
+using System.Text.RegularExpressions;
 
 namespace helper
 {
@@ -76,6 +77,11 @@ namespace helper
             if (Convert.ToString(sqlite_cmd.ExecuteScalar()) == string.Empty)
             {
                 arabic = english.Trim();
+                Form1.Englishtxt.Invoke(new Action(() => Form1.Englishtxt.Text+=arabic+ Environment.NewLine));
+                Form1.Englishtxt.Invoke(new Action(()=> Form1.Englishtxt.Text = string.Join(Environment.NewLine, Form1.Englishtxt.Lines.Distinct())));
+
+
+
             }
             else
             {

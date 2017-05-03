@@ -32,7 +32,7 @@ namespace helper
             progressBar1.Hide();
             lblSize.Text = width.ToString() + "*" + height.ToString();
         
-            if (height<400 || width < 400)
+            if (height<400 || width < 400|| height>600||width>600)
             {
              //   pictureBox2.Image = Properties.Resources.Bad;
                 lblComment.Text="We suggest to change this image";

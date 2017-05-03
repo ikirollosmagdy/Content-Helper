@@ -43,7 +43,7 @@ namespace helper
 
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
-                for (col = 0; col < Form1.Sheet.ColumnCount; col++)
+                for (col = 1; col < Form1.Sheet.ColumnCount; col++)
                 {
                     try
                     {
@@ -52,13 +52,13 @@ namespace helper
                     catch { }
                     try
                     {
-                        Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ultiColor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
+                        Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
                         MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
 
 
                         if (matchColor.Count > 0)
                         {
-                            Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value;
+                            Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value.Trim();
 
 
                         }
@@ -67,7 +67,7 @@ namespace helper
 
                     try
                     {
-                        for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
+                        for (int y = 1; y < Form1.Sheet.ColumnCount; y++)
                         {
                             Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
                             MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
@@ -203,8 +203,8 @@ namespace helper
         private void setColor(int row)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString());
-            Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+            Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
+            Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
             if (CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
             {
                 Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;
@@ -280,8 +280,8 @@ namespace helper
         }
         private void setMobileModel(int row)
         {
-            Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[MobileModel, row].Value;
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString());
+            Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Mobile, row].Value+" "+ Form1.OrganizedSheet[MobileModel, row].Value;
+            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value.ToString());
             if (CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
@@ -324,7 +324,7 @@ namespace helper
         private string getTypeAttribute(DataGridViewCell cell)
         {
             string result = "";
-            if (cell.Value.ToString().ToLower().Contains("cover"))
+            if ((cell.Value.ToString().ToLower().Contains("cover"))||( cell.Value.ToString().ToLower().Contains("frame")))
             {
                 result = "Cases & Covers";
             }

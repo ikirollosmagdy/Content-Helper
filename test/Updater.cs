@@ -17,7 +17,7 @@ namespace helper
     public partial class Updater : Form
     {
         string baseUrl;
-        
+
         List<string> FileNames = new List<string>();
         public Updater(string baseUrl)
         {
@@ -27,8 +27,8 @@ namespace helper
 
         private void Updater_Load(object sender, EventArgs e)
         {
-           
-           
+
+
 
         }
 
@@ -37,7 +37,7 @@ namespace helper
 
         private void Updater_Activated(object sender, EventArgs e)
         {
-           
+
 
         }
         private async void DownLoadFile(string source, string target)
@@ -52,15 +52,17 @@ namespace helper
                 downloader.DownloadFileCompleted += new AsyncCompletedEventHandler(Downloader_DownloadFileCompleted);
                 downloader.DownloadProgressChanged +=
                     new DownloadProgressChangedEventHandler(Downloader_DownloadProgressChanged);
-                if (File.Exists("katana.exe.old")) { File.Delete("katana.exe.old"); };
+                if (File.Exists("katana.exe.old")) {
+                    File.Delete("katana.exe.old");
+                }
                 File.Move("katana.exe", "katana.exe.old");
-              await  downloader.DownloadFileTaskAsync(new Uri(source), target);
+                await downloader.DownloadFileTaskAsync(new Uri(source), target);
 
                 // wait for the current thread to complete, since the an async action will be on a new thread.
-               while (downloader.IsBusy) { }
+                while (downloader.IsBusy) { }
             }
         }
-             private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             ProgressFile.Value = e.ProgressPercentage;
             lblDownloading.Text = string.Format("&Downloaded {0}%", e.ProgressPercentage);
@@ -74,14 +76,14 @@ namespace helper
             else
             {
                 ProgressTotal.PerformStep();
-              
+
                 if (ProgressTotal.Value == ProgressTotal.Maximum)
                 {
                     btnFinish.Enabled = true;
                 }
 
             }
-           
+
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -115,6 +117,6 @@ namespace helper
     }
 
 
-    
-  
+
+
 }

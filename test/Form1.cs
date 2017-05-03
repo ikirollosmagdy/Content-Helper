@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
+using System.Diagnostics;
 
 namespace helper
 {
@@ -34,8 +35,8 @@ namespace helper
         public static TabPage translationTab;
         Stack<Object[][]> undoStack = new Stack<Object[][]>();
         Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
-       
-        public bool copiedData = false;
+        public static System.Windows.Forms.TextBox Englishtxt;
+        public bool copiedData = false,IsEdited=false;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
@@ -101,15 +102,19 @@ namespace helper
         {
             try
             {
+                ManualResetEvent syncEvent = new ManualResetEvent(false);
+                IsEdited = true;
                 PBar.Style = ProgressBarStyle.Marquee;
                // PBar.Visible = true;
                 OrganizedSheet.Rows.Clear();
                 OrganizedSheet.RowCount = Sheet.RowCount;
                 txtStatus.Text = "Working Please wait...";
                 Adapter adapter = new Adapter();
-               
-                 Thread newThread = new Thread(adapter.SwitchCategory);
+                syncEvent.Set();
+                Thread newThread = new Thread(adapter.SwitchCategory);
                  newThread.Start(DropCat.SelectedItem);
+                syncEvent.WaitOne();
+                PBar.Style = ProgressBarStyle.Continuous;
             }
             catch
             {
@@ -129,12 +134,20 @@ namespace helper
 
                 try
                 {
+                    ManualResetEvent syncEvent = new ManualResetEvent(false);
                     txtStats.Text = "Processing";
                     PBar.Style = ProgressBarStyle.Marquee;
                     Adapter adapter = new Adapter();
+                    syncEvent.Set();
                     Thread newThread = new Thread(adapter.SwitchBulk);
+                   
                     newThread.Start(DropCat.SelectedItem);
-                    tabControl1.SelectedIndex = 1;
+                    syncEvent.WaitOne();
+                    PBar.Style = ProgressBarStyle.Continuous;
+                    txtStatus.Text = "Finished";
+                        tabControl1.SelectedIndex = 2;
+                    
+                    
 
                 }
                 catch (Exception ex)
@@ -160,6 +173,7 @@ namespace helper
             txtUntranslated = txtTranslatedCellCount;
             tabs = tabControl1;
             translationTab = tabTranslation;
+            Englishtxt = EnglishTxtBox;
 
             foreach (DataGridViewColumn column in OrganizedSheet.Columns)
             {
@@ -248,11 +262,6 @@ namespace helper
 
         }
 
-        private void OrganaizedGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void GridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             Sheet.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
@@ -284,11 +293,7 @@ namespace helper
 
         private void OrganaizedGrid_CellLeave(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = OrganizedSheet.Rows[e.RowIndex].Cells[e.ColumnIndex].FormattedValue;
-            }
-            catch { }
+
         }
 
         private void OrganaizedGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -330,6 +335,8 @@ namespace helper
             Thread thread = new Thread(saveToDataBase);
                         thread.Start();
             MessageBox.Show("Saved");
+            EnglishTxtBox.Text = string.Empty;
+            ArabicTxtBox.Text = string.Empty;
             
             
         }
@@ -375,12 +382,23 @@ namespace helper
                     OrganizedSheet.BeginEdit(true);
                     ComboBox comb = (ComboBox)OrganizedSheet.EditingControl;
                     comb.DroppedDown = true;
+                 comb.SelectionChangeCommitted += Comb_SelectionChangeCommitted;
+                  comb.FormatStringChanged+= Comb_SelectionChangeCommitted;
+
                 }
             }
             catch { }
         }
 
 
+        private void Comb_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            try
+            {
+                OrganaizedGrid.EndEdit();
+            }
+            catch { }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -486,7 +504,7 @@ namespace helper
             try
             {
 
-                Sheet.CurrentCell = Sheet[0, OrganizedSheet.CurrentCell.RowIndex];
+                Sheet.CurrentCell = Sheet[OrganizedSheet.CurrentCell.ColumnIndex, OrganizedSheet.CurrentCell.RowIndex];
             }
             catch { }
 
@@ -499,27 +517,30 @@ namespace helper
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
+            if (IsEdited)
             {
-                try
+                DialogResult result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    try
+                    {
+                        e.Cancel = true;
+                        PBar.Visible = true;
+                        txtStatus.Text = "Saving...";
+                        exportToExcel(Sheet, OrganizedSheet, "Organized");
+                        e.Cancel = false;
+
+                    }
+                    catch { }
+                }
+                else if (result == DialogResult.No)
+                {
+                    e.Cancel = false;
+                }
+                else
                 {
                     e.Cancel = true;
-                    PBar.Visible = true;
-                    txtStatus.Text = "Saving...";
-                    exportToExcel(Sheet, OrganizedSheet, "Organized");
-                    e.Cancel = false;
-
                 }
-                catch { }
-            }
-            else if (result == DialogResult.No)
-            {
-                e.Cancel = false;
-            }
-            else
-            {
-                e.Cancel = true;
             }
         }
 
@@ -621,7 +642,7 @@ namespace helper
                 Splash_Screen sp = new Splash_Screen();
                 sp.ShowDialog();
             }
-            tabControl1.TabPages.Remove(tabTranslation);
+         //   tabControl1.TabPages.Remove(tabTranslation);
             XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
             var elements = document.Element("AppName");
             Version onlineVersion = new Version(elements.Element("version").Value);
@@ -631,7 +652,19 @@ namespace helper
                 Updater updater = new Updater("http://souqforms.atwebpages.com/");
                 updater.ShowDialog();
             }
-         
+            System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
+            _start = DateTime.Now;
+            t.Start();
+            t.Tick += T_Tick;
+
+
+
+        }
+        DateTime _start;
+        private void T_Tick(object sender, EventArgs e)
+        {
+            TimeSpan duration = DateTime.Now - _start;
+           this .Text = string.Format("Katana {0:hh\\:mm\\:ss}", duration);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -676,6 +709,27 @@ namespace helper
             }
         }
 
+        private void EnglishTxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Control && e.KeyCode == Keys.A)
+            {
+                EnglishTxtBox.SelectAll();
+            }
+        }
+
+        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void ArabicTxtBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                ArabicTxtBox.SelectAll();
+            }
+        }
+
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 
@@ -693,109 +747,111 @@ namespace helper
             SaveFileDialog saveDialog = new SaveFileDialog();
             saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
             saveDialog.FilterIndex = 1;
-            // Creating a Excel object. 
-            Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
-            Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(Type.Missing);
-            Microsoft.Office.Interop.Excel.Worksheet worksheet = null;
-            workbook.Sheets.Add();
-            try
+            if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-
-                worksheet = workbook.Sheets[1];
-
-                worksheet.Name = SheetName;
-
-                //Loop through each row and read value from each column. 
-                for (int i = 0; i < Grid.Columns.Count; i++)
-                {
-                    worksheet.Cells[1, i + 1] = Grid.Columns[i].HeaderText;
-                }
-                for (int i = 0; i < Grid.Rows.Count; i++)
-                {
-                    for (int j = 0; j < Grid.Columns.Count; j++)
-
-                        if (Grid.Rows[i].Cells[j].Value != null)
-                        {
-                            Range range = (Range)worksheet.Cells[i + 2, j + 1];
-                            worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
-                            if (Grid.Rows[i].DefaultCellStyle.BackColor == Color.Empty)
-                            {
-                                range.Interior.ColorIndex = 0;
-                            }
-                            else
-                            {
-                                range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid.Rows[i].DefaultCellStyle.BackColor);
-                            }
-
-
-                        }
-                        else
-                        {
-                            worksheet.Cells[i + 2, j + 1] = "";
-                        }
-                }
-                if (Grid2 != null)
+                // Creating a Excel object. 
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                Microsoft.Office.Interop.Excel.Workbook workbook = excel.Workbooks.Add(Type.Missing);
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = null;
+                workbook.Sheets.Add();
+                try
                 {
 
-                    worksheet = workbook.Sheets[2];
+                    worksheet = workbook.Sheets[1];
 
-                    worksheet.Name = "Imported";
+                    worksheet.Name = SheetName;
 
                     //Loop through each row and read value from each column. 
-                    for (int x = 0; x < Grid2.Columns.Count; x++)
+                    for (int i = 0; i < Grid.Columns.Count; i++)
                     {
-                        worksheet.Cells[1, x + 1] = Grid2.Columns[x].HeaderText;
+                        worksheet.Cells[1, i + 1] = Grid.Columns[i].HeaderText;
                     }
-                    for (int x = 0; x < Grid2.Rows.Count; x++)
+                    for (int i = 0; i < Grid.Rows.Count; i++)
                     {
-                        for (int y = 0; y < Grid2.Columns.Count; y++)
+                        for (int j = 0; j < Grid.Columns.Count; j++)
 
-                            if (Grid2.Rows[x].Cells[y].Value != null)
+                            if (Grid.Rows[i].Cells[j].Value != null)
                             {
-                                Range range = (Range)worksheet.Cells[x + 2, y + 1];
-                                worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
-                                if (Grid2.Rows[x].DefaultCellStyle.BackColor == Color.Empty)
+                                Range range = (Range)worksheet.Cells[i + 2, j + 1];
+                                worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
+                                if (Grid.Rows[i].DefaultCellStyle.BackColor == Color.Empty)
                                 {
                                     range.Interior.ColorIndex = 0;
                                 }
                                 else
                                 {
-                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
+                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid.Rows[i].DefaultCellStyle.BackColor);
                                 }
+
+
                             }
                             else
                             {
-                                worksheet.Cells[x + 2, y + 1] = "";
+                                worksheet.Cells[i + 2, j + 1] = "";
                             }
+                    }
+                    if (Grid2 != null)
+                    {
+
+                        worksheet = workbook.Sheets[2];
+
+                        worksheet.Name = "Imported";
+
+                        //Loop through each row and read value from each column. 
+                        for (int x = 0; x < Grid2.Columns.Count; x++)
+                        {
+                            worksheet.Cells[1, x + 1] = Grid2.Columns[x].HeaderText;
+                        }
+                        for (int x = 0; x < Grid2.Rows.Count; x++)
+                        {
+                            for (int y = 0; y < Grid2.Columns.Count; y++)
+
+                                if (Grid2.Rows[x].Cells[y].Value != null)
+                                {
+                                    Range range = (Range)worksheet.Cells[x + 2, y + 1];
+                                    worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
+                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == Color.Empty)
+                                    {
+                                        range.Interior.ColorIndex = 0;
+                                    }
+                                    else
+                                    {
+                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
+                                    }
+                                }
+                                else
+                                {
+                                    worksheet.Cells[x + 2, y + 1] = "";
+                                }
+                        }
+
+
+
                     }
 
 
-
-                }
-
-                if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
                     workbook.SaveAs(saveDialog.FileName);
                     txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
                     PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
+
+
+                }
+
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+
+                }
+                finally
+                {
+                    workbook.Close(false, Type.Missing, Type.Missing);
+                    excel.Quit();
+                    workbook = null;
+                    excel = null;
+
                 }
 
             }
-
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-            finally
-            {
-                workbook.Close(false, Type.Missing, Type.Missing);
-                excel.Quit();
-                workbook = null;
-                excel = null;
-
-            }
-
         }
 
         private void KeyDownFunction(DataGridView Grid, KeyEventArgs e)

@@ -55,7 +55,7 @@ namespace helper
 
             for (row = 0; row < Form1.Sheet.RowCount; row++)
             {
-                for (col = 0; col < Form1.Sheet.ColumnCount; col++)
+                for (col = 1; col < Form1.Sheet.ColumnCount; col++)
                 {
                     try
                     {
@@ -79,7 +79,21 @@ namespace helper
                     catch { }
                     try
                     {
-                        for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
+                        Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
+                        MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
+
+
+                        if (matchColor.Count > 0)
+                        {
+                            Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value.Trim();
+
+
+                        }
+                    }
+                    catch { }
+                    try
+                    {
+                        for (int y = 1; y < Form1.Sheet.ColumnCount; y++)
                         {
                             Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
                             MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
