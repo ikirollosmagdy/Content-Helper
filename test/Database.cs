@@ -47,6 +47,7 @@ namespace helper
         }
         public string getRecord(string english)
         {
+            english= english.Trim();
             string arabic="";
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;

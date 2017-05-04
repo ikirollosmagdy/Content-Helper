@@ -311,8 +311,8 @@ namespace helper
             Form1.BulkSheet.Rows[row].Cells[4].Value = Form1.OrganizedSheet.Rows[row].Cells[Size].Value;
             if (Form1.OrganizedSheet.Rows[row].Cells[Size].Value != null)
             {
-                Database db = new Database();
-                Form1.BulkSheet.Rows[row].Cells[12].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[4].Value.ToString());
+                
+                Form1.BulkSheet.Rows[row].Cells[12].Value = Form1.BulkSheet.Rows[row].Cells[4].Value.ToString().Replace("ml","مل");
                 if (CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
                 {
                     Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;

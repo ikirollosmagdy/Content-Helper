@@ -157,7 +157,10 @@ namespace helper
                     syncEvent.WaitOne();
                     PBar.Style = ProgressBarStyle.Continuous;
                     txtStatus.Text = "Finished";
+                    
                         tabControl1.SelectedIndex = 2;
+                    
+                        
                     
                     
 
@@ -992,6 +995,7 @@ namespace helper
                 LogWrite(string.Format("|Total item listed: {0} items(s)                                     |", LogListedItems));
                 LogWrite(string.Format("|Total lines translated: {0} line(s)                                 |", LogTranslatedLines));
                 LogWrite(string.Format("|Start time : {0}                                      |", _start));
+                LogWrite(string.Format("|Finish time : {0}                                      |", DateTime.Now.ToShortTimeString()));
                 LogWrite(string.Format("|Total time elapsed: {0} Min(s):Sec(s)                                      |", du));
                 LogWrite(string.Format("|Active sheet elapsed time                                          |"));
                 LogWrite(string.Format("|   -Tab Imported: {0}:{1}                                           |", STImported.Elapsed.Minutes, STImported.Elapsed.Seconds));
@@ -1006,7 +1010,7 @@ namespace helper
                 LogWrite(string.Format("|Item type names                                                    |"));
                 for (int y = 0; y < LogItemTypes.Count; y++)
                 {
-                    LogWrite(string.Format("|   -Item type name:{0} with actions {1}                         |", LogItemTypes[y],LogActionList[y]));
+                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions                         |", LogItemTypes[y],LogActionList[y]));
                 }
                 LogWrite("+====================================================================================+");
             }
