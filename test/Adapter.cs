@@ -55,12 +55,11 @@ namespace helper
                     MessageBox.Show("Please choose category first");
                     break;
             }
-            Form1.txtStats.GetCurrentParent().Invoke(new Action(() => Form1.txtStats.Text = "Finished"));
+          
   
           Form1.LogWrite("Finished Analayzing category \"" + Convert.ToString(index) + "\"");
             Form1.LogActionsPerType = 0;
 
-            Form1.PBar.GetCurrentParent().Invoke(new Action(() => Form1.PBar.Style = ProgressBarStyle.Continuous));
 
         }
      

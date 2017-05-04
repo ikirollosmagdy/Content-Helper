@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabImported = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
@@ -73,8 +73,7 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.btnRebulk = new System.Windows.Forms.ToolStripButton();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.EnglishTxtBox = new System.Windows.Forms.TextBox();
-            this.ArabicTxtBox = new System.Windows.Forms.TextBox();
+            this.EnglishTxtBox = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.btnChooseCountry = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +86,9 @@
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtTranslatedCellCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.WorkerAnalyze = new System.ComponentModel.BackgroundWorker();
+            this.WorkerBulk = new System.ComponentModel.BackgroundWorker();
+            this.ArabicTxtBox = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tabImported.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -164,14 +166,14 @@
             this.GridView1.BackgroundColor = System.Drawing.SystemColors.HighlightText;
             this.GridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView1.ContextMenuStrip = this.SheetMenu;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.GridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.GridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.GridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView1.GridColor = System.Drawing.SystemColors.ActiveBorder;
             this.GridView1.Location = new System.Drawing.Point(0, 0);
@@ -240,14 +242,14 @@
             this.OrganaizedGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
             this.OrganaizedGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.OrganaizedGrid.ContextMenuStrip = this.OrganizedMenu;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SandyBrown;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.SandyBrown;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.OrganaizedGrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.OrganaizedGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OrganaizedGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
             this.OrganaizedGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -483,14 +485,14 @@
             this.BulkGrid.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BulkGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BulkGrid.ContextMenuStrip = this.BulkMenu;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BulkGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.BulkGrid.Location = new System.Drawing.Point(3, 31);
             this.BulkGrid.Name = "BulkGrid";
             this.BulkGrid.Size = new System.Drawing.Size(1057, 393);
@@ -575,25 +577,16 @@
             // 
             // EnglishTxtBox
             // 
+            this.EnglishTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.EnglishTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EnglishTxtBox.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EnglishTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.EnglishTxtBox.Multiline = true;
             this.EnglishTxtBox.Name = "EnglishTxtBox";
-            this.EnglishTxtBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.EnglishTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.EnglishTxtBox.Size = new System.Drawing.Size(353, 397);
             this.EnglishTxtBox.TabIndex = 0;
-            this.EnglishTxtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnglishTxtBox_KeyDown);
-            // 
-            // ArabicTxtBox
-            // 
-            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
-            this.ArabicTxtBox.Multiline = true;
-            this.ArabicTxtBox.Name = "ArabicTxtBox";
-            this.ArabicTxtBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ArabicTxtBox.Size = new System.Drawing.Size(704, 397);
-            this.ArabicTxtBox.TabIndex = 0;
-            this.ArabicTxtBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ArabicTxtBox_KeyDown);
+            this.EnglishTxtBox.Text = "";
+            this.EnglishTxtBox.WordWrap = false;
             // 
             // statusStrip1
             // 
@@ -705,6 +698,33 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
+            // WorkerAnalyze
+            // 
+            this.WorkerAnalyze.WorkerReportsProgress = true;
+            this.WorkerAnalyze.WorkerSupportsCancellation = true;
+            this.WorkerAnalyze.DoWork += new System.ComponentModel.DoWorkEventHandler(this.WorkerAnalyze_DoWork);
+            this.WorkerAnalyze.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.WorkerAnalyze_RunWorkerCompleted);
+            // 
+            // WorkerBulk
+            // 
+            this.WorkerBulk.WorkerReportsProgress = true;
+            this.WorkerBulk.DoWork += new System.ComponentModel.DoWorkEventHandler(this.WorkerBulk_DoWork);
+            this.WorkerBulk.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.WorkerBulk_RunWorkerCompleted);
+            // 
+            // ArabicTxtBox
+            // 
+            this.ArabicTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ArabicTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArabicTxtBox.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ArabicTxtBox.Location = new System.Drawing.Point(0, 0);
+            this.ArabicTxtBox.Name = "ArabicTxtBox";
+            this.ArabicTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.ArabicTxtBox.Size = new System.Drawing.Size(704, 397);
+            this.ArabicTxtBox.TabIndex = 0;
+            this.ArabicTxtBox.Text = "";
+            this.ArabicTxtBox.WordWrap = false;
+            this.ArabicTxtBox.SelectionChanged += new System.EventHandler(this.ArabicTxtBox_SelectionChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -748,9 +768,7 @@
             this.toolStrip4.ResumeLayout(false);
             this.toolStrip4.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
@@ -788,8 +806,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ToolStrip toolStrip4;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.TextBox EnglishTxtBox;
-        private System.Windows.Forms.TextBox ArabicTxtBox;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel txtTranslatedCellCount;
         private System.Windows.Forms.ContextMenuStrip SheetMenu;
@@ -819,6 +835,10 @@
         private System.Windows.Forms.ToolStripMenuItem btnChooseCountry;
         private System.Windows.Forms.ToolStripMenuItem btnTranslation;
         private System.Windows.Forms.ToolStripMenuItem btnDevelop;
+        private System.ComponentModel.BackgroundWorker WorkerAnalyze;
+        private System.ComponentModel.BackgroundWorker WorkerBulk;
+        private System.Windows.Forms.RichTextBox EnglishTxtBox;
+        private System.Windows.Forms.RichTextBox ArabicTxtBox;
     }
 }
 

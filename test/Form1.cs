@@ -35,7 +35,7 @@ namespace helper
         public static TabPage translationTab;
         Stack<Object[][]> undoStack = new Stack<Object[][]>();
         Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
-        public static System.Windows.Forms.TextBox Englishtxt;
+        public static System.Windows.Forms.RichTextBox Englishtxt;
         public bool copiedData = false,IsEdited=false;
         Stopwatch STImported, STBulk, STTranslation;
        static string path;
@@ -110,30 +110,20 @@ namespace helper
         {
             try
             {
-                LogWrite("Start Analayzing category \""+DropCat.SelectedItem.ToString()+"\"");
-                ManualResetEvent syncEvent = new ManualResetEvent(false);
+                LogWrite("Start Analayzing category \"" + DropCat.SelectedItem.ToString() + "\"");
                 IsEdited = true;
                 PBar.Style = ProgressBarStyle.Marquee;
-               // PBar.Visible = true;
                 OrganizedSheet.Rows.Clear();
                 OrganizedSheet.RowCount = Sheet.RowCount;
                 txtStatus.Text = "Working Please wait...";
-                Adapter adapter = new Adapter();
-                syncEvent.Set();
-                Thread newThread = new Thread(adapter.SwitchCategory);
-                 newThread.Start(DropCat.SelectedItem);
-                syncEvent.WaitOne();
-                PBar.Style = ProgressBarStyle.Continuous;
-            
-
+                WorkerAnalyze.RunWorkerAsync(DropCat.SelectedItem);
             }
             catch
             {
                 MessageBox.Show("No file loaded");
-                // PBar.Visible = false;
                 PBar.Style = ProgressBarStyle.Continuous;
             }
-
+            
         }
 
 
@@ -146,24 +136,11 @@ namespace helper
 
                 try
                 {
-                    ManualResetEvent syncEvent = new ManualResetEvent(false);
+                   
                     txtStats.Text = "Processing";
                     PBar.Style = ProgressBarStyle.Marquee;
-                    Adapter adapter = new Adapter();
-                    syncEvent.Set();
-                    Thread newThread = new Thread(adapter.SwitchBulk);
-                   
-                    newThread.Start(DropCat.SelectedItem);
-                    syncEvent.WaitOne();
-                    PBar.Style = ProgressBarStyle.Continuous;
-                    txtStatus.Text = "Finished";
-                    
-                        tabControl1.SelectedIndex = 2;
-                    
-                        
-                    
-                    
-
+                    WorkerBulk.RunWorkerAsync(DropCat.SelectedItem);
+                
                 }
                 catch (Exception ex)
                 {
@@ -345,8 +322,27 @@ namespace helper
                     {
                         OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
                     }
-                }
+                    else
+                    {
+                        if (OrganizedSheet.Columns[j].HeaderText == "Price" || OrganizedSheet.Columns[j].HeaderText == "Quntity")
+                        {
 
+                            Regex Number = new Regex(@"[^\d]");
+                            Match NuMatch = Number.Match(OrganizedSheet[j, i].Value.ToString());
+                            if (NuMatch.Success)
+                            {
+                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+
+
+                            }
+                            else
+                            {
+                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Empty;
+                            }
+
+                        }
+                    }
+                }
             }
         }
 
@@ -373,10 +369,16 @@ namespace helper
             Database DB = new Database();
             EnglishTxtBox.Invoke(new System.Action(()=> EnglishTxtBox.Text = EnglishTxtBox.Text.Trim()));
             ArabicTxtBox.Invoke(new System.Action(() => ArabicTxtBox.Text = ArabicTxtBox.Text.Trim()));
-            for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
-            {
-                DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
-            }
+            EnglishTxtBox.Invoke(new System.Action(() => {
+
+                for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
+                {
+                    DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
+                }
+
+
+            }));
+            
         }
 
 
@@ -795,6 +797,57 @@ namespace helper
             Report();
         }
 
+        private void WorkerAnalyze_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            txtStatus.Text = "Analayzing Finished";
+            PBar.Style = ProgressBarStyle.Continuous;
+        }
+
+        private void WorkerAnalyze_DoWork(object sender, DoWorkEventArgs e)
+        {
+          
+            Adapter adapter = new Adapter();
+            adapter.SwitchCategory(e.Argument);
+          
+        }
+
+        private void WorkerBulk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            txtStatus.Text = "Finished creating Bulk";
+            PBar.Style = ProgressBarStyle.Continuous;
+            if (EnglishTxtBox.Text == string.Empty)
+            {
+                tabControl1.SelectedIndex = 1;
+            }
+            else
+            {
+                tabControl1.SelectedIndex = 2;
+            }
+        }
+
+        private void WorkerBulk_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Adapter adapter = new Adapter();
+            adapter.SwitchBulk(e.Argument);
+        }
+
+
+        private void ArabicTxtBox_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Englishtxt.SelectionBackColor = Color.White;
+                EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Regular);
+                int indexAr = ArabicTxtBox.GetLineFromCharIndex(ArabicTxtBox.SelectionStart);
+                string currentlinetext = EnglishTxtBox.Lines[indexAr];
+                int fy = EnglishTxtBox.GetFirstCharIndexFromLine(indexAr);
+                EnglishTxtBox.Select(fy, currentlinetext.Length);
+                EnglishTxtBox.SelectionBackColor = Color.LightGreen;
+                EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
+            }
+            catch { }
+        }
+
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
         {
             int selectedPageIndex = tabControl1.SelectedIndex;
@@ -992,25 +1045,25 @@ namespace helper
                 TimeSpan duration = DateTime.Now - _start;
                 string du = string.Format("{0:mm\\:ss}", duration);
                 LogWrite("\r\n\r\n+====================================================================================+");
-                LogWrite(string.Format("|Total item listed: {0} items(s)                                     |", LogListedItems));
-                LogWrite(string.Format("|Total lines translated: {0} line(s)                                 |", LogTranslatedLines));
-                LogWrite(string.Format("|Start time : {0}                                      |", _start));
-                LogWrite(string.Format("|Finish time : {0}                                      |", DateTime.Now.ToShortTimeString()));
-                LogWrite(string.Format("|Total time elapsed: {0} Min(s):Sec(s)                                      |", du));
-                LogWrite(string.Format("|Active sheet elapsed time                                          |"));
-                LogWrite(string.Format("|   -Tab Imported: {0}:{1}                                           |", STImported.Elapsed.Minutes, STImported.Elapsed.Seconds));
-                LogWrite(string.Format("|   -Tab Bulk: {0}:{1}                                               |", STBulk.Elapsed.Minutes, STBulk.Elapsed.Seconds));
-                LogWrite(string.Format("|   -Tab Translation: {0}:{1}                                        |", STTranslation.Elapsed.Minutes, STTranslation.Elapsed.Seconds));
-                LogWrite(string.Format("|Total actions by Agent : {0} Action(s)                              |", LogActionsTotal));
-                LogWrite(string.Format("|Saved file names                                                   |"));
+                LogWrite(string.Format("|Total item listed: {0} items(s)\t\t\t\t\t\t\t\t\t|", LogListedItems));
+                LogWrite(string.Format("|Total lines translated: {0} line(s)\t\t\t\t\t\t\t\t\t|", LogTranslatedLines));
+                LogWrite(string.Format("|Start time : {0}\t\t\t\t\t\t\t\t\t|", _start));
+                LogWrite(string.Format("|Finish time : {0}\t\t\t\t\t\t\t\t\t|", DateTime.Now));
+                LogWrite(string.Format("|Total time elapsed: {0} Min(s):Sec(s)\t\t\t\t\t\t\t\t\t|", du));
+                LogWrite(string.Format("|Active sheet elapsed time\t\t\t\t\t\t\t\t\t|"));
+                LogWrite(string.Format("|   -Tab Imported: {0}\t\t\t\t\t\t\t\t\t|", STImported.Elapsed));
+                LogWrite(string.Format("|   -Tab Bulk: {0}\t\t\t\t\t\t\t\t\t|", STBulk.Elapsed));
+                LogWrite(string.Format("|   -Tab Translation: {0}\t\t\t\t\t\t\t\t\t|", STTranslation.Elapsed));
+                LogWrite(string.Format("|Total actions by Agent : {0} Action(s)\t\t\t\t|", LogActionsTotal));
+                LogWrite(string.Format("|Saved file names\t\t\t\t\t\t\t\t\t|"));
                 for (int x = 0; x < LogSavedFile.Count; x++)
                 {
-                    LogWrite(string.Format("|   -Name:{0}                                    |", LogSavedFile[x]));
+                    LogWrite(string.Format("|   -Name:{0}\t\t\t\t|", LogSavedFile[x]));
                 }
-                LogWrite(string.Format("|Item type names                                                    |"));
+                LogWrite(string.Format("|Item type names\t\t\t\t\t\t\t\t\t|"));
                 for (int y = 0; y < LogItemTypes.Count; y++)
                 {
-                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions                         |", LogItemTypes[y],LogActionList[y]));
+                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions\t\t\t\t\t|", LogItemTypes[y],LogActionList[y]));
                 }
                 LogWrite("+====================================================================================+");
             }

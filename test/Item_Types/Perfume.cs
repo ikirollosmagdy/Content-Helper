@@ -313,15 +313,7 @@ namespace helper
             {
                 
                 Form1.BulkSheet.Rows[row].Cells[12].Value = Form1.BulkSheet.Rows[row].Cells[4].Value.ToString().Replace("ml","مل");
-                if (CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
-                {
-                    Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
-                    UnTranslatedCount++;
-                }
-                else
-                {
-                    Form1.BulkSheet[12, row].Style.BackColor = Color.White;
-                }
+                
             }
 
         }
