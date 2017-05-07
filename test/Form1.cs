@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace helper
 {
@@ -64,6 +65,39 @@ namespace helper
                     reader.Close();
 
                 }
+
+                try
+                {
+                    Sheet.Columns.Clear();
+                    ComboBox1.SelectedIndex = 0;
+                    GridView1.DataSource = result.Tables[0];
+                    
+                    GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+
+                    DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
+                    columnID.HeaderText = "No";
+                    if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
+                    {
+                        Sheet.Columns.Insert(0, columnID);
+                    }
+                    foreach (DataGridViewRow row in Sheet.Rows)
+                    {
+                        Sheet[0, row.Index].Value = (row.Index + 1).ToString();
+                    }
+
+                    foreach (DataGridViewColumn column in Sheet.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                    }
+
+                    LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
+                }
+                catch (Exception)
+                {
+                }
+
+
+
 
             }
             catch
@@ -219,9 +253,9 @@ namespace helper
 
 
             inputDialog dialog = new inputDialog();
-            dialog.ShowDialog(this);
+            dialog.Show(this);
 
-            dialog.Dispose();
+        
 
         }
 
@@ -353,33 +387,21 @@ namespace helper
 
         private void toolStripButton4_Click_1(object sender, EventArgs e)
         {
-            Thread thread = new Thread(saveToDataBase);
-                        thread.Start();
-            MessageBox.Show("Saved");
-            
-            LogTranslatedLines = EnglishTxtBox.Lines.Count();
-            EnglishTxtBox.Text = string.Empty;
-            ArabicTxtBox.Text = string.Empty;
-            
-            
+
+            EnglishTxtBox.Text = EnglishTxtBox.Text.Trim();
+            ArabicTxtBox.Text = ArabicTxtBox.Text.Trim();
+           
+          
+            string[][] array = new string[EnglishTxtBox.Lines.Count()][];
+            for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
+            {
+                array[x] = new string[] {EnglishTxtBox.Lines[x],ArabicTxtBox.Lines[x] };
+            }
+
+            Workertranslation.RunWorkerAsync(array);
             
         }
-        private void saveToDataBase()
-        {
-            Database DB = new Database();
-            EnglishTxtBox.Invoke(new System.Action(()=> EnglishTxtBox.Text = EnglishTxtBox.Text.Trim()));
-            ArabicTxtBox.Invoke(new System.Action(() => ArabicTxtBox.Text = ArabicTxtBox.Text.Trim()));
-            EnglishTxtBox.Invoke(new System.Action(() => {
-
-                for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
-                {
-                    DB.AddRecord(EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x]);
-                }
-
-
-            }));
-            
-        }
+       
 
 
         private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -500,7 +522,14 @@ namespace helper
             undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
             try
             {
-                OrganizedSheet.Rows.RemoveAt(OrganizedSheet.SelectedCells[0].RowIndex);
+                
+               
+                foreach (DataGridViewCell oneCell in OrganizedSheet.SelectedCells)
+                {
+                    if (oneCell.Selected)
+                        OrganizedSheet.Rows.RemoveAt(oneCell.RowIndex);
+                }
+                
 
             }
             catch { }
@@ -673,16 +702,22 @@ namespace helper
                 Splash_Screen sp = new Splash_Screen();
                 sp.ShowDialog();
             }
-         //   tabControl1.TabPages.Remove(tabTranslation);
-            XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
-            var elements = document.Element("AppName");
-            Version onlineVersion = new Version(elements.Element("version").Value);
-            Version LocalVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            if (LocalVersion.CompareTo(onlineVersion) < 0)
+
+            
+            if (NetworkInterface.GetIsNetworkAvailable())
             {
-                Updater updater = new Updater("http://souqforms.atwebpages.com/");
-                updater.ShowDialog();
+                XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
+                var elements = document.Element("AppName");
+                Version onlineVersion = new Version(elements.Element("version").Value);
+                Version LocalVersion = Assembly.GetExecutingAssembly().GetName().Version;
+                if (LocalVersion.CompareTo(onlineVersion) < 0)
+                {
+                    Updater updater = new Updater("http://souqforms.atwebpages.com/");
+                    updater.ShowDialog();
+                }
             }
+        
+   
             System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
             _start = DateTime.Now;
             t.Start();
@@ -846,6 +881,40 @@ namespace helper
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
             }
             catch { }
+        }
+
+        private void Workertranslation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("Saved");
+            LogTranslatedLines = EnglishTxtBox.Lines.Count();
+            EnglishTxtBox.Text = string.Empty;
+            ArabicTxtBox.Text = string.Empty;
+        }
+
+        private void Workertranslation_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Database db = new Database();
+            string[][] array =(string[][]) e.Argument;
+
+
+            for (int x = 0; x < array.Length; x++)
+            {
+                db.AddRecord(array[x][0], array[x][1]);
+            }
+               
+            
+            
+                
+        }
+
+        private void ComboBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OrganizedMenu_Opening(object sender, CancelEventArgs e)
+        {
+
         }
 
         private void tabControl1_Selected(object sender, TabControlEventArgs e)
@@ -1078,6 +1147,7 @@ namespace helper
             if (e.Control && e.KeyCode == Keys.C)
             {
                 DataObject d = Grid.GetClipboardContent();
+                
                 Clipboard.SetDataObject(d);
                 e.Handled = true;
             }

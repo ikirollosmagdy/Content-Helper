@@ -124,7 +124,7 @@ namespace helper
             Form1.BulkSheet[4, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString()) + " من " +
                 db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value +
                 "، " + db.getRecord(Form1.OrganizedSheet[colors, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[4, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[4, row].Value.ToString()))
             {
                 Form1.BulkSheet[4, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -140,7 +140,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[5, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
             {
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -172,7 +172,7 @@ namespace helper
                 db.getRecord(Form1.OrganizedSheet[colors, row].Value.ToString())+ "</li></ul>";
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[6, row].Value = ArDes;
-            if (CheckEnglish(ArDes))
+            if (db.CheckEnglish(ArDes))
             {
                 Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -187,7 +187,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[type, row].Value;
             Form1.BulkSheet[7, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
                 Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -214,21 +214,6 @@ namespace helper
 
 
 
-        bool CheckEnglish(string text)
-        {
-            bool IsEnglish = false;
-            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
-            Match match = regex.Match(text);
-            if (match.Success)
-            {
-                IsEnglish = true;
-            }
-            else
-            {
-                IsEnglish = false;
-            }
-
-            return IsEnglish;
-        }
+       
     }
 }

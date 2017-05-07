@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,19 +22,45 @@ namespace helper
         {
             Properties.Settings.Default.IsEgypt = RadEgypt.Checked;
             Properties.Settings.Default.IsFirstUse = false;
+            Properties.Settings.Default.DatabasePath = txtPath.Text;
             Properties.Settings.Default.Save();
             Close();
         }
 
         private void Splash_Screen_Activated(object sender, EventArgs e)
         {
-           if(Properties.Settings.Default.IsEgypt)
+            if (Properties.Settings.Default.IsEgypt)
             {
                 RadEgypt.Checked = true;
             }
             else
             {
                 RadUAE.Checked = true;
+            }
+            
+        }
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            using (CommonOpenFileDialog dialog = new CommonOpenFileDialog())
+            {
+                dialog.InitialDirectory = Application.StartupPath;
+                dialog.IsFolderPicker = true;
+                if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+                {
+                    txtPath.Text = dialog.FileName+"\\";
+                }
+            }
+        }
+
+        private void Splash_Screen_Shown(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.DatabasePath == string.Empty)
+            {
+                txtPath.Text = Application.StartupPath+"\\";
+            }
+            else
+            {
+                txtPath.Text = Properties.Settings.Default.DatabasePath;
             }
         }
     }

@@ -155,7 +155,7 @@ namespace helper
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[8, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + " ل" + db.getRecord(Form1.OrganizedSheet[Mobile, row].Value.ToString()) +
                 " " + db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + " " + ArTitle + "، " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
                 Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -170,7 +170,7 @@ namespace helper
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
                 Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -190,7 +190,7 @@ namespace helper
                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع: " + db.getRecord(Form1.OrganizedSheet[Mobile, row].Value.ToString()) + " " +
                db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + "</li><li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) +
                 "</li><li>الخامة: " + db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString()) + "</li><li>منتج عالي الجودة</li>";
-            if (CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
             {
                 Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -205,7 +205,7 @@ namespace helper
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
             Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
-            if (CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
             {
                 Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -219,7 +219,7 @@ namespace helper
         {
             Form1.BulkSheet[4, row].Value = getTypeAttribute(Form1.OrganizedSheet[Type, row]);
             Form1.BulkSheet[12, row].Value = db.getRecord(Form1.BulkSheet[4, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
             {
                 Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -233,7 +233,7 @@ namespace helper
         {
             Form1.BulkSheet[5, row].Value = Form1.OrganizedSheet[Mobile, row].Value;
             Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Mobile, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
                 Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -254,7 +254,7 @@ namespace helper
             {
                 if (value.ToLower().Contains("light") || value.ToLower().Contains("dark"))
                 {
-                    Form1.BulkSheet[6, row].Value = getReplacement(value);
+                    Form1.BulkSheet[6, row].Value = db.getReplacement(value);
                 }
                 else
                 {
@@ -263,11 +263,11 @@ namespace helper
             }
             else
             {
-                Form1.BulkSheet[6, row].Value = getReplacement(Form1.OrganizedSheet[Colors, row].Value.ToString());
+                Form1.BulkSheet[6, row].Value = db.getReplacement(Form1.OrganizedSheet[Colors, row].Value.ToString());
             }
 
             Form1.BulkSheet[14, row].Value = db.getRecord(Form1.BulkSheet[6, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
             {
                 Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -282,7 +282,7 @@ namespace helper
         {
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Mobile, row].Value+" "+ Form1.OrganizedSheet[MobileModel, row].Value;
             Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -304,22 +304,7 @@ namespace helper
         {
             Form1.BulkSheet[18, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
         }
-        bool CheckEnglish(string text)
-        {
-            bool IsEnglish = false;
-            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
-            Match match = regex.Match(text);
-            if (match.Success)
-            {
-                IsEnglish = true;
-            }
-            else
-            {
-                IsEnglish = false;
-            }
-
-            return IsEnglish;
-        }
+       
 
         private string getTypeAttribute(DataGridViewCell cell)
         {
@@ -339,29 +324,6 @@ namespace helper
 
             return result;
         }
-        string getReplacement(String Text)
-        {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            string arabicMatch = Text;
-            if (Text != null)
-            {
-                Text = Text.ToLower().Trim();
-                try
-                {
-                    foreach (string line in System.IO.File.ReadAllLines("lookup.dat"))
-                    {
-
-                        if (line.Contains(Text))
-                            arabicMatch = line.Split('	')[1];
-
-                    }
-                }
-                catch (Exception)
-                {
-                    arabicMatch = "";
-                }
-            }
-            return textInfo.ToTitleCase(arabicMatch);
-        }
+        
     }
 }

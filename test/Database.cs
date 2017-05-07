@@ -5,17 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Finisar.SQLite;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace helper
 {
    public class Database
     {
         static bool IsEgypt = Properties.Settings.Default.IsEgypt;
+        static string Databasepath = Properties.Settings.Default.DatabasePath;
+
+        
 
         public void AddRecord(string english,string arabic)
         {
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;
+            english = english.Trim().ToLower();
+
             if (english.Contains("'"))
             {
                 english = english.Trim().Replace("'", "''");
@@ -23,11 +29,11 @@ namespace helper
             //Database_UAE
             if (IsEgypt)
             {
-                sqlite_conn = new SQLiteConnection("Data Source=Database_Egypt.db;Version=3;New=False;Compress=True;");
+                sqlite_conn = new SQLiteConnection("Data Source="+Databasepath+"Database_Egypt.db;Version=3;New=False;Compress=True;");
             }
             else
             {
-                sqlite_conn = new SQLiteConnection("Data Source=Database_UAE.db;Version=3;New=False;Compress=True;");
+                sqlite_conn = new SQLiteConnection("Data Source="+Databasepath+"Database_UAE.db;Version=3;New=False;Compress=True;");
             }
                        
                 sqlite_conn.Open();
@@ -47,7 +53,7 @@ namespace helper
         }
         public string getRecord(string english)
         {
-            english= english.Trim();
+            english= english.Trim().ToLower();
             string arabic="";
             SQLiteConnection sqlite_conn;
             SQLiteCommand sqlite_cmd;
@@ -59,11 +65,11 @@ namespace helper
 
             if (IsEgypt)
             {
-                sqlite_conn = new SQLiteConnection("Data Source=Database_Egypt.db;Version=3;New=False;Compress=True;");
+                sqlite_conn = new SQLiteConnection("Data Source="+Databasepath+"\\Database_Egypt.db;Version=3;New=False;Compress=True;");
             }
             else
             {
-                sqlite_conn = new SQLiteConnection("Data Source=Database_UAE.db;Version=3;New=False;Compress=True;");
+                sqlite_conn = new SQLiteConnection("Data Source="+Databasepath+"\\Database_UAE.db;Version=3;New=False;Compress=True;");
             }
 
             sqlite_conn.Open();
@@ -216,6 +222,47 @@ namespace helper
 
             sqlite_cmd.ExecuteNonQuery();
             sqlite_conn.Close();
+        }
+
+      public  string getReplacement(string Text)
+        {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+            string arabicMatch = Text;
+            if (Text != null)
+            {
+                Text = Text.ToLower().Trim();
+                try
+                {
+                    foreach (string line in System.IO.File.ReadAllLines("lookup.dat"))
+                    {
+
+                        if (line.Contains(Text))
+                            arabicMatch = line.Split('	')[1];
+
+                    }
+                }
+                catch (Exception)
+                {
+                    arabicMatch = "";
+                }
+            }
+            return textInfo.ToTitleCase(arabicMatch);
+        }
+     public   bool CheckEnglish(string text)
+        {
+            bool IsEnglish = false;
+            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
+            Match match = regex.Match(text);
+            if (match.Success)
+            {
+                IsEnglish = true;
+            }
+            else
+            {
+                IsEnglish = false;
+            }
+
+            return IsEnglish;
         }
     }
 }

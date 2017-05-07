@@ -163,7 +163,7 @@ namespace helper
                 db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[5, row].Value = ArTitle;
-            if (CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
             {
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -173,7 +173,7 @@ namespace helper
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[6, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[6, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[6, row].Value.ToString()))
             {
                 Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -201,7 +201,7 @@ namespace helper
 
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[7, row].Value = ArDes;
-            if (CheckEnglish(ArDes))
+            if (db.CheckEnglish(ArDes))
             {
                 Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -218,7 +218,7 @@ namespace helper
                 Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Type, row].Value;
             }
             Form1.BulkSheet[8, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
                 Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -235,7 +235,7 @@ namespace helper
                 Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
             }
             Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString());
-            if (CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            if (db.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
                 Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -254,21 +254,6 @@ namespace helper
             Form1.BulkSheet[12, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
         }
 
-        bool CheckEnglish(string text)
-        {
-            bool IsEnglish = false;
-            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
-            Match match = regex.Match(text);
-            if (match.Success)
-            {
-                IsEnglish = true;
-            }
-            else
-            {
-                IsEnglish = false;
-            }
-
-            return IsEnglish;
-        }
+      
     }
 }

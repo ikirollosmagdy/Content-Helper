@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bulker", "test\Bulker.csproj", "{3544A976-1603-426C-B170-82BCC56262E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D380DA18-30FB-42EB-9B6B-71A92EF36F56}"
-	ProjectSection(SolutionItems) = preProject
-		UpdateInfo.xml = UpdateInfo.xml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
