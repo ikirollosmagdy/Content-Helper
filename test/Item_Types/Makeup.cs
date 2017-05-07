@@ -57,7 +57,7 @@ namespace helper
                     catch { }
                     try
                     {
-                        Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
+                        Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/|])?)?\w+([-|/|])?\d+(\w+|\d+)?([-|/|])?(\w+|\d+)?)");
                         MatchCollection matchModel = regexModel.Matches(Form1.Sheet[col, row].Value.ToString());
 
 

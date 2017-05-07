@@ -85,7 +85,7 @@ namespace helper
                     {
                         for (int y = 0; y < Form1.Sheet.ColumnCount; y++)
                         {
-                            Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/| ])?)?\w+([-|/| ])?\d+(\w+|\d+)?([-|/| ])?(\w+|\d+)?)");
+                            Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/|])?)?\w+([-|/|])?\d+(\w+|\d+)?([-|/|])?(\w+|\d+)?)");
                             MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
 
 
