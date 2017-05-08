@@ -17,6 +17,11 @@ using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
+using Google.Apis.Auth.OAuth2;
 
 namespace helper
 {
@@ -354,7 +359,7 @@ namespace helper
                 {
                     if (OrganizedSheet.Rows[i].Cells[j].Value == null || OrganizedSheet.Rows[i].Cells[j].Value.ToString() == "" || OrganizedSheet.Rows[i].Cells[j] == null)
                     {
-                        OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                        OrganizedSheet.Rows[i].Cells[j].Style.BackColor = System.Drawing.Color.Yellow;
                     }
                     else
                     {
@@ -365,13 +370,13 @@ namespace helper
                             Match NuMatch = Number.Match(OrganizedSheet[j, i].Value.ToString());
                             if (NuMatch.Success)
                             {
-                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Yellow;
+                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = System.Drawing.Color.Yellow;
 
 
                             }
                             else
                             {
-                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = Color.Empty;
+                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = System.Drawing.Color.Empty;
                             }
 
                         }
@@ -465,8 +470,8 @@ namespace helper
                 for (int x = 0; x < Sheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 }
             }
             catch { }
@@ -479,8 +484,8 @@ namespace helper
                 for (int x = 0; x < Sheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.HotPink;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.HotPink;
                 }
             }
             catch { }
@@ -493,8 +498,8 @@ namespace helper
                 for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.LightGreen;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.LightGreen;
                 }
             }
             catch { }
@@ -509,8 +514,8 @@ namespace helper
                 for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.HotPink;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.HotPink;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.HotPink;
                 }
             }
             catch { }
@@ -619,8 +624,8 @@ namespace helper
                 for (int x = 0; x < OrganizedSheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = OrganizedSheet.SelectedCells[x].OwningRow.Index;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
                 }
             }
             catch { }
@@ -633,8 +638,8 @@ namespace helper
                 for (int x = 0; x < Sheet.SelectedCells.Count; x++)
                 {
                     int selectedRow = Sheet.SelectedCells[x].OwningRow.Index;
-                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
-                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = Color.Empty;
+                    Sheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
+                    OrganizedSheet.Rows[selectedRow].DefaultCellStyle.BackColor = System.Drawing.Color.Empty;
                 }
             }
             catch { }
@@ -871,13 +876,13 @@ namespace helper
         {
             try
             {
-                Englishtxt.SelectionBackColor = Color.White;
+                Englishtxt.SelectionBackColor = System.Drawing.Color.White;
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Regular);
                 int indexAr = ArabicTxtBox.GetLineFromCharIndex(ArabicTxtBox.SelectionStart);
                 string currentlinetext = EnglishTxtBox.Lines[indexAr];
                 int fy = EnglishTxtBox.GetFirstCharIndexFromLine(indexAr);
                 EnglishTxtBox.Select(fy, currentlinetext.Length);
-                EnglishTxtBox.SelectionBackColor = Color.LightGreen;
+                EnglishTxtBox.SelectionBackColor = System.Drawing.Color.LightGreen;
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
             }
             catch { }
@@ -1014,7 +1019,7 @@ namespace helper
                             {
                                 Range range = (Range)worksheet.Cells[i + 2, j + 1];
                                 worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
-                                if (Grid.Rows[i].DefaultCellStyle.BackColor == Color.Empty)
+                                if (Grid.Rows[i].DefaultCellStyle.BackColor == System.Drawing.Color.Empty)
                                 {
                                     range.Interior.ColorIndex = 0;
                                 }
@@ -1050,7 +1055,7 @@ namespace helper
                                 {
                                     Range range = (Range)worksheet.Cells[x + 2, y + 1];
                                     worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
-                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == Color.Empty)
+                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == System.Drawing.Color.Empty)
                                     {
                                         range.Interior.ColorIndex = 0;
                                     }
@@ -1140,6 +1145,90 @@ namespace helper
             {
                 LogWrite("Application closed by force");
             }
+
+            // Posting data to google Spreadsheet 
+            try
+            {
+                string[] Scopes = { SheetsService.Scope.Spreadsheets };
+                string ApplicationName = "Google Sheets API .NET Quickstart";
+
+                UserCredential credential;
+
+                using (var stream =
+                    new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = System.Environment.GetFolderPath(
+                        System.Environment.SpecialFolder.Personal);
+
+
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                    Console.WriteLine("Credential file saved to: " + credPath);
+                }
+
+                // Create Google Sheets API service.
+                var service = new SheetsService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
+
+
+
+                String spreadsheetId2 = "1AxuO473BEWpVqOtR0wfOOPPVrhUC1ta_Xxj9i79seXA";
+                String range2 = "Sheet1!A:M";
+
+                ValueRange valueRange = new ValueRange();
+                valueRange.MajorDimension = "ROWS";//"ROWS";//COLUMNS
+                string names = string.Empty;
+                string types = string.Empty;
+                for (int x = 0; x < LogSavedFile.Count; x++)
+                {
+                    names+= string.Format("Name: {0}\n", LogSavedFile[x]).Trim();
+                }
+                for (int y = 0; y < LogItemTypes.Count; y++)
+                {
+                    types+=string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]).Trim();
+                }
+
+                TimeSpan duration = DateTime.Now - _start;
+                string du = string.Format("{0:hh\\:mm\\:ss}", duration);
+                var oblist = new List<object>() {
+                    Environment.UserName, LogListedItems.ToString(),
+                    LogTranslatedLines,
+                    _start,
+                    DateTime.Now,
+                    du,
+                    string.Format("Tab Imported: {0}\nTab Bulk: {1}\nTab Translation: {2}",STImported.Elapsed,STBulk.Elapsed,STTranslation.Elapsed).Trim(),
+                    LogActionsTotal,
+                    names,types
+                };
+                valueRange.Values = new List<IList<object>> { oblist };
+
+                // SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId2, range2);
+                SpreadsheetsResource.ValuesResource.AppendRequest update = service.Spreadsheets.Values.Append(valueRange, spreadsheetId2, range2);
+                update.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
+                AppendValuesResponse result2 = update.Execute();
+
+                // End of posting and Close app
+            }
+            catch (Exception ex){
+                Console.WriteLine(ex.Message);
+            }
+
+
+
+
+
+
+
+
+
+
         }
 
         private void KeyDownFunction(DataGridView Grid, KeyEventArgs e)
