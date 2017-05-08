@@ -1200,10 +1200,10 @@ namespace helper
                 var oblist = new List<object>() {
                     Environment.UserName, LogListedItems.ToString(),
                     LogTranslatedLines,
-                    _start,
-                    DateTime.Now,
+                    _start.ToString(),
+                    DateTime.Now.ToString(),
                     du,
-                    string.Format("Tab Imported: {0}\nTab Bulk: {1}\nTab Translation: {2}",STImported.Elapsed,STBulk.Elapsed,STTranslation.Elapsed).Trim(),
+                    string.Format("Tab Imported: {0:hh\\:mm\\:ss}\nTab Bulk: {1:hh\\:mm\\:ss}\nTab Translation: {2:hh\\:mm\\:ss}",STImported.Elapsed,STBulk.Elapsed,STTranslation.Elapsed).Trim(),
                     LogActionsTotal,
                     names,types
                 };
