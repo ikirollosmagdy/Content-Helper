@@ -29,7 +29,13 @@ namespace helper
             {
                 if (Form1.OrganizedSheet.SelectedCells[x].Value != null)
                 {
-                    Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().ToLower().Replace(txtSearch.Text, txtReplace.Text);
+                    if (txtReplace.Text == string.Empty) {
+                        Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().ToLower().Replace(txtSearch.Text, string.Empty);
+                    }
+                    else
+                    {
+                        Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().ToLower().Replace(txtSearch.Text, txtReplace.Text);
+                    }
                 }
 
 
@@ -44,9 +50,15 @@ namespace helper
                 {
                     if (Form1.OrganizedSheet.SelectedCells[x].Value.ToString().ToLower().Contains(txtSearch.Text.ToLower()))
                     {
-                        
-                        Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().Replace(txtSearch.Text, txtReplace.Text);
-                        break;
+                        if (txtReplace.Text == string.Empty)
+                        {
+                            Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().Replace(txtSearch.Text, string.Empty);
+                        }
+                        else
+                        {
+                            Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().Replace(txtSearch.Text, txtReplace.Text);
+                            break;
+                        }
                     }
                 }
 

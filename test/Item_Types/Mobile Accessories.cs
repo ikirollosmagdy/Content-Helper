@@ -199,7 +199,7 @@ namespace helper
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             string title = "", ArTitle = "";
-            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower() != "other")
+            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
                 title = Form1.OrganizedSheet[Brand, row].Value + " " + Form1.OrganizedSheet[Model, row].Value + " ";
                 ArTitle = " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value;
@@ -236,7 +236,16 @@ namespace helper
         }
         private void setDescription(int row)
         {
-            Form1.BulkSheet[2, row].Value = "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value + "</li><li>Mobile Accessory Type: " +
+            string brand = "";
+            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
+            {
+                brand = "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
+
+            }
+
+
+
+            Form1.BulkSheet[2, row].Value = brand + "<li>Mobile Accessory Type: " +
                 Form1.OrganizedSheet[Type, row].Value + "</li><li>Compatible with: " + Form1.OrganizedSheet[Mobile, row].Value + " " +
                 Form1.OrganizedSheet[MobileModel, row].Value + "</li><li>Color: " + Form1.OrganizedSheet[Colors, row].Value +
                 "</li><li>Material: " + Form1.OrganizedSheet[Material, row].Value + "</li><li>High Quality Product</li>";

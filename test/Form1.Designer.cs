@@ -268,6 +268,7 @@
             this.OrganaizedGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellClick);
             this.OrganaizedGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellContentClick);
             this.OrganaizedGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellClick);
+            this.OrganaizedGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellEndEdit);
             this.OrganaizedGrid.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.OrganaizedGrid_CellLeave);
             this.OrganaizedGrid.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.OrganaizedGrid_CellMouseMove);
             this.OrganaizedGrid.CellToolTipTextNeeded += new System.Windows.Forms.DataGridViewCellToolTipTextNeededEventHandler(this.OrganaizedGrid_CellToolTipTextNeeded);
@@ -289,7 +290,7 @@
             this.replaceOrgMenu,
             this.qcCheckOrgMenu});
             this.OrganizedMenu.Name = "OrganizedMenu";
-            this.OrganizedMenu.Size = new System.Drawing.Size(190, 136);
+            this.OrganizedMenu.Size = new System.Drawing.Size(190, 114);
             this.OrganizedMenu.Opening += new System.ComponentModel.CancelEventHandler(this.OrganizedMenu_Opening);
             // 
             // colorsToolStripMenuItem

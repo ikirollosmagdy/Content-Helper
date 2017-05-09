@@ -60,11 +60,11 @@ namespace helper
                     try
                     {
                         Form1.OrganizedSheet[0, row].Value = Convert.ToString(row + 1);
-                        
+
                     }
                     catch { }
 
-                    if (Form1.Sheet.Columns[col].HeaderText.ToLower()=="brand")
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower() == "brand")
                     {
                         Form1.OrganizedSheet[Brand, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
                     }
@@ -72,7 +72,7 @@ namespace helper
                     try
                     {
                         if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("length")) {
-                            Form1.OrganizedSheet[Length,row].Value=Form1.Sheet[col,row].Value.ToString().Replace(" ", "").ToLower();
+                            Form1.OrganizedSheet[Length, row].Value = Form1.Sheet[col, row].Value.ToString().Replace(" ", "").ToLower();
                         }
                         else
                         {
@@ -115,7 +115,7 @@ namespace helper
                     {
                         for (int y = 1; y < Form1.Sheet.ColumnCount; y++)
                         {
-                            if (Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("model")|| Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("code")) {
+                            if (Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("model") || Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("code")) {
 
                                 Form1.OrganizedSheet[Model, row].Value = Form1.Sheet[y, row].Value.ToString().Trim();
                                 break;
@@ -143,7 +143,7 @@ namespace helper
                     {
                         Form1.OrganizedSheet[Link, row].Value = Form1.Sheet[col, row].Value;
                     }
-                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qty")|| Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qua"))
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qty") || Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qua"))
                     {
                         Form1.OrganizedSheet[Quantity, row].Value = Form1.Sheet[col, row].Value;
                     }
@@ -235,7 +235,17 @@ namespace helper
         }
         private void setDescription(int row)
         {
-            Form1.BulkSheet[2, row].Value = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value + "</li> <li>Color :" +
+            string brand = "";
+            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
+            {
+                brand = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
+
+            }
+            else {
+                brand = "<ul>";
+            }
+
+            Form1.BulkSheet[2, row].Value = brand + "<li>Color :" +
                 Form1.OrganizedSheet[Colors, row].Value + "</li> <li>Length :" + Form1.OrganizedSheet[Length, row].Value +
                 "</li> <li>Compatible with :" + Form1.OrganizedSheet[Device, row].Value + "</li> </ul>";
             Form1.BulkSheet[7, row].Value = "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +

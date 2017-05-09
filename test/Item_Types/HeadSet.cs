@@ -257,7 +257,15 @@ namespace helper
                 }
             }
             catch { }
-            des = des + "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "<li>Model: " + Form1.OrganizedSheet[Model, row].Value + "</li><li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
+
+            string brand = "";
+            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
+            {
+                brand = "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
+
+            }
+           
+            des = des + brand + "<li>Model: " + Form1.OrganizedSheet[Model, row].Value + "</li><li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
 "</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li>";
             ArDes = ArDes + "<li>العلامة التجارية: " +db.getRecord( Form1.OrganizedSheet[Brand, row].Value.ToString()) + "<li>الموديل: " +
                 db.getRecord(Form1.OrganizedSheet[Model, row].Value.ToString())+ "<li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +

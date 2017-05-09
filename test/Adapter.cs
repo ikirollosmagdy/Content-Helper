@@ -58,7 +58,7 @@ namespace helper
           
   
           Form1.LogWrite("Finished Analayzing category \"" + Convert.ToString(index) + "\"");
-            Form1.LogActionsPerType = 0;
+            Form1.LogActionsTotal = 0;
 
 
         }

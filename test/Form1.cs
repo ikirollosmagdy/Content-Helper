@@ -48,11 +48,11 @@ namespace helper
         public bool copiedData = false, IsEdited = false;
         Stopwatch STImported, STBulk, STTranslation;
         static string path;
-        public static int LogActionsPerType;
-        List<string> LogSavedFile = new List<string>();
+        public static int LogActionsTotal;
+         List<string> LogSavedFile = new List<string>();
         List<string> LogItemTypes = new List<string>();
         List<int> LogActionList = new List<int>();
-        int LogTranslatedLines, LogListedItems = 0, LogActionsTotal = 0;
+        int LogTranslatedLines, LogListedItems = 0, LogActionsPerType = 0;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
@@ -254,7 +254,7 @@ namespace helper
                 }
             }
 
-
+            LogActionsTotal++;
 
         }
 
@@ -340,14 +340,7 @@ namespace helper
         {
             string value = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
             LogWrite(string.Format("Cell [{0},{1}] value changed to \"{2}\"", e.ColumnIndex, e.RowIndex, value));
-            try
-            {
-                LogActionsPerType++;
-
-
-
-            }
-            catch { }
+           
         }
 
         private void btnQC_Click(object sender, EventArgs e)
@@ -963,6 +956,17 @@ namespace helper
             
         }
 
+        private void OrganaizedGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                LogActionsTotal++;
+               
+
+            }
+            catch { }
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
@@ -1118,7 +1122,7 @@ namespace helper
                     LogSavedFile.Add(saveDialog.FileName);
                     LogActionList.Add(LogActionsPerType);
                     DropCat.GetCurrentParent().Invoke(new System.Action(() => LogItemTypes.Add(DropCat.SelectedItem.ToString())));
-                    LogActionsTotal += LogActionsPerType;
+                    LogActionsTotal += LogActionsTotal;
 
                 }
                 catch

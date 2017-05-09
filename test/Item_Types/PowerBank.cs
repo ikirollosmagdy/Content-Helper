@@ -239,7 +239,22 @@ namespace helper
         }
         private void setDescription(int row)
         {
-            Form1.BulkSheet[2, row].Value = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value + "</li> <li>Color :" +
+
+            string brand = "";
+            if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
+            {
+                brand = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value + "</li>";
+
+            }
+            else
+            {
+                brand = "<ul>";
+            }
+
+
+
+
+            Form1.BulkSheet[2, row].Value = brand + "<li>Color :" +
                 Form1.OrganizedSheet[Colors, row].Value + "</li> <li>Capacity :" + Form1.OrganizedSheet[Capacity, row].Value +
                 "mAh</li> <li>Number of Ports :" + Form1.OrganizedSheet[Ports, row].Value + "</li> <li>Compatible with :" +
                 Form1.OrganizedSheet[Device, row].Value + "</li> </ul>";
