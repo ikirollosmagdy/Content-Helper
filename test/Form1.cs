@@ -16,22 +16,25 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using Microsoft.VisualBasic;
 using System.Diagnostics;
-using System.Net.NetworkInformation;
+
 using Google.Apis.Sheets.v4;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.Auth.OAuth2;
+using System.Runtime.InteropServices;
 
 namespace helper
 {
     public partial class Form1 : Form
     {
+        [DllImport("wininet.dll")]
+        public extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
 
         public Form1()
         {
             InitializeComponent();
-            
+
         }
         DataSet result;
         public static DataGridView Sheet, OrganizedSheet, BulkSheet;
@@ -42,18 +45,19 @@ namespace helper
         Stack<Object[][]> undoStack = new Stack<Object[][]>();
         Stack<DataGridViewCellStyle[]> undoColor = new Stack<DataGridViewCellStyle[]>();
         public static System.Windows.Forms.RichTextBox Englishtxt;
-        public bool copiedData = false,IsEdited=false;
+        public bool copiedData = false, IsEdited = false;
         Stopwatch STImported, STBulk, STTranslation;
-       static string path;
+        static string path;
         public static int LogActionsPerType;
         List<string> LogSavedFile = new List<string>();
         List<string> LogItemTypes = new List<string>();
         List<int> LogActionList = new List<int>();
-        int LogTranslatedLines,LogListedItems=0, LogActionsTotal=0;
+        int LogTranslatedLines, LogListedItems = 0, LogActionsTotal = 0;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
-           try {
+            try
+            {
                 OpenFileDialog OD = new OpenFileDialog();
                 OD.Filter = "Excel files (*.xlsx)|*.xlsx";
                 OD.FilterIndex = 0;
@@ -76,7 +80,7 @@ namespace helper
                     Sheet.Columns.Clear();
                     ComboBox1.SelectedIndex = 0;
                     GridView1.DataSource = result.Tables[0];
-                    
+
                     GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
 
                     DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
@@ -107,7 +111,7 @@ namespace helper
             }
             catch
             {
-                
+
                 MessageBox.Show("Please close file first...!!");
             }
         }
@@ -124,7 +128,8 @@ namespace helper
 
                 DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
                 columnID.HeaderText = "No";
-                if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText)){
+                if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
+                {
                     Sheet.Columns.Insert(0, columnID);
                 }
                 foreach (DataGridViewRow row in Sheet.Rows)
@@ -136,8 +141,8 @@ namespace helper
                 {
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-                
-                LogWrite("Sheet imported \""+ComboBox1.SelectedItem.ToString()+"\"");
+
+                LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
             }
             catch (Exception)
             {
@@ -162,7 +167,7 @@ namespace helper
                 MessageBox.Show("No file loaded");
                 PBar.Style = ProgressBarStyle.Continuous;
             }
-            
+
         }
 
 
@@ -170,16 +175,16 @@ namespace helper
         private void btnCreateBulk_Click(object sender, EventArgs e)
         {
             LogWrite(string.Format("Start creating bulk for category {0}", DropCat.SelectedItem.ToString()));
-            if (OrganizedSheet.RowCount >0)
+            if (OrganizedSheet.RowCount > 0)
             {
 
                 try
                 {
-                   
+
                     txtStats.Text = "Processing";
                     PBar.Style = ProgressBarStyle.Marquee;
                     WorkerBulk.RunWorkerAsync(DropCat.SelectedItem);
-                
+
                 }
                 catch (Exception ex)
                 {
@@ -188,7 +193,7 @@ namespace helper
             }
             else
             {
-                MessageBox.Show("Please, Analayze first...!", "Warning",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                MessageBox.Show("Please, Analayze first...!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -211,7 +216,7 @@ namespace helper
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
-            
+
 
         }
 
@@ -222,7 +227,7 @@ namespace helper
         public void pasteCell(string copied)
         {
             undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
-         
+
             undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
 
 
@@ -260,7 +265,7 @@ namespace helper
             inputDialog dialog = new inputDialog();
             dialog.Show(this);
 
-        
+
 
         }
 
@@ -269,25 +274,19 @@ namespace helper
             if (undoStack.Count == 0)
                 return;
             object[][] rows = undoStack.Pop();
-            DataGridViewCellStyle[] colors = undoColor.Pop();
+             DataGridViewCellStyle[] colors = undoColor.Pop(); 
             while (rows.Equals(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).ToArray()))
             {
                 rows = undoStack.Pop();
                 colors = undoColor.Pop();
             }
 
-
-
             OrganizedSheet.Rows.Clear();
             for (int x = 0; x <= rows.GetUpperBound(0); x++)
             {
-              
-               OrganizedSheet.Rows.Add(rows[x]);
+
+                OrganizedSheet.Rows.Add(rows[x]);
                 OrganaizedGrid.Rows[x].DefaultCellStyle = colors[x];
-
-
-
-
 
             }
 
@@ -332,19 +331,19 @@ namespace helper
         {
 
 
-            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
-            undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
-           
+           undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+           undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
+
         }
 
         private void OrganaizedGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             string value = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
-            LogWrite(string.Format("Cell [{0},{1}] value changed to \"{2}\"", e.ColumnIndex,e.RowIndex,value));
+            LogWrite(string.Format("Cell [{0},{1}] value changed to \"{2}\"", e.ColumnIndex, e.RowIndex, value));
             try
             {
                 LogActionsPerType++;
-               
+
 
 
             }
@@ -395,18 +394,18 @@ namespace helper
 
             EnglishTxtBox.Text = EnglishTxtBox.Text.Trim();
             ArabicTxtBox.Text = ArabicTxtBox.Text.Trim();
-           
-          
-            string[][] array = new string[EnglishTxtBox.Lines.Count()][];
-            for (int x = 0; x < EnglishTxtBox.Lines.Count(); x++)
+
+
+            string[][] array = new string[ArabicTxtBox.Lines.Count()][];
+            for (int x = 0; x < ArabicTxtBox.Lines.Count(); x++)
             {
-                array[x] = new string[] {EnglishTxtBox.Lines[x],ArabicTxtBox.Lines[x] };
+                array[x] = new string[] { EnglishTxtBox.Lines[x], ArabicTxtBox.Lines[x] };
             }
 
             Workertranslation.RunWorkerAsync(array);
-            
+
         }
-       
+
 
 
         private void GridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -429,10 +428,10 @@ namespace helper
         {
             try
             {
-                if (OrganizedSheet[e.ColumnIndex,e.RowIndex].Value.ToString().Contains("http"))
+                if (OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString().Contains("http"))
                 {
                     ImageForm img = new ImageForm();
-                    img.Url = OrganizedSheet[e.ColumnIndex,e.RowIndex].Value.ToString();
+                    img.Url = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
                     img.Show();
                 }
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
@@ -440,8 +439,8 @@ namespace helper
                     OrganizedSheet.BeginEdit(true);
                     ComboBox comb = (ComboBox)OrganizedSheet.EditingControl;
                     comb.DroppedDown = true;
-                 comb.SelectionChangeCommitted += Comb_SelectionChangeCommitted;
-                  comb.FormatStringChanged+= Comb_SelectionChangeCommitted;
+                    comb.SelectionChangeCommitted += Comb_SelectionChangeCommitted;
+                    comb.FormatStringChanged += Comb_SelectionChangeCommitted;
 
                 }
             }
@@ -460,7 +459,7 @@ namespace helper
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void doneToolMenuSheet_Click(object sender, EventArgs e)
@@ -527,14 +526,14 @@ namespace helper
             undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
             try
             {
-                
-               
+
+
                 foreach (DataGridViewCell oneCell in OrganizedSheet.SelectedCells)
                 {
                     if (oneCell.Selected)
                         OrganizedSheet.Rows.RemoveAt(oneCell.RowIndex);
                 }
-                
+
 
             }
             catch { }
@@ -612,7 +611,7 @@ namespace helper
         private void toolStripButton5_Click_1(object sender, EventArgs e)
         {
 
-            
+
 
 
         }
@@ -661,9 +660,10 @@ namespace helper
             try
             {
                 txtCellContent.Text = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
-                
+
             }
-            catch {
+            catch
+            {
                 txtCellContent.Text = string.Empty;
             }
         }
@@ -674,7 +674,7 @@ namespace helper
             {
                 txtCellContent.Text = Sheet[e.ColumnIndex, e.RowIndex].Value.ToString();
 
-              
+
 
             }
             catch
@@ -697,7 +697,7 @@ namespace helper
 
         private void OrganaizedGrid_CellToolTipTextNeeded(object sender, DataGridViewCellToolTipTextNeededEventArgs e)
         {
-            
+
         }
 
         private void Form1_Shown(object sender, EventArgs e)
@@ -708,8 +708,8 @@ namespace helper
                 sp.ShowDialog();
             }
 
-            
-            if (NetworkInterface.GetIsNetworkAvailable())
+
+            if (IsConnectedToInternet())
             {
                 XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
                 var elements = document.Element("AppName");
@@ -721,8 +721,8 @@ namespace helper
                     updater.ShowDialog();
                 }
             }
-        
-   
+
+
             System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
             _start = DateTime.Now;
             t.Start();
@@ -735,7 +735,7 @@ namespace helper
                 Directory.CreateDirectory(System.Windows.Forms.Application.StartupPath + "\\log");
             }
             string dt = DateTime.Now.ToString("dd-MM-yy_HHmm");
-               path = System.Windows.Forms.Application.StartupPath+ "\\log\\Log_" + dt + ".txt";
+            path = System.Windows.Forms.Application.StartupPath + "\\log\\Log_" + dt + ".txt";
             LogWrite("Initilaizing");
             STImported.Start();
         }
@@ -745,14 +745,14 @@ namespace helper
             try
             {
                 string nowtime = DateTime.Now.ToString("dd-MM-yy HH:mm:ss");
-              
+
                 TimeSpan duration = DateTime.Now - _start;
-                string du= string.Format("{0:hh\\:mm\\:ss}", duration);
+                string du = string.Format("{0:hh\\:mm\\:ss}", duration);
                 using (StreamWriter sw = File.AppendText(path))
                 {
-                    sw.WriteLine(value +" ("+du+")  " +"  at: " + nowtime);
+                    sw.WriteLine(value + " (" + du + ")  " + "  at: " + nowtime);
                     sw.Close();
-                    
+
                 }
 
 
@@ -762,16 +762,16 @@ namespace helper
 
 
 
-      static  DateTime _start;
+        static DateTime _start;
         private void T_Tick(object sender, EventArgs e)
         {
             TimeSpan duration = DateTime.Now - _start;
-           this .Text = string.Format("Katana {0:hh\\:mm\\:ss}", duration);
+            this.Text = string.Format("Katana {0:hh\\:mm\\:ss}", duration);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -781,7 +781,7 @@ namespace helper
 
         private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-          
+
         }
 
         private void btnChooseCountry_Click(object sender, EventArgs e)
@@ -798,8 +798,9 @@ namespace helper
 
         private void btnDevelop_Click(object sender, EventArgs e)
         {
-            
-          if (  Interaction.InputBox("Enter your password", "Developer Section") == "admin") {
+
+            if (Interaction.InputBox("Enter your password", "Developer Section") == "admin")
+            {
 
 
                 DeveloperForm DForm = new DeveloperForm();
@@ -813,13 +814,13 @@ namespace helper
 
         private void OrganaizedGrid_RowsDefaultCellStyleChanged(object sender, EventArgs e)
         {
-           
-         
+
+
         }
 
         private void OrganaizedGrid_RowDefaultCellStyleChanged(object sender, DataGridViewRowEventArgs e)
         {
-            
+
         }
 
         private void OrganaizedGrid_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
@@ -829,7 +830,7 @@ namespace helper
 
         private void OrganaizedGrid_RowsDefaultCellStyleChanged_1(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
@@ -845,10 +846,10 @@ namespace helper
 
         private void WorkerAnalyze_DoWork(object sender, DoWorkEventArgs e)
         {
-          
+
             Adapter adapter = new Adapter();
             adapter.SwitchCategory(e.Argument);
-          
+
         }
 
         private void WorkerBulk_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -899,17 +900,17 @@ namespace helper
         private void Workertranslation_DoWork(object sender, DoWorkEventArgs e)
         {
             Database db = new Database();
-            string[][] array =(string[][]) e.Argument;
+            string[][] array = (string[][])e.Argument;
 
 
             for (int x = 0; x < array.Length; x++)
             {
                 db.AddRecord(array[x][0], array[x][1]);
             }
-               
-            
-            
-                
+
+
+
+
         }
 
         private void ComboBox1_Click(object sender, EventArgs e)
@@ -943,29 +944,44 @@ namespace helper
                     STTranslation.Start();
                     break;
             }
-            
+
         }
 
         private void EnglishTxtBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Control && e.KeyCode == Keys.A)
+            if (e.Control && e.KeyCode == Keys.A)
             {
                 EnglishTxtBox.SelectAll();
             }
         }
 
-        private void toolStripButton1_Click_1(object sender, EventArgs e)
+        private void CopyStripMenuItem1_Click(object sender, EventArgs e)
         {
-           
+            DataObject d = OrganaizedGrid.GetClipboardContent();
+
+            Clipboard.SetDataObject(d);
+            
         }
 
-        private void ArabicTxtBox_KeyDown(object sender, KeyEventArgs e)
+        private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (e.Control && e.KeyCode == Keys.A)
+            string CopiedContent = Clipboard.GetText();
+            pasteCell(CopiedContent);
+        }
+
+        private void CutStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+            DataObject d = OrganaizedGrid.GetClipboardContent();
+
+            Clipboard.SetDataObject(d);
+          
+            foreach (DataGridViewCell cell in OrganaizedGrid.SelectedCells)
             {
-                ArabicTxtBox.SelectAll();
+                cell.Value = DBNull.Value;
             }
         }
+
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
@@ -1019,13 +1035,13 @@ namespace helper
                             {
                                 Range range = (Range)worksheet.Cells[i + 2, j + 1];
                                 worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
-                                if (Grid.Rows[i].DefaultCellStyle.BackColor == System.Drawing.Color.Empty)
+                                if (Grid[j,i].Style.BackColor == System.Drawing.Color.Empty)
                                 {
                                     range.Interior.ColorIndex = 0;
                                 }
                                 else
                                 {
-                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid.Rows[i].DefaultCellStyle.BackColor);
+                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid[j, i].Style.BackColor);
                                 }
 
 
@@ -1055,13 +1071,13 @@ namespace helper
                                 {
                                     Range range = (Range)worksheet.Cells[x + 2, y + 1];
                                     worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
-                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == System.Drawing.Color.Empty)
+                                    if (Grid2[y,x].Style.BackColor == System.Drawing.Color.Empty)
                                     {
                                         range.Interior.ColorIndex = 0;
                                     }
                                     else
                                     {
-                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
+                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2[y, x].Style.BackColor);
                                     }
                                 }
                                 else
@@ -1095,18 +1111,19 @@ namespace helper
                     excel = null;
 
                 }
-                LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName) );
-               
+                LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName));
+
                 try
                 {
                     LogSavedFile.Add(saveDialog.FileName);
                     LogActionList.Add(LogActionsPerType);
-                DropCat.GetCurrentParent().Invoke(new System.Action(()=>    LogItemTypes.Add(DropCat.SelectedItem.ToString())));
+                    DropCat.GetCurrentParent().Invoke(new System.Action(() => LogItemTypes.Add(DropCat.SelectedItem.ToString())));
                     LogActionsTotal += LogActionsPerType;
 
                 }
-                catch {
-                  
+                catch
+                {
+
                 }
             }
         }
@@ -1137,7 +1154,7 @@ namespace helper
                 LogWrite(string.Format("|Item type names\t\t\t\t\t\t\t\t\t|"));
                 for (int y = 0; y < LogItemTypes.Count; y++)
                 {
-                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions\t\t\t\t\t|", LogItemTypes[y],LogActionList[y]));
+                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions\t\t\t\t\t|", LogItemTypes[y], LogActionList[y]));
                 }
                 LogWrite("+====================================================================================+");
             }
@@ -1146,87 +1163,149 @@ namespace helper
                 LogWrite("Application closed by force");
             }
 
-            // Posting data to google Spreadsheet 
-            try
+            if (IsConnectedToInternet())
             {
-                string[] Scopes = { SheetsService.Scope.Spreadsheets };
-                string ApplicationName = "Google Sheets API .NET Quickstart";
-
-                UserCredential credential;
-
-                using (var stream =
-                    new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+                // Posting data to google Spreadsheet 
+                try
                 {
-                    string credPath = System.Environment.GetFolderPath(
-                        System.Environment.SpecialFolder.Personal);
+                    string[] Scopes = { SheetsService.Scope.Spreadsheets };
+                    string ApplicationName = "Google Sheets API .NET Quickstart";
+
+                    UserCredential credential;
+
+                    using (var stream =
+                        new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+                    {
+                        string credPath = System.Environment.GetFolderPath(
+                            System.Environment.SpecialFolder.Personal);
 
 
-                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                        GoogleClientSecrets.Load(stream).Secrets,
-                        Scopes,
-                        "user",
-                        CancellationToken.None,
-                        new FileDataStore(credPath, true)).Result;
-                    Console.WriteLine("Credential file saved to: " + credPath);
-                }
+                        credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                            GoogleClientSecrets.Load(stream).Secrets,
+                            Scopes,
+                            "user",
+                            CancellationToken.None,
+                            new FileDataStore(credPath, true)).Result;
+                        Console.WriteLine("Credential file saved to: " + credPath);
+                    }
 
-                // Create Google Sheets API service.
-                var service = new SheetsService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName,
-                });
+                    // Create Google Sheets API service.
+                    var service = new SheetsService(new BaseClientService.Initializer()
+                    {
+                        HttpClientInitializer = credential,
+                        ApplicationName = ApplicationName,
+                    });
 
 
 
-                String spreadsheetId2 = "1AxuO473BEWpVqOtR0wfOOPPVrhUC1ta_Xxj9i79seXA";
-                String range2 = "Sheet1!A:M";
+                    String spreadsheetId2 = "1AxuO473BEWpVqOtR0wfOOPPVrhUC1ta_Xxj9i79seXA";
+                    String range2 = "Sheet1!A:Z";
 
-                ValueRange valueRange = new ValueRange();
-                valueRange.MajorDimension = "ROWS";//"ROWS";//COLUMNS
-                string names = string.Empty;
-                string types = string.Empty;
-                for (int x = 0; x < LogSavedFile.Count; x++)
-                {
-                    names+= string.Format("Name: {0}\n", LogSavedFile[x]).Trim();
-                }
-                for (int y = 0; y < LogItemTypes.Count; y++)
-                {
-                    types+=string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]).Trim();
-                }
+                    ValueRange valueRange = new ValueRange();
+                    valueRange.MajorDimension = "ROWS";//"ROWS";//COLUMNS
+                    string names = string.Empty;
+                    string types = string.Empty;
+                    for (int x = 0; x < LogSavedFile.Count; x++)
+                    {
+                        names += string.Format("Name: {0}\n", LogSavedFile[x]).Trim();
+                    }
+                    for (int y = 0; y < LogItemTypes.Count; y++)
+                    {
+                        types += string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]).Trim();
+                    }
 
-                TimeSpan duration = DateTime.Now - _start;
-                string du = string.Format("{0:hh\\:mm\\:ss}", duration);
-                var oblist = new List<object>() {
-                    Environment.UserName, LogListedItems.ToString(),
+                    TimeSpan duration = DateTime.Now - _start;
+                    string du = string.Format("{0:hh\\:mm\\:ss}", duration);
+                    var oblist = new List<object>() {
+                    Environment.UserName, LogListedItems,
                     LogTranslatedLines,
                     _start.ToString(),
                     DateTime.Now.ToString(),
                     du,
-                    string.Format("Tab Imported: {0:hh\\:mm\\:ss}\nTab Bulk: {1:hh\\:mm\\:ss}\nTab Translation: {2:hh\\:mm\\:ss}",STImported.Elapsed,STBulk.Elapsed,STTranslation.Elapsed).Trim(),
+                    string.Format("{0:hh\\:mm\\:ss}",STImported.Elapsed).Trim(),
+                     string.Format("{0:hh\\:mm\\:ss}",STBulk.Elapsed).Trim(),
+                      string.Format("{0:hh\\:mm\\:ss}",STTranslation.Elapsed).Trim(),
                     LogActionsTotal,
                     names,types
                 };
-                valueRange.Values = new List<IList<object>> { oblist };
+                    valueRange.Values = new List<IList<object>> { oblist };
 
-                // SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId2, range2);
-                SpreadsheetsResource.ValuesResource.AppendRequest update = service.Spreadsheets.Values.Append(valueRange, spreadsheetId2, range2);
-                update.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
-                AppendValuesResponse result2 = update.Execute();
+                    // SpreadsheetsResource.ValuesResource.UpdateRequest update = service.Spreadsheets.Values.Update(valueRange, spreadsheetId2, range2);
+                    SpreadsheetsResource.ValuesResource.AppendRequest update = service.Spreadsheets.Values.Append(valueRange, spreadsheetId2, range2);
+                    update.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
+                    AppendValuesResponse result2 = update.Execute();
 
-                // End of posting and Close app
+
+                    // End of posting and Close app
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
-            catch (Exception ex){
-                Console.WriteLine(ex.Message);
+            else {
+                string names = string.Empty;
+                string types = string.Empty;
+                for (int x = 0; x < LogSavedFile.Count; x++)
+                {
+                    names += string.Format("Name: {0}\n", LogSavedFile[x]).Trim();
+                }
+                for (int y = 0; y < LogItemTypes.Count; y++)
+                {
+                    types += string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]).Trim();
+                }
+
+                TimeSpan duration = DateTime.Now - _start;
+                string du = string.Format("{0:hh\\:mm\\:ss}", duration);
+
+                OfflineReport(Environment.UserName, LogListedItems,
+                    LogTranslatedLines,
+                    _start.ToString(),
+                    DateTime.Now.ToString(),
+                    du,
+                    string.Format("{0:hh\\:mm\\:ss}", STImported.Elapsed).Trim(),
+                     string.Format("{0:hh\\:mm\\:ss}", STBulk.Elapsed).Trim(),
+                      string.Format("{0:hh\\:mm\\:ss}", STTranslation.Elapsed).Trim(),
+                    LogActionsTotal,
+                    names, types);
+
             }
 
+        }
+
+        public static bool IsConnectedToInternet()
+        {
+            bool returnValue = false;
+            try
+            {
+
+                int Desc;
+                returnValue = InternetGetConnectedState(out Desc, 0);
+            }
+            catch
+            {
+                returnValue = false;
+            }
+            return returnValue;
+        }
 
 
+        private async void OfflineReport(string Agent, int ListedItems, int Translated, string stTime, string fTime, string toTime, string tiTime, string tbTime, string ttTime, int actions, string saved, string types)
+        {
+            try
+            {
+                using (StreamWriter sw = File.AppendText("OfflineReport.dat"))
+                {
 
+                    await sw.WriteLineAsync(string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}\t{11}", Agent, ListedItems, Translated, stTime, fTime, toTime, tiTime, tbTime, ttTime, actions, saved, types));
+                    sw.Close();
 
-
-
-
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error for offline: {0}", ex.Message);
+            }
 
 
         }
@@ -1236,7 +1315,7 @@ namespace helper
             if (e.Control && e.KeyCode == Keys.C)
             {
                 DataObject d = Grid.GetClipboardContent();
-                
+
                 Clipboard.SetDataObject(d);
                 e.Handled = true;
             }
@@ -1285,7 +1364,7 @@ namespace helper
             {
                 for (int x = 0; x < Grid.SelectedCells.Count; x++)
                 {
-                    Grid.SelectedCells[x].Value=DBNull.Value;
+                    Grid.SelectedCells[x].Value = DBNull.Value;
                 }
             }
         }

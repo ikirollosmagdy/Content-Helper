@@ -126,21 +126,38 @@ namespace helper
             {
                 for (col = 0; col < Form1.Sheet.ColumnCount; col++)
                 {
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower() == "brand")
+                    {
+                        Form1.OrganizedSheet[Brand, row].Value = Form1.Sheet[col, row].Value;
+                    }
                     try
                     {
-                        Regex regexSize = new Regex(@"(\d{2,3} ?[Mm][lL]?)");
-                        Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
-
-
-
-                        if (matchSize.Success)
+                        if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
                         {
+                            Form1.OrganizedSheet[Size, row].Value = Form1.Sheet[col, row].Value;
+                        }
+                        else
+                        {
+                            Regex regexSize = new Regex(@"(\d{2,3} ?[Mm][lL]?)");
+                            Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
 
-                            Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value.Replace(" ", "").ToLower();
 
+
+                            if (matchSize.Success)
+                            {
+
+                                Form1.OrganizedSheet.Rows[row].Cells[Size].Value = matchSize.Value.Replace(" ", "").ToLower();
+
+                            }
                         }
                     }
                     catch { }
+
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("name"))
+                    {
+                        Form1.OrganizedSheet[PerfumeName, row].Value = Form1.Sheet[col, row].Value;
+                    }
+
                     try
                     {
 
@@ -191,7 +208,18 @@ namespace helper
 
                     }
                     catch (Exception) { }
-                    
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("price"))
+                    {
+                        Form1.OrganizedSheet[Price, row].Value = Form1.Sheet[col, row].Value;
+                    }
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("link"))
+                    {
+                        Form1.OrganizedSheet[Link, row].Value = Form1.Sheet[col, row].Value;
+                    }
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qty") || Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qua"))
+                    {
+                        Form1.OrganizedSheet[Quantity, row].Value = Form1.Sheet[col, row].Value;
+                    }
 
 
 

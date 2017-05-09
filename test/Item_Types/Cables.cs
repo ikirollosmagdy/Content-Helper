@@ -60,34 +60,54 @@ namespace helper
                     try
                     {
                         Form1.OrganizedSheet[0, row].Value = Convert.ToString(row + 1);
+                        
                     }
                     catch { }
+
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower()=="brand")
+                    {
+                        Form1.OrganizedSheet[Brand, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                    }
+
                     try
                     {
-                        Regex regexSize = new Regex(@"(\d{1,2} ?[Mm])|(\d{2,3} ?[Cc][Mm])");
-                        Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
-
-
-
-                        if (matchSize.Success)
+                        if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("length")) {
+                            Form1.OrganizedSheet[Length,row].Value=Form1.Sheet[col,row].Value.ToString().Replace(" ", "").ToLower();
+                        }
+                        else
                         {
+                            Regex regexSize = new Regex(@"(\d{1,2} ?[Mm])|(\d{2,3} ?[Cc][Mm])");
+                            Match matchSize = regexSize.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
 
-                            Form1.OrganizedSheet.Rows[row].Cells[Length].Value = matchSize.Value.Replace(" ", "").ToLower();
 
+
+                            if (matchSize.Success)
+                            {
+
+                                Form1.OrganizedSheet.Rows[row].Cells[Length].Value = matchSize.Value.Replace(" ", "").ToLower();
+
+                            }
                         }
                     }
                     catch { }
                     try
                     {
-                        Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
-                        MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
+                        if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("color")) {
 
-
-                        if (matchColor.Count > 0)
+                            Form1.OrganizedSheet[Colors, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                        }
+                        else
                         {
-                            Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value.Trim();
+                            Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
+                            MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
 
 
+                            if (matchColor.Count > 0)
+                            {
+                                Form1.OrganizedSheet[Colors, row].Value = matchColor[0].Value.Trim();
+
+
+                            }
                         }
                     }
                     catch { }
@@ -95,18 +115,38 @@ namespace helper
                     {
                         for (int y = 1; y < Form1.Sheet.ColumnCount; y++)
                         {
-                            Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/|])?)?\w+([-|/|])?\d+(\w+|\d+)?([-|/|])?(\w+|\d+)?)");
-                            MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
+                            if (Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("model")|| Form1.Sheet.Columns[y].HeaderText.ToLower().Contains("code")) {
 
-
-                            if (matchModel.Count > 0)
-                            {
-                                Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
+                                Form1.OrganizedSheet[Model, row].Value = Form1.Sheet[y, row].Value.ToString().Trim();
                                 break;
+                            }
+                            else
+                            {
+                                Regex regexModel = new Regex(@"(?!\s+)((\w+([-|/|])?)?\w+([-|/|])?\d+(\w+|\d+)?([-|/|])?(\w+|\d+)?)");
+                                MatchCollection matchModel = regexModel.Matches(Form1.Sheet[y, row].Value.ToString());
+
+
+                                if (matchModel.Count > 0)
+                                {
+                                    Form1.OrganizedSheet[Model, row].Value = matchModel[0].Value;
+                                    break;
+                                }
                             }
                         }
                     }
                     catch { }
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("price"))
+                    {
+                        Form1.OrganizedSheet[Price, row].Value = Form1.Sheet[col, row].Value;
+                    }
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("link"))
+                    {
+                        Form1.OrganizedSheet[Link, row].Value = Form1.Sheet[col, row].Value;
+                    }
+                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qty")|| Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("qua"))
+                    {
+                        Form1.OrganizedSheet[Quantity, row].Value = Form1.Sheet[col, row].Value;
+                    }
 
                 }
             }
