@@ -585,6 +585,7 @@ namespace helper
                         PBar.Visible = true;
                         txtStatus.Text = "Saving...";
                         exportToExcel(Sheet, OrganizedSheet, "Organized");
+                        Report();
                         e.Cancel = false;
 
                     }
@@ -592,6 +593,7 @@ namespace helper
                 }
                 else if (result == DialogResult.No)
                 {
+                    Report();
                     e.Cancel = false;
                 }
                 else
@@ -601,13 +603,6 @@ namespace helper
             }
         }
 
-        private void toolStripButton5_Click_1(object sender, EventArgs e)
-        {
-
-
-
-
-        }
 
         private void CleartoolOrgMenu_Click(object sender, EventArgs e)
         {
@@ -828,7 +823,7 @@ namespace helper
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Report();
+          //  Report();
         }
 
         private void WorkerAnalyze_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -878,6 +873,8 @@ namespace helper
                 EnglishTxtBox.Select(fy, currentlinetext.Length);
                 EnglishTxtBox.SelectionBackColor = System.Drawing.Color.LightGreen;
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
+                EnglishTxtBox.ScrollToCaret();
+              //  ArabicTxtBox.ScrollToCaret();
             }
             catch { }
         }
@@ -895,10 +892,10 @@ namespace helper
             Database db = new Database();
             string[][] array = (string[][])e.Argument;
 
-
             for (int x = 0; x < array.Length; x++)
             {
                 db.AddRecord(array[x][0], array[x][1]);
+                Workertranslation.ReportProgress((x/array.Length)*100);
             }
 
 
@@ -965,6 +962,11 @@ namespace helper
 
             }
             catch { }
+        }
+
+        private void Workertranslation_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            PBar.Value = e.ProgressPercentage;
         }
 
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
