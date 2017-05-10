@@ -190,6 +190,7 @@
             this.GridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridView1_CellEndEdit);
             this.GridView1.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_CellMouseMove);
             this.GridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_ColumnHeaderMouseClick);
+            this.GridView1.ColumnHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_ColumnHeaderMouseDoubleClick);
             this.GridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.GridView1_RowHeaderMouseClick);
             this.GridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GridView1_KeyDown);
             // 
@@ -450,7 +451,8 @@
             "Mobile Phone Accessories (26)",
             "Perfumes & Fragrances perfumes (478)",
             "Power Banks power (562)",
-            "Refrigerators & Freezers refrigerators (531)"});
+            "Refrigerators & Freezers refrigerators (531)",
+            "Tablet Accessories (181)"});
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.DropCat.Name = "DropCat";
             this.DropCat.Size = new System.Drawing.Size(250, 25);

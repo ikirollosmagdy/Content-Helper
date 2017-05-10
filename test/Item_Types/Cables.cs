@@ -13,6 +13,7 @@ namespace helper
     public class Cables
     {
         Database db = new Database();
+        Common_Use common = new Common_Use();
         int Brand = 1, Model = 2, Type = 3, Colors = 4, Length = 5, Device = 6,
             Link = 7, Price = 8, Quantity = 9, UnTranslatedCount = 0;
 
@@ -216,7 +217,7 @@ namespace helper
                 db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[5, row].Value = ArTitle;
-            if (db.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
             {
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -227,7 +228,7 @@ namespace helper
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[6, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[6, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[6, row].Value.ToString()))
             {
                 Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -251,7 +252,7 @@ namespace helper
             Form1.BulkSheet[7, row].Value = "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +
                db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
                 "</li> <li>متوافق مع :" + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li> </ul>";
-            if (db.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
                 Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -269,7 +270,7 @@ namespace helper
                 Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[Type, row].Value;
             }
             Form1.BulkSheet[8, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
                 Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -279,7 +280,7 @@ namespace helper
         {
             Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Device, row].Value;
             Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
                 Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;

@@ -15,8 +15,8 @@ namespace helper
     {
 
         Database db = new Database();
-
-          int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
+        Common_Use common = new Common_Use();
+        int Brand = 1, Gender = 5, Size = 4, Type = 3, PerfumeName = 2,
             ExtraData = 7, FregFamily = 6,UnTranslatedCount=0,Link=8,Price=9,Quantity=10;
        
 
@@ -165,13 +165,13 @@ namespace helper
                         MatchCollection matchGender = regexGender.Matches(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchGender.Count > 1)
                         {
-                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = db.getReplacement(matchGender[0].Value) + ", " + db.getReplacement(matchGender[1].Value);
+                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = common.getReplacement(matchGender[0].Value) + ", " + common.getReplacement(matchGender[1].Value);
 
                         }
                         else
                         {
                             //  Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = textInfo.ToTitleCase(matchGender[0].Value);
-                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = db.getReplacement(matchGender[0].Value);
+                            Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = common.getReplacement(matchGender[0].Value);
 
                         }
 
@@ -185,7 +185,7 @@ namespace helper
                         if (matchType.Success)
                         {
 
-                            addTypeAttrib(row, Type, db.getReplacement(matchType.Value));
+                            addTypeAttrib(row, Type, common.getReplacement(matchType.Value));
 
 
                         }
@@ -254,7 +254,7 @@ namespace helper
                 + db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()) + " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) +
                 " - " + db.getRecord(Form1.OrganizedSheet[Type, row].EditedFormattedValue.ToString()) + "، " + db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
 
-            if(db.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            if(common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
                 Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -286,7 +286,7 @@ namespace helper
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue.ToString()) + "</li> <li>اسم العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString()) + "</li> <li>الحجم: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString()) + "</li> </ul>";
-            if (db.CheckEnglish(Form1.BulkSheet.Rows[row].Cells[10].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet.Rows[row].Cells[10].Value.ToString()))
             {
                 Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -302,7 +302,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[1].Value = Form1.OrganizedSheet.Rows[row].Cells[Brand].Value;
             Form1.BulkSheet.Rows[row].Cells[9].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Brand].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
                 Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -322,7 +322,7 @@ namespace helper
 
                 Form1.BulkSheet.Rows[row].Cells[11].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[3].Value.ToString());
 
-                if (db.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
+                if (common.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
                 {
                     Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;
                     UnTranslatedCount++;
@@ -353,7 +353,7 @@ namespace helper
             {
                 Database db = new Database();
                 Form1.BulkSheet.Rows[row].Cells[13].Value = db.getRecord(Form1.BulkSheet.Rows[row].Cells[5].Value.ToString());
-                if (db.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
+                if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
                 {
                     Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
                     UnTranslatedCount++;
@@ -371,7 +371,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[6].Value = Form1.OrganizedSheet.Rows[row].Cells[FregFamily].EditedFormattedValue;
             Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[FregFamily].EditedFormattedValue.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
             {
                 Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -386,7 +386,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet.Rows[row].Cells[7].Value = Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value;
             Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;

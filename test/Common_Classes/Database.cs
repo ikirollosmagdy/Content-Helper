@@ -224,46 +224,7 @@ namespace helper
             sqlite_conn.Close();
         }
 
-        public string getReplacement(string Text)
-        {
-            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-            string arabicMatch = Text;
-            if (Text != null)
-            {
-                Text = Text.ToLower().Trim();
-                try
-                {
-                    foreach (string line in System.IO.File.ReadAllLines("lookup.dat"))
-                    {
-
-                        if (line.Contains(Text))
-                            arabicMatch = line.Split('	')[1];
-
-                    }
-                }
-                catch (Exception)
-                {
-                    arabicMatch = "";
-                }
-            }
-            return textInfo.ToTitleCase(arabicMatch);
-        }
-        public bool CheckEnglish(string text)
-        {
-            bool IsEnglish = false;
-            Regex regex = new Regex(@"[^pulbi<>\/\d\.,\s]([a-zA-Z])");
-            Match match = regex.Match(text);
-            if (match.Success)
-            {
-                IsEnglish = true;
-            }
-            else
-            {
-                IsEnglish = false;
-            }
-
-            return IsEnglish;
-        }
+     
 
         
     }

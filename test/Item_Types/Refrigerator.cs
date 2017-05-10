@@ -17,6 +17,7 @@ namespace helper
         int Brand = 1, Model = 2, Type = 3, Capacity = 4, Colors = 5, Des = 6, Dims = 7, Material = 8
            , style = 9, Shipping=10, Link = 11, Price = 12, Quantity = 13, UnTranslatedCount=0;
         Database db = new Database();
+        Common_Use common = new Common_Use();
 
         private void setupTable()
         {
@@ -80,7 +81,7 @@ namespace helper
                         Match matchSize = regexSize.Match(Form1.Sheet[col, row].Value.ToString());
                         if (matchSize.Success)
                         {
-                            Form1.OrganizedSheet[Type, row].Value = db.getReplacement(matchSize.Value);
+                            Form1.OrganizedSheet[Type, row].Value = common.getReplacement(matchSize.Value);
 
                          }
                     }
@@ -226,7 +227,7 @@ namespace helper
             Form1.BulkSheet[12, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + " " +
                 db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + db.getRecord(Form1.OrganizedSheet[Capacity, row].Value.ToString())
                 + " " + Form1.OrganizedSheet[Model, row].Value + " - " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
             {
                 Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -243,7 +244,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
                 Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -259,7 +260,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase( Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -287,7 +288,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Material, row].Value;
             Form1.BulkSheet[19, row].Value = db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[19, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[19, row].Value.ToString()))
             {
                 Form1.BulkSheet[19, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -320,7 +321,7 @@ namespace helper
 
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[14, row].Value = ArDes;
-            if (db.CheckEnglish(ArDes))
+            if (common.CheckEnglish(ArDes))
             {
                 Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -383,7 +384,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[10, row].Value = Form1.OrganizedSheet[style, row].Value;
             Form1.BulkSheet[21, row].Value = db.getRecord(Form1.OrganizedSheet[style, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[19, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[19, row].Value.ToString()))
             {
                 Form1.BulkSheet[19, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;

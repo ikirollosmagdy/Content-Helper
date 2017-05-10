@@ -14,7 +14,7 @@ namespace helper
     {
         int Brand = 1, Model = 2, type = 3, colors = 4, Desc = 5, Link = 6, price = 7, Quantity = 8
             , UnTranslatedCount = 0;
-
+        Common_Use common = new Common_Use();
         private void setupTable()
         {
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
@@ -169,7 +169,7 @@ namespace helper
             Form1.BulkSheet[4, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString()) + " من " +
                 db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + " " + Form1.OrganizedSheet[Model, row].Value +
                 "، " + db.getRecord(Form1.OrganizedSheet[colors, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[4, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[4, row].Value.ToString()))
             {
                 Form1.BulkSheet[4, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -185,7 +185,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
             Form1.BulkSheet[5, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
             {
                 Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -217,7 +217,7 @@ namespace helper
                 db.getRecord(Form1.OrganizedSheet[colors, row].Value.ToString())+ "</li></ul>";
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[6, row].Value = ArDes;
-            if (db.CheckEnglish(ArDes))
+            if (common.CheckEnglish(ArDes))
             {
                 Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
@@ -232,7 +232,7 @@ namespace helper
             Database db = new Database();
             Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[type, row].Value;
             Form1.BulkSheet[7, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString());
-            if (db.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
                 Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;

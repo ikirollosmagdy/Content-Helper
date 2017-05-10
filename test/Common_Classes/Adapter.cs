@@ -33,6 +33,10 @@ namespace helper
                     Mobile_Accessories acc = new Mobile_Accessories();
                     acc.Organize();
                     break;
+                case "Tablet Accessories (181)":
+                    Tablet_Accessories Tabacc = new Tablet_Accessories();
+                    Tabacc.Organize();
+                    break;
 
                 case "Cable (29)":
                     Cables cable = new Cables();
@@ -90,6 +94,12 @@ namespace helper
                     Mobile_Accessories acc = new Mobile_Accessories();
                     acc.createBulk();
                     break;
+                case "Tablet Accessories (181)":
+                    Tablet_Accessories Tabacc = new Tablet_Accessories();
+                    Tabacc.createBulk();
+                    break;
+
+
                 case "Cable (29)":
                     Cables cable = new Cables();
                     cable.createBulk();

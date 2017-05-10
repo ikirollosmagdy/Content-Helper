@@ -147,8 +147,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapter.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="Common_Classes\Adapter.cs" />
+    <Compile Include="Common_Classes\Common_Use.cs" />
+    <Compile Include="Common_Classes\Database.cs" />
     <Compile Include="DeveloperForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +181,7 @@
     <Compile Include="Item_Types\Charger.cs" />
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Item_Types\PowerBank.cs" />
+    <Compile Include="Item_Types\Tablet Accessories.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Item_Types\Refrigerator.cs" />

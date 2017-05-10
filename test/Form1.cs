@@ -969,6 +969,12 @@ namespace helper
             PBar.Value = e.ProgressPercentage;
         }
 
+        private void GridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string header = Sheet.Columns[e.ColumnIndex].HeaderText;
+            Sheet.Columns[e.ColumnIndex].HeaderText = Interaction.InputBox("Change column header from "+header+" to be ?", "Rename Header Title");
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
