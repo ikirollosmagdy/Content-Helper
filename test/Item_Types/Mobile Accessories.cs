@@ -215,6 +215,8 @@ namespace helper
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             string title = "", ArTitle = "";
+          
+            
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
                 title = Form1.OrganizedSheet[Brand, row].Value + " " + Form1.OrganizedSheet[Model, row].Value + " ";
@@ -224,7 +226,7 @@ namespace helper
                 Form1.OrganizedSheet[MobileModel, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[8, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + " ل" + db.getRecord(Form1.OrganizedSheet[Mobile, row].Value.ToString()) +
-                " " + db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + " " + ArTitle + "، " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+                " " + db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + " " + ArTitle + "، " + common.getColorMulti(Form1.OrganizedSheet[Colors,row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
                 Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
@@ -267,7 +269,7 @@ namespace helper
                 "</li><li>Material: " + Form1.OrganizedSheet[Material, row].Value + "</li><li>High Quality Product</li>";
             Form1.BulkSheet[10, row].Value = "<li>العلامه التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li><li>نوع المنتج: " +
                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع: " + db.getRecord(Form1.OrganizedSheet[Mobile, row].Value.ToString()) + " " +
-               db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + "</li><li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) +
+               db.getRecord(Form1.OrganizedSheet[MobileModel, row].Value.ToString()) + "</li><li>اللون: " + common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString()) +
                 "</li><li>الخامة: " + db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString()) + "</li><li>منتج عالي الجودة</li>";
             if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
             {
@@ -281,9 +283,10 @@ namespace helper
         }
         private void setColor(int row)
         {
+          
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
-            Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
+            Form1.BulkSheet[11, row].Value = common.getColorMulti(Form1.BulkSheet[3, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
             {
                 Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;

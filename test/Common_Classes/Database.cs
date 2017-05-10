@@ -15,7 +15,9 @@ namespace helper
         static string Databasepath = Properties.Settings.Default.DatabasePath;
 
 
-
+        ///<summary>
+        ///Adding new words to database
+        ///</summary>
         public void AddRecord(string english, string arabic)
         {
             SQLiteConnection sqlite_conn;
@@ -51,6 +53,9 @@ namespace helper
             sqlite_conn.Close();
             Form1.LogWrite(string.Format("Translated \"{0}\" to \"{1}\"", english, arabic));
         }
+        ///<summary>
+        ///Gets translated word from database
+        ///</summary>
         public string getRecord(string english)
         {
             english = english.Trim().ToLower();
@@ -112,6 +117,9 @@ namespace helper
             return arabic;
         }
 
+        ///<summary>
+        ///Gets suggestted EAN for item
+        ///</summary>
         public string getEAN(string title)
         {
             List<string> eans = new List<string>();
@@ -157,6 +165,9 @@ namespace helper
 
         }
 
+        ///<summary>
+        ///Gets Translator passwords
+        ///</summary>
         public string getUserPassword(string UserName)
         {
 
@@ -195,7 +206,9 @@ namespace helper
 
             return password;
         }
-
+        ///<summary>
+        ///Adds translation member
+        ///</summary>
         public void AddTranslationMember(string Username, string Password)
         {
             SQLiteConnection sqlite_conn;

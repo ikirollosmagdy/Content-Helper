@@ -17,6 +17,9 @@ namespace helper
 {
   public  class Common_Use
     {
+        ///<summary>
+        ///Gets the replacement for words like family colors
+        ///</summary>
         public string getReplacement(string Text)
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
@@ -37,10 +40,15 @@ namespace helper
                 catch (Exception)
                 {
                     arabicMatch = "";
+                  
                 }
             }
             return textInfo.ToTitleCase(arabicMatch);
         }
+
+        ///<summary>
+        ///Checks if the cell has untranslated words
+        ///</summary>
         public bool CheckEnglish(string text)
         {
             bool IsEnglish = false;
@@ -57,8 +65,10 @@ namespace helper
 
             return IsEnglish;
         }
-
-        public  void sendOfflineReport()
+        ///<summary>
+        ///Send The Offline report to google sheet after Internet connection
+        ///</summary>
+        public void sendOfflineReport()
         {
             if (File.Exists("OfflineReport.dat"))
             {
@@ -136,6 +146,26 @@ namespace helper
                 }
             }
            
+        }
+
+
+        ///<summary>
+        ///Translate color cell in sperate words from database 
+        ///</summary>
+        public string getColorMulti(string text)
+        {
+            Database db = new Database();
+            string arColor = "";
+            string[] colorAr = text.Split(' ');
+            if (colorAr.Length > 1)
+            {
+                arColor = db.getRecord(colorAr[1]) + " " + db.getRecord(colorAr[0]);
+            }
+            else
+            {
+                arColor = db.getRecord(text);
+            }
+            return arColor;
         }
     }
 }

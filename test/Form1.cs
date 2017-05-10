@@ -699,10 +699,7 @@ namespace helper
 
             if (IsConnectedToInternet())
             {
-                if (System.IO.File.Exists("katana.ex_"))
-                {
-                    System.IO.File.Delete("katana.ex_");
-                }
+               
                 XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
                 var elements = document.Element("AppName");
                 Version onlineVersion = new Version(elements.Element("version").Value);
@@ -835,7 +832,10 @@ namespace helper
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-          //  Report();
+            if (System.IO.File.Exists("katana.ex_"))
+            {
+                System.IO.File.Delete("katana.ex_");
+            }
         }
 
         private void WorkerAnalyze_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
