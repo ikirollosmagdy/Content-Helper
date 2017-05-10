@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -42,24 +44,22 @@ namespace helper
         }
         private async void DownLoadFile(string source, string target)
         {
-
-
+           
 
             using (WebClient downloader = new WebClient())
             {
+                
                 // fake as if you are a browser making the request.
                 downloader.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 8.0)");
                 downloader.DownloadFileCompleted += new AsyncCompletedEventHandler(Downloader_DownloadFileCompleted);
                 downloader.DownloadProgressChanged +=
                     new DownloadProgressChangedEventHandler(Downloader_DownloadProgressChanged);
-                if (File.Exists("katana.exe.old")) {
-                    File.Delete("katana.exe.old");
-                }
-                File.Move("katana.exe", "katana.exe.old");
+               
+              
                 await downloader.DownloadFileTaskAsync(new Uri(source), target);
 
                 // wait for the current thread to complete, since the an async action will be on a new thread.
-                while (downloader.IsBusy) { }
+               while (downloader.IsBusy) {  }
             }
         }
         private void Downloader_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -88,6 +88,10 @@ namespace helper
 
         private void btnFinish_Click(object sender, EventArgs e)
         {
+            ProcessStartInfo psi = new ProcessStartInfo("ChangeLog.txt");
+            psi.UseShellExecute = true;
+            Process.Start(psi);
+          
             Application.Restart();
         }
 
@@ -105,6 +109,8 @@ namespace helper
 
             }
             ProgressTotal.Maximum = FileNames.Count - 1;
+           
+            File.Move("katana.exe", "katana.ex_");
             for (int x = 1; x < FileNames.Count; x++)
             {
                 DownLoadFile(baseUrl + FileNames[x], FileNames[x].Replace('!', ' '));

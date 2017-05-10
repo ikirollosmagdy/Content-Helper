@@ -699,6 +699,10 @@ namespace helper
 
             if (IsConnectedToInternet())
             {
+                if (System.IO.File.Exists("katana.ex_"))
+                {
+                    System.IO.File.Delete("katana.ex_");
+                }
                 XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
                 var elements = document.Element("AppName");
                 Version onlineVersion = new Version(elements.Element("version").Value);
@@ -708,6 +712,14 @@ namespace helper
                     Updater updater = new Updater("http://souqforms.atwebpages.com/");
                     updater.ShowDialog();
                 }
+               
+                Task task1 = new Task(() => {
+                    Common_Use common = new Common_Use();
+                    common.sendOfflineReport();
+                    
+                });
+                task1.Start();
+
             }
 
 
@@ -974,6 +986,8 @@ namespace helper
             string header = Sheet.Columns[e.ColumnIndex].HeaderText;
             Sheet.Columns[e.ColumnIndex].HeaderText = Interaction.InputBox("Change column header from "+header+" to be ?", "Rename Header Title");
         }
+
+      
 
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
