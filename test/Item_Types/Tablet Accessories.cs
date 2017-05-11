@@ -260,11 +260,11 @@ namespace helper
         }
         private void setDescription(int row)
         {
-            string brand = "";
+            string brand = "<ul>",arBrand= "<ul>";
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
                 brand = "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value + "</li>";
-
+                arBrand= "<ul><li>العلامه التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString())+ "</li>";
             }
 
 
@@ -272,11 +272,11 @@ namespace helper
             Form1.BulkSheet[2, row].Value = brand + "<li>Mobile Accessory Type: " +
                 Form1.OrganizedSheet[Type, row].Value + "</li><li>Compatible with: "  +
                 Form1.OrganizedSheet[TabletModel, row].Value + "</li><li>Color: " + Form1.OrganizedSheet[Colors, row].Value +
-                "</li><li>Material: " + Form1.OrganizedSheet[Material, row].Value + "</li><li>High Quality Product</li>";
-            Form1.BulkSheet[10, row].Value = "<li>العلامه التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li><li>نوع المنتج: " +
+                "</li><li>Material: " + Form1.OrganizedSheet[Material, row].Value + "</li><li>High Quality Product</li></ul>";
+            Form1.BulkSheet[10, row].Value = arBrand + "<li>نوع المنتج: " +
                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع: "  +
                db.getRecord(Form1.OrganizedSheet[TabletModel, row].Value.ToString()) + "</li><li>اللون: " + common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString()) +
-                "</li><li>الخامة: " + db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString()) + "</li><li>منتج عالي الجودة</li>";
+                "</li><li>الخامة: " + db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString()) + "</li><li>منتج عالي الجودة</li></ul>";
             if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
             {
                 Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
@@ -289,6 +289,7 @@ namespace helper
         }
         private void setColor(int row)
         {
+           
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
             Form1.BulkSheet[11, row].Value = common.getColorMulti(Form1.BulkSheet[3, row].Value.ToString());

@@ -190,7 +190,7 @@ namespace helper
             }
             title = title + Form1.OrganizedSheet[Type, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
             ArTitle = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + ArTitle + " ،" + " ،" +
-                db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+                common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[5, row].Value = ArTitle;
             if (common.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
@@ -224,10 +224,10 @@ namespace helper
                 }
             }
             catch { }
-            des = des + "<li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
-"</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li>";
-            ArDes = ArDes + "<li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +
-                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع : " + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li>";
+            des = des + "<ul><li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
+"</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li></ul>";
+            ArDes = ArDes + "<ul><li>اللون: " + common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +
+                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع : " + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li></ul>";
 
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[7, row].Value = ArDes;

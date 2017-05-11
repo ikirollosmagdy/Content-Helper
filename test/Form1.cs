@@ -969,9 +969,9 @@ namespace helper
         {
             try
             {
+                LogActionsPerType++;
                 LogActionsTotal++;
                
-
             }
             catch { }
         }

@@ -313,11 +313,11 @@ namespace helper
                 }
             }
             catch { }
-            des = des + "<li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Dimensions: " + Form1.OrganizedSheet[Dims, row].Value +
-"</li><li>Capacity: " + Form1.OrganizedSheet[Capacity, row].Value + "</li><li>Style: " + Form1.OrganizedSheet[style, row].Value + "</li>";
-            ArDes = ArDes + "<li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>الابعاد: " +
+            des = des + "<ul><li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Dimensions: " + Form1.OrganizedSheet[Dims, row].Value +
+"</li><li>Capacity: " + Form1.OrganizedSheet[Capacity, row].Value + "</li><li>Style: " + Form1.OrganizedSheet[style, row].Value + "</li></ul>";
+            ArDes = ArDes + "<ul><li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>الابعاد: " +
                 db.getRecord(Form1.OrganizedSheet[Dims, row].Value.ToString()) + "</li><li>السعة: " + db.getRecord(Form1.OrganizedSheet[Capacity, row].Value.ToString()) +
-                "</li><li>الشكل: " + db.getRecord(Form1.OrganizedSheet[style, row].Value.ToString()) + "</li>";
+                "</li><li>الشكل: " + db.getRecord(Form1.OrganizedSheet[style, row].Value.ToString()) + "</li></ul>";
 
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[14, row].Value = ArDes;

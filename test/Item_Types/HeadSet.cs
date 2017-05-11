@@ -259,18 +259,18 @@ namespace helper
             }
             catch { }
 
-            string brand = "";
+            string brand = "<ul>",arBrand= "<ul>";
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
-                brand = "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
-
+                brand = "<ul><li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
+                arBrand= "<ul><li>العلامة التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li>";
             }
            
             des = des + brand + "<li>Model: " + Form1.OrganizedSheet[Model, row].Value + "</li><li>Color: " + Form1.OrganizedSheet[Colors, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value +
-"</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li>";
-            ArDes = ArDes + "<li>العلامة التجارية: " +db.getRecord( Form1.OrganizedSheet[Brand, row].Value.ToString()) + "<li>الموديل: " +
-                db.getRecord(Form1.OrganizedSheet[Model, row].Value.ToString())+ "<li>اللون: " + db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +
-                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع : " + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li>";
+"</li><li>Compatible with: " + Form1.OrganizedSheet[Device, row].Value + "</li></ul>";
+            ArDes = ArDes + arBrand + "<li>الموديل: " +
+                db.getRecord(Form1.OrganizedSheet[Model, row].Value.ToString())+ "<li>اللون: " + common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li><li>النوع: " +
+                db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + "</li><li>متوافق مع : " + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li></ul>";
 
             Form1.BulkSheet[2, row].Value = des;
             Form1.BulkSheet[12, row].Value = ArDes;
@@ -284,7 +284,7 @@ namespace helper
         {
             TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString());
-            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+            Form1.BulkSheet[13, row].Value = common.getColorMulti(Form1.BulkSheet[3, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
                 Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;

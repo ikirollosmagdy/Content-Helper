@@ -214,7 +214,7 @@ namespace helper
             }
             title = title + Form1.OrganizedSheet[Type, row].Value + ", " + Form1.OrganizedSheet[Length, row].Value + ", " + Form1.OrganizedSheet[Colors, row].Value;
             ArTitle = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) + ArTitle + " ،" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) + " ،" +
-                db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+                common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString());
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(title);
             Form1.BulkSheet[5, row].Value = ArTitle;
             if (common.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
@@ -236,21 +236,22 @@ namespace helper
         }
         private void setDescription(int row)
         {
-            string brand = "";
+            string brand = "",arBrand="";
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
                 brand = "<ul> <li>Brand :" + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
-
+                arBrand= "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li>"; 
             }
             else {
                 brand = "<ul>";
+                arBrand = "<ul>";
             }
 
             Form1.BulkSheet[2, row].Value = brand + "<li>Color :" +
                 Form1.OrganizedSheet[Colors, row].Value + "</li> <li>Length :" + Form1.OrganizedSheet[Length, row].Value +
                 "</li> <li>Compatible with :" + Form1.OrganizedSheet[Device, row].Value + "</li> </ul>";
-            Form1.BulkSheet[7, row].Value = "<ul> <li>العلامة التجارية :" + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li> <li>اللون :" +
-               db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
+            Form1.BulkSheet[7, row].Value = arBrand+"<li>اللون :" +
+               common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString()) + "</li> <li>الطول :" + db.getRecord(Form1.OrganizedSheet[Length, row].Value.ToString()) +
                 "</li> <li>متوافق مع :" + db.getRecord(Form1.OrganizedSheet[Device, row].Value.ToString()) + "</li> </ul>";
             if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
