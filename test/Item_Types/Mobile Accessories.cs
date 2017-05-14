@@ -258,7 +258,7 @@ namespace helper
             if (Form1.OrganizedSheet[Brand, row].Value.ToString().ToLower().Trim() != "other")
             {
                 brand = "<ul><li>Brand: " + Form1.OrganizedSheet[Brand, row].Value+ "</li>";
-                arBrand= "<ul><li>Brand: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li>";
+                arBrand= "<ul><li>العلامة التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li>";
             }
 
 
@@ -364,7 +364,7 @@ namespace helper
         {
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Mobile, row].Value+" "+ Form1.OrganizedSheet[MobileModel, row].Value;
            
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value.ToString());
+            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[Mobile, row].Value.ToString())+" "+ db.getRecord(Form1.BulkSheet[MobileModel, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;

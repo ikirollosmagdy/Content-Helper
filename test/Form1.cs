@@ -290,7 +290,7 @@ namespace helper
 
             }
 
-
+            LogActionsTotal++;
         }
 
         private void GridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -987,7 +987,10 @@ namespace helper
             Sheet.Columns[e.ColumnIndex].HeaderText = Interaction.InputBox("Change column header from "+header+" to be ?", "Rename Header Title");
         }
 
-      
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
 
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -1022,6 +1025,7 @@ namespace helper
         }
         public void exportToExcel(DataGridView Grid, DataGridView Grid2, string SheetName)
         {
+            DropCat.GetCurrentParent().Invoke(new System.Action(() => LogItemTypes.Add(DropCat.SelectedItem.ToString())));
             for (int g = 0; g < BulkSheet.RowCount; g++)
             {
                 if (BulkSheet[0, g] != null || BulkSheet[0, g].Value != null || BulkSheet[0, g].Value.ToString() != string.Empty)
@@ -1143,7 +1147,7 @@ namespace helper
                 {
                     LogSavedFile.Add(saveDialog.FileName);
                     LogActionList.Add(LogActionsPerType);
-                    DropCat.GetCurrentParent().Invoke(new System.Action(() => LogItemTypes.Add(DropCat.SelectedItem.ToString())));
+                   
                     LogActionsTotal += LogActionsTotal;
 
                 }
@@ -1175,12 +1179,12 @@ namespace helper
                 LogWrite(string.Format("|Saved file names\t\t\t\t\t\t\t\t\t|"));
                 for (int x = 0; x < LogSavedFile.Count; x++)
                 {
-                    LogWrite(string.Format("|   -Name:{0}\t\t\t\t|", LogSavedFile[x]));
+                    LogWrite(string.Format("|   -Name:{0}\t\t\t\t\n|", LogSavedFile[x]));
                 }
                 LogWrite(string.Format("|Item type names\t\t\t\t\t\t\t\t\t|"));
                 for (int y = 0; y < LogItemTypes.Count; y++)
                 {
-                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions\t\t\t\t\t|", LogItemTypes[y], LogActionList[y]));
+                    LogWrite(string.Format("|   -Item type name:{0} with {1} actions\t\t\t\t\t\n|", LogItemTypes[y], LogActionList[y]));
                 }
                 LogWrite("+====================================================================================+");
             }
