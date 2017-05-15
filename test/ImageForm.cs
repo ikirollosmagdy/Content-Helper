@@ -6,10 +6,14 @@ namespace helper
 {
     public partial class ImageForm : Form
     {
-       public string Url;
-        public ImageForm()
+       public static string Urls;
+         string[] arrUrls;
+        int imagecount = -1;
+        public ImageForm(string url)
         {
             InitializeComponent();
+            Urls = url;
+            arrUrls= url.Split('\n');
         }
 
         private void ImageForm_Activated(object sender, EventArgs e)
@@ -20,7 +24,7 @@ namespace helper
 
         private void ImageForm_Load(object sender, EventArgs e)
         {
-
+          
         }
 
         private void pictureBox1_LoadCompleted(object sender, AsyncCompletedEventArgs e)
@@ -48,8 +52,32 @@ namespace helper
         private void ImageForm_Shown(object sender, EventArgs e)
         {
             progressBar1.Show();
+            imagecount++;
+            pictureBox1.LoadAsync(arrUrls[imagecount]);
+        }
+
+        private void toolStripStatusLabel3_Click(object sender, EventArgs e)
+        {
+            if (imagecount == arrUrls.Length-1)
+            {
+                return;
+            }
+            imagecount++;
+            progressBar1.Show();
+            pictureBox1.LoadAsync(arrUrls[imagecount]);
             
-            pictureBox1.LoadAsync(Url);
+        }
+
+        private void toolStripStatusLabel4_Click(object sender, EventArgs e)
+        {
+            if (imagecount == 0)
+            {
+                return;
+            }
+            imagecount--;
+            progressBar1.Show();
+            pictureBox1.LoadAsync(arrUrls[imagecount]);
+           
         }
     }
 }

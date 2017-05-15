@@ -423,8 +423,8 @@ namespace helper
             {
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString().Contains("http"))
                 {
-                    ImageForm img = new ImageForm();
-                    img.Url = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
+                    ImageForm img = new ImageForm(OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString());
+                  
                     img.Show();
                 }
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
@@ -755,6 +755,7 @@ namespace helper
 
             }
             catch { }
+
         }
 
 
@@ -992,6 +993,19 @@ namespace helper
 
         }
 
+        private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            OrganizedSheet[e.ColumnIndex, e.RowIndex].Value = DBNull.Value;
+            MessageBox.Show("Please choose one from droplist");
+            if (e.Exception!=null && e.Context== DataGridViewDataErrorContexts.Display)
+            {
+                MessageBox.Show("Please choose one from droplist");
+                e.Cancel = true;
+                e.ThrowException = false;
+               
+            }
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
@@ -1036,7 +1050,7 @@ namespace helper
             }
             //Getting the location and file name of the excel to save from user. 
             SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*";
+            saveDialog.Filter = "Excel files (*.xlsx)|*.xlsx";
             saveDialog.FilterIndex = 1;
             if (saveDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -1141,20 +1155,24 @@ namespace helper
                     excel = null;
 
                 }
-                LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName));
+              
+            }
+            LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName));
 
-                try
-                {
-                    LogSavedFile.Add(saveDialog.FileName);
-                    LogActionList.Add(LogActionsPerType);
-                   
-                    LogActionsTotal += LogActionsTotal;
+            if (saveDialog.ShowDialog() != DialogResult.OK) {
+                saveDialog.FileName = "N/A";
+            }
+            try
+            {
+                LogSavedFile.Add(saveDialog.FileName);
+                LogActionList.Add(LogActionsPerType);
 
-                }
-                catch
-                {
+                LogActionsTotal += LogActionsTotal;
 
-                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -1237,26 +1255,27 @@ namespace helper
                     string types = string.Empty;
                     for (int x = 0; x < LogSavedFile.Count; x++)
                     {
-                        names += string.Format("Name: {0}\n", LogSavedFile[x]).Trim();
+                        names += string.Format("Name: {0}\n", LogSavedFile[x]);
                     }
                     for (int y = 0; y < LogItemTypes.Count; y++)
                     {
-                        types += string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]).Trim();
+                        types += string.Format("{0} with {1} actions\n", LogItemTypes[y], LogActionList[y]);
                     }
 
                     TimeSpan duration = DateTime.Now - _start;
+                   
                     string du = string.Format("{0:hh\\:mm\\:ss}", duration);
                     var oblist = new List<object>() {
                     Environment.UserName, LogListedItems,
                     LogTranslatedLines,
                     _start.ToString(),
                     DateTime.Now.ToString(),
-                    du,
-                    string.Format("{0:hh\\:mm\\:ss}",STImported.Elapsed).Trim(),
-                     string.Format("{0:hh\\:mm\\:ss}",STBulk.Elapsed).Trim(),
+                    du,             
+            string.Format("{0:hh\\:mm\\:ss}",STImported.Elapsed).Trim(),
+                            string.Format("{0:hh\\:mm\\:ss}",STBulk.Elapsed).Trim(),
                       string.Format("{0:hh\\:mm\\:ss}",STTranslation.Elapsed).Trim(),
                     LogActionsTotal,
-                    names,types
+                    names.Trim(),types.Trim()
                 };
                     valueRange.Values = new List<IList<object>> { oblist };
 
