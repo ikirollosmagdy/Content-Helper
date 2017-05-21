@@ -453,7 +453,8 @@
             "Perfumes & Fragrances perfumes (478)",
             "Power Banks power (562)",
             "Refrigerators & Freezers refrigerators (531)",
-            "Tablet Accessories (181)"});
+            "Tablet Accessories (181)",
+            "Watches (490)"});
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
             this.DropCat.Name = "DropCat";
             this.DropCat.Size = new System.Drawing.Size(250, 25);

@@ -252,7 +252,7 @@ namespace helper
 
             Form1.BulkSheet[8, row].Value = "عطر " + db.getRecord(Form1.OrganizedSheet[PerfumeName, row].Value.ToString()) + " ل"
                 + db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()) + " من " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) +
-                " - " + db.getRecord(Form1.OrganizedSheet[Type, row].EditedFormattedValue.ToString()) + "، " + db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
+                " - " + db.getRecord(Form1.OrganizedSheet[Type, row].EditedFormattedValue.ToString()) + "، " + Form1.OrganizedSheet[Size, row].Value.ToString().Replace("ml","مل");
 
             if(common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
@@ -285,7 +285,7 @@ namespace helper
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Gender].Value.ToString()) + "</li> <li>النوع العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue.ToString()) + "</li> <li>اسم العطر: "
                 + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[PerfumeName].Value.ToString()) + "</li> <li>الحجم: "
-                + db.getRecord(Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString()) + "</li> </ul>";
+                + Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString().Replace("ml","مل") + "</li> </ul>";
             if (common.CheckEnglish(Form1.BulkSheet.Rows[row].Cells[10].Value.ToString()))
             {
                 Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
@@ -336,7 +336,7 @@ namespace helper
         }
           void setSize(int row)
         {
-            Form1.BulkSheet.Rows[row].Cells[4].Value = Form1.OrganizedSheet.Rows[row].Cells[Size].Value;
+            Form1.BulkSheet.Rows[row].Cells[4].Value = Form1.OrganizedSheet.Rows[row].Cells[Size].Value.ToString().Replace(" ","");
             if (Form1.OrganizedSheet.Rows[row].Cells[Size].Value != null)
             {
                 

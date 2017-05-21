@@ -54,6 +54,10 @@ namespace helper
                     HeadSet headSet = new HeadSet();
                     headSet.Organize();
                     break;
+                case "Watches (490)":
+                    Watches watches = new Watches();
+                    watches.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -116,6 +120,10 @@ namespace helper
                 case "Headphones & Headsets (373)":
                     HeadSet headSet = new HeadSet();
                     headSet.createBulk();
+                    break;
+                case "Watches (490)":
+                    Watches watches = new Watches();
+                    watches.createBulk();
                     break;
 
                 default:
