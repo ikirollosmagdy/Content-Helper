@@ -182,6 +182,7 @@
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Item_Types\PowerBank.cs" />
     <Compile Include="Item_Types\Tablet Accessories.cs" />
+    <Compile Include="Item_Types\Tops.cs" />
     <Compile Include="Item_Types\Watches.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

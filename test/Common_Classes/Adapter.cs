@@ -58,6 +58,10 @@ namespace helper
                     Watches watches = new Watches();
                     watches.Organize();
                     break;
+                case "Tops (488)":
+                    Tops tops = new Tops();
+                    tops.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -124,6 +128,10 @@ namespace helper
                 case "Watches (490)":
                     Watches watches = new Watches();
                     watches.createBulk();
+                    break;
+                case "Tops (488)":
+                    Tops tops = new Tops();
+                    tops.createBulk();
                     break;
 
                 default:
