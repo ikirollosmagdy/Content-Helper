@@ -62,6 +62,10 @@ namespace helper
                     Tops tops = new Tops();
                     tops.Organize();
                     break;
+                case "Casual & Dress Shoes (481)":
+                    Casual_Shoes shoes = new Casual_Shoes();
+                    shoes.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -132,6 +136,10 @@ namespace helper
                 case "Tops (488)":
                     Tops tops = new Tops();
                     tops.createBulk();
+                    break;
+                case "Casual & Dress Shoes (481)":
+                    Casual_Shoes shoes = new Casual_Shoes();
+                    shoes.createBulk();
                     break;
 
                 default:
