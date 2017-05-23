@@ -276,9 +276,9 @@ namespace helper
             }
         }
         private void setDescription(int row) {
-            Form1.BulkSheet[2, row].Value = string.Format("<p><strong>Product Features:</strong></p><ul><li>Brand:{0}</li><li>Model Number:{1}</li><li>Type:{2}</li><li>Watch Shape:{3}</li><li>Band Material:{4}</li><li>Display Type:{5}</li><li>Targeted Group:{6}</li></ul> ",
+            Form1.BulkSheet[2, row].Value = string.Format("<p><b>Product Features:</b></p><ul><li>Brand:{0}</li><li>Model Number:{1}</li><li>Type:{2}</li><li>Watch Shape:{3}</li><li>Band Material:{4}</li><li>Display Type:{5}</li><li>Targeted Group:{6}</li></ul> ",
                 Form1.OrganizedSheet[Brand,row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Type, row].Value, Form1.OrganizedSheet[WatchShap, row].Value, Form1.OrganizedSheet[BandMaterial, row].Value, Form1.OrganizedSheet[DisplayType, row].Value, Form1.OrganizedSheet[Gender, row].Value);
-            Form1.BulkSheet[11, row].Value = string.Format("<p><strong>خصائص المنتج:</strong></p><ul><li>العلامة التجارية:{0}</li><li>رقم الموديل:{1}</li><li>النوع:{2}</li><li>الشكل:{3}</li><li>خامة السوار:{4}</li><li>نوع العرض:{5}</li><li>المجموعة المستهدفة:{6}</li></ul>",
+            Form1.BulkSheet[11, row].Value = string.Format("<p><b>خصائص المنتج:</b></p><ul><li>العلامة التجارية:{0}</li><li>رقم الموديل:{1}</li><li>النوع:{2}</li><li>الشكل:{3}</li><li>خامة السوار:{4}</li><li>نوع العرض:{5}</li><li>المجموعة المستهدفة:{6}</li></ul>",
             db.getRecord( Form1.OrganizedSheet[Brand, row].Value.ToString()), Form1.OrganizedSheet[Model, row].Value, db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
             db.getRecord(Form1.OrganizedSheet[WatchShap, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[BandMaterial, row].Value.ToString()),
            db.getRecord(Form1.OrganizedSheet[DisplayType, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()));

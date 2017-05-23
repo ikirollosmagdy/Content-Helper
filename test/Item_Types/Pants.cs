@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace helper
 {
-    public class Casual_Shoes
+  public  class Pants
     {
         Database db = new Database();
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
         Common_Use common = new Common_Use();
-        int Brand = 1, Model = 2, Style = 3, Gender = 4, Colors = 5, Size = 6, Material = 7, Occasion = 8,
+        int Brand = 1, Model = 2, Style = 3, Gender = 4, Colors = 5, Size = 6, Material = 7, Type = 8,
            Link = 10, Price = 11, Quantity = 12, UnTranslatedCount = 0, ItemConnection = 1;
+       
+
         private void setupTable()
         {
 
@@ -24,19 +26,19 @@ namespace helper
             StyleColumn.HeaderText = "Style";
             StyleColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             StyleColumn.FlatStyle = FlatStyle.Popup;
-            StyleColumn.Items.AddRange("Ballerina", "Espadrille", "Fashion Sneakers", "Flat", "Heels", "Loafers & Moccasian", "Mary Jane", "Monk", "Oxfords & Wingtip", "Slip On", "Velcro", "Wedges");
+            StyleColumn.Items.AddRange("Boot Cut", "Boyfriend", "Cargo", "Cross", "Drawstring", "Flare", "Harem", "High Waist", "Palazzo", "Pleated", "Ripped", "Skinny", "Slim Fit", "Straight");
 
             DataGridViewComboBoxColumn SizeColumn = new DataGridViewComboBoxColumn();
             SizeColumn.HeaderText = "Size";
             SizeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             SizeColumn.FlatStyle = FlatStyle.Popup;
-            SizeColumn.Items.AddRange("10 UK", "10 US", "10 US", "10.5 UK", "10.5 US", "11 UK", "11 UK", "11 US", "11.5 UK", "11.5 US", "11.5 US", "12 UK", "12 US", "12 US", "12.5 UK", "12.5 US", "13 UK", "13 US", "13.5 UK", "13.5 US", "14 UK", "14 US", "14.5 UK", "14.5 US", "15 UK", "15 US", "27 EU", "28 EU", "29 EU", "3 UK", "3 US", "3.5 UK", "3.5 US", "30 EU", "31 EU", "32 EU", "33 EU", "34 EU", "35 EU", "35.5 EU", "36 2/3 EU", "36 EU", "36.5 EU", "36.7 EU", "37 1/3 EU", "37 EU", "37.5 EU", "38 2/3 EU", "38 EU", "38.5 EU", "39 1/3 EU", "39 EU", "39.5 EU", "4 UK", "4 US", "4.5 UK", "4.5 US", "40 2/3 EU", "40 EU", "40.5 EU", "41 1/3 EU", "41 EU", "41.5 EU", "42 2/3 EU", "42 EU", "42.5 EU", "43 1/3 EU", "43 EU", "43.3 EU", "43.5 EU", "44 2/3 EU", "44 EU", "44.5 EU", "45 EU", "45.5 EU", "46 EU", "46.5 EU", "47 EU", "48 EU", "48.5 EU", "49 EU", "5 UK", "5 US", "5.5 UK", "5.5 US", "6 UK", "6 US", "6.5 UK", "6.5 US", "7 UK", "7 US", "7.5 UK", "7.5 US", "7.7 US", "8 UK", "8 US", "8.5 UK", "8.5 US", "9 UK", "9 US", "9.5 UK", "9.5 US");
+            SizeColumn.Items.AddRange("0 US", "10 - 11 Years", "10 UK", "10 US", "11 - 12 Years", "12 - 13 Years", "12 UK", "12 US", "13 - 14 Years", "14 - 15 Years", "14 - 16 UK", "14 UK", "14 US", "15 - 16 Years", "16 UK", "16 US", "18 - 20 UK", "18 UK", "18 US", "2 US", "20 UK", "20 US", "22 - 24 UK", "22 UK", "22 US", "24 UK", "24 US", "26 - 28 UK", "26 UK", "28 EU", "28 UK", "29 EU", "3 - 4 Years", "30 - 32 UK", "30 EU", "30 UK", "31 EU", "32 EU", "32 UK", "33 EU", "34 EU", "34 UK", "36 EU", "36 UK", "38 EU", "38 UK", "39 EU", "3XL", "4 - 5 Years", "4 UK", "4 US", "40 EU", "40 UK", "41 EU", "42 EU", "42 UK", "43 EU", "44 EU", "44 UK", "45 EU", "46 EU", "46 UK", "48 EU", "48 UK", "4XL", "5 - 6 Years", "5 Years", "50 EU", "50 UK", "52 EU", "54 EU", "56 EU", "5XL", "6 - 7 Years", "6 UK", "6 US", "6XL", "7 - 8 Years", "7XL", "8 - 9 Years", "8 UK", "8 US", "8XL", "9 - 10 Years", "Free Size", "L", "L/XL", "M", "M/L", "S", "S/M", "UK 10", "XL", "XL/XXL", "XS", "XXL", "XXS");
 
-            DataGridViewComboBoxColumn OccasionColumn = new DataGridViewComboBoxColumn();
-            OccasionColumn.HeaderText = "Occasion";
-            OccasionColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            OccasionColumn.FlatStyle = FlatStyle.Popup;
-            OccasionColumn.Items.AddRange("Casual Shoe", "Dress Shoe");
+            DataGridViewComboBoxColumn TypeColumn = new DataGridViewComboBoxColumn();
+            TypeColumn.HeaderText = "Type";
+            TypeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            TypeColumn.FlatStyle = FlatStyle.Popup;
+            TypeColumn.Items.AddRange("Capris", "Fashion Joggers", "Jeans", "Leggings", "Trousers");
 
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
@@ -50,7 +52,7 @@ namespace helper
             //  Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("size", "Size")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(SizeColumn)));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("material", "Material")));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(OccasionColumn)));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(TypeColumn)));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Image Url")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity")));
@@ -105,11 +107,11 @@ namespace helper
                     catch { }
                     try
                     {
-                        Regex regexStyle = new Regex(@"([Bb]allerina)|([Ee]spadri\w+)|([Ss]neaker)|([Ff]lat)|([Hh]eel\w+)|([Ww]edg\w+)");
-                        Match matchStyle = regexStyle.Match(Form1.Sheet[col, row].Value.ToString());
-                        if (matchStyle.Success)
+                        Regex regexType = new Regex(@"([Ll]egg?\w+)|([Jj]eans)|([Tt]rous\w+)");
+                        Match matchType = regexType.Match(Form1.Sheet[col, row].Value.ToString());
+                        if (matchType.Success)
                         {
-                            Form1.OrganizedSheet[Style, row].Value = common.getReplacement(matchStyle.Value);
+                            Form1.OrganizedSheet[Type, row].Value = common.getReplacement(matchType.Value);
 
                         }
                     }
@@ -142,7 +144,7 @@ namespace helper
                         }
                         else
                         {
-                            Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow)");
+                            Regex regexColor = new Regex(@"([Bb]eige|[Bb]lack|[Bb]lue|[Bb]rown|[Cc]lear|[Gg]old|[Gg]reen|[Gg]rey|[Mm]ulti ?[Cc]olor|[Oo]ffWhite|[Oo]range|[Pp]ink|[Pp]urple|[Rr]ed|[Ss]ilver|[Tt]urquoise|[Ww]hite|[Yy]ellow|[Nn]avy|[Ll]ight|[Dd]ark)");
                             MatchCollection matchColor = regexColor.Matches(Form1.Sheet[col, row].Value.ToString());
 
 
@@ -160,7 +162,7 @@ namespace helper
                     {
                         if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
                         {
-                            Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
+                         Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
                         }
                     }
                     catch { }
@@ -214,20 +216,20 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Des", "Description")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("color", "Color")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("size", "Size")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("gender", "Gender")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Style", "Style")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("occasion", "Occasion")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("type", "Type")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("pantStyle", "Pants Style")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Size", "Size")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Gender", "Gender")));
 
 
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArTitle", "Title Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArBran", "Brand Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArDes", "Description Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Arcolor", "Color Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Arsize", "Size Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Argender", "Gender Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArStyle", "Style Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Aroccasion", "Occasion Arabic")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Artype", "Type Arabic")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArpantStyle", "Pants Style Arabic")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArSize", "Size Arabic")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArGender", "Gender Arabic")));
 
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
@@ -247,10 +249,12 @@ namespace helper
                         setBrand(i);
                         setDescription(i);
                         setColor(i);
+                        setType(i);
+                        setStyle(i);
                         setSize(i);
                         setGender(i);
-                        setStyle(i);
-                        setOccasion(i);
+                        
+                     
 
                         setLink(i);
                         setPrice(i);
@@ -273,8 +277,8 @@ namespace helper
         {
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2} {3} for {4} - {5}",
                Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Style, row].Value,
-            Form1.OrganizedSheet[Occasion, row].Value, Form1.OrganizedSheet[Gender, row].Value, Form1.OrganizedSheet[Colors, row].Value));
-            Form1.BulkSheet[8, row].Value = string.Format("{0} {1} لل{2} من {3} {4} - {5}", db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Occasion, row].Value.ToString()),
+            Form1.OrganizedSheet[Type, row].Value, Form1.OrganizedSheet[Gender, row].Value, Form1.OrganizedSheet[Colors, row].Value));
+            Form1.BulkSheet[8, row].Value = string.Format("{0} {1} لل{2} من {3} {4} - {5}", db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
                 db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()),
                 Form1.OrganizedSheet[Model, row].Value, db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()));
             if (common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
@@ -305,6 +309,8 @@ namespace helper
                 UnTranslatedCount++;
             }
         }
+
+       
         private void setColor(int row)
         {
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
@@ -316,17 +322,21 @@ namespace helper
             }
         }
 
-
-        private void setSize(int row)
+        private void setType(int row)
         {
-            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Size, row].Value;
-            Form1.BulkSheet[12, row].Value = Form1.OrganizedSheet[Size, row].Value;
-
+            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
+            Form1.BulkSheet[12, row].Value =db.getRecord( Form1.OrganizedSheet[Size, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
+            {
+                Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
         }
-        private void setGender(int row)
+
+        private void setStyle(int row)
         {
-            Form1.BulkSheet[5, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Gender, row].Value.ToString().Trim());
-            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString());
+            Form1.BulkSheet[5, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Style, row].Value.ToString().Trim());
+            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
                 Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
@@ -334,26 +344,24 @@ namespace helper
             }
         }
 
-        private void setStyle(int row)
+        private void setSize(int row)
         {
-            Form1.BulkSheet[6, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Style, row].Value.ToString().Trim());
-            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
-            {
-                Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
-                UnTranslatedCount++;
-            }
+            Form1.BulkSheet[6, row].Value = Form1.OrganizedSheet[Size, row].Value;
+            Form1.BulkSheet[14, row].Value =db.getRecord( Form1.OrganizedSheet[Size, row].Value.ToString());
+
         }
-        private void setOccasion(int row)
+        private void setGender(int row)
         {
-            Form1.BulkSheet[7, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Occasion, row].Value.ToString().Trim());
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[Occasion, row].Value.ToString());
+            Form1.BulkSheet[7, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Gender, row].Value.ToString().Trim());
+            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
+
+       
 
         private void setLink(int row)
         {
@@ -383,7 +391,36 @@ namespace helper
         private string getSizeBulk(string text)
         {
             string value = "";
+            if (!text.ToLower().Contains("y") && !text.ToLower().Contains(" m"))
+            {
 
+
+
+                switch (text.ToLower())
+                {
+                    case "xxxl":
+                        value = "3XL";
+                        break;
+                    case "xxxxl":
+                        value = "4XL";
+                        break;
+                    case "xxxxxl":
+                        value = "5XL";
+                        break;
+                    case "xxxxxxl":
+                        value = "6XL";
+                        break;
+                    case "xxxxxxxl":
+                        value = "7XL";
+                        break;
+                    case "2xl":
+                        value = "XXL";
+                        break;
+                    default:
+                        value = text.ToUpper();
+                        break;
+                }
+            }
             try
             {
                 int si = Convert.ToInt32(text);
@@ -403,7 +440,5 @@ namespace helper
             return value.Trim();
 
         }
-
-
     }
 }

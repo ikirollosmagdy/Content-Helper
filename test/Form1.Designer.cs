@@ -451,6 +451,7 @@
             "Headphones & Headsets (373)",
             "Makeup (295)",
             "Mobile Phone Accessories (26)",
+            "Pants (477)",
             "Perfumes & Fragrances perfumes (478)",
             "Power Banks power (562)",
             "Refrigerators & Freezers refrigerators (531)",

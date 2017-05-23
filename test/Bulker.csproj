@@ -180,6 +180,7 @@
     <Compile Include="Item_Types\Makeup.cs" />
     <Compile Include="Item_Types\Mobile Accessories.cs" />
     <Compile Include="Item_Types\Charger.cs" />
+    <Compile Include="Item_Types\Pants.cs" />
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Item_Types\PowerBank.cs" />
     <Compile Include="Item_Types\Tablet Accessories.cs" />

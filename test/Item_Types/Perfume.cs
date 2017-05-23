@@ -272,7 +272,7 @@ namespace helper
         {
             Database db = new Database();
             string Des = "<p>" + Form1.OrganizedSheet.Rows[row].Cells[ExtraData].Value
-                + "</p> <p><strong>Product Features:</strong></p> <ul> <li>Brand: "
+                + "</p> <p><b>Product Features:</b></p> <ul> <li>Brand: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Brand].Value + "</li> <li>Target Group: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Gender].Value + "</li> <li>Fragrance Type: "
                 + Form1.OrganizedSheet.Rows[row].Cells[Type].EditedFormattedValue + "</li> <li>Perfume Name: "
