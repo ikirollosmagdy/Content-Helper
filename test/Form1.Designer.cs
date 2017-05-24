@@ -455,6 +455,7 @@
             "Perfumes & Fragrances perfumes (478)",
             "Power Banks power (562)",
             "Refrigerators & Freezers refrigerators (531)",
+            "Slippers (485)",
             "Tablet Accessories (181)",
             "Tops (488)",
             "Watches (490)"});

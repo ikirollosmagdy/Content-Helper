@@ -29,7 +29,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>13</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -183,6 +183,7 @@
     <Compile Include="Item_Types\Pants.cs" />
     <Compile Include="Item_Types\Perfume.cs" />
     <Compile Include="Item_Types\PowerBank.cs" />
+    <Compile Include="Item_Types\Slipper.cs" />
     <Compile Include="Item_Types\Tablet Accessories.cs" />
     <Compile Include="Item_Types\Tops.cs" />
     <Compile Include="Item_Types\Watches.cs" />
