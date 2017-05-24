@@ -180,7 +180,8 @@ namespace helper
 
                 try
                 {
-
+                    EnglishTxtBox.Clear();
+                    ArabicTxtBox.Clear();
                     txtStats.Text = "Processing";
                     PBar.Style = ProgressBarStyle.Marquee;
                     WorkerBulk.RunWorkerAsync(DropCat.SelectedItem);
@@ -1136,6 +1137,7 @@ namespace helper
 
 
                     workbook.SaveAs(saveDialog.FileName);
+                    txtStats.GetCurrentParent().Invoke(new System.Action(() => MessageBox.Show("File has been saved...!!!","Saving...")));
                     txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
                     PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
 

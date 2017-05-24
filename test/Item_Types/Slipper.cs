@@ -265,10 +265,10 @@ namespace helper
         }
         private void setTitle(int row)
         {
-            Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2} for {4} - {5}",
+            Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2} for {3} - {4}",
                Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Type, row].Value,
              Form1.OrganizedSheet[Gender, row].Value, Form1.OrganizedSheet[Colors, row].Value));
-            Form1.BulkSheet[7, row].Value = string.Format("{0} {1} لل{2} من  {4} - {5}", db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
+            Form1.BulkSheet[7, row].Value = string.Format("{0} لل{1} من {2} {3} - {4}", db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
                 db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()),
                 Form1.OrganizedSheet[Model, row].Value, db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()));
             if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
