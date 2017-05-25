@@ -448,6 +448,7 @@
             "Cable (29)",
             "Casual & Dress Shoes (481)",
             "Chargers laptop (351)",
+            "Handbags (472)",
             "Headphones & Headsets (373)",
             "Makeup (295)",
             "Mobile Phone Accessories (26)",

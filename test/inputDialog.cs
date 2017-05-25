@@ -13,6 +13,7 @@ namespace helper
 {
     public partial class inputDialog : Form
     {
+        int Count = 0;
         public inputDialog()
         {
             InitializeComponent();
@@ -36,10 +37,12 @@ namespace helper
                     {
                         Form1.OrganizedSheet.SelectedCells[x].Value = Form1.OrganizedSheet.SelectedCells[x].Value.ToString().ToLower().Replace(txtSearch.Text, txtReplace.Text);
                     }
+                    Count++;
                 }
 
 
             }
+            MessageBox.Show(string.Format("{0} cell(s) replaced", Count));
         }
         
         private void button2_Click(object sender, EventArgs e)

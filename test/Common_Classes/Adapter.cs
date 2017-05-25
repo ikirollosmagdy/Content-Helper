@@ -74,6 +74,10 @@ namespace helper
                     Slipper slipper = new Slipper();
                     slipper.Organize();
                     break;
+                case "Handbags (472)":
+                    Handbags handbag = new Handbags();
+                    handbag.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -157,6 +161,10 @@ namespace helper
                 case "Slippers (485)":
                     Slipper slipper = new Slipper();
                     slipper.createBulk();
+                    break;
+                case "Handbags (472)":
+                    Handbags handbag = new Handbags();
+                    handbag.createBulk();
                     break;
 
                 default:

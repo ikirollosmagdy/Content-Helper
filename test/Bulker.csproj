@@ -174,22 +174,23 @@
     <Compile Include="inputDialog.Designer.cs">
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Item_Types\Cables.cs" />
-    <Compile Include="Item_Types\Casual Shoes.cs" />
-    <Compile Include="Item_Types\HeadSet.cs" />
-    <Compile Include="Item_Types\Makeup.cs" />
-    <Compile Include="Item_Types\Mobile Accessories.cs" />
-    <Compile Include="Item_Types\Charger.cs" />
-    <Compile Include="Item_Types\Pants.cs" />
-    <Compile Include="Item_Types\Perfume.cs" />
-    <Compile Include="Item_Types\PowerBank.cs" />
-    <Compile Include="Item_Types\Slipper.cs" />
-    <Compile Include="Item_Types\Tablet Accessories.cs" />
-    <Compile Include="Item_Types\Tops.cs" />
-    <Compile Include="Item_Types\Watches.cs" />
+    <Compile Include="Item_Types\CCC\Cables.cs" />
+    <Compile Include="Item_Types\FASHION\Casual Shoes.cs" />
+    <Compile Include="Item_Types\CCC\HeadSet.cs" />
+    <Compile Include="Item_Types\FASHION\Hand bags.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Makeup.cs" />
+    <Compile Include="Item_Types\CCC\Mobile Accessories.cs" />
+    <Compile Include="Item_Types\CCC\Charger.cs" />
+    <Compile Include="Item_Types\FASHION\Pants.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Perfume.cs" />
+    <Compile Include="Item_Types\CCC\PowerBank.cs" />
+    <Compile Include="Item_Types\FASHION\Slipper.cs" />
+    <Compile Include="Item_Types\CCC\Tablet Accessories.cs" />
+    <Compile Include="Item_Types\FASHION\Tops.cs" />
+    <Compile Include="Item_Types\FASHION\Watches.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Item_Types\Refrigerator.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Refrigerator.cs" />
     <Compile Include="Splash_Screen.cs">
       <SubType>Form</SubType>
     </Compile>

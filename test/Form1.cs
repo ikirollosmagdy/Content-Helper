@@ -765,7 +765,7 @@ namespace helper
         private void T_Tick(object sender, EventArgs e)
         {
             TimeSpan duration = DateTime.Now - _start;
-            this.Text = string.Format("Katana {0:hh\\:mm\\:ss}", duration);
+            //this.Text = string.Format("Katana {0:hh\\:mm\\:ss}", duration);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -773,10 +773,6 @@ namespace helper
 
         }
 
-        private void toolStripDropDownButton1_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            MessageBox.Show(e.ClickedItem.MergeIndex.ToString());
-        }
 
         private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
         {

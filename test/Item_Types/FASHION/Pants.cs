@@ -325,7 +325,7 @@ namespace helper
         private void setType(int row)
         {
             Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
-            Form1.BulkSheet[12, row].Value =db.getRecord( Form1.OrganizedSheet[Size, row].Value.ToString());
+            Form1.BulkSheet[12, row].Value =db.getRecord( Form1.OrganizedSheet[Type, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
             {
                 Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
