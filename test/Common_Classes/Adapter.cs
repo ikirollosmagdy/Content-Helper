@@ -78,6 +78,11 @@ namespace helper
                     Handbags handbag = new Handbags();
                     handbag.Organize();
                     break;
+                case "Power Tools (97)":
+                    Power_Tool power = new Power_Tool();
+                    power.Organize();
+                    break;
+                        
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -165,6 +170,11 @@ namespace helper
                 case "Handbags (472)":
                     Handbags handbag = new Handbags();
                     handbag.createBulk();
+                    break;
+
+                case "Power Tools (97)":
+                    Power_Tool power = new Power_Tool();
+                    power.createBulk();
                     break;
 
                 default:

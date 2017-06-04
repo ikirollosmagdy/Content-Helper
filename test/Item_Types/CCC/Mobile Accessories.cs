@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -373,6 +374,7 @@ namespace helper
             else
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Empty;
+       
             }
         }
         private void setLink(int row)

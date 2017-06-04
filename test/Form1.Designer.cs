@@ -66,6 +66,7 @@
             this.btnAnalayze = new System.Windows.Forms.ToolStripButton();
             this.btnSaveSheet = new System.Windows.Forms.ToolStripButton();
             this.btnCreateBulk = new System.Windows.Forms.ToolStripButton();
+            this.btnAddItem = new System.Windows.Forms.ToolStripButton();
             this.tabBulk = new System.Windows.Forms.TabPage();
             this.toolStrip3 = new System.Windows.Forms.ToolStrip();
             this.btnSave = new System.Windows.Forms.ToolStripButton();
@@ -403,7 +404,8 @@
             this.DropCat,
             this.btnAnalayze,
             this.btnSaveSheet,
-            this.btnCreateBulk});
+            this.btnCreateBulk,
+            this.btnAddItem});
             this.toolStrip1.Location = new System.Drawing.Point(3, 3);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1057, 25);
@@ -455,6 +457,7 @@
             "Pants (477)",
             "Perfumes & Fragrances perfumes (478)",
             "Power Banks power (562)",
+            "Power Tools (97)",
             "Refrigerators & Freezers refrigerators (531)",
             "Slippers (485)",
             "Tablet Accessories (181)",
@@ -496,6 +499,18 @@
             this.btnCreateBulk.Size = new System.Drawing.Size(71, 22);
             this.btnCreateBulk.Text = "Create Bulk";
             this.btnCreateBulk.Click += new System.EventHandler(this.btnCreateBulk_Click);
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnAddItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btnAddItem.Enabled = false;
+            this.btnAddItem.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItem.Image")));
+            this.btnAddItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(60, 22);
+            this.btnAddItem.Text = "Add Item";
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // tabBulk
             // 
@@ -905,6 +920,7 @@
         private System.Windows.Forms.ToolStripMenuItem PasteStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem UndoOrgMenu;
         private System.Windows.Forms.ToolStripMenuItem CutStripMenuItem1;
+        private System.Windows.Forms.ToolStripButton btnAddItem;
     }
 }
 

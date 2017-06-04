@@ -81,6 +81,10 @@
       <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FuzzyString, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FuzzyString.1.0.0\lib\FuzzyString.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.25.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.25.0\lib\net45\Google.Apis.dll</HintPath>
       <Private>True</Private>
@@ -125,6 +129,14 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ruzzie.Caching, Version=2.1.103.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ruzzie.Cache.FlashCache.2.1.103\lib\net45\Ruzzie.Caching.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ruzzie.Common, Version=1.1.53.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ruzzie.Common.1.1.53\lib\net45\Ruzzie.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SQLite.NET">
@@ -178,19 +190,26 @@
     <Compile Include="Item_Types\FASHION\Casual Shoes.cs" />
     <Compile Include="Item_Types\CCC\HeadSet.cs" />
     <Compile Include="Item_Types\FASHION\Hand bags.cs" />
-    <Compile Include="Item_Types\LIFE_STYLE\Makeup.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Health_Beauty\Makeup.cs" />
     <Compile Include="Item_Types\CCC\Mobile Accessories.cs" />
     <Compile Include="Item_Types\CCC\Charger.cs" />
     <Compile Include="Item_Types\FASHION\Pants.cs" />
-    <Compile Include="Item_Types\LIFE_STYLE\Perfume.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Health_Beauty\Perfume.cs" />
     <Compile Include="Item_Types\CCC\PowerBank.cs" />
     <Compile Include="Item_Types\FASHION\Slipper.cs" />
     <Compile Include="Item_Types\CCC\Tablet Accessories.cs" />
     <Compile Include="Item_Types\FASHION\Tops.cs" />
     <Compile Include="Item_Types\FASHION\Watches.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Tools\Power Tool.cs" />
+    <Compile Include="New_item_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="New_item_form.Designer.cs">
+      <DependentUpon>New_item_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Item_Types\LIFE_STYLE\Refrigerator.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Home\Refrigerator.cs" />
     <Compile Include="Splash_Screen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -220,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="inputDialog.resx">
       <DependentUpon>inputDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="New_item_form.resx">
+      <DependentUpon>New_item_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -287,7 +309,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Item_Types\LIFE_STYLE\Baby\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

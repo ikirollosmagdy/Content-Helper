@@ -1003,6 +1003,12 @@ namespace helper
             }
         }
 
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            New_item_form newForm = new New_item_form();
+            newForm.Show();
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
