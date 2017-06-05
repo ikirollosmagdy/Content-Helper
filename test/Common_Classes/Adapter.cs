@@ -82,7 +82,12 @@ namespace helper
                     Power_Tool power = new Power_Tool();
                     power.Organize();
                     break;
-                        
+                case "Hand Tools (319)":
+                    Hand_Tool hand = new Hand_Tool();
+                    hand.Organize();
+                    break;
+
+
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -175,6 +180,10 @@ namespace helper
                 case "Power Tools (97)":
                     Power_Tool power = new Power_Tool();
                     power.createBulk();
+                    break;
+                case "Hand Tools (319)":
+                    Hand_Tool hand = new Hand_Tool();
+                    hand.createBulk();
                     break;
 
                 default:

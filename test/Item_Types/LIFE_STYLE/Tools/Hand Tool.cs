@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace helper
 {
-    public class Power_Tool
+    public class Hand_Tool
     {
         Database db = new Database();
         Common_Use common = new Common_Use();
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-        int Brand = 1, Model = 2, Type = 3, PowerSource = 4, Extra = 5,
-            Link = 6, Price = 7, Quantity = 8, UnTranslatedCount = 0;
+        int Brand = 1, Model = 2, Type = 3, Extra = 4, Link = 5, Price = 6, Quantity = 7, UnTranslatedCount = 0;
 
         private void setupTable()
         {
@@ -24,21 +23,13 @@ namespace helper
             typeColumn.HeaderText = "Type";
             typeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             typeColumn.FlatStyle = FlatStyle.Popup;
-            typeColumn.Items.AddRange("Air Compressor", "Blower", "Combo Kit", "Drill", "Electric Carving Tool", "Generator", "Glue Gun", "Grinder", "Heat Gun", "Impact Driver", "Impact Wrench", "Nailer", "Stapler", "Oscillating Tool", "Planer", "Polisher", "Power Hammer", "Power Tool Mixer", "Pressure Washer", "Rotary Tool", "Sander", "Saw", "Cutter", "Screwdriver", "Shear", "Solar Panel", "Sprayer", "Water Distributor", "Water Pump", "Welding & Soldering Machine");
-
-            DataGridViewComboBoxColumn SouceColumn = new DataGridViewComboBoxColumn();
-            SouceColumn.HeaderText = "Power Source";
-            SouceColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            SouceColumn.FlatStyle = FlatStyle.Popup;
-            SouceColumn.Items.AddRange("Air", "Battery", "Corded Electric", "Cordless Electric", "Diesel", "Gas", "Petrol", "Solar");
-
+            typeColumn.Items.AddRange("Axe", "Bench Vise", "Brush", "Chisel", "Clamp", "Cutter", "Cutting Tool", "Engraving Tool", "Filter Key", "Foot Air Pump", "Grease Gun", "Grinding Tool", "Gripper", "Hammer", "Hand Air Pump", "Hand Jack", "Hand Saw", "Hand Tools Organizer", "Leather Hole Punch", "Magnet", "Multi Tool", "Packaging Tool", "Plier", "Polishing Tool", "Reaching Aid", "Riveter", "Sanding Tool", "SandPaper", "Scissor", "Screwdriver", "Shovel ", "Sprayer", "Stapler", "Tester Screwdriver", "Tool Sets", "Turning Tool", "Water Pump", "Wire Stripper", "Wrench");
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("NO", "No.")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Brand", "Brand")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Model", "Model")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(typeColumn)));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(SouceColumn)));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Extra", "More Data")));
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Image Url")));
@@ -95,7 +86,7 @@ namespace helper
 
                     try
                     {
-                        Regex regexType = new Regex(@"(polisher|saw|cutter|blower|drill|grinder|planer|screwdriver|generator|sander|nailer|stapler)", RegexOptions.IgnoreCase);
+                        Regex regexType = new Regex(@"(Stapler|Sprayer|axe|Brush|Chisel|Punch|Clamp|Vice|Cutter|Gripper|Hammer|Plier|Riveter|SandPaper|Scissor|Screwdriver|Wrench)", RegexOptions.IgnoreCase);
                         Match matchType = regexType.Match(Form1.Sheet[col, row].Value.ToString());
                         if (matchType.Success)
                         {
@@ -121,7 +112,6 @@ namespace helper
             }
 
         }
-
         public void createBulk()
         {
             UnTranslatedCount = 0;
@@ -130,16 +120,12 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Title", "Title")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Des", "Description")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("PowerSource", "Power Source")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Type", "Type")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Model", "Model Number")));
 
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArTitle", "Title Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArBrand", "Brand Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArDes", "Description Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArPowerSource", "Power Source Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArType", "Type Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArModel", "Model Number Arabic")));
 
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Link", "Link")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Price", "Price")));
@@ -157,9 +143,7 @@ namespace helper
                         setTitle(i);
                         setBrand(i);
                         setDescription(i);
-                        setPowerSource(i);
                         setType(i);
-                        setModel(i);
                         setLink(i);
                         setPrice(i);
                         setQuantity(i);
@@ -174,27 +158,26 @@ namespace helper
 
 
         }
-
         private void setTitle(int row)
         {
             Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2}",
               Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Type, row].Value));
 
-            Form1.BulkSheet[6, row].Value = string.Format("{0} من {1} {2}", db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
+            Form1.BulkSheet[4, row].Value = string.Format("{0} من {1} {2}", db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
                 db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()), Form1.OrganizedSheet[Model, row].Value);
-            if (common.CheckEnglish(Form1.BulkSheet[6, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[4, row].Value.ToString()))
             {
-                Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[4, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
         private void setBrand(int row)
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
-            Form1.BulkSheet[7, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
+            Form1.BulkSheet[5, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[5, row].Value.ToString()))
             {
-                Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[5, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
 
@@ -214,64 +197,51 @@ namespace helper
                 }
             }
             catch { }
-            des = des + "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value + "</li><li>Power Source: " + Form1.OrganizedSheet[PowerSource, row].Value +
-"</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value + "</li><li>Model: " + Form1.OrganizedSheet[Model, row].Value + "</li></ul>";
-            ArDes = ArDes + "<li>العلامة التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li><li>مصدر الطاقة: " +
-                db.getRecord(Form1.OrganizedSheet[PowerSource, row].Value.ToString()) + "</li><li>النوع: " + db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) +
+            des = des + "<li>Brand: " + Form1.OrganizedSheet[Brand, row].Value + "</li><li>Type: " + Form1.OrganizedSheet[Type, row].Value + "</li><li>Model: " + Form1.OrganizedSheet[Model, row].Value + "</li></ul>";
+            ArDes = ArDes + "<li>العلامة التجارية: " + db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()) + "</li><li>النوع: " + db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()) +
                 "</li><li>الموديل: " + Form1.OrganizedSheet[Model, row].Value + "</li></ul>";
 
             Form1.BulkSheet[2, row].Value = des;
-            Form1.BulkSheet[8, row].Value = ArDes;
+            Form1.BulkSheet[6, row].Value = ArDes;
             if (common.CheckEnglish(ArDes))
             {
-                Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[6, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
 
-        }
-        private void setPowerSource(int row)
-        {
-            Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[PowerSource, row].Value;
-            Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[PowerSource, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
-            {
-                Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
-                UnTranslatedCount++;
-            }
         }
         private void setType(int row)
         {
-            Form1.BulkSheet[4, row].Value = getAttribType(Form1.OrganizedSheet[Type, row].Value.ToString());
-            Form1.BulkSheet[10, row].Value = db.getRecord(Form1.BulkSheet[4, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
+            Form1.BulkSheet[3, row].Value = getAttribType(Form1.OrganizedSheet[Type, row].Value.ToString());
+            Form1.BulkSheet[7, row].Value = db.getRecord(Form1.BulkSheet[3, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
-                Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
 
         }
-        private void setModel(int row)
-        {
-            Form1.BulkSheet[5, row].Value = Form1.OrganizedSheet[Model, row].Value;
-            Form1.BulkSheet[11, row].Value = Form1.OrganizedSheet[Model, row].Value;
-        }
         private void setLink(int row)
         {
-            Form1.BulkSheet[12, row].Value = Form1.OrganizedSheet[Link, row].Value;
+            Form1.BulkSheet[8, row].Value = Form1.OrganizedSheet[Link, row].Value;
         }
         private void setPrice(int row)
         {
-            Form1.BulkSheet[13, row].Value = Form1.OrganizedSheet[Price, row].Value;
+            Form1.BulkSheet[9, row].Value = Form1.OrganizedSheet[Price, row].Value;
         }
         private void setQuantity(int row)
         {
-            Form1.BulkSheet[14, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
+            Form1.BulkSheet[10, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
         }
 
         private string getAttribType(string text)
         {
             string value = "";
-            if (text.Equals("Generator") || text.Equals("Glue Gun") || text.Equals("Water Distributor"))
+            if (text.Equals("Axe") || text.Equals("Filter Key") || text.Equals("Foot Air Pump") || text.Equals("Hand Air Pump")
+                || text.Equals("Magnet") || text.Equals("Riveter") || text.Equals("SandPaper") || text.Equals("Tester Screwdriver")
+                || text.Equals("Water Pump") || text.Equals("Tool Sets")
+
+                )
             {
                 value = text;
             }
@@ -279,19 +249,28 @@ namespace helper
             {
                 switch (text)
                 {
-                    case "Nailer":
-                        value = "Nailers & Staplers";
+                    case "Chisel":
+                        value = "Chisels & Punches";
                         break;
-                    case "Stapler":
-                        value = "Nailers & Staplers";
+                    case "Punch":
+                        value = "Chisels & Punches";
                         break;
-                    case "Saw":
-                        value = "Saws and Cutters";
+                    case "Clamp":
+                        value = "Clamps & Vices";
                         break;
-                    case "Cutter":
-                        value = "Saws and Cutters";
+                    case "Vice":
+                        value = "Clamps & Vices";
                         break;
-                    case "Impact Wrench":
+                    case "Shovel":
+                        value = "Shovel & Trowel";
+                        break;
+                    case "Trowel":
+                        value = "Shovel & Trowel";
+                        break;
+                    case "Wrench":
+                        value = text + "es";
+                        break;
+                    case "Leather Hole Punch":
                         value = text + "es";
                         break;
                     default:
@@ -304,7 +283,5 @@ namespace helper
 
         }
 
-
     }
-
 }

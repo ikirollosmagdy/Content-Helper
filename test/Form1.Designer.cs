@@ -450,6 +450,7 @@
             "Cable (29)",
             "Casual & Dress Shoes (481)",
             "Chargers laptop (351)",
+            "Hand Tools (319)",
             "Handbags (472)",
             "Headphones & Headsets (373)",
             "Makeup (295)",
