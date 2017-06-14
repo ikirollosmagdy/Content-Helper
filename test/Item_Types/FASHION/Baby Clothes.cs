@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 
 namespace helper
 {
-  public  class Pants
+ public   class Baby_Clothes
     {
         Database db = new Database();
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
         Common_Use common = new Common_Use();
-        int Brand = 1, Model = 2, Style = 3, Gender = 4, Colors = 5, Size = 6, Material = 7, Type = 8,
-           Link = 9, Price = 10, Quantity = 11, UnTranslatedCount = 0, ItemConnection = 1;
-       
+        int Brand = 1, Model = 2, Style = 3, Gender = 4, Colors = 5, Size = 6, Material = 7, 
+           Link = 8, Price = 9, Quantity = 10, UnTranslatedCount = 0, ItemConnection = 1;
+
 
         private void setupTable()
         {
@@ -34,11 +34,7 @@ namespace helper
             SizeColumn.FlatStyle = FlatStyle.Popup;
             SizeColumn.Items.AddRange("0 US", "10 - 11 Years", "10 UK", "10 US", "11 - 12 Years", "12 - 13 Years", "12 UK", "12 US", "13 - 14 Years", "14 - 15 Years", "14 - 16 UK", "14 UK", "14 US", "15 - 16 Years", "16 UK", "16 US", "18 - 20 UK", "18 UK", "18 US", "2 US", "20 UK", "20 US", "22 - 24 UK", "22 UK", "22 US", "24 UK", "24 US", "26 - 28 UK", "26 UK", "28 EU", "28 UK", "29 EU", "3 - 4 Years", "30 - 32 UK", "30 EU", "30 UK", "31 EU", "32 EU", "32 UK", "33 EU", "34 EU", "34 UK", "36 EU", "36 UK", "38 EU", "38 UK", "39 EU", "3XL", "4 - 5 Years", "4 UK", "4 US", "40 EU", "40 UK", "41 EU", "42 EU", "42 UK", "43 EU", "44 EU", "44 UK", "45 EU", "46 EU", "46 UK", "48 EU", "48 UK", "4XL", "5 - 6 Years", "5 Years", "50 EU", "50 UK", "52 EU", "54 EU", "56 EU", "5XL", "6 - 7 Years", "6 UK", "6 US", "6XL", "7 - 8 Years", "7XL", "8 - 9 Years", "8 UK", "8 US", "8XL", "9 - 10 Years", "Free Size", "L", "L/XL", "M", "M/L", "S", "S/M", "UK 10", "XL", "XL/XXL", "XS", "XXL", "XXS");
 
-            DataGridViewComboBoxColumn TypeColumn = new DataGridViewComboBoxColumn();
-            TypeColumn.HeaderText = "Type";
-            TypeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            TypeColumn.FlatStyle = FlatStyle.Popup;
-            TypeColumn.Items.AddRange("Capris", "Fashion Joggers", "Jeans", "Leggings", "Trousers");
+         
 
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Clear()));
@@ -49,10 +45,10 @@ namespace helper
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Gender", "Gender")));
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Color", "Color")));
-            //  Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("size", "Size")));
+        
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(SizeColumn)));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("material", "Material")));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add(TypeColumn)));
+          
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Image Url")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity")));
@@ -162,7 +158,7 @@ namespace helper
                     {
                         if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
                         {
-                         Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
+                            Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
                         }
                     }
                     catch { }
@@ -253,8 +249,8 @@ namespace helper
                         setStyle(i);
                         setSize(i);
                         setGender(i);
-                        
-                     
+
+
 
                         setLink(i);
                         setPrice(i);
@@ -310,7 +306,7 @@ namespace helper
             }
         }
 
-       
+
         private void setColor(int row)
         {
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
@@ -325,7 +321,7 @@ namespace helper
         private void setType(int row)
         {
             Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
-            Form1.BulkSheet[12, row].Value =db.getRecord( Form1.OrganizedSheet[Type, row].Value.ToString());
+            Form1.BulkSheet[12, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
             {
                 Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
@@ -347,7 +343,7 @@ namespace helper
         private void setSize(int row)
         {
             Form1.BulkSheet[6, row].Value = Form1.OrganizedSheet[Size, row].Value;
-            Form1.BulkSheet[14, row].Value =db.getRecord( Form1.OrganizedSheet[Size, row].Value.ToString());
+            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
 
         }
         private void setGender(int row)
@@ -361,7 +357,7 @@ namespace helper
             }
         }
 
-       
+
 
         private void setLink(int row)
         {

@@ -16,12 +16,12 @@ namespace helper
             switch (Convert.ToString(index))
             {
 
-                case "Perfumes & Fragrances perfumes (478)":
+                case "Perfumes & Fragrances (478)":
                     Perfume perfume = new Perfume();
                     perfume.getGender();
 
                     break;
-                case "Refrigerators & Freezers refrigerators (531)":
+                case "Refrigerators & Freezers (531)":
                     Refrigerator Ref = new Refrigerator();
                     Ref.Organize();
                     break;
@@ -42,7 +42,7 @@ namespace helper
                     Cables cable = new Cables();
                     cable.Organize();
                     break;
-                case "Power Banks power (562)":
+                case "Power Banks (562)":
                     PowerBank pBank = new PowerBank();
                     pBank.Organize();
                     break;
@@ -87,6 +87,12 @@ namespace helper
                     hand.Organize();
                     break;
 
+                case "Baby Clothes (343)":
+                    Baby_Clothes baby = new Baby_Clothes();
+                    baby.Organize();
+
+                    break;
+
 
 
                 default:
@@ -108,7 +114,7 @@ namespace helper
             switch (Convert.ToString(index))
             {
 
-                case "Perfumes & Fragrances perfumes (478)":
+                case "Perfumes & Fragrances (478)":
                    
                         Perfume per = new Perfume();
 
@@ -116,7 +122,7 @@ namespace helper
                     
 
                     break;
-                case "Refrigerators & Freezers refrigerators (531)":
+                case "Refrigerators & Freezers (531)":
                     Refrigerator Ref = new Refrigerator();
                     Ref.creatBulk();
                     break;
@@ -138,7 +144,7 @@ namespace helper
                     Cables cable = new Cables();
                     cable.createBulk();
                     break;
-                case "Power Banks power (562)":
+                case "Power Banks (562)":
                     PowerBank pBank = new PowerBank();
                     pBank.createBulk();
                     break;
@@ -184,6 +190,10 @@ namespace helper
                 case "Hand Tools (319)":
                     Hand_Tool hand = new Hand_Tool();
                     hand.createBulk();
+                    break;
+                    case "Baby Clothes (343)":
+                    Baby_Clothes baby = new Baby_Clothes();
+                    baby.createBulk();
                     break;
 
                 default:

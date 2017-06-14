@@ -187,6 +187,7 @@
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Item_Types\CCC\Cables.cs" />
+    <Compile Include="Item_Types\FASHION\Baby Clothes.cs" />
     <Compile Include="Item_Types\FASHION\Casual Shoes.cs" />
     <Compile Include="Item_Types\CCC\HeadSet.cs" />
     <Compile Include="Item_Types\FASHION\Hand bags.cs" />

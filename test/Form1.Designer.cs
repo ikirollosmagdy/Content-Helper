@@ -447,6 +447,7 @@
             this.DropCat.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.DropCat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DropCat.Items.AddRange(new object[] {
+            "Baby Clothes (343)",
             "Cable (29)",
             "Casual & Dress Shoes (481)",
             "Chargers laptop (351)",
@@ -456,10 +457,10 @@
             "Makeup (295)",
             "Mobile Phone Accessories (26)",
             "Pants (477)",
-            "Perfumes & Fragrances perfumes (478)",
-            "Power Banks power (562)",
+            "Perfumes & Fragrances (478)",
+            "Power Banks (562)",
             "Power Tools (97)",
-            "Refrigerators & Freezers refrigerators (531)",
+            "Refrigerators & Freezers (531)",
             "Slippers (485)",
             "Tablet Accessories (181)",
             "Tops (488)",

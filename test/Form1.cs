@@ -367,11 +367,12 @@ namespace helper
 
 
                             }
-                            else
-                            {
-                                OrganizedSheet.Rows[i].Cells[j].Style.BackColor = System.Drawing.Color.Empty;
-                            }
+                            
 
+                        }
+                        else
+                        {
+                            OrganizedSheet.Rows[i].Cells[j].Style.BackColor = System.Drawing.Color.Empty;
                         }
                     }
                 }
