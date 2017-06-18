@@ -8,10 +8,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using Yandex;
+using Yandex.Translator;
 
 namespace helper
 {
@@ -167,5 +172,25 @@ namespace helper
             }
             return arColor;
         }
+
+        ///<summary>
+        ///Translate by bing transltor
+        ///</summary>
+        public async Task<string> Translate(string EnglishText) {
+            string value = "";
+            await Task.Run(() =>
+            {
+               
+                IYandexTranslator translator = Yandex.Translator.Yandex.Translator(api => api.ApiKey("trnsl.1.1.20170618T103837Z.addd4ae9843986c5.aca0267470761b5b9d216bb9edac947c5f754fe3"));
+
+                IEnumerable<ITranslationPair> translationPairs = translator.TranslationPairs(); //error The remote server returned an error: (403) Forbidden.
+                string language = translator.Detect("This is English text");
+                ITranslation translation = translator.Translate("ar", EnglishText);
+                value = translation.Text;
+            } );
+
+            return  value;
+        }
+      
     }
 }

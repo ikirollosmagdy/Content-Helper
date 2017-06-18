@@ -1010,6 +1010,18 @@ namespace helper
             newForm.Show();
         }
 
+        private void btnTranslateBing_Click(object sender, EventArgs e)
+        {
+            getTranslation();
+
+        }
+
+        private async void getTranslation() {
+            Common_Use com = new Common_Use();
+            ArabicTxtBox.Text = await com.Translate(EnglishTxtBox.Text);
+               
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();

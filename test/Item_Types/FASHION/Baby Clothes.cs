@@ -23,16 +23,16 @@ namespace helper
         {
 
             DataGridViewComboBoxColumn StyleColumn = new DataGridViewComboBoxColumn();
-            StyleColumn.HeaderText = "Style";
+            StyleColumn.HeaderText = "Category";
             StyleColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             StyleColumn.FlatStyle = FlatStyle.Popup;
-            StyleColumn.Items.AddRange("Boot Cut", "Boyfriend", "Cargo", "Cross", "Drawstring", "Flare", "Harem", "High Waist", "Palazzo", "Pleated", "Ripped", "Skinny", "Slim Fit", "Straight");
+            StyleColumn.Items.AddRange("Athletic Wear", "Bodysuit", "Coat", "Costume", "Dress", "Jacket", "Jumpsuit", "Onesie", "Overall", "Pants", "Romper", "Sandal", "Shirt", "Shoe", "Short", "Skirt", "Sleepwear", "Slipper", "Suit", "Swimwear", "Top", "T-Shirt", "Two Pieces Wear", "Underwear");
 
             DataGridViewComboBoxColumn SizeColumn = new DataGridViewComboBoxColumn();
             SizeColumn.HeaderText = "Size";
             SizeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             SizeColumn.FlatStyle = FlatStyle.Popup;
-            SizeColumn.Items.AddRange("0 US", "10 - 11 Years", "10 UK", "10 US", "11 - 12 Years", "12 - 13 Years", "12 UK", "12 US", "13 - 14 Years", "14 - 15 Years", "14 - 16 UK", "14 UK", "14 US", "15 - 16 Years", "16 UK", "16 US", "18 - 20 UK", "18 UK", "18 US", "2 US", "20 UK", "20 US", "22 - 24 UK", "22 UK", "22 US", "24 UK", "24 US", "26 - 28 UK", "26 UK", "28 EU", "28 UK", "29 EU", "3 - 4 Years", "30 - 32 UK", "30 EU", "30 UK", "31 EU", "32 EU", "32 UK", "33 EU", "34 EU", "34 UK", "36 EU", "36 UK", "38 EU", "38 UK", "39 EU", "3XL", "4 - 5 Years", "4 UK", "4 US", "40 EU", "40 UK", "41 EU", "42 EU", "42 UK", "43 EU", "44 EU", "44 UK", "45 EU", "46 EU", "46 UK", "48 EU", "48 UK", "4XL", "5 - 6 Years", "5 Years", "50 EU", "50 UK", "52 EU", "54 EU", "56 EU", "5XL", "6 - 7 Years", "6 UK", "6 US", "6XL", "7 - 8 Years", "7XL", "8 - 9 Years", "8 UK", "8 US", "8XL", "9 - 10 Years", "Free Size", "L", "L/XL", "M", "M/L", "S", "S/M", "UK 10", "XL", "XL/XXL", "XS", "XXL", "XXS");
+            SizeColumn.Items.AddRange("0 - 6 Months", "0 US", "1 UK", "1 US", "1.5 UK", "1.5 US", "1/2 US", "12 - 18 Months", "12 - 24 Months", "12 - 36 Months", "12 Months", "16 EU", "17 EU", "18 - 24 Months", "18 EU", "18.5 EU", "18/19 EU", "19 EU", "19.5 EU", "2 UK", "2 US", "2.5 UK", "2.5 US", "20 EU", "20.5 EU", "20/21 EU", "21 EU", "21/22 EU", "22 EU", "22/23 EU", "23 EU", "23/24 EU", "24 - 30 Months", "24 - 36 Months", "24 EU", "24/25 EU", "25 EU", "25/26 EU", "26 EU", "3 - 6 Months", "3 UK", "3 US", "3.5 UK", "3.5 US", "30 - 36 Months", "4 EU", "4 UK", "4 US", "4.5 EU", "4.5 US", "4/5 US", "5 US", "5.5 US", "6 - 12 Months", "6 - 9 Months", "6 US", "6.5 US", "7 US", "7/8 US", "9 - 12 Months", "9/10 US", "L", "M", "S", "XL");
 
          
 
@@ -101,32 +101,17 @@ namespace helper
                         }
                     }
                     catch { }
-                    try
-                    {
-                        Regex regexType = new Regex(@"([Ll]egg?\w+)|([Jj]eans)|([Tt]rous\w+)");
-                        Match matchType = regexType.Match(Form1.Sheet[col, row].Value.ToString());
-                        if (matchType.Success)
-                        {
-                            Form1.OrganizedSheet[Type, row].Value = common.getReplacement(matchType.Value);
-
-                        }
-                    }
-                    catch { }
+                 
                     try
                     {
 
-                        Regex regexGender = new Regex(@"(([Ww]o)?[Mm][ae]n)|([Uu]ni(sex)?)|([Bb]oys?)|([Gg]irls?)");
+                        Regex regexGender = new Regex(@"([Uu]ni(sex)?)|([Bb]oys?)|([Gg]irls?)");
                         Match matchGender = regexGender.Match(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchGender.Success)
                         {
-                            if (matchGender.Value.ToLower() == "woman")
-                            {
-                                Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = "Women";
-                            }
-                            else
-                            {
+                           
                                 Form1.OrganizedSheet.Rows[row].Cells[Gender].Value = common.getReplacement(matchGender.Value);
-                            }
+                            
                         }
 
 
@@ -154,14 +139,14 @@ namespace helper
 
                     }
                     catch { }
-                    try
-                    {
-                        if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
-                        {
-                            Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
-                        }
-                    }
-                    catch { }
+                    //try
+                    //{
+                    //    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
+                    //    {
+                    //        Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
+                    //    }
+                    //}
+                    //catch { }
 
 
 
@@ -212,8 +197,8 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Bran", "Brand")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Des", "Description")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("color", "Color")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("type", "Type")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("pantStyle", "Pants Style")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Category", "Category")));
+           
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Size", "Size")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Gender", "Gender")));
 
@@ -222,8 +207,8 @@ namespace helper
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArBran", "Brand Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArDes", "Description Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Arcolor", "Color Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("Artype", "Type Arabic")));
-            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArpantStyle", "Pants Style Arabic")));
+            Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArtCategory", "Category Arabic")));
+         
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArSize", "Size Arabic")));
             Form1.BulkSheet.Invoke(new Action(() => Form1.BulkSheet.Columns.Add("ArGender", "Gender Arabic")));
 
@@ -245,8 +230,7 @@ namespace helper
                         setBrand(i);
                         setDescription(i);
                         setColor(i);
-                        setType(i);
-                        setStyle(i);
+                        setCategory(i);
                         setSize(i);
                         setGender(i);
 
@@ -271,25 +255,25 @@ namespace helper
         }
         private void setTitle(int row)
         {
-            Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2} {3} for {4} - {5}",
+            Form1.BulkSheet[0, row].Value = textInfo.ToTitleCase(string.Format("{0} {1} {2} {3} for {3} - {4}",
                Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Style, row].Value,
-            Form1.OrganizedSheet[Type, row].Value, Form1.OrganizedSheet[Gender, row].Value, Form1.OrganizedSheet[Colors, row].Value));
-            Form1.BulkSheet[8, row].Value = string.Format("{0} {1} لل{2} من {3} {4} - {5}", db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString()),
+            Form1.OrganizedSheet[Gender, row].Value, Form1.OrganizedSheet[Colors, row].Value));
+            Form1.BulkSheet[7, row].Value = string.Format("{0} {1} لل{2} من  {3} - {4}", db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString()),
                 db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()),
                 Form1.OrganizedSheet[Model, row].Value, db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()));
-            if (common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[7, row].Value.ToString()))
             {
-                Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[7, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
         private void setBrand(int row)
         {
             Form1.BulkSheet[1, row].Value = Form1.OrganizedSheet[Brand, row].Value;
-            Form1.BulkSheet[9, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
+            Form1.BulkSheet[8, row].Value = db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[8, row].Value.ToString()))
             {
-                Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[8, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
@@ -297,11 +281,11 @@ namespace helper
         {
             Form1.BulkSheet[2, row].Value = string.Format("<p><b>Product Features:</b></p><ul><li>Brand:{0}</li><li>Model Number:{1}</li><li>Color:{2}</li><li>Size:{3}</li><li>Material:{4}</li><li>Targeted Group:{5}</li></ul>",
                 Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[Model, row].Value, Form1.OrganizedSheet[Colors, row].Value, Form1.OrganizedSheet[Size, row].Value, Form1.OrganizedSheet[Material, row].Value, Form1.OrganizedSheet[Gender, row].Value);
-            Form1.BulkSheet[10, row].Value = string.Format("<p><b>خصائص المنتج:</b></p><ul><li>العلامة  التجارية:{0}</li><li>رقم الموديلr:{1}</li><li>اللون:{2}</li><li>المقاس:{3}</li><li>الخامة:{4}</li><li>المجموعة المستهدفة:{5}</li></ul>",
+            Form1.BulkSheet[9, row].Value = string.Format("<p><b>خصائص المنتج:</b></p><ul><li>العلامة  التجارية:{0}</li><li>رقم الموديلr:{1}</li><li>اللون:{2}</li><li>المقاس:{3}</li><li>الخامة:{4}</li><li>المجموعة المستهدفة:{5}</li></ul>",
                db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()), Form1.OrganizedSheet[Model, row].Value, db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString()), Form1.OrganizedSheet[Size, row].Value, db.getRecord(Form1.OrganizedSheet[Material, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()));
-            if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
+            if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
-                Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[9, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
@@ -310,7 +294,19 @@ namespace helper
         private void setColor(int row)
         {
             Form1.BulkSheet[3, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Colors, row].Value.ToString().Trim());
-            Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Colors, row].Value.ToString());
+            Form1.BulkSheet[10, row].Value = common.getColorMulti(Form1.OrganizedSheet[Colors, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
+            {
+                Form1.BulkSheet[10, row].Style.BackColor = Color.Yellow;
+                UnTranslatedCount++;
+            }
+        }
+
+
+        private void setCategory(int row)
+        {
+            Form1.BulkSheet[4, row].Value = getCatBulk(Form1.OrganizedSheet[Style, row].Value.ToString().Trim());
+            Form1.BulkSheet[11, row].Value = db.getRecord(Form1.BulkSheet[4, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
             {
                 Form1.BulkSheet[11, row].Style.BackColor = Color.Yellow;
@@ -318,41 +314,19 @@ namespace helper
             }
         }
 
-        private void setType(int row)
-        {
-            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Type, row].Value;
-            Form1.BulkSheet[12, row].Value = db.getRecord(Form1.OrganizedSheet[Type, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[12, row].Value.ToString()))
-            {
-                Form1.BulkSheet[12, row].Style.BackColor = Color.Yellow;
-                UnTranslatedCount++;
-            }
-        }
-
-        private void setStyle(int row)
-        {
-            Form1.BulkSheet[5, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Style, row].Value.ToString().Trim());
-            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Style, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
-            {
-                Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
-                UnTranslatedCount++;
-            }
-        }
-
         private void setSize(int row)
         {
-            Form1.BulkSheet[6, row].Value = Form1.OrganizedSheet[Size, row].Value;
-            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
+            Form1.BulkSheet[5, row].Value = Form1.OrganizedSheet[Size, row].Value;
+            Form1.BulkSheet[12, row].Value = db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
 
         }
         private void setGender(int row)
         {
-            Form1.BulkSheet[7, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Gender, row].Value.ToString().Trim());
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
+            Form1.BulkSheet[6, row].Value = textInfo.ToTitleCase(Form1.OrganizedSheet[Gender, row].Value.ToString().Trim());
+            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
-                Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }
@@ -361,15 +335,15 @@ namespace helper
 
         private void setLink(int row)
         {
-            Form1.BulkSheet[16, row].Value = Form1.OrganizedSheet[Link, row].Value;
+            Form1.BulkSheet[14, row].Value = Form1.OrganizedSheet[Link, row].Value;
         }
         private void setPrice(int row)
         {
-            Form1.BulkSheet[17, row].Value = Form1.OrganizedSheet[Price, row].Value;
+            Form1.BulkSheet[15, row].Value = Form1.OrganizedSheet[Price, row].Value;
         }
         private void setQuantity(int row)
         {
-            Form1.BulkSheet[18, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
+            Form1.BulkSheet[16, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
         }
 
         private void setItemConnection(int row)
@@ -382,58 +356,48 @@ namespace helper
                 }
             }
             catch { }
-            Form1.BulkSheet[19, row].Value = ItemConnection.ToString();
+            Form1.BulkSheet[17, row].Value = ItemConnection.ToString();
         }
-        private string getSizeBulk(string text)
+        private string getCatBulk(string text)
         {
             string value = "";
-            if (!text.ToLower().Contains("y") && !text.ToLower().Contains(" m"))
-            {
-
-
-
-                switch (text.ToLower())
-                {
-                    case "xxxl":
-                        value = "3XL";
-                        break;
-                    case "xxxxl":
-                        value = "4XL";
-                        break;
-                    case "xxxxxl":
-                        value = "5XL";
-                        break;
-                    case "xxxxxxl":
-                        value = "6XL";
-                        break;
-                    case "xxxxxxxl":
-                        value = "7XL";
-                        break;
-                    case "2xl":
-                        value = "XXL";
-                        break;
-                    default:
-                        value = text.ToUpper();
-                        break;
-                }
+            if (text.Equals("Sleepwear") || text.Equals("Swimwear") || text.Equals("Underwear")||text.Equals("Two Pieces Wear")
+                || text.Equals("Pants")) {
+                return text;
             }
-            try
+
+            switch (text)
             {
-                int si = Convert.ToInt32(text);
-                if (si > 0)
-                {
-                    if (si > 27 && si < 57)
-                    {
-                        value = si + " EU";
-                    }
-                    else
-                    {
-                        value = "";
-                    }
-                }
+                case "Bodysuit":
+                    value = "Bodysuits & Onesies";
+                    break;
+                case "Onesie":
+                    value = "Bodysuits & Onesies";
+                    break;
+                case "Jacket":
+                    value = "Jackets & Coats";
+                    break;
+                case "Coat":
+                    value = "Jackets & Coats";
+                    break;
+                case "Top":
+                    value = "Tops & Shirts";
+                    break;
+                case "Shirt":
+                    value = "Tops & Shirts";
+                    break;
+                case "T-Shirt":
+                    value = "Tops & Shirts";
+                    break;
+
+
+                default:
+                    value = text + "s";
+                    break;
             }
-            catch { }
-            return value.Trim();
+
+
+            return textInfo.ToTitleCase(value.Trim());
 
         }
     }
