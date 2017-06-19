@@ -18,6 +18,7 @@ using System.Xml.Linq;
 using Yandex;
 using Yandex.Translator;
 
+
 namespace helper
 {
   public  class Common_Use
@@ -178,6 +179,18 @@ namespace helper
         ///</summary>
         public async Task<string> Translate(string EnglishText) {
             string value = "";
+            await Task.Run(() => {
+                Translator tran = new Translator();
+                value = tran.Translate(EnglishText, "English", "Arabic");
+
+
+
+            });
+
+            return value.Trim();
+
+            /*
+            string value = "";
             await Task.Run(() =>
             {
                
@@ -190,7 +203,9 @@ namespace helper
             } );
 
             return  value;
+            */
         }
+        
       
     }
 }
