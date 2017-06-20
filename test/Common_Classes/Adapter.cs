@@ -12,7 +12,7 @@ namespace helper
     {
         public void SwitchCategory(object index)
         {
-           
+
             switch (Convert.ToString(index))
             {
 
@@ -29,7 +29,7 @@ namespace helper
                     Makeup makeup = new Makeup();
                     makeup.Organize();
                     break;
-                    case "Mobile Phone Accessories (26)":
+                case "Mobile Phone Accessories (26)":
                     Mobile_Accessories acc = new Mobile_Accessories();
                     acc.Organize();
                     break;
@@ -92,21 +92,24 @@ namespace helper
                     baby.Organize();
 
                     break;
-
+                case "Sleepwear (484)":
+                    Sleepwear jack = new Sleepwear();
+                    jack.Organize();
+                    break;
 
 
                 default:
                     MessageBox.Show("Please choose category first");
                     break;
             }
-          
-  
-          Form1.LogWrite("Finished Analayzing category \"" + Convert.ToString(index) + "\"");
+
+
+            Form1.LogWrite("Finished Analayzing category \"" + Convert.ToString(index) + "\"");
             Form1.LogActionsTotal = 0;
 
 
         }
-     
+
 
         public void SwitchBulk(object index)
         {
@@ -115,11 +118,11 @@ namespace helper
             {
 
                 case "Perfumes & Fragrances (478)":
-                   
-                        Perfume per = new Perfume();
 
-                        per.createBulk();
-                    
+                    Perfume per = new Perfume();
+
+                    per.createBulk();
+
 
                     break;
                 case "Refrigerators & Freezers (531)":
@@ -191,19 +194,22 @@ namespace helper
                     Hand_Tool hand = new Hand_Tool();
                     hand.createBulk();
                     break;
-                    case "Baby Clothes (343)":
+                case "Baby Clothes (343)":
                     Baby_Clothes baby = new Baby_Clothes();
                     baby.createBulk();
+                    break;
+                case "Sleepwear (484)":
+                    Sleepwear jac = new Sleepwear();
+                    jac.createBulk();
                     break;
 
                 default:
                     MessageBox.Show("Please choose category first");
                     break;
             }
-           Form1. LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)));
+            Form1.LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)));
 
         }
-
 
 
     }
