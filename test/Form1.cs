@@ -888,14 +888,14 @@ namespace helper
                 EnglishTxtBox.SelectionBackColor = System.Drawing.Color.LightGreen;
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
                 EnglishTxtBox.ScrollToCaret();
-              //  ArabicTxtBox.ScrollToCaret();
+             //  ArabicTxtBox.ScrollToCaret();
             }
             catch { }
         }
 
         private void Workertranslation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show("Saved");
+            MessageBox.Show(string.Format("Saved {0} line(s)",EnglishTxtBox.Lines.Count()));
             LogTranslatedLines = EnglishTxtBox.Lines.Count();
             EnglishTxtBox.Text = string.Empty;
             ArabicTxtBox.Text = string.Empty;
