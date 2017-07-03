@@ -96,7 +96,10 @@ namespace helper
                     Sleepwear jack = new Sleepwear();
                     jack.Organize();
                     break;
-
+                case "Kitchen and Dining (316)":
+                    Kitchen_Dinning Kitchen = new Kitchen_Dinning();
+                    Kitchen.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -201,6 +204,11 @@ namespace helper
                 case "Sleepwear (484)":
                     Sleepwear jac = new Sleepwear();
                     jac.createBulk();
+                    break;
+
+                case "Kitchen and Dining (316)":
+                    Kitchen_Dinning kitchen = new Kitchen_Dinning();
+                    kitchen.createBulk();
                     break;
 
                 default:

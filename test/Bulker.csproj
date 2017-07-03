@@ -212,6 +212,7 @@
     <Compile Include="Item_Types\CCC\Tablet Accessories.cs" />
     <Compile Include="Item_Types\FASHION\Tops.cs" />
     <Compile Include="Item_Types\FASHION\Watches.cs" />
+    <Compile Include="Item_Types\LIFE_STYLE\Home\Kitchen_Dinning.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Hand Tool.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Power Tool.cs" />
     <Compile Include="New_item_form.cs">
