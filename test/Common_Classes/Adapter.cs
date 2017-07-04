@@ -100,6 +100,10 @@ namespace helper
                     Kitchen_Dinning Kitchen = new Kitchen_Dinning();
                     Kitchen.Organize();
                     break;
+                case "Underwear (489)":
+                    Underwears under = new Underwears();
+                    under.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -209,6 +213,10 @@ namespace helper
                 case "Kitchen and Dining (316)":
                     Kitchen_Dinning kitchen = new Kitchen_Dinning();
                     kitchen.createBulk();
+                    break;
+                case "Underwear (489)":
+                    Underwears under = new Underwears();
+                    under.createBulk();
                     break;
 
                 default:

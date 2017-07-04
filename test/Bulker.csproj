@@ -202,6 +202,7 @@
     <Compile Include="Item_Types\CCC\HeadSet.cs" />
     <Compile Include="Item_Types\FASHION\Hand bags.cs" />
     <Compile Include="Item_Types\FASHION\Sleepwear.cs" />
+    <Compile Include="Item_Types\FASHION\Underwears.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Health_Beauty\Makeup.cs" />
     <Compile Include="Item_Types\CCC\Mobile Accessories.cs" />
     <Compile Include="Item_Types\CCC\Charger.cs" />
