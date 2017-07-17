@@ -104,6 +104,14 @@ namespace helper
                     Underwears under = new Underwears();
                     under.Organize();
                     break;
+                case "Snacks & Bakery (582)":
+                    Snacks_Bakery snack = new Snacks_Bakery();
+                    snack.Organize();
+                    break;
+                case "Swimwear (487)":
+                    Swimwear swim = new Swimwear();
+                    swim.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -217,6 +225,14 @@ namespace helper
                 case "Underwear (489)":
                     Underwears under = new Underwears();
                     under.createBulk();
+                    break;
+                case "Snacks & Bakery (582)":
+                    Snacks_Bakery snack = new Snacks_Bakery();
+                    snack.createBulk();
+                    break;
+                case "Swimwear (487)":
+                    Swimwear swim = new Swimwear();
+                    swim.createBulk();
                     break;
 
                 default:

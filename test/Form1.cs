@@ -53,6 +53,7 @@ namespace helper
         List<string> LogItemTypes = new List<string>();
         List<int> LogActionList = new List<int>();
         int LogTranslatedLines, LogListedItems = 0, LogActionsPerType = 0;
+        bool ViewOrientation = false;
 
         private void btnLoadFile_Click(object sender, EventArgs e)
         {
@@ -1009,8 +1010,14 @@ namespace helper
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            New_item_form newForm = new New_item_form();
-            newForm.Show();
+            if (ViewOrientation)
+            {
+                splitContainer2.Orientation = Orientation.Vertical;
+            }
+            else {
+                splitContainer2.Orientation = Orientation.Horizontal;
+            }
+            ViewOrientation = !ViewOrientation;
         }
 
         private void btnTranslateBing_Click(object sender, EventArgs e)

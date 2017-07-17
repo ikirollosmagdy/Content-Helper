@@ -29,7 +29,7 @@
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -202,7 +202,9 @@
     <Compile Include="Item_Types\CCC\HeadSet.cs" />
     <Compile Include="Item_Types\FASHION\Hand bags.cs" />
     <Compile Include="Item_Types\FASHION\Sleepwear.cs" />
+    <Compile Include="Item_Types\FASHION\Swimwear.cs" />
     <Compile Include="Item_Types\FASHION\Underwears.cs" />
+    <Compile Include="Item_Types\FMCG\Snacks_Bakery.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Health_Beauty\Makeup.cs" />
     <Compile Include="Item_Types\CCC\Mobile Accessories.cs" />
     <Compile Include="Item_Types\CCC\Charger.cs" />
