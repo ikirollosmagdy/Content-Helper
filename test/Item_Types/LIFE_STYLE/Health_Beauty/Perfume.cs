@@ -161,7 +161,7 @@ namespace helper
                     try
                     {
 
-                        Regex regexGender = new Regex(@"(([Ww]o)?[Mm][ae]n)|([Uu]ni(sex)?)|([Bb]oys?)|([Gg]irls?)");
+                        Regex regexGender = new Regex(@"(([Ww]o)?[Mm][ae]n)|([Uu]ni(sex)?)|([Bb]oys?)|([Gg]irls?)|([Hh][ie][rm])");
                         MatchCollection matchGender = regexGender.Matches(Form1.Sheet.Rows[row].Cells[col].Value.ToString());
                         if (matchGender.Count > 1)
                         {

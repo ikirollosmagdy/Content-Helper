@@ -43,7 +43,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(251, 194);
+            this.progressBar1.Location = new System.Drawing.Point(314, 198);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(100, 16);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
@@ -59,9 +59,9 @@
             this.toolStripStatusLabel3,
             this.toolStripStatusLabel2,
             this.lblComment});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 382);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 391);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(648, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(728, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -75,7 +75,7 @@
             // lblSize
             // 
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(211, 17);
+            this.lblSize.Size = new System.Drawing.Size(266, 17);
             this.lblSize.Spring = true;
             this.lblSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -103,7 +103,7 @@
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(259, 17);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(266, 17);
             this.toolStripStatusLabel2.Spring = true;
             this.toolStripStatusLabel2.Text = "Comment:";
             this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -122,7 +122,7 @@
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(648, 379);
+            this.pictureBox1.Size = new System.Drawing.Size(728, 388);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -132,7 +132,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 404);
+            this.ClientSize = new System.Drawing.Size(728, 413);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.pictureBox1);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Forms;
 
 namespace helper
@@ -31,10 +32,11 @@ namespace helper
         {
             int height = pictureBox1.Image.Height,
               width = pictureBox1.Image.Height;
-
+            string ext = Path.GetExtension(arrUrls[imagecount]);
 
             progressBar1.Hide();
-            lblSize.Text = width.ToString() + "*" + height.ToString();
+           
+            lblSize.Text = string.Format("Size: {0} * {1} with Format: {2}",width,height,ext);
         
             if (height<400 || width < 400|| height>600||width>600)
             {

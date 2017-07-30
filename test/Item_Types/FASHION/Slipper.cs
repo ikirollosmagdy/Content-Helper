@@ -16,7 +16,7 @@ namespace helper
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
         Common_Use common = new Common_Use();
         int Brand = 1, Model = 2, Type = 3, Gender = 4, Colors = 5, Size = 6, Material = 7,
-           Link = 8, Price = 8, Quantity = 10, UnTranslatedCount = 0, ItemConnection = 1;
+           Link = 8, Price = 9, Quantity = 10, UnTranslatedCount = 0, ItemConnection = 1;
         private void setupTable()
         {
 

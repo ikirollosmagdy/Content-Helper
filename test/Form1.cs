@@ -64,57 +64,69 @@ namespace helper
                 OD.FilterIndex = 0;
                 if (OD.ShowDialog() == DialogResult.OK)
                 {
-                    FileStream fs = File.Open(OD.FileName, FileMode.Open, FileAccess.Read);
+                    
+                    FileStream fs = File.Open(OD.FileName, FileMode.Open, FileAccess.ReadWrite);
                     IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(fs);
+                                     
                     reader.IsFirstRowAsColumnNames = true;
+                    
+                    
                     result = reader.AsDataSet();
-
+                    
+                    
+                    reader.Close();
+                    
                     ComboBox1.Items.Clear();
                     foreach (System.Data.DataTable dt in result.Tables)
                         ComboBox1.Items.Add(dt.TableName);
-                    reader.Close();
-
+                    
                 }
+
 
                 try
                 {
-                    Sheet.Columns.Clear();
+                   //Sheet.Columns.Clear();
                     ComboBox1.SelectedIndex = 0;
+                    result.Tables[0].Columns[2].DataType = typeof(string);
+
                     GridView1.DataSource = result.Tables[0];
+                    
 
-                    GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+                        GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
 
-                    DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
-                    columnID.HeaderText = "No";
-                    if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
-                    {
-                        Sheet.Columns.Insert(0, columnID);
+                        DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
+                        columnID.HeaderText = "No";
+                        if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
+                        {
+                            Sheet.Columns.Insert(0, columnID);
+                        }
+                        foreach (DataGridViewRow row in Sheet.Rows)
+                        {
+                            Sheet[0, row.Index].Value = (row.Index + 1).ToString();
+                        }
+
+                        foreach (DataGridViewColumn column in Sheet.Columns)
+                        {
+                            column.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        
                     }
-                    foreach (DataGridViewRow row in Sheet.Rows)
-                    {
-                        Sheet[0, row.Index].Value = (row.Index + 1).ToString();
+
+                        LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
                     }
-
-                    foreach (DataGridViewColumn column in Sheet.Columns)
-                    {
-                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                    }
-
-                    LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
-                }
-                catch (Exception)
-                {
-                }
-
-
-
-
+                    catch (Exception)
+            {
             }
+        }
+
+
+
+    
             catch
             {
 
                 MessageBox.Show("Please close file first...!!");
             }
+           
         }
 
 
@@ -123,7 +135,8 @@ namespace helper
         {
             try
             {
-                Sheet.Columns.Clear();
+                //Sheet.Columns.Clear();
+               
                 GridView1.DataSource = result.Tables[ComboBox1.SelectedIndex];
                 GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
 
@@ -546,7 +559,7 @@ namespace helper
         {
             PBar.Visible = true;
             txtStatus.Text = "Saving...";
-            Thread thread = new Thread(() => exportToExcel(Sheet, OrganizedSheet, "Organized"));
+            Thread thread = new Thread(() => exportToExcel(Sheet, OrganizedSheet, "Imported"));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
@@ -986,8 +999,10 @@ namespace helper
 
         private void GridView1_ColumnHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            string header = Sheet.Columns[e.ColumnIndex].HeaderText;
-            Sheet.Columns[e.ColumnIndex].HeaderText = Interaction.InputBox("Change column header from "+header+" to be ?", "Rename Header Title");
+
+            //string header = Sheet.Columns[e.ColumnIndex].HeaderText;
+            //Sheet.Columns[e.ColumnIndex].HeaderText = Interaction.InputBox("Change column header from " + header + " to be ?", "Rename Header Title");
+
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -998,10 +1013,10 @@ namespace helper
         private void OrganaizedGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             OrganizedSheet[e.ColumnIndex, e.RowIndex].Value = DBNull.Value;
-            MessageBox.Show("Please choose one from droplist");
+            //MessageBox.Show("Please choose one from droplist");
             if (e.Exception!=null && e.Context== DataGridViewDataErrorContexts.Display)
             {
-                MessageBox.Show("Please choose one from droplist");
+                //MessageBox.Show("Please choose one from droplist");
                 e.Cancel = true;
                 e.ThrowException = false;
                
@@ -1131,6 +1146,11 @@ namespace helper
          
         }
 
+        private void GridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+           
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
@@ -1204,13 +1224,13 @@ namespace helper
                             {
                                 Range range = (Range)worksheet.Cells[i + 2, j + 1];
                                 worksheet.Cells[i + 2, j + 1] = Grid.Rows[i].Cells[j].Value.ToString();
-                                if (Grid[j,i].Style.BackColor == System.Drawing.Color.Empty)
+                                if (Grid.Rows[i].DefaultCellStyle.BackColor == System.Drawing.Color.Empty)
                                 {
                                     range.Interior.ColorIndex = 0;
                                 }
                                 else
                                 {
-                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid[j, i].Style.BackColor);
+                                    range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid.Rows[i].DefaultCellStyle.BackColor);
                                 }
 
 
@@ -1225,7 +1245,7 @@ namespace helper
 
                         worksheet = workbook.Sheets[2];
 
-                        worksheet.Name = "Imported";
+                        worksheet.Name = "Organized";
 
                         //Loop through each row and read value from each column. 
                         for (int x = 0; x < Grid2.Columns.Count; x++)
@@ -1240,13 +1260,13 @@ namespace helper
                                 {
                                     Range range = (Range)worksheet.Cells[x + 2, y + 1];
                                     worksheet.Cells[x + 2, y + 1] = Grid2.Rows[x].Cells[y].Value.ToString();
-                                    if (Grid2[y,x].Style.BackColor == System.Drawing.Color.Empty)
+                                    if (Grid2.Rows[x].DefaultCellStyle.BackColor == System.Drawing.Color.Empty || Grid2.Rows[x].DefaultCellStyle.BackColor == System.Drawing.Color.White)
                                     {
                                         range.Interior.ColorIndex = 0;
                                     }
                                     else
                                     {
-                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2[y, x].Style.BackColor);
+                                        range.Interior.Color = System.Drawing.ColorTranslator.ToOle(Grid2.Rows[x].DefaultCellStyle.BackColor);
                                     }
                                 }
                                 else
@@ -1285,9 +1305,9 @@ namespace helper
             }
             LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName));
 
-            if (saveDialog.ShowDialog() != DialogResult.OK) {
-                saveDialog.FileName = "N/A";
-            }
+            //if (saveDialog.ShowDialog() != DialogResult.OK) {
+            //    saveDialog.FileName = "N/A";
+            //}
             try
             {
                 LogSavedFile.Add(saveDialog.FileName);
