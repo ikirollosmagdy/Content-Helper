@@ -31,7 +31,7 @@ namespace helper
 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Link", "Image Url")));
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Price", "Price")));
-            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity")));
+            Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.Columns.Add("Qunatity", "Quantity"))); 
             Form1.OrganizedSheet.Invoke(new Action(() => Form1.OrganizedSheet.RowCount = Form1.Sheet.RowCount));
             foreach (DataGridViewColumn co in Form1.OrganizedSheet.Columns)
             {
@@ -56,21 +56,25 @@ namespace helper
                     {
                         Form1.OrganizedSheet[Brand, row].Value = Form1.Sheet[col, row].Value;
                     }
-
-                    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("type"))
+                    try
                     {
-                        Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
-                    }
-                    else {
-                        if (Form1.Sheet[col, row].Value != null)
+                        if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("type"))
                         {
-                            if (Form1.Sheet[col, row].Value.ToString().ToLower().Contains("cover") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("frame") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("holder"))
+                            Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                        }
+                        else
+                        {
+                            if (Form1.Sheet[col, row].Value != null)
                             {
+                                if (Form1.Sheet[col, row].Value.ToString().ToLower().Contains("cover") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("frame") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("holder"))
+                                {
 
-                                Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                                    Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                                }
                             }
                         }
-                }
+                    }
+                    catch { }
 
                     try
                     {
@@ -368,7 +372,7 @@ namespace helper
         {
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Mobile, row].Value+" "+ Form1.OrganizedSheet[MobileModel, row].Value;
            
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[Mobile, row].Value.ToString())+" "+ db.getRecord(Form1.BulkSheet[MobileModel, row].Value.ToString());
+            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value .ToString());
             if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;

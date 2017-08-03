@@ -49,7 +49,7 @@ namespace helper
         Stopwatch STImported, STBulk, STTranslation;
         static string path;
         public static int LogActionsTotal;
-         List<string> LogSavedFile = new List<string>();
+        List<string> LogSavedFile = new List<string>();
         List<string> LogItemTypes = new List<string>();
         List<int> LogActionList = new List<int>();
         int LogTranslatedLines, LogListedItems = 0, LogActionsPerType = 0;
@@ -64,69 +64,69 @@ namespace helper
                 OD.FilterIndex = 0;
                 if (OD.ShowDialog() == DialogResult.OK)
                 {
-                    
+
                     FileStream fs = File.Open(OD.FileName, FileMode.Open, FileAccess.ReadWrite);
                     IExcelDataReader reader = ExcelReaderFactory.CreateOpenXmlReader(fs);
-                                     
+
                     reader.IsFirstRowAsColumnNames = true;
-                    
-                    
+
+
                     result = reader.AsDataSet();
-                    
-                    
+
+
                     reader.Close();
-                    
+
                     ComboBox1.Items.Clear();
                     foreach (System.Data.DataTable dt in result.Tables)
                         ComboBox1.Items.Add(dt.TableName);
-                    
+
                 }
 
 
                 try
                 {
-                   //Sheet.Columns.Clear();
+                    //Sheet.Columns.Clear();
                     ComboBox1.SelectedIndex = 0;
                     result.Tables[0].Columns[2].DataType = typeof(string);
 
                     GridView1.DataSource = result.Tables[0];
-                    
 
-                        GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
 
-                        DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
-                        columnID.HeaderText = "No";
-                        if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
-                        {
-                            Sheet.Columns.Insert(0, columnID);
-                        }
-                        foreach (DataGridViewRow row in Sheet.Rows)
-                        {
-                            Sheet[0, row.Index].Value = (row.Index + 1).ToString();
-                        }
+                    GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithAutoHeaderText;
 
-                        foreach (DataGridViewColumn column in Sheet.Columns)
-                        {
-                            column.SortMode = DataGridViewColumnSortMode.NotSortable;
-                        
+                    DataGridViewTextBoxColumn columnID = new DataGridViewTextBoxColumn();
+                    columnID.HeaderText = "No";
+                    if (!columnID.HeaderText.Equals(Sheet.Columns[0].HeaderText))
+                    {
+                        Sheet.Columns.Insert(0, columnID);
+                    }
+                    foreach (DataGridViewRow row in Sheet.Rows)
+                    {
+                        Sheet[0, row.Index].Value = (row.Index + 1).ToString();
                     }
 
-                        LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
+                    foreach (DataGridViewColumn column in Sheet.Columns)
+                    {
+                        column.SortMode = DataGridViewColumnSortMode.NotSortable;
+
                     }
-                    catch (Exception)
-            {
+
+                    LogWrite("Sheet imported \"" + ComboBox1.SelectedItem.ToString() + "\"");
+                }
+                catch (Exception)
+                {
+                }
             }
-        }
 
 
 
-    
+
             catch
             {
 
                 MessageBox.Show("Please close file first...!!");
             }
-           
+
         }
 
 
@@ -136,7 +136,7 @@ namespace helper
             try
             {
                 //Sheet.Columns.Clear();
-               
+
                 GridView1.DataSource = result.Tables[ComboBox1.SelectedIndex];
                 GridView1.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
 
@@ -289,7 +289,7 @@ namespace helper
             if (undoStack.Count == 0)
                 return;
             object[][] rows = undoStack.Pop();
-             DataGridViewCellStyle[] colors = undoColor.Pop(); 
+            DataGridViewCellStyle[] colors = undoColor.Pop();
             while (rows.Equals(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).ToArray()))
             {
                 rows = undoStack.Pop();
@@ -346,8 +346,8 @@ namespace helper
         {
 
 
-           undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
-           undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
+            undoStack.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.Cells.Cast<DataGridViewCell>().Select(c => c.Value).ToArray()).ToArray());
+            undoColor.Push(OrganizedSheet.Rows.Cast<DataGridViewRow>().Where(r => !r.IsNewRow).Select(r => r.DefaultCellStyle).ToArray());
 
         }
 
@@ -355,7 +355,7 @@ namespace helper
         {
             string value = OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString();
             LogWrite(string.Format("Cell [{0},{1}] value changed to \"{2}\"", e.ColumnIndex, e.RowIndex, value));
-           
+
         }
 
         private void btnQC_Click(object sender, EventArgs e)
@@ -381,7 +381,7 @@ namespace helper
 
 
                             }
-                            
+
 
                         }
                         else
@@ -440,7 +440,7 @@ namespace helper
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString().Contains("http"))
                 {
                     ImageForm img = new ImageForm(OrganizedSheet[e.ColumnIndex, e.RowIndex].Value.ToString());
-                  
+
                     img.Show();
                 }
                 if (OrganizedSheet[e.ColumnIndex, e.RowIndex].GetType() == typeof(DataGridViewComboBoxCell))
@@ -468,8 +468,15 @@ namespace helper
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.DoubleBuffered = true;
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null,
+OrganaizedGrid, new object[] { true });
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null,
+Sheet, new object[] { true });
+
 
         }
+
 
         private void doneToolMenuSheet_Click(object sender, EventArgs e)
         {
@@ -718,7 +725,7 @@ namespace helper
 
             if (IsConnectedToInternet())
             {
-               
+
                 XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
                 var elements = document.Element("AppName");
                 Version onlineVersion = new Version(elements.Element("version").Value);
@@ -728,11 +735,12 @@ namespace helper
                     Updater updater = new Updater("http://souqforms.atwebpages.com/");
                     updater.ShowDialog();
                 }
-               
-                Task task1 = new Task(() => {
+
+                Task task1 = new Task(() =>
+                {
                     Common_Use common = new Common_Use();
                     common.sendOfflineReport();
-                    
+
                 });
                 task1.Start();
 
@@ -770,8 +778,8 @@ namespace helper
                     sw.Close();
 
                 }
-              
-             
+
+
             }
             catch { }
 
@@ -902,14 +910,14 @@ namespace helper
                 EnglishTxtBox.SelectionBackColor = System.Drawing.Color.LightGreen;
                 EnglishTxtBox.SelectionFont = new System.Drawing.Font(EnglishTxtBox.SelectionFont, FontStyle.Bold);
                 EnglishTxtBox.ScrollToCaret();
-             //  ArabicTxtBox.ScrollToCaret();
+                //  ArabicTxtBox.ScrollToCaret();
             }
             catch { }
         }
 
         private void Workertranslation_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            MessageBox.Show(string.Format("Saved {0} line(s)",EnglishTxtBox.Lines.Count()));
+            MessageBox.Show(string.Format("Saved {0} line(s)", EnglishTxtBox.Lines.Count()));
             LogTranslatedLines = EnglishTxtBox.Lines.Count();
             EnglishTxtBox.Text = string.Empty;
             ArabicTxtBox.Text = string.Empty;
@@ -923,7 +931,7 @@ namespace helper
             for (int x = 0; x < array.Length; x++)
             {
                 db.AddRecord(array[x][0], array[x][1]);
-                Workertranslation.ReportProgress((x/array.Length)*100);
+                Workertranslation.ReportProgress((x / array.Length) * 100);
             }
 
 
@@ -978,7 +986,7 @@ namespace helper
             DataObject d = OrganaizedGrid.GetClipboardContent();
 
             Clipboard.SetDataObject(d);
-            
+
         }
 
         private void OrganaizedGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -987,7 +995,7 @@ namespace helper
             {
                 LogActionsPerType++;
                 LogActionsTotal++;
-               
+
             }
             catch { }
         }
@@ -1014,12 +1022,12 @@ namespace helper
         {
             OrganizedSheet[e.ColumnIndex, e.RowIndex].Value = DBNull.Value;
             //MessageBox.Show("Please choose one from droplist");
-            if (e.Exception!=null && e.Context== DataGridViewDataErrorContexts.Display)
+            if (e.Exception != null && e.Context == DataGridViewDataErrorContexts.Display)
             {
                 //MessageBox.Show("Please choose one from droplist");
                 e.Cancel = true;
                 e.ThrowException = false;
-               
+
             }
         }
 
@@ -1029,7 +1037,8 @@ namespace helper
             {
                 splitContainer2.Orientation = Orientation.Vertical;
             }
-            else {
+            else
+            {
                 splitContainer2.Orientation = Orientation.Horizontal;
             }
             ViewOrientation = !ViewOrientation;
@@ -1037,17 +1046,18 @@ namespace helper
 
         private void btnTranslateBing_Click(object sender, EventArgs e)
         {
-           
-         getTranslation();
+
+            getTranslation();
 
         }
 
-        private async void getTranslation() {
+        private async void getTranslation()
+        {
             Common_Use com = new Common_Use();
             ArabicTxtBox.Clear();
             for (int i = 0; i < EnglishTxtBox.Lines.Count(); i++)
             {
-                ArabicTxtBox.Text+= await com.Translate(EnglishTxtBox.Lines[i]) + Environment.NewLine;
+                ArabicTxtBox.Text += await com.Translate(EnglishTxtBox.Lines[i]) + Environment.NewLine;
             }
 
 
@@ -1062,7 +1072,7 @@ namespace helper
             if (hittest.ColumnIndex != -1
                 && hittest.RowIndex != -1)
                 OrganaizedGrid[hittest.ColumnIndex, hittest.RowIndex].Value = cellvalue.Trim();
-           
+
         }
 
         private void OrganaizedGrid_DragOver(object sender, DragEventArgs e)
@@ -1142,13 +1152,13 @@ namespace helper
 
         private void OrganaizedGrid_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
         {
-       
-         
+
+
         }
 
         private void GridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-           
+
         }
 
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
@@ -1163,7 +1173,7 @@ namespace helper
             DataObject d = OrganaizedGrid.GetClipboardContent();
 
             Clipboard.SetDataObject(d);
-          
+
             foreach (DataGridViewCell cell in OrganaizedGrid.SelectedCells)
             {
                 cell.Value = DBNull.Value;
@@ -1281,7 +1291,7 @@ namespace helper
 
 
                     workbook.SaveAs(saveDialog.FileName);
-                    txtStats.GetCurrentParent().Invoke(new System.Action(() => MessageBox.Show("File has been saved...!!!","Saving...")));
+                    txtStats.GetCurrentParent().Invoke(new System.Action(() => MessageBox.Show("File has been saved...!!!", "Saving...")));
                     txtStats.GetCurrentParent().Invoke(new System.Action(() => Form1.txtStats.Text = "File has been saved!!!"));
                     PBar.GetCurrentParent().Invoke(new System.Action(() => Form1.PBar.Visible = false));
 
@@ -1301,7 +1311,7 @@ namespace helper
                     excel = null;
 
                 }
-              
+
             }
             LogWrite(string.Format("Finished exporting sheet with name {0}", saveDialog.FileName));
 
@@ -1409,14 +1419,14 @@ namespace helper
                     }
 
                     TimeSpan duration = DateTime.Now - _start;
-                   
+
                     string du = string.Format("{0:hh\\:mm\\:ss}", duration);
                     var oblist = new List<object>() {
                     Environment.UserName, LogListedItems,
                     LogTranslatedLines,
                     _start.ToString(),
                     DateTime.Now.ToString(),
-                    du,             
+                    du,
             string.Format("{0:hh\\:mm\\:ss}",STImported.Elapsed).Trim(),
                             string.Format("{0:hh\\:mm\\:ss}",STBulk.Elapsed).Trim(),
                       string.Format("{0:hh\\:mm\\:ss}",STTranslation.Elapsed).Trim(),
@@ -1438,7 +1448,8 @@ namespace helper
                     Console.WriteLine(ex.Message);
                 }
             }
-            else {
+            else
+            {
                 string names = string.Empty;
                 string types = string.Empty;
                 for (int x = 0; x < LogSavedFile.Count; x++)
@@ -1563,6 +1574,9 @@ namespace helper
                 }
             }
         }
+
+
+
     }
 
 }
