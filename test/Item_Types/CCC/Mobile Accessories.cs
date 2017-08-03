@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace helper
-{
+{ 
     public class Mobile_Accessories
     {
         Database db = new Database();
@@ -61,11 +61,14 @@ namespace helper
                     {
                         Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
                     }
-                    else { 
-                        if (Form1.Sheet[col, row].Value.ToString().ToLower().Contains("cover") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("frame") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("holder"))
+                    else {
+                        if (Form1.Sheet[col, row].Value != null)
                         {
+                            if (Form1.Sheet[col, row].Value.ToString().ToLower().Contains("cover") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("frame") || Form1.Sheet[col, row].Value.ToString().ToLower().Contains("holder"))
+                            {
 
-                            Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                                Form1.OrganizedSheet[Type, row].Value = Form1.Sheet[col, row].Value.ToString().Trim();
+                            }
                         }
                 }
 
