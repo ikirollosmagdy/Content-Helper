@@ -298,22 +298,22 @@ namespace helper
         }
         private void setType(int row)
         {
-            Form1.BulkSheet[5, row].Value = getTopStyle(Form1.OrganizedSheet[Type, row].Value.ToString());
-            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.BulkSheet[5, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
+            Form1.BulkSheet[6, row].Value = getTopStyle(Form1.OrganizedSheet[Type, row].Value.ToString());
+            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.BulkSheet[6, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
             {
-                Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
 
         }
         private void setSize(int row)
         {
-            Form1.BulkSheet[6, row].Value = Form1.OrganizedSheet[Size, row].Value;
-            Form1.BulkSheet[14, row].Value = db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
-            if (common.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
+            Form1.BulkSheet[5, row].Value = Form1.OrganizedSheet[Size, row].Value;
+            Form1.BulkSheet[13, row].Value = db.getRecord(Form1.OrganizedSheet[Size, row].Value.ToString());
+            if (common.CheckEnglish(Form1.BulkSheet[13, row].Value.ToString()))
             {
-                Form1.BulkSheet[14, row].Style.BackColor = Color.Yellow;
+                Form1.BulkSheet[13, row].Style.BackColor = Color.Yellow;
                 UnTranslatedCount++;
             }
         }

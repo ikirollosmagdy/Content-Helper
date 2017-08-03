@@ -372,7 +372,7 @@ namespace helper
         {
             Form1.BulkSheet[7, row].Value = Form1.OrganizedSheet[Mobile, row].Value+" "+ Form1.OrganizedSheet[MobileModel, row].Value;
            
-            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value .ToString());
+            Form1.BulkSheet[15, row].Value = db.getRecord(Form1.BulkSheet[7, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[15, row].Value.ToString()))
             {
                 Form1.BulkSheet[15, row].Style.BackColor = Color.Yellow;

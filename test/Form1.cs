@@ -473,6 +473,8 @@ namespace helper
 OrganaizedGrid, new object[] { true });
             typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null,
 Sheet, new object[] { true });
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null,
+BulkGrid, new object[] { true });
 
 
         }
