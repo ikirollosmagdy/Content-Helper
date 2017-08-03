@@ -145,19 +145,19 @@ namespace helper
                     {
 
                         setTitle(i);
-                        //setBrand(i);
-                        //setDescription(i);
-                        //setColor(i);
-                        //setSize(i);
-                        //setCategory(i);
+                        setBrand(i);
+                        setDescription(i);
+                        setType(i);
+                       setSize(i);
+                        setPackaging(i);
 
-                        //setGender(i);
+                        setCount(i);
 
 
 
-                        //setLink(i);
-                        //setPrice(i);
-                        //setQuantity(i);
+                        setLink(i);
+                        setPrice(i);
+                       setQuantity(i);
                         //setItemConnection(i);
 
 

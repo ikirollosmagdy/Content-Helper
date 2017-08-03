@@ -148,7 +148,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="SQLite.NET">
-      <HintPath>..\..\..\..\..\Desktop\test\SQLite.NET.dll</HintPath>
+      <HintPath>..\..\..\..\Documents\EGDownloads\SQLite.NET.0.21_armv4_dll\SQLite.NET.0.21_armv4_dll\SQLite.NET.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -245,6 +245,9 @@
     <Compile Include="Updater.Designer.cs">
       <DependentUpon>Updater.cs</DependentUpon>
     </Compile>
+    <Content Include="SQLite3_wrapper.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="DeveloperForm.resx">
       <DependentUpon>DeveloperForm.cs</DependentUpon>
     </EmbeddedResource>
