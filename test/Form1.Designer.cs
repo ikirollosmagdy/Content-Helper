@@ -96,6 +96,7 @@
             this.WorkerAnalyze = new System.ComponentModel.BackgroundWorker();
             this.WorkerBulk = new System.ComponentModel.BackgroundWorker();
             this.Workertranslation = new System.ComponentModel.BackgroundWorker();
+            this.getCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabImported.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -203,9 +204,10 @@
             // 
             this.SheetMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.colorsToolStripMenuItem1,
-            this.insertColumnSheetMenu});
+            this.insertColumnSheetMenu,
+            this.getCategory});
             this.SheetMenu.Name = "contextMenuStrip1";
-            this.SheetMenu.Size = new System.Drawing.Size(212, 48);
+            this.SheetMenu.Size = new System.Drawing.Size(212, 92);
             // 
             // colorsToolStripMenuItem1
             // 
@@ -828,6 +830,13 @@
             this.Workertranslation.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Workertranslation_ProgressChanged);
             this.Workertranslation.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Workertranslation_RunWorkerCompleted);
             // 
+            // getCategory
+            // 
+            this.getCategory.Name = "getCategory";
+            this.getCategory.Size = new System.Drawing.Size(211, 22);
+            this.getCategory.Text = "Categorization Tool";
+            this.getCategory.Click += new System.EventHandler(this.getCategory_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -949,6 +958,7 @@
         private System.Windows.Forms.ToolStripMenuItem CutStripMenuItem1;
         private System.Windows.Forms.ToolStripButton btnAddItem;
         private System.Windows.Forms.ToolStripButton btnTranslateBing;
+        private System.Windows.Forms.ToolStripMenuItem getCategory;
     }
 }
 

@@ -1163,6 +1163,51 @@ BulkGrid, new object[] { true });
 
         }
 
+        private void getCategory_Click(object sender, EventArgs e)
+        {
+          
+            Thread thread = new Thread(() =>
+            {
+                Categorization cat = new Categorization();
+                int row, col;
+                DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+                column.HeaderText = "Category";
+                if (Sheet.Columns[1].HeaderText != "Category")
+                {
+                   
+                    Sheet.Invoke(new System.Action(()=> Sheet.Columns.Insert(1, column)));
+                }
+
+                for (row = 0; row < Sheet.RowCount - 1; row++)
+                {
+                    for (col = 0; col < Sheet.ColumnCount; col++)
+                    {
+                        try
+                        {
+                            string value = cat.getCategory(Sheet[col, row].Value.ToString());
+                            if (value != "")
+                            {
+                              
+                                Sheet.Invoke(new System.Action(() => Sheet[1, row].Value = value));
+                            }
+
+                        }
+                        catch { }
+
+
+                    }
+
+                }
+
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+
+
+          
+                    
+        }
+
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)
         {
             string CopiedContent = Clipboard.GetText();
