@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Basem Abdallah\Desktop\Published Versions\</PublishUrl>
+    <PublishUrl>C:\Users\babdallah\Desktop\Published Versions\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,7 +28,7 @@
     <SuiteName>Katana</SuiteName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -60,7 +60,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>91232769A7885E6263055659417CFBC12ACC1B3B</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1F7125BCB064D2F08D855E7FF3E358A2FDEFAA0B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Bulker_TemporaryKey.pfx</ManifestKeyFile>
@@ -147,7 +147,8 @@
     </Reference>
     <Reference Include="SQLite.NET, Version=0.21.1869.4058, Culture=neutral, PublicKeyToken=c273bd375e695f9c">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Desktop\Sq\SQLite.NET.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\SQLite.NET.0.21_x68_dll\SQLite.NET.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

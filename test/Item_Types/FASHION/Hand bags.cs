@@ -22,8 +22,6 @@ namespace helper
         private void setupTable()
         {
 
-            
-
             DataGridViewComboBoxColumn TypeColumn = new DataGridViewComboBoxColumn();
             TypeColumn.HeaderText = "Type";
             TypeColumn.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
@@ -416,7 +414,7 @@ namespace helper
         private string getMaterial(string text)
         {
             string value = "";
-            Regex regmat = new Regex(@"([Cc]ot\w+)|([Ll]ea\w+)|([Ww]oo\w+)|([Ss]at\w+)|([Ss]ilk)|([Vv]isco\w+)|([Pp]olye\w+)|([Ll]inen)|([Nn]ylon)|([Vv]elvet)");
+            Regex regmat = new Regex(@"([Cc]ot\w+)|([Ll]ea\w+)|([Ww]oo\w+)|([Ss]at\w+)|([Ss]ilk)|([Vv]isco\w+)|([Pp]olye\w+)|([Ll]inen)|([Nn]ylon)|([Vv]elvet)|(pu)",RegexOptions.IgnoreCase);
             MatchCollection matchmat = regmat.Matches(text);
             if (matchmat.Count > 1)
             {
