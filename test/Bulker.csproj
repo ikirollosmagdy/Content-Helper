@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>helper</RootNamespace>
-    <AssemblyName>katana</AssemblyName>
+    <AssemblyName>Bulker</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -28,7 +28,7 @@
     <SuiteName>Katana</SuiteName>
     <WebPage>publish.htm</WebPage>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -63,7 +63,8 @@
     <ManifestCertificateThumbprint>1F7125BCB064D2F08D855E7FF3E358A2FDEFAA0B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Bulker_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -219,6 +220,7 @@
     <Compile Include="Item_Types\LIFE_STYLE\Home\Kitchen_Dinning.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Hand Tool.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Power Tool.cs" />
+    <Compile Include="Item_Types\TOYS\Toys.cs" />
     <Compile Include="New_item_form.cs">
       <SubType>Form</SubType>
     </Compile>

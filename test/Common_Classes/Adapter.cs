@@ -112,6 +112,10 @@ namespace helper
                     Swimwear swim = new Swimwear();
                     swim.Organize();
                     break;
+                case "Toys (24)":
+                    Toys toys = new Toys();
+                    toys.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -233,6 +237,10 @@ namespace helper
                 case "Swimwear (487)":
                     Swimwear swim = new Swimwear();
                     swim.createBulk();
+                    break;
+                case "Toys (24)":
+                    Toys toys = new Toys();
+                    toys.createBulk();
                     break;
 
                 default:

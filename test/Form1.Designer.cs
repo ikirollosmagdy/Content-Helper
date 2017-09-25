@@ -43,6 +43,7 @@
             this.cancelSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ClearSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.insertColumnSheetMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.getCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.OrganaizedGrid = new System.Windows.Forms.DataGridView();
             this.OrganizedMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.colorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,7 +97,6 @@
             this.WorkerAnalyze = new System.ComponentModel.BackgroundWorker();
             this.WorkerBulk = new System.ComponentModel.BackgroundWorker();
             this.Workertranslation = new System.ComponentModel.BackgroundWorker();
-            this.getCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabImported.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -207,7 +207,7 @@
             this.insertColumnSheetMenu,
             this.getCategory});
             this.SheetMenu.Name = "contextMenuStrip1";
-            this.SheetMenu.Size = new System.Drawing.Size(212, 92);
+            this.SheetMenu.Size = new System.Drawing.Size(212, 70);
             // 
             // colorsToolStripMenuItem1
             // 
@@ -246,6 +246,13 @@
             this.insertColumnSheetMenu.Size = new System.Drawing.Size(211, 22);
             this.insertColumnSheetMenu.Text = "Insert Comments Column";
             this.insertColumnSheetMenu.Click += new System.EventHandler(this.insertColumnToolStripMenuItem_Click);
+            // 
+            // getCategory
+            // 
+            this.getCategory.Name = "getCategory";
+            this.getCategory.Size = new System.Drawing.Size(211, 22);
+            this.getCategory.Text = "Categorization Tool";
+            this.getCategory.Click += new System.EventHandler(this.getCategory_Click);
             // 
             // OrganaizedGrid
             // 
@@ -479,6 +486,7 @@
             "Swimwear (487)",
             "Tablet Accessories (181)",
             "Tops (488)",
+            "Toys (24)",
             "Underwear (489)",
             "Watches (490)"});
             this.DropCat.Margin = new System.Windows.Forms.Padding(5, 0, 1, 0);
@@ -830,13 +838,6 @@
             this.Workertranslation.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.Workertranslation_ProgressChanged);
             this.Workertranslation.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Workertranslation_RunWorkerCompleted);
             // 
-            // getCategory
-            // 
-            this.getCategory.Name = "getCategory";
-            this.getCategory.Size = new System.Drawing.Size(211, 22);
-            this.getCategory.Text = "Categorization Tool";
-            this.getCategory.Click += new System.EventHandler(this.getCategory_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -849,7 +850,7 @@
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Katana";
+            this.Text = "Bulker";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.Form1_HelpButtonClicked);
             this.Activated += new System.EventHandler(this.Form1_Activated);
