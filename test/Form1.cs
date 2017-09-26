@@ -957,19 +957,34 @@ BulkGrid, new object[] { true });
             switch (selectedPageIndex)
             {
                 case 0:
-                    STImported.Start();
-                    STBulk.Stop();
-                    STTranslation.Stop();
+                    try
+                    {
+                        STImported.Start();
+
+                        STBulk.Stop();
+                        STTranslation.Stop();
+                    }
+                    catch { }
                     break;
                 case 1:
-                    STImported.Stop();
-                    STBulk.Start();
-                    STTranslation.Stop();
+                    try
+                    {
+                        STImported.Stop();
+
+                        STBulk.Start();
+                        STTranslation.Stop();
+                    }
+                    catch { }
                     break;
                 case 2:
-                    STImported.Stop();
-                    STBulk.Stop();
-                    STTranslation.Start();
+                    try
+                    {
+                        STImported.Stop();
+
+                        STBulk.Stop();
+                        STTranslation.Start();
+                    }
+                    catch { }
                     break;
             }
 
@@ -1165,7 +1180,7 @@ BulkGrid, new object[] { true });
 
         private void getCategory_Click(object sender, EventArgs e)
         {
-          
+
             Thread thread = new Thread(() =>
             {
                 Categorization cat = new Categorization();
@@ -1174,8 +1189,8 @@ BulkGrid, new object[] { true });
                 column.HeaderText = "Category";
                 if (Sheet.Columns[1].HeaderText != "Category")
                 {
-                   
-                    Sheet.Invoke(new System.Action(()=> Sheet.Columns.Insert(1, column)));
+
+                    Sheet.Invoke(new System.Action(() => Sheet.Columns.Insert(1, column)));
                 }
 
                 for (row = 0; row < Sheet.RowCount - 1; row++)
@@ -1187,7 +1202,7 @@ BulkGrid, new object[] { true });
                             string value = cat.getCategory(Sheet[col, row].Value.ToString());
                             if (value != "")
                             {
-                              
+
                                 Sheet.Invoke(new System.Action(() => Sheet[1, row].Value = value));
                             }
 
@@ -1204,8 +1219,8 @@ BulkGrid, new object[] { true });
             thread.Start();
 
 
-          
-                    
+
+
         }
 
         private void PasteStripMenuItem1_Click(object sender, EventArgs e)

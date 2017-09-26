@@ -206,7 +206,7 @@ namespace helper
         {
             Form1.BulkSheet[2, row].Value = string.Format("<p>{0}</p><p><b>Product Features:</b></p><ul><li>Brand:{1}</li><li>Toy Category:{2}</li><li>Recommended Age:{3}</li><li>Targeted Group:{4}</li></ul>",
                 Form1.OrganizedSheet[Desc, row].Value, Form1.OrganizedSheet[Brand, row].Value, Form1.OrganizedSheet[category, row].Value, Form1.OrganizedSheet[Age, row].Value, Form1.OrganizedSheet[Gender, row].Value);
-            Form1.BulkSheet[9, row].Value = string.Format("<p>{0}</p><p><b>خصائص المنتج:</b></p><ul><li>العلامة  التجارية:{1}</li><li>نوع اللعبة:{2}</li><li>الفئة العمرية:3}</li><li>المجموعة المستهدفة:{4}</li></ul>",
+            Form1.BulkSheet[9, row].Value = string.Format("<p>{0}</p><p><strong>خصائص المنتج:</strong></p><ul><li>العلامة التجارية:{1}</li><li>نوع اللعبة:{2}</li><li>الفئة العمرية:{3}</li><li>المجموعة المستهدفة:{4}</li></ul>",
                db.getRecord(Form1.OrganizedSheet[Desc, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[Brand, row].Value.ToString()), db.getRecord(Form1.OrganizedSheet[category, row].Value.ToString()), Form1.OrganizedSheet[Age, row].Value, db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString()));
             if (common.CheckEnglish(Form1.BulkSheet[9, row].Value.ToString()))
             {
@@ -216,7 +216,7 @@ namespace helper
         }
         private void setCategory(int row)
         {
-            Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[category, row].Value.ToString().Trim();
+            Form1.BulkSheet[3, row].Value = Form1.OrganizedSheet[category, row].Value;
             Form1.BulkSheet[10, row].Value = db.getRecord(Form1.OrganizedSheet[category, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
             {
@@ -226,7 +226,7 @@ namespace helper
         }
         private void setGender(int row)
         {
-            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Gender, row].Value.ToString();
+            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[Gender, row].Value;
             Form1.BulkSheet[11, row].Value = db.getRecord(Form1.OrganizedSheet[Gender, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[11, row].Value.ToString()))
             {

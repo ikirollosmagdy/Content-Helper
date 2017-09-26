@@ -247,7 +247,7 @@ namespace helper
                     MessageBox.Show("Please choose category first");
                     break;
             }
-            Form1.LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)));
+            Form1.LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)) );
 
         }
 
