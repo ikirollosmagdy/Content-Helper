@@ -116,6 +116,10 @@ namespace helper
                     Toys toys = new Toys();
                     toys.Organize();
                     break;
+                case "Baby Gears (331)":
+                    Baby_Gear baby_gear = new Baby_Gear();
+                    baby_gear.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -241,6 +245,10 @@ namespace helper
                 case "Toys (24)":
                     Toys toys = new Toys();
                     toys.createBulk();
+                    break;
+                case "Baby Gears (331)":
+                    Baby_Gear baby_gear = new Baby_Gear();
+                    baby_gear.createBulk();
                     break;
 
                 default:

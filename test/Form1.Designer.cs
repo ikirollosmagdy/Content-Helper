@@ -466,6 +466,7 @@
             this.DropCat.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.DropCat.Items.AddRange(new object[] {
             "Baby Clothes (343)",
+            "Baby Gears (331)",
             "Cable (29)",
             "Casual & Dress Shoes (481)",
             "Chargers laptop (351)",

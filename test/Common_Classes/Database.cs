@@ -67,6 +67,10 @@ namespace helper
             {
                 english = english.Trim().Replace("'", "''");
             }
+            if (english.Contains("\n"))
+            {
+                english = english.Trim().Replace("\n", ";");
+            }
 
             if (IsEgypt)
             {
@@ -111,6 +115,10 @@ namespace helper
             if (arabic.Contains("''"))
             {
                 arabic = arabic.Trim().Replace("''", "'");
+            }
+            if (arabic.Contains(";"))
+            {
+                arabic = arabic.Trim().Replace(";", "\n");
             }
 
 

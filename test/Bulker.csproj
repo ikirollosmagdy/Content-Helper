@@ -198,6 +198,7 @@
     <Compile Include="inputDialog.Designer.cs">
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item_Types\BABY\Baby_Gear.cs" />
     <Compile Include="Item_Types\CCC\Cables.cs" />
     <Compile Include="Item_Types\FASHION\Baby Clothes.cs" />
     <Compile Include="Item_Types\FASHION\Casual Shoes.cs" />
@@ -220,7 +221,7 @@
     <Compile Include="Item_Types\LIFE_STYLE\Home\Kitchen_Dinning.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Hand Tool.cs" />
     <Compile Include="Item_Types\LIFE_STYLE\Tools\Power Tool.cs" />
-    <Compile Include="Item_Types\TOYS\Toys.cs" />
+    <Compile Include="Item_Types\BABY\Toys.cs" />
     <Compile Include="New_item_form.cs">
       <SubType>Form</SubType>
     </Compile>
