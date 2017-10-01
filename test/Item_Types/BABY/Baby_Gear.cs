@@ -224,7 +224,7 @@ namespace helper
         }
         private void setType(int row)
         {
-            Form1.BulkSheet[4, row].Value = Form1.OrganizedSheet[type, row].Value;
+            Form1.BulkSheet[4, row].Value = getType(Form1.OrganizedSheet[type, row].Value.ToString());
             Form1.BulkSheet[10, row].Value = db.getRecord(Form1.OrganizedSheet[type, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[10, row].Value.ToString()))
             {
@@ -256,6 +256,39 @@ namespace helper
         private void setQuantity(int row)
         {
             Form1.BulkSheet[14, row].Value = Form1.OrganizedSheet[Quantity, row].Value;
+        }
+
+
+        private string getType(string text)
+        {
+            string value = "";
+            switch (text)
+            {
+                case "Baby Potty":
+                case "Baby Swing":
+                    value = text;
+                    break;
+                case "Baby Seat":
+                case "Baby Chair":
+                    value = "Baby Seats & Chairs";
+                    break;
+                case "Car Seat Accessory":
+                    value = "Car Seat Accessories";
+                    break;
+                case "Stroller Accessory":
+                    value = "Stroller Accessories";
+                    break;
+                case "Portable Bed":
+                case "Portable Playard":
+                    value = "Portable Beds & Playard";
+                    break;
+
+                default:
+                    value = text + "s";
+                    break;
+            }
+
+            return value.Trim();
         }
     }
 }

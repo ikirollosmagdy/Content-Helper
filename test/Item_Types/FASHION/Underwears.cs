@@ -139,14 +139,14 @@ namespace helper
 
                     }
                     catch { }
-                    //try
-                    //{
-                    //    if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
-                    //    {
-                    //        Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
-                    //    }
-                    //}
-                    //catch { }
+                    try
+                    {
+                      if (Form1.Sheet.Columns[col].HeaderText.ToLower().Contains("size"))
+                       {
+                            Form1.OrganizedSheet[Size, row].Value = getSizeBulk(Form1.Sheet[col, row].Value.ToString());
+                        }
+                    }
+                    catch { }
 
 
 
@@ -387,6 +387,58 @@ namespace helper
 
 
             return textInfo.ToTitleCase(value.Trim());
+
+        }
+        private string getSizeBulk(string text)
+        {
+            string value = "";
+            if (!text.ToLower().Contains("y") && !text.ToLower().Contains(" m"))
+            {
+
+
+
+                switch (text.ToLower())
+                {
+                    case "xxxl":
+                        value = "3XL";
+                        break;
+                    case "xxxxl":
+                        value = "4XL";
+                        break;
+                    case "xxxxxl":
+                        value = "5XL";
+                        break;
+                    case "xxxxxxl":
+                        value = "6XL";
+                        break;
+                    case "xxxxxxxl":
+                        value = "7XL";
+                        break;
+                    case "2xl":
+                        value = "XXL";
+                        break;
+                    default:
+                        value = text.ToUpper();
+                        break;
+                }
+            }
+            try
+            {
+                int si = Convert.ToInt32(text);
+                if (si > 0)
+                {
+                    if (si > 27 && si < 57)
+                    {
+                        value = si + " EU";
+                    }
+                    else
+                    {
+                        value = "";
+                    }
+                }
+            }
+            catch { }
+            return value.Trim();
 
         }
     }

@@ -318,7 +318,7 @@ namespace helper
         }
         private void setMaterial(int row)
         {
-            Form1.BulkSheet[4, row].Value = getMaterial(Form1.OrganizedSheet[Material, row].Value.ToString());
+            Form1.BulkSheet[4, row].Value =getMaterial(Form1.OrganizedSheet[Material, row].Value.ToString());
             Form1.BulkSheet[14, row].Value = db.getRecord(Form1.BulkSheet[4, row].Value.ToString());
             if (common.CheckEnglish(Form1.BulkSheet[14, row].Value.ToString()))
             {
@@ -480,7 +480,7 @@ namespace helper
         }
         private string getMaterial(string text) {
             string value = "";
-            Regex regmat = new Regex(@"([Cc]ot\w+)|([Ll]ea\w+)|([Ww]oo\w+)|([Ss]at\w+)|([Ss]ilk)|([Vv]isco\w+)|([Pp]olye\w+)|([Ll]inen)|([Nn]ylon)|([Vv]elvet)");
+            Regex regmat = new Regex(@"(acrylic|beads|chiffon|corduroy|cotton|denim|flannel|georgette|jersey|lace|leather|linen|lycra|nylon|organza|polyester|rayon|satin|sequin|silk|synthetic|taffeta|toweling|twill|velvet|viscose|wool)", RegexOptions.IgnoreCase);
             MatchCollection matchmat = regmat.Matches(text);
             if (matchmat.Count > 1)
             {
