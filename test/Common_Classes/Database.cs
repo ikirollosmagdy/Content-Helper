@@ -69,7 +69,7 @@ namespace helper
             }
             if (english.Contains("\n"))
             {
-                english = english.Trim().Replace("\n", ";");
+                english = english.Trim().Replace("\n", "-");
             }
 
             if (IsEgypt)
@@ -116,9 +116,9 @@ namespace helper
             {
                 arabic = arabic.Trim().Replace("''", "'");
             }
-            if (arabic.Contains(";"))
+            if (arabic.Contains("-"))
             {
-                arabic = arabic.Trim().Replace(";", "\n");
+                arabic = arabic.Trim().Replace("-", "\n");
             }
 
 

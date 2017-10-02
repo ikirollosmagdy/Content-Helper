@@ -120,6 +120,10 @@ namespace helper
                     Baby_Gear baby_gear = new Baby_Gear();
                     baby_gear.Organize();
                     break;
+                case "Baby Safety and Health (332)":
+                    Baby_Safety baby_safety = new Baby_Safety();
+                    baby_safety.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -249,6 +253,10 @@ namespace helper
                 case "Baby Gears (331)":
                     Baby_Gear baby_gear = new Baby_Gear();
                     baby_gear.createBulk();
+                    break;
+                case "Baby Safety and Health (332)":
+                    Baby_Safety baby_safety = new Baby_Safety();
+                    baby_safety.createBulk();
                     break;
 
                 default:

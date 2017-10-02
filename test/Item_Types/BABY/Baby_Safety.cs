@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace helper
 {
-    class Baby_Gear
+    class Baby_Safety
     {
 
         Database db = new Database();
@@ -25,7 +25,7 @@ namespace helper
             type_Column.HeaderText = "Type";
             type_Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             type_Column.FlatStyle = FlatStyle.Popup;
-            type_Column.Items.AddRange("Baby Bouncer", "Baby Carrier", "Baby Potty", "Baby Seat", "Baby Chair", "Baby Stroller", "Baby Swing", "Car Seat Accessory", "Car Seat", "Portable Bed", "Portable Playard", "Stroller Accessory", "Travel System", "Walker");
+            type_Column.Items.AddRange("Baby Care Kit", "Baby Cotton Swab", "Baby First Aid", "Baby Harness", "Baby Leash", "Baby Humidifier Device", "Baby Monitor", "Baby Camera", "Baby Nail Scissor", "Baby Pillow", "Baby Safety Gate", "Edge Guard", "Corner Guard", "Equipment Safety Lock", "Equipment Safety Straps", "Nasal Aspirator", "Play Pen", "Sleep Positioner", "Steriliser", "Tongue Cleaner", "Toothbrush");
 
 
 
@@ -264,23 +264,29 @@ namespace helper
             string value = "";
             switch (text)
             {
-                case "Baby Potty":
-                case "Baby Swing":
+                case "Baby Care Kit":
+                case "Baby Cotton Swab":
+                case "Baby First Aid":
+                case "Baby Nail Scissor":
+                case "Baby Pillow":
+                case "Toothbrush":
                     value = text;
                     break;
-                case "Baby Seat":
-                case "Baby Chair":
-                    value = "Baby Seats & Chairs";
+                case "Baby Harness":
+                case "Baby Leash":
+                    value = "Baby Harnesses & Leashes";
                     break;
-                case "Car Seat Accessory":
-                    value = "Car Seat Accessories";
+                case "Baby Monitor":
+                case "Baby Camera":
+                    value = "Baby Monitor & Cameras";
                     break;
-                case "Stroller Accessory":
-                    value = "Stroller Accessories";
+                case "Edge Guards":
+                case "Corner Guards":
+                    value = "Edge & Corner Guards";
                     break;
-                case "Portable Bed":
-                case "Portable Playard":
-                    value = "Portable Beds & Playard";
+                case "Equipment Safety Lock":
+                case "Equipment Safety Strap":
+                    value = "Equipment Safety Locks & Straps";
                     break;
 
                 default:
