@@ -124,6 +124,10 @@ namespace helper
                     Baby_Safety baby_safety = new Baby_Safety();
                     baby_safety.Organize();
                     break;
+                case "Baby Accessories (430)":
+                    Baby_Accessories baby_acces = new Baby_Accessories();
+                    baby_acces.Organize();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
@@ -149,7 +153,6 @@ namespace helper
                     Perfume per = new Perfume();
 
                     per.createBulk();
-
 
                     break;
                 case "Refrigerators & Freezers (531)":
@@ -258,12 +261,16 @@ namespace helper
                     Baby_Safety baby_safety = new Baby_Safety();
                     baby_safety.createBulk();
                     break;
+                case "Baby Accessories (430)":
+                    Baby_Accessories baby_acces = new Baby_Accessories();
+                    baby_acces.createBulk();
+                    break;
 
                 default:
                     MessageBox.Show("Please choose category first");
                     break;
             }
-            Form1.LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)) );
+            Form1.LogWrite(string.Format("Finished creating bulk for category {0}", Convert.ToString(index)));
 
         }
 

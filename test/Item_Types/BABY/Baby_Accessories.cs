@@ -10,9 +10,8 @@ using System.Windows.Forms;
 
 namespace helper
 {
-   public class Baby_Safety
+   public class Baby_Accessories
     {
-
         Database db = new Database();
         TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
         Common_Use common = new Common_Use();
@@ -25,7 +24,7 @@ namespace helper
             type_Column.HeaderText = "Type";
             type_Column.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
             type_Column.FlatStyle = FlatStyle.Popup;
-            type_Column.Items.AddRange("Baby Care Kit", "Baby Cotton Swab", "Baby First Aid", "Baby Harness", "Baby Leash", "Baby Humidifier Device", "Baby Monitor", "Baby Camera", "Baby Nail Scissor", "Baby Pillow", "Baby Safety Gate", "Edge Guard", "Corner Guard", "Equipment Safety Lock", "Equipment Safety Straps", "Nasal Aspirator", "Play Pen", "Sleep Positioner", "Steriliser", "Tongue Cleaner", "Toothbrush");
+            type_Column.Items.AddRange("Baby Belt", "Baby Blanket", "Baby Foot Accessory", "Baby Gloves", "Baby Mittens", "Baby Hair Accessory", "Baby Hat", "Baby Caps", "Baby Scarve", "Baby Sleep Pads", "Baby Socks", "Baby Tights", "Baby Swaddle");
 
 
 
@@ -264,29 +263,24 @@ namespace helper
             string value = "";
             switch (text)
             {
-                case "Baby Care Kit":
-                case "Baby Cotton Swab":
-                case "Baby First Aid":
-                case "Baby Nail Scissor":
-                case "Baby Pillow":
-                case "Toothbrush":
+                case "Baby Gloves":
+                case "Baby Mittens":
+                    value = "Baby Gloves & Mittens";
+                    break;
+                case "Baby Hat":
+                case "Baby Cap":
+                    value = "Baby Hats & Caps";
+                    break;
+                case "Baby Socks":
+                case "Baby Tights":
+                    value = "Baby Socks & Tights";
+                    break;
+                case "Baby Foot Accessory":
+                case "Baby Hair Accessory":
+                    value = text.Replace("ory", "ories");
+                    break;
+                case "Baby Swaddle":
                     value = text;
-                    break;
-                case "Baby Harness":
-                case "Baby Leash":
-                    value = "Baby Harnesses & Leashes";
-                    break;
-                case "Baby Monitor":
-                case "Baby Camera":
-                    value = "Baby Monitor & Cameras";
-                    break;
-                case "Edge Guards":
-                case "Corner Guards":
-                    value = "Edge & Corner Guards";
-                    break;
-                case "Equipment Safety Lock":
-                case "Equipment Safety Strap":
-                    value = "Equipment Safety Locks & Straps";
                     break;
 
                 default:

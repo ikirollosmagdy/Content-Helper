@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace helper
 {
-    class Baby_Gear
+  public  class Baby_Gear
     {
 
         Database db = new Database();

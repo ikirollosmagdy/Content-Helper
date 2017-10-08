@@ -198,6 +198,7 @@
     <Compile Include="inputDialog.Designer.cs">
       <DependentUpon>inputDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Item_Types\BABY\Baby_Accessories.cs" />
     <Compile Include="Item_Types\BABY\Baby_Gear.cs" />
     <Compile Include="Item_Types\BABY\Baby_Safety.cs" />
     <Compile Include="Item_Types\CCC\Cables.cs" />
