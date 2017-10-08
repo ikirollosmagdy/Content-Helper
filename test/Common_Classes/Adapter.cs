@@ -129,6 +129,11 @@ namespace helper
                     baby_acces.Organize();
                     break;
 
+                case "Rings (284)":
+                    Rings rings = new Rings();
+                    rings.Organize();
+                    break;
+
                 default:
                     MessageBox.Show("Please choose category first");
                     break;
@@ -264,6 +269,10 @@ namespace helper
                 case "Baby Accessories (430)":
                     Baby_Accessories baby_acces = new Baby_Accessories();
                     baby_acces.createBulk();
+                    break;
+                case "Rings (284)":
+                    Rings rings = new Rings();
+                    rings.createBulk();
                     break;
 
                 default:
