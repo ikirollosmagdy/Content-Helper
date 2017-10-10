@@ -482,13 +482,23 @@ namespace helper
             string value = "";
             Regex regmat = new Regex(@"(acrylic|beads|chiffon|corduroy|cotton|denim|flannel|georgette|jersey|lace|leather|linen|lycra|nylon|organza|polyester|rayon|satin|sequin|silk|synthetic|taffeta|toweling|twill|velvet|viscose|wool)", RegexOptions.IgnoreCase);
             MatchCollection matchmat = regmat.Matches(text);
+           
             if (matchmat.Count > 1)
             {
                 value = "Mixed Materials";
             }
             else
             {
-                value = textInfo.ToTitleCase(matchmat[0].Value);
+                try
+                {
+                    value = textInfo.ToTitleCase(matchmat[0].Value);
+                }
+                catch (Exception)
+                {
+
+                    value = "Check Material";
+                }
+                
             }
             return value.Trim();
         }

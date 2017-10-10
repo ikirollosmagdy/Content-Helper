@@ -33,9 +33,11 @@ namespace helper
                 {
                     foreach (string line in System.IO.File.ReadAllLines("lookup.dat"))
                     {
-
-                        if (line.Contains(Text))
+                        if ( Text== line.Split('	')[0])
+                        {
                             arabicMatch = line.Split('	')[1];
+                        }
+
 
                     }
                 }
