@@ -726,7 +726,7 @@ BulkGrid, new object[] { true });
 
 
             if (IsConnectedToInternet())
-            {
+            { 
 
                 XDocument document = XDocument.Load("http://souqforms.atwebpages.com/UpdateInfo.xml");
                 var elements = document.Element("AppName");
