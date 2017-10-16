@@ -90,7 +90,6 @@ namespace helper
                 case "Baby Clothes (343)":
                     Baby_Clothes baby = new Baby_Clothes();
                     baby.Organize();
-
                     break;
                 case "Sleepwear (484)":
                     Sleepwear jack = new Sleepwear();
